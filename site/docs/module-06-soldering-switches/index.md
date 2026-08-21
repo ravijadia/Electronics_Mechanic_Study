@@ -1,14 +1,11 @@
 ---
-sidebar_position: 1
-sidebar_label: ઝાંખી (Overview)
+sidebar_position: 0
+sidebar_label: Overview
 ---
 
-# મોડ્યુલ 6: સોલ્ડરિંગ/ડિસોલ્ડરિંગ એન્જીન અને વિવિધ સ્વીચો
+# Module 6: Soldering/Desoldering and Various Switches
 
-:::info આ મોડ્યુલનું કન્ટેન્ટ હજુ તૈયાર થઈ રહ્યું છે (Content coming soon)
-:::
-
-| અભ્યાસ સં. | વિષય | સ્થિતિ |
+| Study No. | Topic | Status |
 |---|---|---|
-| 1.6.44 – 47 | વાયરનું સોલ્ડરિંગ (Soldering of wires) | ⏳ ટૂંક સમયમાં |
-| 1.6.48 & 49 | સ્વીચો (Switches) | ⏳ ટૂંક સમયમાં |
+| 1.6.44 – 47 | [Soldering and desoldering of wires](module-06-soldering-switches/soldering-desoldering-wires) | ✅ Ready |
+| 1.6.48 & 49 | [Types of switches](module-06-soldering-switches/types-of-switches) | ✅ Ready |

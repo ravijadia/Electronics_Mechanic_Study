@@ -1,15 +1,11 @@
 ---
-sidebar_position: 1
-sidebar_label: ઝાંખી (Overview)
+sidebar_position: 0
+sidebar_label: Overview
 ---
 
-# મોડ્યુલ 5: ડિજિટલ સ્ટોરેજ ઓસિલોસ્કોપ (Digital Storage Oscilloscope)
+# Module 5: Digital Storage Oscilloscope
 
-:::info આ મોડ્યુલનું કન્ટેન્ટ હજુ તૈયાર થઈ રહ્યું છે (Content coming soon)
-:::
-
-| અભ્યાસ સં. | વિષય | સ્થિતિ |
+| Study No. | Topic | Status |
 |---|---|---|
-| 1.5.40 & 1.5.41 | ડિજિટલ સ્ટોરેજ ઓસિલોસ્કોપના આગળના પેનલ નિયંત્રણો ચલાવવા | ⏳ ટૂંક સમયમાં |
-| 1.5.42 | સિંગલ શોટ સિગ્નલ કેપ્ચર (Capturing a single shot signal) | ⏳ ટૂંક સમયમાં |
-| 1.5.43 | IC 8038 નો ઉપયોગ કરીને ફંક્શન જનરેટર | ⏳ ટૂંક સમયમાં |
+| 1.5.40 – 42 | [DSO front panel controls & Single shot signal capture](module-05-digital-storage-oscilloscope/dso-controls-single-shot) | ✅ Ready |
+| 1.5.43 | [Function Generator using IC 8038](module-05-digital-storage-oscilloscope/function-generator-ic8038) | ✅ Ready |
