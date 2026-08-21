@@ -1,14 +1,11 @@
 ---
-sidebar_position: 1
-sidebar_label: ઝાંખી (Overview)
+sidebar_position: 0
+sidebar_label: Overview
 ---
 
-# મોડ્યુલ 4: એસી અને ડીસી માપવાના સાધનો, બેઝિક વર્કશોપ પ્રેક્ટિસ
+# Module 4: AC/DC Measuring Instruments, Basic Workshop Practice
 
-:::info આ મોડ્યુલનું કન્ટેન્ટ હજુ તૈયાર થઈ રહ્યું છે (Content coming soon)
-:::
-
-| અભ્યાસ સં. | વિષય | સ્થિતિ |
+| Study No. | Topic | Status |
 |---|---|---|
-| 1.4.35 & 1.4.36 | માપવાના સાધનો, સાધનો, ઉપયોગોનો પ્રકાર અને સુવિધાઓ | ⏳ ટૂંક સમયમાં |
-| 1.4.37 – 39 | ઓસિલોસ્કોપના નિયંત્રણો અને કાર્યો (Controls and functions of Oscilloscope) | ⏳ ટૂંક સમયમાં |
+| 1.4.35 & 1.4.36 | [Types of measuring instruments, equipment, uses and features](module-04-ac-dc-measuring-instruments/measuring-instruments-types) | ✅ Ready |
+| 1.4.37 – 39 | [Controls and functions of Oscilloscope](module-04-ac-dc-measuring-instruments/oscilloscope-controls) | ✅ Ready |

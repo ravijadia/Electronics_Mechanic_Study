@@ -28,6 +28,14 @@ const config: Config = {
 
   onBrokenLinks: 'throw',
 
+  scripts: [
+    {src: '/Electronics_Mechanic_Study/js/google-translate-init.js', async: false},
+    {
+      src: 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit',
+      async: true,
+    },
+  ],
+
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
@@ -114,6 +122,11 @@ const config: Config = {
         {
           type: 'localeDropdown',
           position: 'right',
+        },
+        {
+          type: 'html',
+          position: 'right',
+          value: '<div id="google_translate_element"></div>',
         },
         {
           href: 'https://github.com/ravijadia/Electronics_Mechanic_Study',

@@ -15,8 +15,8 @@ sidebar_label: અભ્યાસક્રમ અનુક્રમણિકા 
 | મોડ્યુલ | વિષય | સ્થિતિ |
 |---|---|---|
 | [મોડ્યુલ 2](./module-02-ac-electrical-cables-meters/) | AC અને ઇલેક્ટ્રીકલ કેબલ્સ, સિંગલ રેન્જ મીટર | ✅ 2/2 પ્રકરણ તૈયાર |
-| [મોડ્યુલ 3](./module-03-cells-and-batteries/) | કોષો અને બેટરીઓ | ⏳ |
-| [મોડ્યુલ 4](./module-04-ac-dc-measuring-instruments/) | AC/DC માપવાના સાધનો, વર્કશોપ પ્રેક્ટિસ | ⏳ |
+| [મોડ્યુલ 3](./module-03-cells-and-batteries/) | કોષો અને બેટરીઓ | ✅ 2/2 પ્રકરણ તૈયાર (English) |
+| [મોડ્યુલ 4](./module-04-ac-dc-measuring-instruments/) | AC/DC માપવાના સાધનો, વર્કશોપ પ્રેક્ટિસ | ✅ 2/2 પ્રકરણ તૈયાર (English) |
 | [મોડ્યુલ 5](./module-05-digital-storage-oscilloscope/) | ડિજિટલ સ્ટોરેજ ઓસિલોસ્કોપ | ⏳ |
 | [મોડ્યુલ 6](./module-06-soldering-switches/) | સોલ્ડરિંગ/ડિસોલ્ડરિંગ અને સ્વીચો | ⏳ |
 | [મોડ્યુલ 7](./module-07-active-passive-components/) | સક્રિય અને નિષ્ક્રિય ઘટકો | ⏳ |

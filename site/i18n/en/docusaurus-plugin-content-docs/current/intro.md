@@ -15,8 +15,8 @@ Click a module in the left sidebar to open it. New content is added to each modu
 | Module | Topic | Status |
 |---|---|---|
 | [Module 2](./module-02-ac-electrical-cables-meters/) | AC & Electrical Cables, Single Range Meters | ✅ 2/2 chapters ready |
-| [Module 3](./module-03-cells-and-batteries/) | Cells and Batteries | ⏳ |
-| [Module 4](./module-04-ac-dc-measuring-instruments/) | AC/DC Measuring Instruments, Workshop Practice | ⏳ |
+| [Module 3](./module-03-cells-and-batteries/) | Cells and Batteries | ✅ 2/2 chapters ready |
+| [Module 4](./module-04-ac-dc-measuring-instruments/) | AC/DC Measuring Instruments, Workshop Practice | ✅ 2/2 chapters ready |
 | [Module 5](./module-05-digital-storage-oscilloscope/) | Digital Storage Oscilloscope | ⏳ |
 | [Module 6](./module-06-soldering-switches/) | Soldering/Desoldering and Switches | ⏳ |
 | [Module 7](./module-07-active-passive-components/) | Active and Passive Components | ⏳ |
