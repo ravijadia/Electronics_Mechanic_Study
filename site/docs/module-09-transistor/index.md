@@ -1,19 +1,19 @@
 ---
-sidebar_position: 1
-sidebar_label: ઝાંખી (Overview)
+sidebar_position: 0
+sidebar_label: Overview
 ---
 
-# મોડ્યુલ 9: ટ્રાન્ઝિસ્ટર (Transistor)
+# Module 9: Transistor
 
-:::info આ મોડ્યુલનું કન્ટેન્ટ હજુ તૈયાર થઈ રહ્યું છે (Content coming soon)
+:::info Content for this module is being prepared
 :::
 
-| અભ્યાસ સં. | વિષય | સ્થિતિ |
+| Study No. | Topic | Status |
 |---|---|---|
-| 1.9.81 – 83 | ટ્રાન્ઝિસ્ટર અને વર્ગીકરણ (Transistors and classification) | ⏳ ટૂંક સમયમાં |
-| 1.9.84 – 87 | ટ્રાન્ઝિસ્ટરનું બાયસિંગ (Biasing of transistors) | ⏳ ટૂંક સમયમાં |
-| 1.9.88 & 89 | ઓસિલેટર (Oscillators) | ⏳ ટૂંક સમયમાં |
-| 1.9.90 | આરસી ફેઝ શિફ્ટ ઓસિલેટર (RC Phase Shift Oscillator) | ⏳ ટૂંક સમયમાં |
-| 1.9.91 | મલ્ટિવાઈબ્રેટર્સ અને સર્કિટ ડાયાગ્રામનો અભ્યાસ | ⏳ ટૂંક સમયમાં |
-| 1.9.92 & 93 | ક્લિપર સર્કિટ (Clipper circuit) | ⏳ ટૂંક સમયમાં |
-| 1.9.94 & 95 | ક્લેમ્પર સર્કિટ્સ (Clamper Circuits) | ⏳ ટૂંક સમયમાં |
+| 1.9.81 – 83 | Transistors and classification | ⏳ Coming soon |
+| 1.9.84 – 87 | Biasing of transistors | ⏳ Coming soon |
+| 1.9.88 & 89 | Oscillators | ⏳ Coming soon |
+| 1.9.90 | RC Phase Shift Oscillator | ⏳ Coming soon |
+| 1.9.91 | Multivibrators and circuit diagram study | ⏳ Coming soon |
+| 1.9.92 & 93 | Clipper circuit | ⏳ Coming soon |
+| 1.9.94 & 95 | Clamper circuits | ⏳ Coming soon |

@@ -1,17 +1,17 @@
 ---
-sidebar_position: 1
-sidebar_label: ઝાંખી (Overview)
+sidebar_position: 0
+sidebar_label: Overview
 ---
 
-# મોડ્યુલ 12: બેઝિક ગેટ્સ, કોમ્બિનેશનલ સર્કિટ, ફ્લિપ ફ્લોપ્સ
+# Module 12: Basic Gates, Combinational Circuits, Flip-Flops
 
-:::info આ મોડ્યુલનું કન્ટેન્ટ હજુ તૈયાર થઈ રહ્યું છે (Content coming soon)
+:::info Content for this module is being prepared
 :::
 
-| અભ્યાસ સં. | વિષય | સ્થિતિ |
+| Study No. | Topic | Status |
 |---|---|---|
-| 1.12.109 – 111 | ડિજિટલ IC પરિવારો અને તેમની ઓપરેશનલ લાક્ષણિકતાઓ | ⏳ ટૂંક સમયમાં |
-| 1.12.112 – 114 | દ્વિસંગી અંકગણિત (Binary arithmetic) | ⏳ ટૂંક સમયમાં |
-| 1.12.115 & 116 | એન્કોડર અને ડીકોડરનો ખ્યાલ | ⏳ ટૂંક સમયમાં |
-| 1.12.117 & 118 | મલ્ટિપ્લેક્સર્સ અને ડિમલ્ટિપ્લેક્સર્સ | ⏳ ટૂંક સમયમાં |
-| 1.12.119 – 122 | લેચ સર્કિટ અને એપ્લિકેશન્સ | ⏳ ટૂંક સમયમાં |
+| 1.12.109 – 111 | Digital IC families and their operational characteristics | ⏳ Coming soon |
+| 1.12.112 – 114 | Binary arithmetic | ⏳ Coming soon |
+| 1.12.115 & 116 | Concept of encoder and decoder | ⏳ Coming soon |
+| 1.12.117 & 118 | Multiplexers and demultiplexers | ⏳ Coming soon |
+| 1.12.119 – 122 | Latch circuits and applications | ⏳ Coming soon |

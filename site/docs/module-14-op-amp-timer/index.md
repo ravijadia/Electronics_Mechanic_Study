@@ -1,16 +1,16 @@
 ---
-sidebar_position: 1
-sidebar_label: ઝાંખી (Overview)
+sidebar_position: 0
+sidebar_label: Overview
 ---
 
-# મોડ્યુલ 14: ઓપ એમ્પ અને ટાઈમર એપ્લિકેશન (Op Amp and Timer Applications)
+# Module 14: Op Amp and Timer Applications
 
-:::info આ મોડ્યુલનું કન્ટેન્ટ હજુ તૈયાર થઈ રહ્યું છે (Content coming soon)
+:::info Content for this module is being prepared
 :::
 
-| અભ્યાસ સં. | વિષય | સ્થિતિ |
+| Study No. | Topic | Status |
 |---|---|---|
-| 1.14.127 & 128 | ઓપરેશનલ એમ્પ્લીફાયર અને તેમની એપ્લિકેશનો | ⏳ ટૂંક સમયમાં |
-| 1.14.129 & 130 | ઓપ-એમ્પ એપ્લિકેશન્સ – તુલનાકારો, વિભેદક | ⏳ ટૂંક સમયમાં |
-| 1.14.131 & 132 | ઓપ-એમ્પ એપ્લિકેશન્સ – ડિફરેન્શિયલ અને ઇન્સ્ટ્રુમેન્ટેશન એમ્પ્લીફાયર | ⏳ ટૂંક સમયમાં |
-| 1.14.133 – 136 | ટાઈમર IC અને તેની એપ્લિકેશનો | ⏳ ટૂંક સમયમાં |
+| 1.14.127 & 128 | Operational amplifier and its applications | ⏳ Coming soon |
+| 1.14.129 & 130 | Op-amp applications – comparators, differentiator | ⏳ Coming soon |
+| 1.14.131 & 132 | Op-amp applications – differential and instrumentation amplifier | ⏳ Coming soon |
+| 1.14.133 – 136 | Timer IC and its applications | ⏳ Coming soon |

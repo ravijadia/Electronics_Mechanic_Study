@@ -1,15 +1,15 @@
 ---
-sidebar_position: 1
-sidebar_label: ઝાંખી (Overview)
+sidebar_position: 0
+sidebar_label: Overview
 ---
 
-# મોડ્યુલ 10: પાવર ઇલેક્ટ્રોનિક ઘટકો (Power Electronic Components)
+# Module 10: Power Electronic Components
 
-:::info આ મોડ્યુલનું કન્ટેન્ટ હજુ તૈયાર થઈ રહ્યું છે (Content coming soon)
+:::info Content for this module is being prepared
 :::
 
-| અભ્યાસ સં. | વિષય | સ્થિતિ |
+| Study No. | Topic | Status |
 |---|---|---|
-| 1.10.96 & 97 | ફિલ્ડ ઇફેક્ટ ટ્રાન્ઝિસ્ટર (Field Effect Transistor) | ⏳ ટૂંક સમયમાં |
-| 1.10.98 – 100 | TRIAC અને DIAC નો ઉપયોગ કરીને લેમ્પ ડિમર/પંખા મોટર સ્પીડ રેગ્યુલેટર | ⏳ ટૂંક સમયમાં |
-| 1.10.101 – 104 | MOSFET | ⏳ ટૂંક સમયમાં |
+| 1.10.96 & 97 | Field Effect Transistor | ⏳ Coming soon |
+| 1.10.98 – 100 | Lamp dimmer / fan motor speed regulator using TRIAC and DIAC | ⏳ Coming soon |
+| 1.10.101 – 104 | MOSFET | ⏳ Coming soon |

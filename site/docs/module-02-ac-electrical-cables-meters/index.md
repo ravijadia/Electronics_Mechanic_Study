@@ -1,13 +1,11 @@
 ---
 sidebar_position: 0
-sidebar_label: ઝાંખી (Overview)
+sidebar_label: Overview
 ---
 
-# મોડ્યુલ 2: એસી અને ઇલેક્ટ્રીકલ કેબલ્સ, સિંગલ રેન્જ મીટર
+# Module 2: AC and Electrical Cables, Single Range Meters
 
-*(Basics of AC and Electrical cables, Single range meters)*
-
-| અભ્યાસ સં. | વિષય | સ્થિતિ |
+| Study No. | Topic | Status |
 |---|---|---|
-| 1.2.13 – 21 | [વિદ્યુત શરતો (Electrical terms)](module-02-ac-electrical-cables-meters/electrical-terms) | ✅ તૈયાર |
-| 1.2.22 – 27 | [માપન સાધન મીટર (Measuring instrument meter)](module-02-ac-electrical-cables-meters/measuring-instrument-meter) | ✅ તૈયાર |
+| 1.2.13 – 21 | [Electrical terms](module-02-ac-electrical-cables-meters/electrical-terms) | ✅ Ready |
+| 1.2.22 – 27 | [Measuring instrument meter](module-02-ac-electrical-cables-meters/measuring-instrument-meter) | ✅ Ready |

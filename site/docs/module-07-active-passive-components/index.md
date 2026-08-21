@@ -1,23 +1,14 @@
 ---
-sidebar_position: 1
-sidebar_label: ઝાંખી (Overview)
+sidebar_position: 0
+sidebar_label: Overview
 ---
 
-# મોડ્યુલ 7: સક્રિય અને નિષ્ક્રિય ઘટકો (Active and Passive Components)
+# Module 7: Active and Passive Components
 
-:::info આ મોડ્યુલનું કન્ટેન્ટ હજુ તૈયાર થઈ રહ્યું છે (Content coming soon)
-:::
-
-| અભ્યાસ સં. | વિષય | સ્થિતિ |
+| Study No. | Topic | Status |
 |---|---|---|
-| 1.7.50 | સક્રિય ઇલેક્ટ્રોનિક ઘટકો, નિષ્ક્રિય અને સક્રિય ઘટકો | ⏳ ટૂંક સમયમાં |
-| 1.7.51 – 53 | નિષ્ક્રિય ઘટકો – પ્રતિરોધકો (Resistors) | ⏳ ટૂંક સમયમાં |
-| 1.7.54 | ઓહ્મનો ધારો (Ohm's law) | ⏳ ટૂંક સમયમાં |
-| 1.7.55 | કિર્ચહોફ્સ ધારા (Kirchhoff's laws) | ⏳ ટૂંક સમયમાં |
-| 1.7.56 & 57 | ડીસી શ્રેણી સર્કિટ (DC series circuit) | ⏳ ટૂંક સમયમાં |
-| 1.7.58 | નિષ્ક્રિય ઘટકો – ઇન્ડક્ટર્સ (Inductors) | ⏳ ટૂંક સમયમાં |
-| 1.7.59 & 60 | નિષ્ક્રિય ઘટકો – કેપેસિટર્સ (Capacitors) | ⏳ ટૂંક સમયમાં |
-| 1.7.61 – 63 | મેગ્નેટિઝમ, રિલે (Magnetism, relay) | ⏳ ટૂંક સમયમાં |
-| 1.7.64 | RC સર્કિટ માટે સમય સ્થિર (Time constant) | ⏳ ટૂંક સમયમાં |
-| 1.7.65 | આર.સી. વિલેદક (R.C. Differentiator) | ⏳ ટૂંક સમયમાં |
-| 1.7.66 | આર.એલ.સી. શ્રેણી અને સમાંતર સર્કિટ (R.L.C. Series and parallel circuits) | ⏳ ટૂંક સમયમાં |
+| 1.7.50 – 53 | [Active/passive electronic components, Resistors](module-07-active-passive-components/active-passive-resistors) | ✅ Ready |
+| 1.7.54 – 57 | [Ohm's law, Kirchhoff's laws, DC series circuit](module-07-active-passive-components/ohms-kirchhoffs-dc-series) | ✅ Ready |
+| 1.7.58 – 60 | [Inductors and Capacitors](module-07-active-passive-components/inductors-capacitors) | ✅ Ready |
+| 1.7.61 – 63 | [Magnetism, Relay](module-07-active-passive-components/magnetism-relay) | ✅ Ready |
+| 1.7.64 – 66 | [RC time constant, RC differentiator, RLC series/parallel circuits](module-07-active-passive-components/rc-time-constant-rlc) | ✅ Ready |

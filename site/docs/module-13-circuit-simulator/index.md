@@ -1,13 +1,13 @@
 ---
-sidebar_position: 1
-sidebar_label: ઝાંખી (Overview)
+sidebar_position: 0
+sidebar_label: Overview
 ---
 
-# મોડ્યુલ 13: ઈલેક્ટ્રોનિક સર્કિટ સિમ્યુલેટર (Electronic Circuit Simulator)
+# Module 13: Electronic Circuit Simulator
 
-:::info આ મોડ્યુલનું કન્ટેન્ટ હજુ તૈયાર થઈ રહ્યું છે (Content coming soon)
+:::info Content for this module is being prepared
 :::
 
-| અભ્યાસ સં. | વિષય | સ્થિતિ |
+| Study No. | Topic | Status |
 |---|---|---|
-| 1.13.123 – 126 | ઈલેક્ટ્રોનિક સિમ્યુલેશન સોફ્ટવેર (Electronic Simulation Software) | ⏳ ટૂંક સમયમાં |
+| 1.13.123 – 126 | Electronic simulation software | ⏳ Coming soon |
