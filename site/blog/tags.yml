@@ -1,0 +1,14 @@
+announcement:
+  label: Announcement
+  permalink: /announcement
+  description: સામાન્ય જાહેરાતો (General announcements)
+
+exam:
+  label: Exam
+  permalink: /exam
+  description: પરીક્ષા સંબંધિત જાહેરાતો (Exam-related announcements)
+
+new-content:
+  label: New Content
+  permalink: /new-content
+  description: નવું સ્ટડી મટીરીયલ ઉમેરાયું (New study material added)
