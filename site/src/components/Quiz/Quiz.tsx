@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import Translate from '@docusaurus/Translate';
 import styles from './styles.module.css';
 
 export interface QuizQuestion {
@@ -56,9 +57,17 @@ export default function Quiz({title, questions, passPercent = 60}: QuizProps): J
       {submitted && (
         <div className={`${styles.resultBanner} ${passed ? styles.pass : styles.fail}`}>
           <strong>
-            તમારો સ્કોર (Score): {score} / {questions.length} ({percent}%)
+            <Translate id="quiz.score" values={{score, total: questions.length, percent}}>
+              {'Your Score: {score} / {total} ({percent}%)'}
+            </Translate>
           </strong>
-          <div>{passed ? 'પાસ! 🎉' : 'ફરી પ્રયત્ન કરો (Try again)'}</div>
+          <div>
+            {passed ? (
+              <Translate id="quiz.passed">Passed! 🎉</Translate>
+            ) : (
+              <Translate id="quiz.failed">Try again</Translate>
+            )}
+          </div>
         </div>
       )}
 
@@ -109,11 +118,11 @@ export default function Quiz({title, questions, passPercent = 60}: QuizProps): J
             disabled={!allAnswered}
             onClick={handleSubmit}
           >
-            સબમિટ કરો (Submit)
+            <Translate id="quiz.submit">Submit</Translate>
           </button>
         ) : (
           <button className={styles.submitButton} onClick={handleRetry}>
-            ફરી પ્રયત્ન કરો (Retry)
+            <Translate id="quiz.retry">Retry</Translate>
           </button>
         )}
       </div>

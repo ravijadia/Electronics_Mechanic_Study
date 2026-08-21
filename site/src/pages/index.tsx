@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
+import Translate, {translate} from '@docusaurus/Translate';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
 
@@ -16,12 +17,15 @@ function HomepageHeader() {
         <Heading as="h1" className="hero__title">
           {siteConfig.title}
         </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <p className="hero__subtitle">
+          <Translate id="homepage.hero.subtitle">
+            Study Material, MCQ Tests and Announcements for Electronic
+            Mechanic Trade Trainees
+          </Translate>
+        </p>
         <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
-            સ્ટડી મટીરીયલ જુઓ (View Study Material)
+          <Link className="button button--secondary button--lg" to="/docs/intro">
+            <Translate id="homepage.hero.cta">View Study Material</Translate>
           </Link>
         </div>
       </div>
@@ -34,7 +38,11 @@ export default function Home(): ReactNode {
   return (
     <Layout
       title={siteConfig.title}
-      description="Electronic Mechanic Trade — Study Material, MCQ Tests અને Announcements">
+      description={translate({
+        id: 'homepage.meta.description',
+        message:
+          'Electronic Mechanic Trade — Study Material, MCQ Tests and Announcements',
+      })}>
       <HomepageHeader />
       <main>
         <HomepageFeatures />

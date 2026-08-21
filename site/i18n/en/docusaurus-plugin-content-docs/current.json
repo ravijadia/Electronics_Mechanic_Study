@@ -1,0 +1,110 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 2: AC અને ઇલેક્ટ્રીકલ કેબલ્સ, સિંગલ રેન્જ મીટર": {
+    "message": "Module 2: AC & Electrical Cables, Single Range Meters",
+    "description": "The label for category 'મોડ્યુલ 2: AC અને ઇલેક્ટ્રીકલ કેબલ્સ, સિંગલ રેન્જ મીટર' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 2: AC અને ઇલેક્ટ્રીકલ કેબલ્સ, સિંગલ રેન્જ મીટર.link.generated-index.description": {
+    "message": "Basics of AC and Electrical cables, Single range meters",
+    "description": "The generated-index page description for category 'મોડ્યુલ 2: AC અને ઇલેક્ટ્રીકલ કેબલ્સ, સિંગલ રેન્જ મીટર' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 3: કોષો અને બેટરીઓ": {
+    "message": "Module 3: Cells and Batteries",
+    "description": "The label for category 'મોડ્યુલ 3: કોષો અને બેટરીઓ' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 3: કોષો અને બેટરીઓ.link.generated-index.description": {
+    "message": "Cells and Batteries",
+    "description": "The generated-index page description for category 'મોડ્યુલ 3: કોષો અને બેટરીઓ' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 4: AC/DC માપવાના સાધનો, વર્કશોપ પ્રેક્ટિસ": {
+    "message": "Module 4: AC/DC Measuring Instruments, Workshop Practice",
+    "description": "The label for category 'મોડ્યુલ 4: AC/DC માપવાના સાધનો, વર્કશોપ પ્રેક્ટિસ' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 4: AC/DC માપવાના સાધનો, વર્કશોપ પ્રેક્ટિસ.link.generated-index.description": {
+    "message": "AC & DC Measuring Instruments, Basic Workshop Practice",
+    "description": "The generated-index page description for category 'મોડ્યુલ 4: AC/DC માપવાના સાધનો, વર્કશોપ પ્રેક્ટિસ' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 5: ડિજિટલ સ્ટોરેજ ઓસિલોસ્કોપ": {
+    "message": "Module 5: Digital Storage Oscilloscope",
+    "description": "The label for category 'મોડ્યુલ 5: ડિજિટલ સ્ટોરેજ ઓસિલોસ્કોપ' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 5: ડિજિટલ સ્ટોરેજ ઓસિલોસ્કોપ.link.generated-index.description": {
+    "message": "Digital Storage Oscilloscope",
+    "description": "The generated-index page description for category 'મોડ્યુલ 5: ડિજિટલ સ્ટોરેજ ઓસિલોસ્કોપ' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 6: સોલ્ડરિંગ/ડિસોલ્ડરિંગ અને સ્વીચો": {
+    "message": "Module 6: Soldering/Desoldering and Switches",
+    "description": "The label for category 'મોડ્યુલ 6: સોલ્ડરિંગ/ડિસોલ્ડરિંગ અને સ્વીચો' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 6: સોલ્ડરિંગ/ડિસોલ્ડરિંગ અને સ્વીચો.link.generated-index.description": {
+    "message": "Soldering/Desoldering and various switches",
+    "description": "The generated-index page description for category 'મોડ્યુલ 6: સોલ્ડરિંગ/ડિસોલ્ડરિંગ અને સ્વીચો' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 7: સક્રિય અને નિષ્ક્રિય ઘટકો": {
+    "message": "Module 7: Active and Passive Components",
+    "description": "The label for category 'મોડ્યુલ 7: સક્રિય અને નિષ્ક્રિય ઘટકો' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 7: સક્રિય અને નિષ્ક્રિય ઘટકો.link.generated-index.description": {
+    "message": "Active and Passive components",
+    "description": "The generated-index page description for category 'મોડ્યુલ 7: સક્રિય અને નિષ્ક્રિય ઘટકો' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 8: પાવર સપ્લાય સર્કિટ": {
+    "message": "Module 8: Power Supply Circuits",
+    "description": "The label for category 'મોડ્યુલ 8: પાવર સપ્લાય સર્કિટ' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 8: પાવર સપ્લાય સર્કિટ.link.generated-index.description": {
+    "message": "Power supply circuits",
+    "description": "The generated-index page description for category 'મોડ્યુલ 8: પાવર સપ્લાય સર્કિટ' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 9: ટ્રાન્ઝિસ્ટર": {
+    "message": "Module 9: Transistor",
+    "description": "The label for category 'મોડ્યુલ 9: ટ્રાન્ઝિસ્ટર' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 9: ટ્રાન્ઝિસ્ટર.link.generated-index.description": {
+    "message": "Transistor",
+    "description": "The generated-index page description for category 'મોડ્યુલ 9: ટ્રાન્ઝિસ્ટર' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 10: પાવર ઇલેક્ટ્રોનિક ઘટકો": {
+    "message": "Module 10: Power Electronic Components",
+    "description": "The label for category 'મોડ્યુલ 10: પાવર ઇલેક્ટ્રોનિક ઘટકો' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 10: પાવર ઇલેક્ટ્રોનિક ઘટકો.link.generated-index.description": {
+    "message": "Power Electronic Components",
+    "description": "The generated-index page description for category 'મોડ્યુલ 10: પાવર ઇલેક્ટ્રોનિક ઘટકો' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 11: ઓપ્ટો ઇલેક્ટ્રોનિક્સ (LEDs)": {
+    "message": "Module 11: Opto Electronics (LEDs)",
+    "description": "The label for category 'મોડ્યુલ 11: ઓપ્ટો ઇલેક્ટ્રોનિક્સ (LEDs)' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 11: ઓપ્ટો ઇલેક્ટ્રોનિક્સ (LEDs).link.generated-index.description": {
+    "message": "Opto Electronics",
+    "description": "The generated-index page description for category 'મોડ્યુલ 11: ઓપ્ટો ઇલેક્ટ્રોનિક્સ (LEDs)' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 12: ગેટ્સ, કોમ્બિનેશનલ સર્કિટ, ફ્લિપ ફ્લોપ્સ": {
+    "message": "Module 12: Gates, Combinational Circuits, Flip Flops",
+    "description": "The label for category 'મોડ્યુલ 12: ગેટ્સ, કોમ્બિનેશનલ સર્કિટ, ફ્લિપ ફ્લોપ્સ' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 12: ગેટ્સ, કોમ્બિનેશનલ સર્કિટ, ફ્લિપ ફ્લોપ્સ.link.generated-index.description": {
+    "message": "Basic Gates, Combinational circuits, Flip Flops",
+    "description": "The generated-index page description for category 'મોડ્યુલ 12: ગેટ્સ, કોમ્બિનેશનલ સર્કિટ, ફ્લિપ ફ્લોપ્સ' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 13: ઈલેક્ટ્રોનિક સર્કિટ સિમ્યુલેટર": {
+    "message": "Module 13: Electronic Circuit Simulator",
+    "description": "The label for category 'મોડ્યુલ 13: ઈલેક્ટ્રોનિક સર્કિટ સિમ્યુલેટર' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 13: ઈલેક્ટ્રોનિક સર્કિટ સિમ્યુલેટર.link.generated-index.description": {
+    "message": "Electronic Circuit Simulator",
+    "description": "The generated-index page description for category 'મોડ્યુલ 13: ઈલેક્ટ્રોનિક સર્કિટ સિમ્યુલેટર' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 14: ઓપ એમ્પ અને ટાઈમર એપ્લિકેશન": {
+    "message": "Module 14: Op Amp and Timer Applications",
+    "description": "The label for category 'મોડ્યુલ 14: ઓપ એમ્પ અને ટાઈમર એપ્લિકેશન' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 14: ઓપ એમ્પ અને ટાઈમર એપ્લિકેશન.link.generated-index.description": {
+    "message": "Op Amp and Timer applications",
+    "description": "The generated-index page description for category 'મોડ્યુલ 14: ઓપ એમ્પ અને ટાઈમર એપ્લિકેશન' in sidebar 'studySidebar'"
+  }
+}

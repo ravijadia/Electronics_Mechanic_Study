@@ -1,0 +1,26 @@
+{
+  "title": {
+    "message": "Electronic Mechanic Trade",
+    "description": "The title in the navbar"
+  },
+  "logo.alt": {
+    "message": "Electronic Mechanic Trade Logo",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.Study Material": {
+    "message": "Study Material",
+    "description": "Navbar item with label Study Material"
+  },
+  "item.label.Tests": {
+    "message": "Tests",
+    "description": "Navbar item with label Tests"
+  },
+  "item.label.Announcements": {
+    "message": "Announcements",
+    "description": "Navbar item with label Announcements"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
+  }
+}

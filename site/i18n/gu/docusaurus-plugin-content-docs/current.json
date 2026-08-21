@@ -1,0 +1,110 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 2: AC અને ઇલેક્ટ્રીકલ કેબલ્સ, સિંગલ રેન્જ મીટર": {
+    "message": "મોડ્યુલ 2: AC અને ઇલેક્ટ્રીકલ કેબલ્સ, સિંગલ રેન્જ મીટર",
+    "description": "The label for category 'મોડ્યુલ 2: AC અને ઇલેક્ટ્રીકલ કેબલ્સ, સિંગલ રેન્જ મીટર' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 2: AC અને ઇલેક્ટ્રીકલ કેબલ્સ, સિંગલ રેન્જ મીટર.link.generated-index.description": {
+    "message": "AC અને ઇલેક્ટ્રીકલ કેબલ્સ, સિંગલ રેન્જ મીટરની બેઝિક",
+    "description": "The generated-index page description for category 'મોડ્યુલ 2: AC અને ઇલેક્ટ્રીકલ કેબલ્સ, સિંગલ રેન્જ મીટર' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 3: કોષો અને બેટરીઓ": {
+    "message": "મોડ્યુલ 3: કોષો અને બેટરીઓ",
+    "description": "The label for category 'મોડ્યુલ 3: કોષો અને બેટરીઓ' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 3: કોષો અને બેટરીઓ.link.generated-index.description": {
+    "message": "કોષો અને બેટરીઓ",
+    "description": "The generated-index page description for category 'મોડ્યુલ 3: કોષો અને બેટરીઓ' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 4: AC/DC માપવાના સાધનો, વર્કશોપ પ્રેક્ટિસ": {
+    "message": "મોડ્યુલ 4: AC/DC માપવાના સાધનો, વર્કશોપ પ્રેક્ટિસ",
+    "description": "The label for category 'મોડ્યુલ 4: AC/DC માપવાના સાધનો, વર્કશોપ પ્રેક્ટિસ' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 4: AC/DC માપવાના સાધનો, વર્કશોપ પ્રેક્ટિસ.link.generated-index.description": {
+    "message": "AC અને DC માપવાના સાધનો, બેઝિક વર્કશોપ પ્રેક્ટિસ",
+    "description": "The generated-index page description for category 'મોડ્યુલ 4: AC/DC માપવાના સાધનો, વર્કશોપ પ્રેક્ટિસ' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 5: ડિજિટલ સ્ટોરેજ ઓસિલોસ્કોપ": {
+    "message": "મોડ્યુલ 5: ડિજિટલ સ્ટોરેજ ઓસિલોસ્કોપ",
+    "description": "The label for category 'મોડ્યુલ 5: ડિજિટલ સ્ટોરેજ ઓસિલોસ્કોપ' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 5: ડિજિટલ સ્ટોરેજ ઓસિલોસ્કોપ.link.generated-index.description": {
+    "message": "ડિજિટલ સ્ટોરેજ ઓસિલોસ્કોપ",
+    "description": "The generated-index page description for category 'મોડ્યુલ 5: ડિજિટલ સ્ટોરેજ ઓસિલોસ્કોપ' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 6: સોલ્ડરિંગ/ડિસોલ્ડરિંગ અને સ્વીચો": {
+    "message": "મોડ્યુલ 6: સોલ્ડરિંગ/ડિસોલ્ડરિંગ અને સ્વીચો",
+    "description": "The label for category 'મોડ્યુલ 6: સોલ્ડરિંગ/ડિસોલ્ડરિંગ અને સ્વીચો' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 6: સોલ્ડરિંગ/ડિસોલ્ડરિંગ અને સ્વીચો.link.generated-index.description": {
+    "message": "સોલ્ડરિંગ/ડિસોલ્ડરિંગ અને વિવિધ સ્વીચો",
+    "description": "The generated-index page description for category 'મોડ્યુલ 6: સોલ્ડરિંગ/ડિસોલ્ડરિંગ અને સ્વીચો' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 7: સક્રિય અને નિષ્ક્રિય ઘટકો": {
+    "message": "મોડ્યુલ 7: સક્રિય અને નિષ્ક્રિય ઘટકો",
+    "description": "The label for category 'મોડ્યુલ 7: સક્રિય અને નિષ્ક્રિય ઘટકો' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 7: સક્રિય અને નિષ્ક્રિય ઘટકો.link.generated-index.description": {
+    "message": "સક્રિય અને નિષ્ક્રિય ઘટકો",
+    "description": "The generated-index page description for category 'મોડ્યુલ 7: સક્રિય અને નિષ્ક્રિય ઘટકો' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 8: પાવર સપ્લાય સર્કિટ": {
+    "message": "મોડ્યુલ 8: પાવર સપ્લાય સર્કિટ",
+    "description": "The label for category 'મોડ્યુલ 8: પાવર સપ્લાય સર્કિટ' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 8: પાવર સપ્લાય સર્કિટ.link.generated-index.description": {
+    "message": "પાવર સપ્લાય સર્કિટ",
+    "description": "The generated-index page description for category 'મોડ્યુલ 8: પાવર સપ્લાય સર્કિટ' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 9: ટ્રાન્ઝિસ્ટર": {
+    "message": "મોડ્યુલ 9: ટ્રાન્ઝિસ્ટર",
+    "description": "The label for category 'મોડ્યુલ 9: ટ્રાન્ઝિસ્ટર' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 9: ટ્રાન્ઝિસ્ટર.link.generated-index.description": {
+    "message": "ટ્રાન્ઝિસ્ટર",
+    "description": "The generated-index page description for category 'મોડ્યુલ 9: ટ્રાન્ઝિસ્ટર' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 10: પાવર ઇલેક્ટ્રોનિક ઘટકો": {
+    "message": "મોડ્યુલ 10: પાવર ઇલેક્ટ્રોનિક ઘટકો",
+    "description": "The label for category 'મોડ્યુલ 10: પાવર ઇલેક્ટ્રોનિક ઘટકો' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 10: પાવર ઇલેક્ટ્રોનિક ઘટકો.link.generated-index.description": {
+    "message": "પાવર ઇલેક્ટ્રોનિક ઘટકો",
+    "description": "The generated-index page description for category 'મોડ્યુલ 10: પાવર ઇલેક્ટ્રોનિક ઘટકો' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 11: ઓપ્ટો ઇલેક્ટ્રોનિક્સ (LEDs)": {
+    "message": "મોડ્યુલ 11: ઓપ્ટો ઇલેક્ટ્રોનિક્સ (LEDs)",
+    "description": "The label for category 'મોડ્યુલ 11: ઓપ્ટો ઇલેક્ટ્રોનિક્સ (LEDs)' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 11: ઓપ્ટો ઇલેક્ટ્રોનિક્સ (LEDs).link.generated-index.description": {
+    "message": "ઓપ્ટો ઇલેક્ટ્રોનિક્સ",
+    "description": "The generated-index page description for category 'મોડ્યુલ 11: ઓપ્ટો ઇલેક્ટ્રોનિક્સ (LEDs)' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 12: ગેટ્સ, કોમ્બિનેશનલ સર્કિટ, ફ્લિપ ફ્લોપ્સ": {
+    "message": "મોડ્યુલ 12: ગેટ્સ, કોમ્બિનેશનલ સર્કિટ, ફ્લિપ ફ્લોપ્સ",
+    "description": "The label for category 'મોડ્યુલ 12: ગેટ્સ, કોમ્બિનેશનલ સર્કિટ, ફ્લિપ ફ્લોપ્સ' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 12: ગેટ્સ, કોમ્બિનેશનલ સર્કિટ, ફ્લિપ ફ્લોપ્સ.link.generated-index.description": {
+    "message": "બેઝિક ગેટ્સ, કોમ્બિનેશનલ સર્કિટ, ફ્લિપ ફ્લોપ્સ",
+    "description": "The generated-index page description for category 'મોડ્યુલ 12: ગેટ્સ, કોમ્બિનેશનલ સર્કિટ, ફ્લિપ ફ્લોપ્સ' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 13: ઈલેક્ટ્રોનિક સર્કિટ સિમ્યુલેટર": {
+    "message": "મોડ્યુલ 13: ઈલેક્ટ્રોનિક સર્કિટ સિમ્યુલેટર",
+    "description": "The label for category 'મોડ્યુલ 13: ઈલેક્ટ્રોનિક સર્કિટ સિમ્યુલેટર' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 13: ઈલેક્ટ્રોનિક સર્કિટ સિમ્યુલેટર.link.generated-index.description": {
+    "message": "ઈલેક્ટ્રોનિક સર્કિટ સિમ્યુલેટર",
+    "description": "The generated-index page description for category 'મોડ્યુલ 13: ઈલેક્ટ્રોનિક સર્કિટ સિમ્યુલેટર' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 14: ઓપ એમ્પ અને ટાઈમર એપ્લિકેશન": {
+    "message": "મોડ્યુલ 14: ઓપ એમ્પ અને ટાઈમર એપ્લિકેશન",
+    "description": "The label for category 'મોડ્યુલ 14: ઓપ એમ્પ અને ટાઈમર એપ્લિકેશન' in sidebar 'studySidebar'"
+  },
+  "sidebar.studySidebar.category.મોડ્યુલ 14: ઓપ એમ્પ અને ટાઈમર એપ્લિકેશન.link.generated-index.description": {
+    "message": "ઓપ એમ્પ અને ટાઈમર એપ્લિકેશન",
+    "description": "The generated-index page description for category 'મોડ્યુલ 14: ઓપ એમ્પ અને ટાઈમર એપ્લિકેશન' in sidebar 'studySidebar'"
+  }
+}

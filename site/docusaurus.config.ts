@@ -6,7 +6,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'Electronic Mechanic Trade',
-  tagline: 'Study Material, MCQ Tests અને Announcements — Electronic Mechanic Trade Trainees માટે',
+  tagline: 'Study Material, MCQ Tests and Announcements for Electronic Mechanic Trade Trainees',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -32,8 +32,18 @@ const config: Config = {
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: 'gu',
+    locales: ['gu', 'en'],
+    localeConfigs: {
+      gu: {
+        label: 'ગુજરાતી',
+        htmlLang: 'gu',
+      },
+      en: {
+        label: 'English',
+        htmlLang: 'en',
+      },
+    },
   },
 
   plugins: [
@@ -101,6 +111,10 @@ const config: Config = {
         },
         {to: '/tests', label: 'Tests', position: 'left'},
         {to: '/blog', label: 'Announcements', position: 'left'},
+        {
+          type: 'localeDropdown',
+          position: 'right',
+        },
         {
           href: 'https://github.com/ravijadia/Electronics_Mechanic_Study',
           label: 'GitHub',

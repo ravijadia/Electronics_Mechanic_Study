@@ -1,11 +1,12 @@
 import type {ReactNode} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
+import Translate from '@docusaurus/Translate';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 
 type FeatureItem = {
-  title: string;
+  title: ReactNode;
   Svg: React.ComponentType<React.ComponentProps<'svg'>>;
   description: ReactNode;
   to: string;
@@ -13,27 +14,41 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'સ્ટડી મટીરીયલ (Study Material)',
+    title: (
+      <Translate id="homepage.feature.study.title">Study Material</Translate>
+    ),
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     to: '/docs/intro',
     description: (
-      <>Module 2 થી Module 14 સુધીના પ્રકરણો, ગુજરાતીમાં સમજૂતી સાથે.</>
+      <Translate id="homepage.feature.study.description">
+        Chapters from Module 2 through Module 14, with explanations in
+        Gujarati.
+      </Translate>
     ),
   },
   {
-    title: 'MCQ ટેસ્ટ (Tests)',
+    title: <Translate id="homepage.feature.tests.title">MCQ Tests</Translate>,
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     to: '/tests',
     description: (
-      <>દરેક પ્રકરણ પછી પ્રેક્ટિસ ટેસ્ટ આપો — તરત જ સ્કોર જુઓ, કોઈ લોગિન નહીં.</>
+      <Translate id="homepage.feature.tests.description">
+        Take a practice test after each chapter — see your score instantly,
+        no login required.
+      </Translate>
     ),
   },
   {
-    title: 'જાહેરાતો (Announcements)',
+    title: (
+      <Translate id="homepage.feature.announcements.title">
+        Announcements
+      </Translate>
+    ),
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     to: '/blog',
     description: (
-      <>નવું કન્ટેન્ટ, પરીક્ષા તારીખો અને અગત્યની જાહેરાતો અહીં જુઓ.</>
+      <Translate id="homepage.feature.announcements.description">
+        New content, exam dates, and important announcements posted here.
+      </Translate>
     ),
   },
 ];
