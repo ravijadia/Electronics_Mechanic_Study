@@ -1,0 +1,127 @@
+---
+title: Quiz — TRIAC & DIAC Dimmer/Regulator
+description: Module 10 lesson quiz — Lamp Dimmer / Fan Motor Speed Regulator using TRIAC and DIAC
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: TRIAC & DIAC Dimmer/Regulator
+
+Lesson: [Lamp Dimmer / Fan Motor Speed Regulator using TRIAC and DIAC](/docs/module-10-power-electronic-components/triac-diac-dimmer) · Module 10: Power Electronic Components
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'What key ability do both TRIAC and DIAC have that an SCR does not?',
+      options: [
+        'They can switch DC only',
+        'They can conduct in both directions of an AC cycle',
+        'They require no triggering at all',
+        'They only work at high frequency',
+      ],
+      correctIndex: 1,
+      explanation: 'Unlike an SCR (unidirectional), both TRIAC and DIAC are bidirectional devices, conducting on both AC half-cycles.',
+    },
+    {
+      question: 'How many terminals does a DIAC have, and does it have a gate?',
+      options: ['Two terminals, no gate', 'Three terminals, one gate', 'Two terminals, one gate', 'Four terminals, two gates'],
+      correctIndex: 0,
+      explanation: 'A DIAC is a two-terminal device with no gate terminal.',
+    },
+    {
+      question: 'What triggers a DIAC into conduction?',
+      options: [
+        'A positive gate pulse only',
+        'Voltage across it exceeding its breakover voltage, in either polarity',
+        'A drop in current below its holding value',
+        'An external clock signal',
+      ],
+      correctIndex: 1,
+      explanation: 'A DIAC switches on once the voltage across it exceeds its breakover voltage (VBO), in either direction.',
+    },
+    {
+      question: 'What is the primary role of a DIAC in a TRIAC dimmer circuit?',
+      options: [
+        'To rectify the AC supply',
+        'To deliver a sharp trigger pulse to the TRIAC gate at the right moment',
+        'To step down the mains voltage',
+        'To filter ripple from the output',
+      ],
+      correctIndex: 1,
+      explanation: 'The DIAC supplies a sharp gate current pulse to fire the TRIAC once the RC network reaches its breakover voltage.',
+    },
+    {
+      question: 'A TRIAC is functionally equivalent to:',
+      options: [
+        'A single SCR',
+        'Two SCRs connected in anti-parallel with a common gate',
+        'A DIAC with an extra terminal',
+        'A bridge rectifier',
+      ],
+      correctIndex: 1,
+      explanation: 'A TRIAC behaves like two SCRs connected back-to-back (anti-parallel) sharing one gate terminal.',
+    },
+    {
+      question: 'What are the three terminals of a TRIAC?',
+      options: ['Anode, Cathode, Gate', 'Source, Drain, Gate', 'MT1, MT2, Gate', 'Emitter, Base, Collector'],
+      correctIndex: 2,
+      explanation: 'A TRIAC has Main Terminal 1 (MT1), Main Terminal 2 (MT2), and a Gate.',
+    },
+    {
+      question: 'Unlike an SCR, a TRIAC can be triggered into conduction using:',
+      options: [
+        'Only a positive gate pulse',
+        'Only a negative gate pulse',
+        'Either a positive or negative gate pulse',
+        'No gate pulse is ever needed',
+      ],
+      correctIndex: 2,
+      explanation: 'A TRIAC can be fired with either polarity of gate pulse, unlike an SCR which needs a positive pulse.',
+    },
+    {
+      question: 'In a phase-control dimmer, what does changing the potentiometer resistance change?',
+      options: [
+        'The mains supply frequency',
+        'The firing angle, and therefore the power delivered to the load',
+        'The DIAC breakover voltage permanently',
+        'The direction of current through the TRIAC',
+      ],
+      correctIndex: 1,
+      explanation: 'Varying the potentiometer changes how long the RC network takes to reach the DIAC breakover voltage, shifting the firing angle.',
+    },
+    {
+      question: 'A smaller firing angle (TRIAC triggered earlier in the half-cycle) results in:',
+      options: [
+        'Dimmer lamp / lower fan speed',
+        'Brighter lamp / higher fan speed',
+        'No change in brightness',
+        'The TRIAC turning off completely',
+      ],
+      correctIndex: 1,
+      explanation: 'Triggering earlier lets more of the AC waveform reach the load, increasing power delivered — brighter/faster.',
+    },
+    {
+      question: 'Why does a TRIAC need to be re-triggered every half-cycle?',
+      options: [
+        'It has no natural turn-off mechanism at all',
+        'It turns off naturally at each AC current zero-crossing',
+        'The DIAC destroys itself after one pulse',
+        'TRIACs can only conduct once per lifetime',
+      ],
+      correctIndex: 1,
+      explanation: 'A TRIAC commutates off naturally when current crosses zero each half-cycle, requiring re-triggering for the next half-cycle.',
+    },
+    {
+      question: 'Which of these is a typical application of TRIAC-DIAC based circuits?',
+      options: [
+        'Precision DC voltage reference',
+        'Lamp dimmers and fan speed regulators',
+        'High-frequency radio demodulation',
+        'Battery charge storage',
+      ],
+      correctIndex: 1,
+      explanation: 'Lamp dimmers, fan speed regulators, and heater/soldering iron controls are classic TRIAC-DIAC applications.',
+    },
+  ]}
+/>

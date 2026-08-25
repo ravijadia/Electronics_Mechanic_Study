@@ -1,0 +1,127 @@
+---
+title: Quiz — Oscilloscope Controls
+description: Module 4 lesson quiz — Controls and Functions of Oscilloscope
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Oscilloscope Controls
+
+Lesson: [Controls and Functions of Oscilloscope](/docs/module-04-ac-dc-measuring-instruments/oscilloscope-controls) · Module 4: AC/DC Measuring Instruments, Basic Workshop Practice
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'What key advantage does an oscilloscope have over a multimeter?',
+      options: [
+        'It measures resistance more accurately',
+        'It shows the actual shape of a signal over time',
+        'It is cheaper to buy',
+        'It requires no probes',
+      ],
+      correctIndex: 1,
+      explanation: 'An oscilloscope displays how voltage changes over time, revealing waveform shape — something a multimeter cannot show.',
+    },
+    {
+      question: 'In a DSO, what replaces the CRT display of an older analog oscilloscope?',
+      options: ['A paper chart', 'An LCD screen', 'A needle gauge', 'A speaker'],
+      correctIndex: 1,
+      explanation: 'Digital Storage Oscilloscopes (DSOs) use an LCD screen instead of a Cathode Ray Tube.',
+    },
+    {
+      question: 'Which oscilloscope block amplifies the input signal before it deflects the trace up or down?',
+      options: ['Time base circuit', 'Trigger circuit', 'Vertical amplifier', 'Power supply'],
+      correctIndex: 2,
+      explanation: 'The vertical amplifier boosts the input signal for vertical deflection, controlled by the Volts/Div setting.',
+    },
+    {
+      question: 'What does the "Volts/Div" control set?',
+      options: [
+        'How much time each horizontal division represents',
+        'How many volts each vertical grid division represents',
+        'The trace brightness',
+        'The trigger voltage level',
+      ],
+      correctIndex: 1,
+      explanation: 'Volts/Div sets the vertical scale — how many volts each grid division on screen represents.',
+    },
+    {
+      question: 'What does the "Time/Div" control set?',
+      options: [
+        'The vertical scale of the trace',
+        'How much time each horizontal grid division represents',
+        'The trace intensity',
+        'Which channel is displayed',
+      ],
+      correctIndex: 1,
+      explanation: 'Time/Div sets the horizontal (time) scale — how much time each grid division represents.',
+    },
+    {
+      question: 'Why does a waveform sometimes appear to drift or scroll across the screen instead of standing still?',
+      options: [
+        'The Volts/Div is set incorrectly',
+        'The trigger is not properly synchronizing the start of each sweep',
+        'The probe is disconnected',
+        'The oscilloscope is broken',
+      ],
+      correctIndex: 1,
+      explanation: 'The trigger circuit synchronizes each horizontal sweep to a fixed point on the signal; poor triggering causes drifting.',
+    },
+    {
+      question: 'What does "Trigger Slope" select?',
+      options: [
+        'Whether the display is analog or digital',
+        'Whether triggering happens on a rising or falling edge of the signal',
+        'The amplitude of the input signal',
+        'Which channel is grounded',
+      ],
+      correctIndex: 1,
+      explanation: 'Trigger Slope chooses rising-edge or falling-edge triggering for the start of each sweep.',
+    },
+    {
+      question: 'What is the difference between AC and DC coupling on an oscilloscope input?',
+      options: [
+        'AC coupling shows the full signal including DC offset; DC coupling blocks it',
+        'DC coupling shows the full signal including DC offset; AC coupling blocks the DC offset and shows only the varying part',
+        'There is no difference',
+        'AC coupling only works with square waves',
+      ],
+      correctIndex: 1,
+      explanation: 'DC coupling passes the complete signal; AC coupling blocks the DC component, showing only the AC variation.',
+    },
+    {
+      question: 'Why would a technician use Dual-channel (CH1/CH2) mode?',
+      options: [
+        'To increase the trace brightness',
+        'To compare the phase relationship or timing between two signals at once',
+        'To measure resistance directly',
+        'To reduce probe capacitance',
+      ],
+      correctIndex: 1,
+      explanation: 'Dual-channel mode displays two signals simultaneously, useful for comparing phase or timing relationships.',
+    },
+    {
+      question: 'Which oscilloscope application would help detect ripple on a DC power supply output?',
+      options: [
+        'Measuring resistance with an ohmmeter',
+        'Viewing the DC output waveform on the oscilloscope screen for AC variation riding on the DC level',
+        'Using the clamp meter only',
+        'Checking the fuse rating',
+      ],
+      correctIndex: 1,
+      explanation: 'Viewing a supply’s DC output on an oscilloscope reveals ripple as a small AC variation riding on the DC level.',
+    },
+    {
+      question: 'What should be done first when connecting an oscilloscope probe to measure a signal?',
+      options: [
+        'Set Time/Div to its maximum value',
+        'Connect the probe to the signal and connect the probe’s ground clip to the circuit’s ground',
+        'Turn off the trigger circuit',
+        'Switch to AC coupling only',
+      ],
+      correctIndex: 1,
+      explanation: 'A proper probe connection, including the ground clip reference, is the essential first step before adjusting other controls.',
+    },
+  ]}
+/>

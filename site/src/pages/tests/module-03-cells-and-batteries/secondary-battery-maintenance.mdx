@@ -1,0 +1,113 @@
+---
+title: Quiz — Secondary Battery Maintenance
+description: Module 3 lesson quiz — Secondary Battery Charge, Discharge and Maintenance
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Secondary Battery – Charge, Discharge and Maintenance
+
+Lesson: [Secondary Battery – Charge, Discharge and Maintenance](/docs/module-03-cells-and-batteries/secondary-battery-maintenance) · Module 3: Cells and Batteries
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'In Constant Current (CC) charging, what does the charger hold fixed?',
+      options: ['Voltage', 'Current', 'Both voltage and current', 'Resistance'],
+      correctIndex: 1,
+      explanation: 'CC charging holds current fixed while the battery voltage rises as it charges.',
+    },
+    {
+      question: 'In Constant Voltage (CV) charging, what happens to the current as the battery nears full charge?',
+      options: ['It increases sharply', 'It stays fixed', 'It tapers off (decreases)', 'It reverses direction'],
+      correctIndex: 2,
+      explanation: 'CV charging holds voltage fixed; current naturally tapers off as the battery approaches full charge.',
+    },
+    {
+      question: 'What is trickle (float) charging used for?',
+      options: [
+        'Rapidly charging a fully discharged battery',
+        'Keeping a fully-charged standby battery topped up with a very small current',
+        'Discharging a battery safely',
+        'Testing a battery’s capacity',
+      ],
+      correctIndex: 1,
+      explanation: 'Float/trickle charging maintains standby batteries (UPS, emergency lighting) at full charge with minimal current.',
+    },
+    {
+      question: 'Most modern lead-acid or Li-ion chargers typically combine which two charging methods in stages?',
+      options: [
+        'Fast charging then trickle charging only',
+        'Constant Current first, then Constant Voltage',
+        'Constant Voltage first, then Constant Current',
+        'Only Constant Voltage throughout',
+      ],
+      correctIndex: 1,
+      explanation: 'A common charging profile starts with CC and switches to CV as the battery nears full charge.',
+    },
+    {
+      question: 'What resting voltage typically indicates a healthy, fully-charged 12V lead-acid battery?',
+      options: ['Around 10V', 'Around 11V', 'Around 12.6V', 'Around 14.5V'],
+      correctIndex: 2,
+      explanation: 'A healthy 12V lead-acid battery reads around 12.6V at rest when fully charged.',
+    },
+    {
+      question: 'What instrument is used to check specific gravity of a lead-acid battery’s electrolyte?',
+      options: ['Multimeter', 'Hydrometer', 'Oscilloscope', 'Ammeter'],
+      correctIndex: 1,
+      explanation: 'A hydrometer measures the electrolyte’s specific gravity to judge state of charge.',
+    },
+    {
+      question: 'What specific gravity range typically indicates a fully charged lead-acid cell?',
+      options: ['1.000–1.050', '1.100–1.150', '1.260–1.280', '1.500–1.600'],
+      correctIndex: 2,
+      explanation: 'A fully charged lead-acid cell reads approximately 1.260–1.280 specific gravity.',
+    },
+    {
+      question: 'Why should deep discharge be avoided in lead-acid and Li-ion batteries?',
+      options: [
+        'It has no real effect on battery life',
+        'It damages the battery chemistry and shortens overall life',
+        'It makes the battery charge faster next time',
+        'It only affects the battery’s color',
+      ],
+      correctIndex: 1,
+      explanation: 'Discharging far below the rated cutoff voltage damages most battery chemistries and reduces lifespan.',
+    },
+    {
+      question: 'What should be used to top up the electrolyte level in a vented lead-acid battery?',
+      options: ['Tap water', 'Distilled water only', 'Battery acid', 'Any available water'],
+      correctIndex: 1,
+      explanation: 'Only distilled water should be added — tap water introduces minerals that harm the cell.',
+    },
+    {
+      question: 'Why is proper ventilation essential when charging lead-acid batteries?',
+      options: [
+        'To keep the battery cool for appearance only',
+        'Charging releases hydrogen gas, which is explosive in an enclosed space',
+        'It has no safety purpose, only comfort',
+        'To prevent the electrolyte from evaporating',
+      ],
+      correctIndex: 1,
+      explanation: 'Hydrogen gas released during charging can be explosive if it accumulates in an unventilated space.',
+    },
+    {
+      question: 'When removing a lead-acid battery, which terminal should be disconnected first for safety?',
+      options: ['Positive terminal', 'Negative terminal', 'Either terminal, order does not matter', 'Both simultaneously'],
+      correctIndex: 1,
+      explanation: 'Disconnecting the negative terminal first reduces the risk of accidental short-circuit sparks.',
+    },
+    {
+      question: 'What is an "equalizing charge" used for in lead-acid battery maintenance?',
+      options: [
+        'To permanently disable a weak cell',
+        'To give a controlled overcharge that equalizes charge across all cells and reduces sulfation',
+        'To discharge the battery completely before storage',
+        'To measure the battery’s internal resistance',
+      ],
+      correctIndex: 1,
+      explanation: 'An equalizing charge is a controlled overcharge, done per manufacturer schedule, to balance cells and reduce sulfation.',
+    },
+  ]}
+/>

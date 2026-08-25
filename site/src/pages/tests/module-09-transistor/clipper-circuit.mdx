@@ -1,0 +1,106 @@
+---
+title: Quiz — Clipper Circuit
+description: Module 9 lesson quiz — Clipper Circuit
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Clipper Circuit
+
+Lesson: [Clipper Circuit](/docs/module-09-transistor/clipper-circuit) · Module 9: Transistor
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'What does a clipper circuit do to an input waveform?',
+      options: [
+        'Shifts the entire waveform up or down without changing its shape',
+        'Removes (clips) a portion of the waveform above or below a reference level',
+        'Amplifies the entire waveform equally',
+        'Converts the waveform from AC to DC only',
+      ],
+      correctIndex: 1,
+      explanation: 'A clipper removes part of the waveform above/below a chosen reference level using diodes.',
+    },
+    {
+      question: 'In a series clipper, where is the diode connected relative to the load?',
+      options: ['In series with the load', 'In parallel with the load', 'Across the power supply only', 'Not connected to the circuit'],
+      correctIndex: 0,
+      explanation: 'A series clipper places the diode in series with the load path.',
+    },
+    {
+      question: 'In a shunt (parallel) clipper, where is the diode connected relative to the load?',
+      options: ['In series with the load', 'In parallel with the load', 'Only at the input source', 'It has no diode'],
+      correctIndex: 1,
+      explanation: 'A shunt clipper places the diode in parallel with the load, short-circuiting the clipped portion.',
+    },
+    {
+      question: 'What does a positive clipper remove from the waveform?',
+      options: ['The negative portion', 'The positive portion (or the part above a set positive level)', 'Both halves equally', 'Nothing, it passes the signal unchanged'],
+      correctIndex: 1,
+      explanation: 'A positive clipper removes the positive portion of the waveform, letting the negative portion pass.',
+    },
+    {
+      question: 'What does a negative clipper remove from the waveform?',
+      options: ['The positive portion', 'The negative portion (or the part below a set negative level)', 'Nothing at all', 'Only the DC component'],
+      correctIndex: 1,
+      explanation: 'A negative clipper removes the negative portion, letting the positive portion pass.',
+    },
+    {
+      question: 'How does a biased clipper differ from a simple (unbiased) clipper?',
+      options: [
+        'It uses no diode at all',
+        'It adds a DC reference voltage in series with the diode to shift the clipping level away from 0V',
+        'It clips both halves of the waveform completely, leaving nothing',
+        'It only works on DC input signals',
+      ],
+      correctIndex: 1,
+      explanation: 'Adding a DC bias source in series with the diode moves the clipping threshold to any desired voltage.',
+    },
+    {
+      question: 'When a shunt clipper’s diode is forward biased and conducting, what happens to the output?',
+      options: [
+        'The full input signal appears at the output',
+        'The output is clamped near zero (or the reference level), since the diode short-circuits that portion',
+        'The output voltage doubles',
+        'The circuit is open and no current flows',
+      ],
+      correctIndex: 1,
+      explanation: 'A conducting shunt diode effectively shorts the signal to the reference, clipping that portion of the output.',
+    },
+    {
+      question: 'Which of the following is a common application of clipper circuits?',
+      options: [
+        'Converting sine waves into approximate square waves',
+        'Stepping down mains voltage',
+        'Storing digital data permanently',
+        'Generating three-phase AC power',
+      ],
+      correctIndex: 0,
+      explanation: 'Clippers are used to shape sine waves into approximate square waves by clipping the peaks.',
+    },
+    {
+      question: 'Why are clipper circuits used for circuit protection?',
+      options: [
+        'They increase the voltage to a safe minimum',
+        'They limit the signal amplitude, preventing voltage spikes from reaching sensitive circuitry',
+        'They convert AC into a stable DC reference always',
+        'They isolate the circuit magnetically',
+      ],
+      correctIndex: 1,
+      explanation: 'By clipping voltage above a safe threshold, clippers protect downstream circuits from over-voltage spikes.',
+    },
+    {
+      question: 'In a series clipper, when is the output zero?',
+      options: [
+        'When the diode is forward biased and conducting',
+        'When the diode is reverse biased and not conducting',
+        'The output is never zero',
+        'Only when the input itself is zero',
+      ],
+      correctIndex: 1,
+      explanation: 'A reverse-biased series diode blocks current, giving zero output during that portion of the input cycle.',
+    },
+  ]}
+/>

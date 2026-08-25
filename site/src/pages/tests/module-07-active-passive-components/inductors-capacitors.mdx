@@ -1,0 +1,92 @@
+---
+title: Quiz — Inductors & Capacitors
+description: Module 7 lesson quiz — Inductors and Capacitors
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Inductors & Capacitors
+
+Lesson: [Inductors and Capacitors](/docs/module-07-active-passive-components/inductors-capacitors) · Module 7: Active and Passive Components
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'An inductor stores energy in which form?',
+      options: ['Electric field', 'Magnetic field', 'Heat', 'Chemical energy'],
+      correctIndex: 1,
+      explanation: 'An inductor stores energy in a magnetic field created by current flowing through its coil.',
+    },
+    {
+      question: 'What does an inductor oppose?',
+      options: ['A change in voltage', 'A change in current', 'Any current flow at all', 'A change in resistance'],
+      correctIndex: 1,
+      explanation: 'An inductor resists sudden changes in the current flowing through it.',
+    },
+    {
+      question: 'What is the unit of inductance?',
+      options: ['Farad', 'Ohm', 'Henry', 'Tesla'],
+      correctIndex: 2,
+      explanation: 'Inductance is measured in Henrys (H), typically in mH or µH for practical components.',
+    },
+    {
+      question: 'A capacitor stores energy in which form?',
+      options: ['Magnetic field', 'Electric field', 'Heat', 'Mechanical spring tension'],
+      correctIndex: 1,
+      explanation: 'A capacitor stores energy in the electric field between its two plates.',
+    },
+    {
+      question: 'What does a capacitor oppose?',
+      options: ['A change in current', 'A change in voltage', 'A change in resistance', 'Any voltage at all'],
+      correctIndex: 1,
+      explanation: 'A capacitor resists sudden changes in the voltage across it.',
+    },
+    {
+      question: 'How do inductors combine in series?',
+      options: ['1/Lt = 1/L1 + 1/L2', 'Lt = L1 + L2', 'Lt = L1 × L2', 'Lt = L1 − L2'],
+      correctIndex: 1,
+      explanation: 'Inductors in series add directly, just like resistors: Lt = L1 + L2 + ...',
+    },
+    {
+      question: 'How do capacitors combine in series?',
+      options: ['Ct = C1 + C2', '1/Ct = 1/C1 + 1/C2', 'Ct = C1 × C2', 'Ct = C1 − C2'],
+      correctIndex: 1,
+      explanation: 'Capacitors in series use the reciprocal formula — the opposite pattern to resistors/inductors.',
+    },
+    {
+      question: 'Two capacitors of 10µF and 20µF are connected in series. What is the total capacitance?',
+      options: ['30µF', '15µF', '6.67µF', '2µF'],
+      correctIndex: 2,
+      explanation: '1/Ct = 1/10 + 1/20 = 3/20, so Ct = 20/3 ≈ 6.67µF.',
+    },
+    {
+      question: 'Which type of capacitor must be connected with the correct polarity, or it may be damaged?',
+      options: ['Ceramic capacitor', 'Polyester/Film capacitor', 'Electrolytic capacitor', 'Air capacitor'],
+      correctIndex: 2,
+      explanation: 'Electrolytic (and tantalum) capacitors are polarized and can be damaged by reverse voltage.',
+    },
+    {
+      question: 'At DC (steady state), how does an ideal capacitor behave once fully charged?',
+      options: [
+        'Like a short circuit (plain wire)',
+        'Like an open circuit, blocking further current',
+        'Like a resistor',
+        'It keeps drawing increasing current',
+      ],
+      correctIndex: 1,
+      explanation: 'Once fully charged, a capacitor blocks further DC current, behaving like an open circuit.',
+    },
+    {
+      question: 'At DC (steady state), how does an ideal inductor behave?',
+      options: [
+        'Like an open circuit',
+        'Like a plain wire (short circuit)',
+        'Like a capacitor',
+        'It blocks all current permanently',
+      ],
+      correctIndex: 1,
+      explanation: 'At steady DC, an inductor offers no opposition and acts like a plain conductor.',
+    },
+  ]}
+/>

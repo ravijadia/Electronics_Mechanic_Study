@@ -1,0 +1,108 @@
+---
+title: Quiz — Electronic Simulation Software
+description: Module 13 lesson quiz — Electronic Simulation Software
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Electronic Simulation Software
+
+Lesson: [Electronic Simulation Software](/docs/module-13-circuit-simulator/electronic-simulation-software) · Module 13: Electronic Circuit Simulator
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'What is the main purpose of circuit simulation software?',
+      options: [
+        'To physically manufacture PCBs',
+        'To predict how a circuit will behave before it is physically built',
+        'To replace the need for any hand calculations forever',
+        'To store component datasheets only',
+      ],
+      correctIndex: 1,
+      explanation: 'Simulation lets a circuit be drawn and tested virtually, predicting voltages, currents, and waveforms before building it.',
+    },
+    {
+      question: 'Which of these is NOT listed as a benefit of simulating a circuit before building it?',
+      options: ['Cost saving', 'Time saving', 'Guaranteed zero errors in the final physical build', 'Safety when testing high-voltage/high-current designs'],
+      correctIndex: 2,
+      explanation: 'Simulation reduces risk and cost but does not guarantee the physical build will be completely error-free.',
+    },
+    {
+      question: 'What does SPICE stand for, in the context of circuit simulators?',
+      options: [
+        'System for Printed Integrated Circuit Evaluation',
+        'Simulation Program with Integrated Circuit Emphasis',
+        'Standard Protocol for Internal Circuit Estimation',
+        'Signal Processing In Circuit Environments',
+      ],
+      correctIndex: 1,
+      explanation: 'SPICE (Simulation Program with Integrated Circuit Emphasis) is the simulation engine most circuit simulators are built around.',
+    },
+    {
+      question: 'What are the two connected parts found in nearly all circuit simulators?',
+      options: [
+        'A power supply and a multimeter',
+        'A schematic editor and a simulation engine',
+        'A breadboard and a soldering station',
+        'A compiler and a debugger',
+      ],
+      correctIndex: 1,
+      explanation: 'A schematic editor is used to draw the circuit, and a simulation engine solves the circuit equations to produce results.',
+    },
+    {
+      question: 'What is a key advantage of an online/browser-based simulator over a desktop simulator?',
+      options: [
+        'It always has more advanced analysis options',
+        'It requires no installation and is convenient for quick checks or learning',
+        'It cannot simulate any real components',
+        'It only works without an internet connection',
+      ],
+      correctIndex: 1,
+      explanation: 'Online simulators run in a browser with nothing to install, making them convenient for quick simulations and learning.',
+    },
+    {
+      question: 'In the basic simulation workflow, what comes right after drawing the schematic and wiring the components?',
+      options: ['Running the simulation immediately', 'Assigning component values', 'Viewing the results', 'Adjusting the circuit'],
+      correctIndex: 1,
+      explanation: 'After the schematic is drawn, component values (resistance, voltage, etc.) are assigned before choosing an analysis type and running.',
+    },
+    {
+      question: 'For a series RC circuit with R = 1kΩ and C = 100µF, what is the time constant τ?',
+      options: ['1 ms', '10 ms', '100 ms', '1000 ms'],
+      correctIndex: 2,
+      explanation: 'τ = RC = 1000 × 100×10⁻⁶ = 0.1s = 100 ms.',
+    },
+    {
+      question: 'Roughly how many time constants (τ) does a capacitor need to be considered fully charged?',
+      options: ['1τ', '2τ', '5τ', '10τ'],
+      correctIndex: 2,
+      explanation: 'A capacitor is generally considered fully charged after about 5 time constants.',
+    },
+    {
+      question: 'Which analysis type would you choose to view a capacitor voltage charging up over time in a simulator?',
+      options: ['DC Operating Point', 'Transient Analysis', 'AC Frequency Sweep', 'None — simulators cannot show this'],
+      correctIndex: 1,
+      explanation: 'Transient analysis shows how voltages and currents change over time, such as a charging curve.',
+    },
+    {
+      question: 'Which analysis type treats capacitors as open circuits and inductors as short circuits to find only the final steady-state values?',
+      options: ['Transient Analysis', 'AC Frequency Sweep', 'DC Operating Point', 'Worst-case Analysis'],
+      correctIndex: 2,
+      explanation: 'DC Operating Point analysis finds the steady-state DC values, ignoring time-varying behavior.',
+    },
+    {
+      question: 'Which analysis type would be most useful when designing a filter circuit to check its response across different frequencies?',
+      options: ['DC Operating Point', 'Transient Analysis', 'AC Frequency Sweep', 'Component placement analysis'],
+      correctIndex: 2,
+      explanation: 'An AC frequency sweep plots how gain/response changes with frequency, ideal for filters and amplifiers.',
+    },
+    {
+      question: 'In the worked RC circuit walkthrough, what formula is used to confirm the simulated charging curve matches hand calculation?',
+      options: ['Vc = V × e^(t/RC)', 'Vc = V(1 − e^(−t/RC))', 'Vc = IR', 'Vc = V/RC'],
+      correctIndex: 1,
+      explanation: 'The exponential charging equation Vc = V(1 − e^(−t/RC)) describes capacitor voltage during charging.',
+    },
+  ]}
+/>

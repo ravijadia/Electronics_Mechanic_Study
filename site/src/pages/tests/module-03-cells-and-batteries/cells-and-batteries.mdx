@@ -1,0 +1,118 @@
+---
+title: Quiz — Cells and Batteries
+description: Module 3 lesson quiz — Cells and Batteries
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Cells and Batteries
+
+Lesson: [Cells and Batteries](/docs/module-03-cells-and-batteries/cells-and-batteries) · Module 3: Cells and Batteries
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'What does a cell convert directly into electrical energy?',
+      options: ['Mechanical energy', 'Chemical energy', 'Solar energy', 'Magnetic energy'],
+      correctIndex: 1,
+      explanation: 'A cell converts stored chemical energy directly into electrical energy via a chemical reaction at its electrodes.',
+    },
+    {
+      question: 'What is a battery, in relation to a cell?',
+      options: [
+        'A single large cell',
+        'Two or more cells connected together in series, parallel, or a combination',
+        'A cell without an electrolyte',
+        'A device that only stores AC power',
+      ],
+      correctIndex: 1,
+      explanation: 'A battery is simply multiple cells combined to achieve a needed voltage or current rating.',
+    },
+    {
+      question: 'What is the key difference between a primary cell and a secondary cell?',
+      options: [
+        'Primary cells are always larger',
+        'Primary cells cannot be recharged; secondary cells can be recharged and reused',
+        'Secondary cells cannot supply current',
+        'There is no real difference',
+      ],
+      correctIndex: 1,
+      explanation: 'Primary cells undergo a non-reversible reaction (discard after use); secondary cells are reversible and rechargeable.',
+    },
+    {
+      question: 'Which of these is an example of a secondary (rechargeable) cell?',
+      options: ['Zinc-Carbon cell', 'Alkaline cell', 'Lead-Acid battery', 'Disposable coin cell'],
+      correctIndex: 2,
+      explanation: 'Lead-Acid, Ni-Cd, and Li-ion are rechargeable secondary cells; Zinc-Carbon and Alkaline are primary (non-rechargeable).',
+    },
+    {
+      question: 'A standard 12V lead-acid battery is made up of how many 2V cells in series?',
+      options: ['4', '6', '8', '12'],
+      correctIndex: 1,
+      explanation: 'Each lead-acid cell is about 2V, so 6 cells in series give 12V.',
+    },
+    {
+      question: 'What is EMF (Electromotive Force)?',
+      options: [
+        'The voltage across the cell while current is flowing',
+        'The total voltage of a cell measured with no load connected',
+        'The internal resistance of a cell',
+        'The current a cell can deliver',
+      ],
+      correctIndex: 1,
+      explanation: 'EMF is the cell’s full "push" voltage measured with no current being drawn.',
+    },
+    {
+      question: 'Why is terminal voltage always slightly less than EMF when a cell is supplying current?',
+      options: [
+        'Because of the cell’s internal resistance dropping some voltage',
+        'Because EMF decreases permanently over time',
+        'Because the external circuit absorbs the difference instantly',
+        'Terminal voltage is actually always higher than EMF',
+      ],
+      correctIndex: 0,
+      explanation: 'Terminal Voltage = EMF − (Current × Internal Resistance); the internal resistance drop reduces terminal voltage.',
+    },
+    {
+      question: 'A cell has an EMF of 12V and internal resistance of 0.2Ω. When supplying 5A, what is its terminal voltage?',
+      options: ['10V', '11V', '11.5V', '12V'],
+      correctIndex: 1,
+      explanation: 'Terminal Voltage = 12 − (5 × 0.2) = 12 − 1 = 11V.',
+    },
+    {
+      question: 'What happens to voltage and current capacity when identical cells are connected in series?',
+      options: [
+        'Voltage adds up, capacity (Ah) stays the same as one cell',
+        'Voltage stays the same, capacity adds up',
+        'Both voltage and capacity add up',
+        'Neither voltage nor capacity changes',
+      ],
+      correctIndex: 0,
+      explanation: 'Series connection adds cell voltages together while capacity (Ah) remains that of a single cell.',
+    },
+    {
+      question: 'What happens to voltage and current capacity when identical cells are connected in parallel?',
+      options: [
+        'Voltage adds up, capacity stays the same',
+        'Voltage stays the same as one cell, capacity (Ah) adds up',
+        'Both double regardless of count',
+        'Voltage decreases, capacity decreases',
+      ],
+      correctIndex: 1,
+      explanation: 'Parallel connection keeps voltage the same as a single cell while capacities add together.',
+    },
+    {
+      question: 'A battery is rated 100 Ah. Roughly how long can it theoretically supply a 5A load?',
+      options: ['2 hours', '5 hours', '20 hours', '100 hours'],
+      correctIndex: 2,
+      explanation: 'Time ≈ Capacity / Current = 100 Ah / 5A = 20 hours.',
+    },
+    {
+      question: 'Which cell chemistry has the highest typical per-cell voltage among these options?',
+      options: ['Nickel-Cadmium (≈1.2V)', 'Zinc-Carbon (≈1.5V)', 'Lithium-ion (≈3.7V)', 'Lead-Acid (≈2V)'],
+      correctIndex: 2,
+      explanation: 'Li-ion cells have a notably higher nominal voltage (~3.7V) than Ni-Cd, Zinc-Carbon, or Lead-Acid cells.',
+    },
+  ]}
+/>

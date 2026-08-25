@@ -1,0 +1,121 @@
+---
+title: Quiz — MOSFET
+description: Module 10 lesson quiz — MOSFET
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: MOSFET
+
+Lesson: [MOSFET](/docs/module-10-power-electronic-components/mosfet) · Module 10: Power Electronic Components
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'What separates a MOSFET\'s gate from its channel?',
+      options: [
+        'A reverse-biased PN junction, like a JFET',
+        'A thin insulating oxide layer (SiO₂)',
+        'An air gap',
+        'Nothing — they are directly connected',
+      ],
+      correctIndex: 1,
+      explanation: 'The gate is insulated from the channel by a thin SiO₂ layer, giving the MOSFET its name and very high input impedance.',
+    },
+    {
+      question: 'Why is a MOSFET also called an IGFET?',
+      options: [
+        'Because it has an integrated gate filter',
+        'Because its gate is insulated (Insulated Gate FET)',
+        'Because it uses infrared triggering',
+        'Because it has an internal ground fault sensor',
+      ],
+      correctIndex: 1,
+      explanation: 'IGFET stands for Insulated Gate Field Effect Transistor, referring to the oxide-insulated gate.',
+    },
+    {
+      question: 'For an N-channel enhancement MOSFET, when does a conducting channel form?',
+      options: [
+        'Only when VGS is negative',
+        'Only when VGS exceeds the threshold voltage VGS(th), positively',
+        'At all times, regardless of VGS',
+        'Only when VDS = 0',
+      ],
+      correctIndex: 1,
+      explanation: 'Enhancement-mode MOSFETs form their channel only once VGS exceeds the threshold voltage.',
+    },
+    {
+      question: 'A depletion-mode MOSFET differs from an enhancement-mode MOSFET in that it:',
+      options: [
+        'Has no gate terminal',
+        'Already has a conducting channel at VGS = 0',
+        'Cannot be used for switching',
+        'Only conducts DC, never AC',
+      ],
+      correctIndex: 1,
+      explanation: 'Depletion-mode MOSFETs conduct at VGS = 0; the channel is depleted (reduced) by applying gate voltage.',
+    },
+    {
+      question: 'Why does virtually no gate current flow in a MOSFET under normal DC bias?',
+      options: [
+        'The gate is grounded internally',
+        'The gate is separated from the channel by an insulating oxide layer',
+        'The Source and Drain are shorted together',
+        'MOSFETs only operate in pulsed mode',
+      ],
+      correctIndex: 1,
+      explanation: 'The insulating oxide layer blocks DC current flow into the gate, giving extremely high input impedance.',
+    },
+    {
+      question: 'Compared to a BJT, a MOSFET generally offers:',
+      options: [
+        'Slower switching and higher conduction losses',
+        'Faster switching speed and lower conduction losses at high current',
+        'No advantage in switching applications',
+        'Lower input impedance',
+      ],
+      correctIndex: 1,
+      explanation: 'MOSFETs switch faster and have lower RDS(on) conduction losses, making them well suited to power switching.',
+    },
+    {
+      question: 'Why must MOSFETs be handled using anti-static precautions?',
+      options: [
+        'Their metal case corrodes easily',
+        'The thin gate oxide layer can be punctured by static discharge, even without visible damage',
+        'They are sensitive to visible light',
+        'They generate static charge themselves during storage',
+      ],
+      correctIndex: 1,
+      explanation: 'ESD can permanently puncture the extremely thin gate oxide layer, destroying the device invisibly.',
+    },
+    {
+      question: 'Which precaution helps protect MOSFETs from ESD damage during handling?',
+      options: [
+        'Storing them in plastic bags with no special coating',
+        'Using a grounded anti-static wrist strap and conductive foam packaging',
+        'Touching the gate lead directly to test continuity',
+        'Leaving the leads unshorted during storage',
+      ],
+      correctIndex: 1,
+      explanation: 'Anti-static wrist straps, conductive foam packaging, and grounded mats are standard ESD precautions.',
+    },
+    {
+      question: 'Which type of MOSFET is most commonly used in digital logic (CMOS) and switching applications?',
+      options: ['Depletion-mode only', 'Enhancement-mode', 'JFET-based MOSFET', 'None — MOSFETs are unsuitable for logic circuits'],
+      correctIndex: 1,
+      explanation: 'Enhancement-mode MOSFETs, which are normally off until triggered, are the standard building block of CMOS logic.',
+    },
+    {
+      question: 'Which is a typical MOSFET application in power electronics?',
+      options: [
+        'Precision analog voltage reference only',
+        'SMPS (Switch Mode Power Supply) switching and DC-DC converters',
+        'Passive voltage division only',
+        'AC waveform generation without switching',
+      ],
+      correctIndex: 1,
+      explanation: 'MOSFETs are the primary switching devices in SMPS, motor drives, and DC-DC converters.',
+    },
+  ]}
+/>

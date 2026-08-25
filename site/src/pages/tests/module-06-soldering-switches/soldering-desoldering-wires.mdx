@@ -1,0 +1,127 @@
+---
+title: Quiz — Soldering & Desoldering of Wires
+description: Module 6 lesson quiz — Soldering and desoldering of wires
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Soldering and Desoldering of Wires
+
+Lesson: [Soldering and Desoldering of Wires](/docs/module-06-soldering-switches/soldering-desoldering-wires) · Module 6: Soldering/Desoldering and Various Switches
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'What is soldering?',
+      options: [
+        'Joining two metals by melting a filler metal (solder) between them',
+        'Welding two metals directly together without any filler',
+        'Gluing two wires together with adhesive',
+        'Twisting two wires together with no heat',
+      ],
+      correctIndex: 0,
+      explanation: 'Soldering joins metal surfaces by melting a filler metal (solder) between them to form a permanent bond.',
+    },
+    {
+      question: 'What is the main purpose of flux in soldering?',
+      options: [
+        'To cool the joint faster',
+        'To remove oxide film from metal surfaces so solder can bond properly',
+        'To increase the melting point of solder',
+        'To color-code the joint',
+      ],
+      correctIndex: 1,
+      explanation: 'Flux chemically removes oxide film, allowing solder to properly wet and bond to the metal.',
+    },
+    {
+      question: 'Why should you "tin" the soldering iron tip before use?',
+      options: [
+        'To make the iron heat up faster',
+        'So heat transfers efficiently to the joint and the tip is protected from oxidizing',
+        'It is purely cosmetic and has no functional benefit',
+        'To reduce the iron’s wattage',
+      ],
+      correctIndex: 1,
+      explanation: 'A thin layer of fresh solder on the tip improves heat transfer and protects the tip from oxidation.',
+    },
+    {
+      question: 'During soldering, where should the solder wire be fed?',
+      options: [
+        'Directly onto the hot iron tip',
+        'Into the joint itself, so the heat from the joint melts it',
+        'Anywhere near the joint, it does not matter',
+        'Onto the wire before heating begins',
+      ],
+      correctIndex: 1,
+      explanation: 'Solder should be fed into the joint, not the iron tip, so the joint itself melts and flows the solder.',
+    },
+    {
+      question: 'What is a "cold solder joint"?',
+      options: [
+        'A joint that was soldered without preheating the iron',
+        'A dull, grainy, or cracked joint caused by insufficient heat during soldering',
+        'A joint that has cooled down completely after soldering',
+        'A joint made using cold (unheated) solder wire',
+      ],
+      correctIndex: 1,
+      explanation: 'A cold solder joint looks dull/grainy or cracked and results from insufficient heat, making it an unreliable connection.',
+    },
+    {
+      question: 'What should be done if you find a dull, grainy solder joint during inspection?',
+      options: [
+        'Leave it, appearance does not affect function',
+        'Reheat and redo the joint',
+        'Add more flux only, without reheating',
+        'Cut the wire and discard the component',
+      ],
+      correctIndex: 1,
+      explanation: 'A cold/dull solder joint is unreliable and should be reheated and resoldered properly.',
+    },
+    {
+      question: 'A desoldering pump removes molten solder using which method?',
+      options: ['Capillary action', 'Suction', 'Magnetism', 'Evaporation'],
+      correctIndex: 1,
+      explanation: 'A desoldering pump (solder sucker) triggers a spring-loaded plunger to suck away molten solder.',
+    },
+    {
+      question: 'Desoldering wick (braid) removes solder using which principle?',
+      options: ['Suction', 'Capillary action, absorbing melted solder into the braid', 'Magnetic attraction', 'Chemical dissolving'],
+      correctIndex: 1,
+      explanation: 'Heated braid draws molten solder up into itself by capillary action.',
+    },
+    {
+      question: 'What does a shiny, smooth, cone-shaped solder joint indicate?',
+      options: [
+        'Insufficient heat was used',
+        'A good joint with proper heat and solder flow',
+        'Too much flux was used',
+        'The joint will likely fail soon',
+      ],
+      correctIndex: 1,
+      explanation: 'A shiny, smooth, cone-shaped joint is the sign of a correctly made solder joint.',
+    },
+    {
+      question: 'Why should a hot soldering iron always be placed in its stand when not actively in use?',
+      options: [
+        'To keep it visible for the next user',
+        'To prevent burns and fire hazards from an unsecured hot iron',
+        'It has no real safety purpose, only convenience',
+        'To keep the tip cool for tinning',
+      ],
+      correctIndex: 1,
+      explanation: 'An unsecured hot iron laid down loosely is a burn and fire hazard — the stand keeps it safely held.',
+    },
+    {
+      question: 'What does "bridging" mean in a soldering context, and how is it typically fixed?',
+      options: [
+        'A missing solder joint; fixed by adding more solder',
+        'Excess solder connecting two adjacent joints that should be separate; fixed by removing the excess with desoldering wick',
+        'A joint that is too small; fixed by using a larger iron',
+        'A wire that has broken; fixed by replacing the wire',
+      ],
+      correctIndex: 1,
+      explanation: 'Bridging is unwanted solder connecting adjacent joints, usually removed with desoldering wick.',
+    },
+  ]}
+/>

@@ -1,0 +1,102 @@
+---
+title: Quiz — Digital IC Families
+description: Module 12 lesson quiz — Digital IC families and their operational characteristics
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Digital IC Families
+
+Lesson: [Digital IC Families and Their Operational Characteristics](/docs/module-12-digital-logic/digital-ic-families) · Module 12: Basic Gates, Combinational Circuits, Flip-Flops
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'TTL (Transistor-Transistor Logic) gates are built primarily using which type of device?',
+      options: ['MOSFETs', 'Bipolar junction transistors', 'JFETs', 'Vacuum tubes'],
+      correctIndex: 1,
+      explanation: 'TTL is built from bipolar junction transistors, unlike CMOS which uses MOSFETs.',
+    },
+    {
+      question: 'CMOS logic gates are built using which arrangement?',
+      options: [
+        'Only NPN bipolar transistors',
+        'Paired P-channel and N-channel MOSFETs',
+        'A single resistor-transistor pair',
+        'Vacuum-tube triodes',
+      ],
+      correctIndex: 1,
+      explanation: 'CMOS uses complementary pairs of P-channel and N-channel MOSFETs.',
+    },
+    {
+      question: 'Which IC family generally has the lowest static power consumption?',
+      options: ['TTL', 'CMOS', 'ECL', 'All are equal'],
+      correctIndex: 1,
+      explanation: 'CMOS has very low static power dissipation compared to TTL and ECL.',
+    },
+    {
+      question: 'Which IC family offers the fastest switching speed (lowest propagation delay)?',
+      options: ['TTL', 'CMOS', 'ECL', 'They are all identical in speed'],
+      correctIndex: 2,
+      explanation: 'ECL achieves the lowest propagation delay (~1-2 ns) at the cost of high power consumption.',
+    },
+    {
+      question: 'What does "fan-out" describe for a logic gate?',
+      options: [
+        'The number of inputs a gate accepts',
+        'The number of same-family gate inputs one output can safely drive',
+        'The supply voltage range of the IC',
+        'The physical size of the IC package',
+      ],
+      correctIndex: 1,
+      explanation: 'Fan-out is how many gate inputs of the same family a single output can reliably drive.',
+    },
+    {
+      question: 'What does "noise margin" indicate about a logic family?',
+      options: [
+        'How loud the circuit is when operating',
+        'How much unwanted voltage noise an input can tolerate before being misread',
+        'The number of gates inside one IC package',
+        'The maximum operating frequency',
+      ],
+      correctIndex: 1,
+      explanation: 'Noise margin is the tolerance an input has against noise before it flips to the wrong logic level.',
+    },
+    {
+      question: 'What is the standard supply voltage for classic TTL logic?',
+      options: ['3.3V ± 0.1V', '5V ± 0.25V', '12V ± 1V', '-5.2V'],
+      correctIndex: 1,
+      explanation: 'Standard TTL is powered from a regulated 5V ± 0.25V supply.',
+    },
+    {
+      question: 'The IC part number 7400 refers to which standard logic function?',
+      options: ['Quad 2-input NOR gate', 'Quad 2-input NAND gate', 'Hex inverter', 'Dual 4-input AND gate'],
+      correctIndex: 1,
+      explanation: '7400 is the classic TTL Quad 2-input NAND gate IC.',
+    },
+    {
+      question: 'The 40xx series IC prefix belongs to which logic family?',
+      options: ['TTL', 'CMOS', 'ECL', 'None of the above'],
+      correctIndex: 1,
+      explanation: 'The 40xx series (e.g. 4001) denotes the standard CMOS logic family.',
+    },
+    {
+      question: 'The "speed-power product" of a logic family is calculated as:',
+      options: [
+        'Supply voltage × fan-out',
+        'Propagation delay × power dissipation',
+        'Noise margin ÷ fan-in',
+        'Number of gates × package pins',
+      ],
+      correctIndex: 1,
+      explanation: 'Speed-power product = propagation delay × power dissipation; a lower value indicates a better family (fast and low-power).',
+    },
+    {
+      question: 'Which logic family was historically used in high-speed applications like early supercomputers and RF equipment?',
+      options: ['TTL', 'CMOS', 'ECL', '74LS series'],
+      correctIndex: 2,
+      explanation: 'ECL’s very high speed made it suitable for early supercomputers and RF equipment, despite its high power draw.',
+    },
+  ]}
+/>

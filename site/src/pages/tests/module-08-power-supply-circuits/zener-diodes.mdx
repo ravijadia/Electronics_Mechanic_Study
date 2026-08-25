@@ -1,0 +1,96 @@
+---
+title: Quiz — Zener Diode
+description: Module 8 lesson quiz — Working principle of Zener diodes
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Zener Diode
+
+Lesson: [Working Principle of Zener Diodes](/docs/module-08-power-supply-circuits/zener-diodes) · Module 8: Power Supply Circuits
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'What makes a Zener diode different from an ordinary diode?',
+      options: [
+        'It only works on AC',
+        'It is designed to operate safely and repeatably in reverse breakdown',
+        'It has three terminals',
+        'It cannot conduct in forward bias',
+      ],
+      correctIndex: 1,
+      explanation: 'Zener diodes are specifically designed for controlled, non-destructive reverse breakdown operation.',
+    },
+    {
+      question: 'How does a Zener diode behave when forward-biased?',
+      options: [
+        'Like an open circuit',
+        'Like a normal diode, conducting with about 0.7V drop',
+        'It immediately breaks down',
+        'It regulates voltage at Vz',
+      ],
+      correctIndex: 1,
+      explanation: 'In forward bias, a Zener diode behaves just like an ordinary silicon diode.',
+    },
+    {
+      question: 'What happens to the voltage across a Zener diode once it enters breakdown?',
+      options: [
+        'It keeps rising with current',
+        'It stays essentially constant at Vz while current increases sharply',
+        'It drops to zero',
+        'It becomes negative',
+      ],
+      correctIndex: 1,
+      explanation: 'In breakdown, Zener voltage stays nearly fixed at Vz even as current varies significantly.',
+    },
+    {
+      question: 'What component is always required in series with a Zener diode in a regulator circuit?',
+      options: ['A capacitor', 'A series resistor to limit current', 'A second Zener diode', 'A transformer'],
+      correctIndex: 1,
+      explanation: 'The series resistor limits Zener current to a safe value and absorbs excess voltage.',
+    },
+    {
+      question: 'In a basic Zener regulator, how is the diode connected relative to the load?',
+      options: ['In series with the load', 'In parallel with the load, reverse-biased', 'In parallel, forward-biased', 'Not connected to the load'],
+      correctIndex: 1,
+      explanation: 'The Zener diode is connected in reverse, in parallel with the load, to fix the load voltage at Vz.',
+    },
+    {
+      question: 'An unregulated 12V supply feeds a Zener regulator with Vz = 5.6V and desired Iz = 20mA. What series resistor is needed?',
+      options: ['160Ω', '280Ω', '320Ω', '560Ω'],
+      correctIndex: 2,
+      explanation: 'Rs = (Vin − Vz) / Iz = (12 − 5.6) / 0.02 = 320Ω.',
+    },
+    {
+      question: 'If the input voltage to a Zener regulator rises, what absorbs the extra voltage?',
+      options: ['The load resistor', 'The series resistor', 'The Zener diode voltage rises too', 'Nothing — the circuit fails'],
+      correctIndex: 1,
+      explanation: 'The series resistor drops the extra voltage as more current flows through the Zener, keeping Vz fixed at the load.',
+    },
+    {
+      question: 'If load current increases in a properly designed Zener regulator, what happens to Zener current?',
+      options: [
+        'It increases to match',
+        'It decreases to compensate, keeping output voltage steady',
+        'It becomes zero immediately',
+        'It has no relation to load current',
+      ],
+      correctIndex: 1,
+      explanation: 'Zener current decreases as load current increases, as long as it stays enough to remain in breakdown.',
+    },
+    {
+      question: 'Besides voltage regulation, which is a common application of Zener diodes?',
+      options: ['High-power rectification', 'Voltage reference and over-voltage protection', 'AC amplification', 'Transformer coupling'],
+      correctIndex: 1,
+      explanation: 'Zener diodes are widely used as stable voltage references and for clamping/over-voltage protection.',
+    },
+    {
+      question: 'A 15V unregulated supply feeds a Zener regulator with Vz = 6.2V and desired Iz = 25mA. What series resistor value is needed?',
+      options: ['196Ω', '248Ω', '352Ω', '600Ω'],
+      correctIndex: 2,
+      explanation: 'Rs = (15 − 6.2) / 0.025 = 8.8 / 0.025 = 352Ω.',
+    },
+  ]}
+/>

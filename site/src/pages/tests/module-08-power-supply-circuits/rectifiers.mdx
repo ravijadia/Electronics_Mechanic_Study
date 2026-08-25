@@ -1,0 +1,106 @@
+---
+title: Quiz — Rectifiers
+description: Module 8 lesson quiz — Rectifiers
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Rectifiers
+
+Lesson: [Rectifiers](/docs/module-08-power-supply-circuits/rectifiers) · Module 8: Power Supply Circuits
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'What does a rectifier do?',
+      options: [
+        'Converts DC to AC',
+        'Converts AC to DC using the one-way conduction of diodes',
+        'Amplifies a signal',
+        'Stores electrical charge',
+      ],
+      correctIndex: 1,
+      explanation: 'A rectifier converts alternating current into direct current using diodes.',
+    },
+    {
+      question: 'How many diodes does a basic half-wave rectifier use?',
+      options: ['1', '2', '4', '0'],
+      correctIndex: 0,
+      explanation: 'A half-wave rectifier uses a single diode in series with the load.',
+    },
+    {
+      question: 'Why does a half-wave rectifier have high ripple and low efficiency?',
+      options: [
+        'It uses too many diodes',
+        'It only conducts during one half of the AC cycle, wasting the other half',
+        'It requires a center-tapped transformer',
+        'It operates only on DC input',
+      ],
+      correctIndex: 1,
+      explanation: 'The diode blocks current during the negative half-cycle, so output only exists during half the cycle.',
+    },
+    {
+      question: 'A center-tapped full-wave rectifier uses how many diodes?',
+      options: ['1', '2', '4', '3'],
+      correctIndex: 1,
+      explanation: 'It uses two diodes, each conducting on alternate half-cycles.',
+    },
+    {
+      question: 'What special transformer feature does a center-tapped full-wave rectifier require?',
+      options: ['A step-up ratio', 'A center tap on the secondary winding', 'An iron-core only', 'Multiple primaries'],
+      correctIndex: 1,
+      explanation: 'The center tap provides the common reference point used by the two diodes.',
+    },
+    {
+      question: 'How many diodes does a full-wave bridge rectifier use?',
+      options: ['1', '2', '4', '6'],
+      correctIndex: 2,
+      explanation: 'A bridge rectifier uses four diodes arranged in a bridge configuration.',
+    },
+    {
+      question: 'What is a key advantage of a bridge rectifier over a center-tapped full-wave rectifier?',
+      options: [
+        'It uses fewer diodes',
+        'It does not require a center-tapped transformer',
+        'It only works on DC',
+        'It has higher ripple',
+      ],
+      correctIndex: 1,
+      explanation: 'A bridge rectifier achieves full-wave rectification with an ordinary (non-center-tapped) transformer.',
+    },
+    {
+      question: 'Compared to a half-wave rectifier, a full-wave rectifier’s ripple frequency is:',
+      options: [
+        'The same as the AC input frequency',
+        'Half the AC input frequency',
+        'Double the AC input frequency',
+        'Independent of the AC input frequency',
+      ],
+      correctIndex: 2,
+      explanation: 'Full-wave rectifiers produce two output pulses per AC cycle, doubling the ripple frequency.',
+    },
+    {
+      question: 'What is the purpose of a filter capacitor placed after a rectifier?',
+      options: [
+        'To rectify AC into DC by itself',
+        'To smooth pulsating DC into a steadier DC voltage by charging and discharging',
+        'To step down the AC voltage',
+        'To block DC and pass only AC',
+      ],
+      correctIndex: 1,
+      explanation: 'The filter capacitor charges during pulses and discharges slowly between them, smoothing the output.',
+    },
+    {
+      question: 'Why is a full-wave rectifier’s output easier to filter smooth than a half-wave rectifier’s output?',
+      options: [
+        'It has a lower ripple frequency',
+        'It has a higher ripple frequency, giving the capacitor less time to discharge between pulses',
+        'It uses larger diodes',
+        'It produces a perfectly smooth output without any capacitor',
+      ],
+      correctIndex: 1,
+      explanation: 'Higher ripple frequency means shorter gaps between pulses, so the capacitor discharges less before being recharged.',
+    },
+  ]}
+/>

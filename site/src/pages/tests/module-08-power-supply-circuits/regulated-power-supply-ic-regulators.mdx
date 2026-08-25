@@ -1,0 +1,106 @@
+---
+title: Quiz — Regulated Power Supply & IC Regulators
+description: Module 8 lesson quiz — Regulated power supply and IC voltage regulators
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Regulated Power Supply & IC Regulators
+
+Lesson: [Regulated Power Supply & IC Regulators](/docs/module-08-power-supply-circuits/regulated-power-supply-ic-regulators) · Module 8: Power Supply Circuits
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'What are the four stages of a complete regulated DC power supply, in order?',
+      options: [
+        'Regulator → Filter → Rectifier → Transformer',
+        'Transformer → Rectifier → Filter → Regulator',
+        'Rectifier → Transformer → Regulator → Filter',
+        'Filter → Regulator → Transformer → Rectifier',
+      ],
+      correctIndex: 1,
+      explanation: 'AC mains is stepped down, rectified, filtered, then regulated to a steady output.',
+    },
+    {
+      question: 'Why is a regulator stage needed even after filtering?',
+      options: [
+        'Filtering already removes all ripple perfectly',
+        'The filtered output still has some ripple and varies with input/load changes',
+        'Regulators increase output power beyond input power',
+        'Filtering converts AC to DC by itself',
+      ],
+      correctIndex: 1,
+      explanation: 'Filtered DC still has residual ripple and voltage variation; the regulator removes this and holds a fixed output.',
+    },
+    {
+      question: 'What output voltage does a 7812 IC regulator provide?',
+      options: ['+5V', '+8V', '+12V', '−12V'],
+      correctIndex: 2,
+      explanation: 'The "xx" in 78xx directly indicates the fixed positive output voltage — 7812 gives +12V.',
+    },
+    {
+      question: 'What does the 79xx series of IC regulators provide?',
+      options: ['Fixed positive voltages', 'Fixed negative voltages', 'Adjustable voltages only', 'AC output'],
+      correctIndex: 1,
+      explanation: '79xx regulators (e.g. 7905, 7912) provide fixed negative output voltages.',
+    },
+    {
+      question: 'How is the output voltage set on an LM317 adjustable regulator?',
+      options: [
+        'By its fixed part number, like 78xx',
+        'Using two external resistors forming a divider connected to the Adjust pin',
+        'By changing the input frequency',
+        'It cannot be adjusted once manufactured',
+      ],
+      correctIndex: 1,
+      explanation: 'A resistor divider on the Adjust pin sets the LM317’s output voltage within its rated range.',
+    },
+    {
+      question: 'How many pins does a typical 7805 IC regulator package have, and what are they?',
+      options: [
+        '2 pins: Input, Output',
+        '3 pins: Input, Ground, Output',
+        '4 pins: Input, Output, Ground, Adjust',
+        '3 pins: Input, Output, Adjust',
+      ],
+      correctIndex: 1,
+      explanation: 'The 78xx series is a standard 3-pin package: Input, Ground, Output.',
+    },
+    {
+      question: 'Why must the input voltage to a 7805 regulator be higher than 5V?',
+      options: [
+        'It is not required to be higher',
+        'The IC needs headroom above the output voltage to regulate correctly',
+        'To prevent reverse current only',
+        'Because the 7805 works only on AC input',
+      ],
+      correctIndex: 1,
+      explanation: 'IC regulators need a few extra volts of input above the output to have enough headroom to regulate.',
+    },
+    {
+      question: 'Which of these is a built-in protection feature commonly found in IC voltage regulators?',
+      options: ['Voltage doubling', 'Thermal shutdown and short-circuit protection', 'Automatic AC generation', 'Frequency multiplication'],
+      correctIndex: 1,
+      explanation: 'Most IC regulators include thermal shutdown and overcurrent/short-circuit protection.',
+    },
+    {
+      question: 'Compared to a discrete Zener-based regulator, an IC voltage regulator generally offers:',
+      options: [
+        'Worse voltage stability',
+        'Better voltage stability, load regulation, and built-in protections',
+        'No advantage at all',
+        'Only negative output voltages',
+      ],
+      correctIndex: 1,
+      explanation: 'IC regulators integrate reference, error amplifier, and protections for much better performance than a simple Zener regulator.',
+    },
+    {
+      question: 'What is typically placed on the input and output pins of a 7805 regulator circuit, per datasheet recommendations?',
+      options: ['Large inductors', 'Small filter capacitors', 'Additional Zener diodes', 'A second transformer'],
+      correctIndex: 1,
+      explanation: 'Small capacitors on input and output improve stability and suppress noise, as recommended in datasheets.',
+    },
+  ]}
+/>

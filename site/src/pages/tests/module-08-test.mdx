@@ -1,91 +1,18 @@
 ---
-title: Module 8 Test — સેમિકન્ડક્ટર અને ડાયોડ
-description: Semiconductor & Diode MCQ test
+title: Module 8 Tests — Power Supply Circuits
+description: Module 8 lesson-wise MCQ tests
 ---
 
-import Quiz from '@site/src/components/Quiz/Quiz';
+# Module 8: Power Supply Circuits — Tests
 
-# મોડ્યુલ 8 ટેસ્ટ: સેમિકન્ડક્ટર અને ડાયોડ
+Pick a lesson below to take its quiz. Each quiz has at least 10 questions — no login required.
 
-નીચેના પ્રશ્નોના જવાબ આપો અને **Submit** કરીને તમારો સ્કોર જુઓ. કોઈ લોગિન જરૂરી નથી.
+| Lesson | Quiz | Questions |
+|---|---|---|
+| Semiconductor & Diode | [Take quiz →](/tests/module-08-power-supply-circuits/semiconductors-and-diodes) | 12 |
+| Transformer | [Take quiz →](/tests/module-08-power-supply-circuits/transformer) | 10 |
+| Rectifiers | [Take quiz →](/tests/module-08-power-supply-circuits/rectifiers) | 10 |
+| Working Principle of Zener Diodes | [Take quiz →](/tests/module-08-power-supply-circuits/zener-diodes) | 10 |
+| Regulated Power Supply & IC Regulators | [Take quiz →](/tests/module-08-power-supply-circuits/regulated-power-supply-ic-regulators) | 10 |
 
-<Quiz
-  passPercent={60}
-  questions={[
-    {
-      question: 'સેમિકન્ડક્ટર મટીરીયલનું ઉદાહરણ કયું છે?',
-      options: ['કોપર (Copper)', 'સિલિકોન (Silicon)', 'રબર (Rubber)', 'ગ્લાસ (Glass)'],
-      correctIndex: 1,
-      explanation: 'સિલિકોન અને જર્મેનિયમ સેમિકન્ડક્ટર મટીરીયલના ઉદાહરણ છે.',
-    },
-    {
-      question: 'સિલિકોનમાં ફોસ્ફરસ (Phosphorus) ભેળવવાથી કયો પ્રકાર બને છે?',
-      options: ['P-ટાઈપ', 'N-ટાઈપ', 'ઇન્સ્યુલેટર', 'કંડક્ટર'],
-      correctIndex: 1,
-      explanation: 'ફોસ્ફરસ વધારાના ઇલેક્ટ્રોન આપે છે, જેથી N-ટાઈપ મટીરીયલ બને છે.',
-    },
-    {
-      question: 'PN જંક્શન એટલે શું?',
-      options: [
-        'બે N-ટાઈપ મટીરીયલનું જોડાણ',
-        'P-ટાઈપ અને N-ટાઈપ મટીરીયલનું જોડાણ (ડાયોડ)',
-        'બે કંડક્ટરનું જોડાણ',
-        'એક ઇન્સ્યુલેટર',
-      ],
-      correctIndex: 1,
-      explanation: 'P-ટાઈપ અને N-ટાઈપ મટીરીયલને જોડવાથી બનતું જંક્શન એ જ ડાયોડ છે.',
-    },
-    {
-      question: 'ડાયોડનું કયું ટર્મિનલ P-ટાઈપ સાઈડ પર હોય છે?',
-      options: ['કેથોડ (Cathode)', 'એનોડ (Anode)', 'ગેટ (Gate)', 'બેઝ (Base)'],
-      correctIndex: 1,
-      explanation: 'એનોડ એ P-ટાઈપ સાઈડ છે, કેથોડ એ N-ટાઈપ સાઈડ છે.',
-    },
-    {
-      question: 'સિલિકોન ડાયોડનો સામાન્ય ફોરવર્ડ વોલ્ટેજ ડ્રોપ કેટલો હોય છે?',
-      options: ['0.3V', '0.7V', '1.5V', '5V'],
-      correctIndex: 1,
-      explanation: 'સિલિકોન ડાયોડમાં લગભગ 0.7V પર કરંટ વહેવાનું શરૂ થાય છે.',
-    },
-    {
-      question: 'જર્મેનિયમ ડાયોડનો સામાન્ય ફોરવર્ડ વોલ્ટેજ ડ્રોપ કેટલો હોય છે?',
-      options: ['0.3V', '0.7V', '1.2V', '2V'],
-      correctIndex: 0,
-      explanation: 'જર્મેનિયમ ડાયોડમાં આ વોલ્ટેજ લગભગ 0.3V હોય છે.',
-    },
-    {
-      question: 'રિવર્સ બાયસમાં ડાયોડ કેવી રીતે વર્તે છે?',
-      options: [
-        'કરંટ પસાર થવા દે છે (ON)',
-        'કરંટ પસાર થવા દેતો નથી (OFF), માત્ર નજીવો લીકેજ કરંટ વહે છે',
-        'હંમેશા ડેમેજ થાય છે',
-        'વોલ્ટેજ વધારે છે',
-      ],
-      correctIndex: 1,
-      explanation: 'રિવર્સ બાયસમાં ડાયોડ OFF સ્ટેટમાં હોય છે, ખૂબ ઓછો લીકેજ કરંટ વહે છે.',
-    },
-    {
-      question: '6V બેટરી અને 470Ω રેઝિસ્ટર સાથે સીરીઝમાં જોડેલ સિલિકોન ડાયોડમાં આશરે કેટલો કરંટ વહેશે?',
-      options: ['0.3 mA', '11.3 mA', '113 mA', '1.13 A'],
-      correctIndex: 1,
-      explanation: 'I = (6 − 0.7) / 470 = 5.3 / 470 ≈ 11.3 mA.',
-    },
-    {
-      question: 'ડાયોડનો ઉપયોગ AC ને DC માં કન્વર્ટ કરવા માટે થાય છે, તેને શું કહે છે?',
-      options: ['સ્વિચિંગ (Switching)', 'રેક્ટિફિકેશન (Rectification)', 'એમ્પ્લિફિકેશન (Amplification)', 'મોડ્યુલેશન (Modulation)'],
-      correctIndex: 1,
-      explanation: 'AC ને DC માં કન્વર્ટ કરવાની પ્રક્રિયાને રેક્ટિફિકેશન કહે છે.',
-    },
-    {
-      question: 'જો રિવર્સ વોલ્ટેજ ડાયોડની લિમિટ કરતાં વધી જાય તો શું થાય?',
-      options: [
-        'કંઈ ન થાય',
-        'ડાયોડ બ્રેકડાઉન વોલ્ટેજ પર ડેમેજ થઈ શકે',
-        'ડાયોડ વધુ કરંટ પસાર થવા દે',
-        'ડાયોડનો રંગ બદલાય',
-      ],
-      correctIndex: 1,
-      explanation: 'રિવર્સ વોલ્ટેજ લિમિટ કરતાં વધુ થાય તો બ્રેકડાઉન વોલ્ટેજ પર ડાયોડ ડેમેજ થઈ શકે છે.',
-    },
-  ]}
-/>
+[← Back to all tests](/tests)

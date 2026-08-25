@@ -1,0 +1,91 @@
+---
+title: Quiz — Multiplexers & Demultiplexers
+description: Module 12 lesson quiz — Multiplexers and demultiplexers
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Multiplexers & Demultiplexers
+
+Lesson: [Multiplexers and Demultiplexers](/docs/module-12-digital-logic/multiplexers-demultiplexers) · Module 12: Basic Gates, Combinational Circuits, Flip-Flops
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'What does a multiplexer (MUX) do?',
+      options: [
+        'Routes a single input to one of several outputs',
+        'Selects one of several input lines and connects it to a single output',
+        'Stores one bit of data',
+        'Converts binary to decimal',
+      ],
+      correctIndex: 1,
+      explanation: 'A MUX is a data selector — it picks one of several inputs to route to a single output line.',
+    },
+    {
+      question: 'What does a demultiplexer (DEMUX) do?',
+      options: [
+        'Selects one of several inputs for a single output',
+        'Routes a single input data line to one of several output lines',
+        'Amplifies the input signal',
+        'Adds two binary numbers',
+      ],
+      correctIndex: 1,
+      explanation: 'A DEMUX is a data distributor — it takes one input and sends it to a chosen output line.',
+    },
+    {
+      question: 'How many select lines are required for a 4:1 multiplexer?',
+      options: ['1', '2', '3', '4'],
+      correctIndex: 1,
+      explanation: 'A 4:1 MUX needs log₂(4) = 2 select lines to choose among 4 inputs.',
+    },
+    {
+      question: 'How many select lines are required for an 8:1 multiplexer?',
+      options: ['2', '3', '4', '8'],
+      correctIndex: 1,
+      explanation: 'An 8:1 MUX needs log₂(8) = 3 select lines.',
+    },
+    {
+      question: 'For an n:1 multiplexer, the general formula for required select lines is:',
+      options: ['n', 'n/2', 'log₂(n)', '2n'],
+      correctIndex: 2,
+      explanation: 'The number of select lines equals log₂(number of inputs).',
+    },
+    {
+      question: 'On a 4:1 MUX with select lines S1S0 = 10, which input is connected to the output?',
+      options: ['I0', 'I1', 'I2', 'I3'],
+      correctIndex: 2,
+      explanation: 'Per the standard 4:1 MUX select table, S1S0 = 10 selects input I2.',
+    },
+    {
+      question: 'In a demultiplexer, what state do the non-selected outputs remain in?',
+      options: ['Logic 1', 'Logic 0', 'They float randomly', 'They mirror the input'],
+      correctIndex: 1,
+      explanation: 'Only the selected output follows the input data; all other outputs stay at logic 0.',
+    },
+    {
+      question: 'A multiplexer is best described as which type of device?',
+      options: ['One-to-many', 'Many-to-one', 'One-to-one', 'Many-to-many'],
+      correctIndex: 1,
+      explanation: 'A MUX combines many inputs down to one output — a many-to-one device.',
+    },
+    {
+      question: 'A demultiplexer is best described as which type of device?',
+      options: ['One-to-many', 'Many-to-one', 'One-to-one', 'Many-to-many'],
+      correctIndex: 0,
+      explanation: 'A DEMUX distributes one input to many possible outputs — a one-to-many device.',
+    },
+    {
+      question: 'Why are a MUX and a DEMUX commonly used together in a communication link?',
+      options: [
+        'To increase the supply voltage',
+        'The MUX combines multiple signals onto one transmission line, and the DEMUX at the far end separates them back out',
+        'To convert AC to DC',
+        'To store data permanently',
+      ],
+      correctIndex: 1,
+      explanation: 'A MUX/DEMUX pair lets multiple signal sources share a single line, then be separated back into individual channels at the receiver.',
+    },
+  ]}
+/>

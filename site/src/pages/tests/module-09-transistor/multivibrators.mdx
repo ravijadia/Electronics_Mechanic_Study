@@ -1,0 +1,96 @@
+---
+title: Quiz — Multivibrators
+description: Module 9 lesson quiz — Multivibrators and Circuit Diagram Study
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Multivibrators
+
+Lesson: [Multivibrators and Circuit Diagram Study](/docs/module-09-transistor/multivibrators) · Module 9: Transistor
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'A multivibrator circuit produces its switching action using:',
+      options: [
+        'A single transistor stage with negative feedback',
+        'Two cross-coupled transistor stages with regenerative (positive) feedback',
+        'A single diode and capacitor only',
+        'An operational amplifier only',
+      ],
+      correctIndex: 1,
+      explanation: 'A multivibrator uses two amplifying stages cross-coupled with positive feedback between them.',
+    },
+    {
+      question: 'How many stable states does an astable multivibrator have?',
+      options: ['Zero', 'One', 'Two', 'Three'],
+      correctIndex: 0,
+      explanation: 'Astable has no stable state — it continuously switches on its own, free-running.',
+    },
+    {
+      question: 'How many stable states does a monostable multivibrator have?',
+      options: ['Zero', 'One', 'Two', 'Three'],
+      correctIndex: 1,
+      explanation: 'Monostable has one stable state, and produces a single pulse when triggered before returning to it.',
+    },
+    {
+      question: 'How many stable states does a bistable multivibrator have?',
+      options: ['Zero', 'One', 'Two', 'Three'],
+      correctIndex: 2,
+      explanation: 'Bistable has two stable states and switches between them only when triggered — like a flip-flop.',
+    },
+    {
+      question: 'In a basic astable multivibrator, how are the two transistor collectors coupled to the opposite base?',
+      options: ['Through resistors only', 'Through coupling capacitors', 'Directly wired with no component', 'Through a transformer'],
+      correctIndex: 1,
+      explanation: 'Cross-coupling capacitors between each collector and the opposite base enable the automatic switching action.',
+    },
+    {
+      question: 'In an astable multivibrator, what determines the output frequency?',
+      options: [
+        'The supply voltage only',
+        'The RC time constants of the coupling networks',
+        'The number of transistors used',
+        'The transistor’s β value only',
+      ],
+      correctIndex: 1,
+      explanation: 'The charge/discharge time of the coupling capacitors through the base resistors sets the switching frequency.',
+    },
+    {
+      question: 'Why is a bistable multivibrator also useful as a digital memory element?',
+      options: [
+        'It automatically resets itself every cycle',
+        'It holds one of two stable states until triggered, effectively "remembering" its state',
+        'It has no stable state at all',
+        'It only works with AC signals',
+      ],
+      correctIndex: 1,
+      explanation: 'Because it stays in whichever stable state it was last triggered into, it functions like a memory bit (flip-flop).',
+    },
+    {
+      question: 'What type of coupling does a monostable multivibrator use on its two sides?',
+      options: [
+        'Capacitive coupling on both sides',
+        'Resistive coupling on both sides',
+        'One capacitive coupling and one resistive coupling',
+        'No coupling at all',
+      ],
+      correctIndex: 2,
+      explanation: 'One side uses resistive (DC) coupling for the stable state; the other uses capacitive coupling for the timed quasi-stable state.',
+    },
+    {
+      question: 'Which multivibrator type is commonly used as an LED flasher or clock pulse generator?',
+      options: ['Astable', 'Monostable', 'Bistable', 'None of these'],
+      correctIndex: 0,
+      explanation: 'Astable multivibrators free-run continuously, making them ideal for flashers and clock/tone generation.',
+    },
+    {
+      question: 'A monostable multivibrator, once triggered, automatically returns to its stable state after a duration set by:',
+      options: ['The supply voltage', 'An RC time constant', 'The number of trigger pulses', 'The transistor’s physical size'],
+      correctIndex: 1,
+      explanation: 'The pulse duration in the quasi-stable state is set by the RC time constant in the timing network.',
+    },
+  ]}
+/>

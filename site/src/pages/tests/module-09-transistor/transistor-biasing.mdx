@@ -1,0 +1,97 @@
+---
+title: Quiz — Biasing of Transistors
+description: Module 9 lesson quiz — Biasing of Transistors
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Biasing of Transistors
+
+Lesson: [Biasing of Transistors](/docs/module-09-transistor/transistor-biasing) · Module 9: Transistor
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'For normal transistor amplifier operation, how must the emitter-base junction be biased?',
+      options: ['Reverse biased', 'Forward biased', 'Left unbiased', 'Short-circuited'],
+      correctIndex: 1,
+      explanation: 'The emitter-base junction must be forward biased so carriers can flow from emitter into the base.',
+    },
+    {
+      question: 'For normal transistor amplifier operation, how must the collector-base junction be biased?',
+      options: ['Forward biased', 'Reverse biased', 'Left unbiased', 'Short-circuited'],
+      correctIndex: 1,
+      explanation: 'The collector-base junction must be reverse biased so the collector can gather carriers crossing the base.',
+    },
+    {
+      question: 'What is the purpose of biasing a transistor circuit?',
+      options: [
+        'To physically cool the transistor',
+        'To set a stable operating point (Q-point) for distortion-free amplification',
+        'To reduce the number of components needed',
+        'To convert AC to DC',
+      ],
+      correctIndex: 1,
+      explanation: 'Correct biasing establishes the Q-point so the transistor amplifies without cutting off or saturating.',
+    },
+    {
+      question: 'In fixed bias (base resistor method), the base current IB is calculated as:',
+      options: ['IB = VCC × RB', 'IB = (VCC − VBE) / RB', 'IB = VCC / VBE', 'IB = RB / VCC'],
+      correctIndex: 1,
+      explanation: 'IB = (VCC − VBE) / RB, since RB drops the difference between VCC and the base-emitter voltage.',
+    },
+    {
+      question: 'What is the main disadvantage of fixed bias?',
+      options: [
+        'Too many components',
+        'Poor stability — IC varies greatly with temperature since IB is fixed regardless of IC',
+        'It cannot be used with NPN transistors',
+        'It requires two separate power supplies',
+      ],
+      correctIndex: 1,
+      explanation: 'Since IB is fixed independent of IC, temperature-induced changes in IC are not compensated, giving poor stability.',
+    },
+    {
+      question: 'In collector-to-base bias, how does negative feedback improve stability?',
+      options: [
+        'It has no feedback at all',
+        'If IC increases, collector voltage drops, reducing IB, which reduces IC back down',
+        'It increases IB whenever IC increases',
+        'It disconnects the base if IC rises',
+      ],
+      correctIndex: 1,
+      explanation: 'RB is connected to the collector, so a rise in IC (lowering collector voltage) automatically reduces IB, partially self-correcting.',
+    },
+    {
+      question: 'Which biasing method offers the best thermal stability and is most widely used in practical amplifiers?',
+      options: ['Fixed bias', 'Collector-to-base bias', 'Voltage divider bias', 'No bias at all'],
+      correctIndex: 2,
+      explanation: 'Voltage divider bias fixes the base voltage nearly independent of transistor β and temperature, giving the best stability.',
+    },
+    {
+      question: 'What extra component does voltage divider bias add, compared to the other two methods, for further stabilization?',
+      options: ['A second transistor', 'An emitter resistor (RE)', 'A coupling capacitor', 'A Zener diode'],
+      correctIndex: 1,
+      explanation: 'An emitter resistor RE is added in voltage divider bias to provide additional negative feedback stabilization.',
+    },
+    {
+      question: 'The stability factor S is defined as:',
+      options: ['ΔIC / ΔICO', 'ΔICO / ΔIC', 'IC / IB', 'VCC / RB'],
+      correctIndex: 0,
+      explanation: 'S = ΔIC / ΔICO — how much collector current changes per unit change in leakage current.',
+    },
+    {
+      question: 'A lower value of the stability factor S means:',
+      options: ['Worse thermal stability', 'Better thermal stability, with the ideal minimum being 1', 'No relation to stability', 'Higher gain always'],
+      correctIndex: 1,
+      explanation: 'A lower S indicates better stability against temperature-caused leakage current changes; ideal minimum is S = 1.',
+    },
+    {
+      question: 'Which biasing method has the worst (highest) stability factor among fixed, collector-to-base, and voltage divider bias?',
+      options: ['Fixed bias', 'Collector-to-base bias', 'Voltage divider bias', 'They are all equal'],
+      correctIndex: 0,
+      explanation: 'Fixed bias has no feedback correcting for IC changes, giving it the highest (worst) stability factor.',
+    },
+  ]}
+/>

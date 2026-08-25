@@ -1,0 +1,92 @@
+---
+title: Quiz — Operational Amplifiers
+description: Module 14 lesson quiz — Operational Amplifier and its Applications
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Operational Amplifiers
+
+Lesson: [Operational Amplifier and its Applications](/docs/module-14-op-amp-timer/operational-amplifiers) · Module 14: Op Amp and Timer Applications
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'What type of amplifier is an op-amp, in terms of its two inputs?',
+      options: ['A single-ended amplifier', 'A high-gain differential amplifier', 'A power amplifier only', 'A current amplifier'],
+      correctIndex: 1,
+      explanation: 'An op-amp is a high-gain, direct-coupled differential amplifier that amplifies the voltage difference between its two inputs.',
+    },
+    {
+      question: 'On the IC 741 op-amp, which pin is the non-inverting input?',
+      options: ['Pin 2', 'Pin 3', 'Pin 6', 'Pin 7'],
+      correctIndex: 1,
+      explanation: 'Pin 3 is the non-inverting (+) input on the IC 741.',
+    },
+    {
+      question: 'Which of these is NOT a characteristic of an ideal op-amp?',
+      options: ['Infinite input impedance', 'Zero output impedance', 'Infinite bandwidth', 'Finite, low open-loop gain'],
+      correctIndex: 3,
+      explanation: 'An ideal op-amp has infinite (very high) open-loop gain, not a low finite gain.',
+    },
+    {
+      question: 'According to the two "golden rules" for analyzing op-amp circuits with negative feedback, how much current flows into the input terminals?',
+      options: ['A large current', 'Essentially zero current', 'Exactly 1mA', 'It depends on the supply voltage'],
+      correctIndex: 1,
+      explanation: 'Because of infinite input impedance, no current flows into either input terminal.',
+    },
+    {
+      question: 'In an inverting amplifier, where is the input signal applied?',
+      options: [
+        'Directly to the non-inverting input',
+        'To the inverting input, through a resistor Rin',
+        'To both inputs equally',
+        'To the output pin',
+      ],
+      correctIndex: 1,
+      explanation: 'The input goes to the inverting (−) terminal through Rin, with Rf providing feedback from the output.',
+    },
+    {
+      question: 'What is the output phase relationship of an inverting amplifier relative to its input?',
+      options: ['In phase (0°)', '90° phase shift', '180° out of phase', 'It has no fixed phase relationship'],
+      correctIndex: 2,
+      explanation: 'The inverting amplifier configuration always produces an output 180° out of phase with the input.',
+    },
+    {
+      question: 'What is the minimum possible voltage gain magnitude of a non-inverting amplifier?',
+      options: ['0', '0.5', '1', 'Infinite'],
+      correctIndex: 2,
+      explanation: 'Non-inverting gain = 1 + Rf/Rin, which is always at least 1 since Rf/Rin cannot be negative.',
+    },
+    {
+      question: 'An inverting amplifier has Rin = 2kΩ and Rf = 20kΩ. What is its output voltage for a 0.4V input?',
+      options: ['−0.4V', '−4V', '4V', '−40V'],
+      correctIndex: 1,
+      explanation: 'Vout = −(Rf/Rin) × Vin = −(20k/2k) × 0.4 = −10 × 0.4 = −4V.',
+    },
+    {
+      question: 'Why does adding a feedback resistor (Rf) to an op-amp circuit help stabilize its gain?',
+      options: [
+        'It increases the op-amp’s internal open-loop gain',
+        'It makes the closed-loop gain depend on resistor values rather than the op-amp’s variable internal gain',
+        'It removes the need for a power supply',
+        'It converts the op-amp into a comparator',
+      ],
+      correctIndex: 1,
+      explanation: 'Negative feedback sets gain by the external resistor ratio, making it stable and independent of internal gain variation.',
+    },
+    {
+      question: 'What is the ideal output impedance of an op-amp?',
+      options: ['Infinite', 'Very high, matching the load', 'Zero', 'Equal to the input impedance'],
+      correctIndex: 2,
+      explanation: 'An ideal op-amp has zero output impedance, so its output voltage does not sag under load.',
+    },
+    {
+      question: 'A non-inverting amplifier has Rin = 1kΩ and Rf = 9kΩ. What is its voltage gain?',
+      options: ['9', '10', '1', '0.9'],
+      correctIndex: 1,
+      explanation: 'Gain = 1 + Rf/Rin = 1 + 9k/1k = 1 + 9 = 10.',
+    },
+  ]}
+/>

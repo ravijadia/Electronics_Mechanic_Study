@@ -1,0 +1,112 @@
+---
+title: Quiz — Field Effect Transistor
+description: Module 10 lesson quiz — Field Effect Transistor (FET)
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Field Effect Transistor
+
+Lesson: [Field Effect Transistor (FET)](/docs/module-10-power-electronic-components/field-effect-transistor) · Module 10: Power Electronic Components
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'A FET is fundamentally different from a BJT because it is:',
+      options: [
+        'Current controlled, bipolar',
+        'Voltage controlled, unipolar',
+        'Voltage controlled, bipolar',
+        'Current controlled, unipolar',
+      ],
+      correctIndex: 1,
+      explanation: 'A FET is controlled by an electric field from gate voltage and conducts using only one type of charge carrier — unipolar.',
+    },
+    {
+      question: 'What are the three terminals of a JFET?',
+      options: ['Anode, Cathode, Gate', 'Source, Drain, Gate', 'Emitter, Base, Collector', 'Input, Output, Ground'],
+      correctIndex: 1,
+      explanation: 'A JFET has Source, Drain, and Gate terminals.',
+    },
+    {
+      question: 'In an N-channel JFET, what type of material forms the gate regions?',
+      options: ['N-type', 'P-type', 'Intrinsic silicon', 'Metal only'],
+      correctIndex: 1,
+      explanation: 'In an N-channel JFET, the channel is N-type and the gate regions diffused on either side are P-type.',
+    },
+    {
+      question: 'Why is the Gate-Source junction of a JFET always kept reverse biased?',
+      options: [
+        'To maximize gate current',
+        'To create a depletion region that controls channel width while keeping gate current near zero',
+        'To make the FET behave like a diode rectifier',
+        'It is not necessary — forward bias also works',
+      ],
+      correctIndex: 1,
+      explanation: 'Reverse bias creates a depletion region controlling channel width, while keeping gate current negligible for high input impedance.',
+    },
+    {
+      question: 'What is the "pinch-off voltage" of a JFET?',
+      options: [
+        'The VDS at which the JFET is destroyed',
+        'The VGS at which the channel is fully depleted and drain current becomes nearly zero',
+        'The maximum drain current possible',
+        'The forward voltage drop of the gate junction',
+      ],
+      correctIndex: 1,
+      explanation: 'Pinch-off voltage (VP) is the reverse VGS at which the depletion regions meet, cutting off the channel.',
+    },
+    {
+      question: 'A JFET has IDSS = 8 mA and VP = −4V. What is ID at VGS = −2V?',
+      options: ['1 mA', '2 mA', '4 mA', '8 mA'],
+      correctIndex: 1,
+      explanation: 'ID = IDSS × (1 − VGS/VP)² = 8mA × (1 − 0.5)² = 8mA × 0.25 = 2mA.',
+    },
+    {
+      question: 'Compared to a BJT, a FET typically has:',
+      options: [
+        'Lower input impedance and higher noise',
+        'Higher input impedance and lower noise',
+        'The same input impedance, but higher noise',
+        'No input impedance at all',
+      ],
+      correctIndex: 1,
+      explanation: 'FETs offer much higher input impedance (MΩ–GΩ range) and generally lower noise than BJTs.',
+    },
+    {
+      question: 'Which term describes a FET\'s gain, analogous to a BJT\'s current gain (β)?',
+      options: ['Transconductance (gm)', 'Alpha (α)', 'Power gain', 'Reflection coefficient'],
+      correctIndex: 0,
+      explanation: 'FET gain is expressed as transconductance (gm), relating change in ID to change in VGS.',
+    },
+    {
+      question: 'A JFET has IDSS = 10 mA and VP = −5V. What is ID at VGS = −1V?',
+      options: ['3.2 mA', '6.4 mA', '8.0 mA', '10 mA'],
+      correctIndex: 1,
+      explanation: 'ID = 10mA × (1 − (−1/−5))² = 10mA × (1 − 0.2)² = 10mA × 0.64 = 6.4mA.',
+    },
+    {
+      question: 'Which of the following is a typical application of a FET?',
+      options: [
+        'High-power AC rectification only',
+        'High input impedance buffer/pre-amplifier stages',
+        'Step-down voltage transformation',
+        'AC to DC power conversion in bridge circuits',
+      ],
+      correctIndex: 1,
+      explanation: 'FETs are widely used in high input impedance amplifier and buffer stages due to their voltage-controlled, low-loading nature.',
+    },
+    {
+      question: 'How does a FET compare to a BJT in thermal stability?',
+      options: [
+        'FET has poorer thermal stability',
+        'FET generally has better thermal stability',
+        'They are identical in thermal behavior',
+        'Thermal stability does not apply to FETs',
+      ],
+      correctIndex: 1,
+      explanation: 'FETs generally exhibit better thermal stability than BJTs, one reason they suit power switching applications well.',
+    },
+  ]}
+/>

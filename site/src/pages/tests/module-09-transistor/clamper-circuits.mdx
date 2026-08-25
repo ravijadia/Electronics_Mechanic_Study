@@ -1,0 +1,116 @@
+---
+title: Quiz — Clamper Circuits
+description: Module 9 lesson quiz — Clamper Circuits
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Clamper Circuits
+
+Lesson: [Clamper Circuits](/docs/module-09-transistor/clamper-circuits) · Module 9: Transistor
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'What does a clamper circuit do to an input waveform?',
+      options: [
+        'Removes part of the waveform above or below a reference level',
+        'Shifts the entire waveform up or down to a new DC level, without changing its shape',
+        'Converts a sine wave into a square wave by clipping',
+        'Blocks the waveform entirely',
+      ],
+      correctIndex: 1,
+      explanation: 'A clamper repositions (DC-shifts) the whole waveform while preserving its original shape.',
+    },
+    {
+      question: 'Which two components are essential in a basic clamper circuit?',
+      options: ['Resistor and inductor', 'Capacitor and diode', 'Transformer and resistor', 'Two diodes only'],
+      correctIndex: 1,
+      explanation: 'A series capacitor and a shunt diode are the two essential components of a basic clamper.',
+    },
+    {
+      question: 'Why is a clamper also called a "DC restorer"?',
+      options: [
+        'It restores AC signals to a fixed shape',
+        'It re-establishes/shifts the DC reference level of a signal',
+        'It restores blown fuses automatically',
+        'It only works with DC input',
+      ],
+      correctIndex: 1,
+      explanation: 'A clamper shifts the DC level of a signal, effectively "restoring" a desired DC reference.',
+    },
+    {
+      question: 'In a clamper circuit, what charges up to approximately the peak input voltage during conduction?',
+      options: ['The load resistor', 'The clamping capacitor', 'The diode itself', 'The power supply'],
+      correctIndex: 1,
+      explanation: 'The series capacitor charges to near the peak input voltage while the diode conducts.',
+    },
+    {
+      question: 'For correct clamping action, the RC time constant of the circuit must be:',
+      options: [
+        'Much smaller than the input signal’s time period',
+        'Much larger than the input signal’s time period',
+        'Exactly equal to the input signal’s time period',
+        'Irrelevant to clamper operation',
+      ],
+      correctIndex: 1,
+      explanation: 'A large RC time constant prevents the capacitor from significantly discharging between input cycles.',
+    },
+    {
+      question: 'A positive clamper shifts the waveform so that:',
+      options: [
+        'Its highest point rests at (or near) 0V',
+        'Its lowest point rests at (or near) 0V, making the whole waveform appear positive',
+        'It is clipped in half',
+        'It becomes a pure DC signal with no variation',
+      ],
+      correctIndex: 1,
+      explanation: 'A positive clamper shifts the waveform upward so its lowest point sits near 0V.',
+    },
+    {
+      question: 'A negative clamper shifts the waveform so that:',
+      options: [
+        'Its lowest point rests at (or near) 0V',
+        'Its highest point rests at (or near) 0V, making the whole waveform appear negative',
+        'The waveform is unchanged',
+        'The frequency doubles',
+      ],
+      correctIndex: 1,
+      explanation: 'A negative clamper shifts the waveform downward so its highest point sits near 0V.',
+    },
+    {
+      question: 'How does a biased clamper differ from a simple positive or negative clamper?',
+      options: [
+        'It uses no capacitor at all',
+        'A DC bias voltage in series with the diode shifts the clamped level to any chosen reference, not just 0V',
+        'It only works with square waves',
+        'It removes part of the waveform like a clipper',
+      ],
+      correctIndex: 1,
+      explanation: 'Adding a DC bias source lets the clamped waveform rest at any desired reference voltage.',
+    },
+    {
+      question: 'What is a key practical application of clamper circuits mentioned for television receivers?',
+      options: [
+        'Amplifying the video signal',
+        'Restoring the DC level of a signal to correctly set picture brightness',
+        'Generating the AC mains supply',
+        'Tuning the RF channel',
+      ],
+      correctIndex: 1,
+      explanation: 'TV receivers use clampers to restore the DC reference of the video signal, setting correct brightness levels.',
+    },
+    {
+      question: 'Which statement correctly distinguishes a clamper from a clipper?',
+      options: [
+        'A clamper alters waveform shape; a clipper preserves it',
+        'A clamper preserves waveform shape while shifting its DC level; a clipper removes part of the waveform',
+        'Both perform exactly the same function',
+        'A clamper needs no diode; a clipper needs no capacitor',
+      ],
+      correctIndex: 1,
+      explanation: 'Clamper = shifts DC level, shape preserved. Clipper = removes part of the signal, altering its shape.',
+    },
+  ]}
+/>

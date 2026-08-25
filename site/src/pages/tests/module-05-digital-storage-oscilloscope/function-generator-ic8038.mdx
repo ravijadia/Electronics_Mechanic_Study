@@ -1,0 +1,117 @@
+---
+title: Quiz — Function Generator (IC 8038)
+description: Module 5 lesson quiz — Function generator using IC 8038
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Function Generator Using IC 8038
+
+Lesson: [Function Generator Using IC 8038](/docs/module-05-digital-storage-oscilloscope/function-generator-ic8038) · Module 5: Digital Storage Oscilloscope
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'Which three waveforms can IC 8038 generate simultaneously?',
+      options: [
+        'Sine, square, and sawtooth',
+        'Sine, square, and triangle',
+        'Triangle, pulse, and ramp',
+        'Square, sawtooth, and pulse',
+      ],
+      correctIndex: 1,
+      explanation: 'IC 8038 simultaneously produces sine, square, and triangle waveforms at separate output pins.',
+    },
+    {
+      question: 'What type of IC package is typically used for IC 8038?',
+      options: ['8-pin DIP', '14-pin DIP', '16-pin SMD only', '3-pin TO-220'],
+      correctIndex: 1,
+      explanation: 'IC 8038 is commonly available in a 14-pin DIP package.',
+    },
+    {
+      question: 'Which components primarily set the output frequency of IC 8038?',
+      options: [
+        'Supply voltage only',
+        'External timing resistor(s) and capacitor',
+        'The sine-shaping potentiometers',
+        'The pull-up resistor on the square output',
+      ],
+      correctIndex: 1,
+      explanation: 'Frequency is set mainly by the external timing R and C values.',
+    },
+    {
+      question: 'On which pin does IC 8038 output its square wave?',
+      options: ['Pin 2', 'Pin 3', 'Pin 9', 'Pin 11'],
+      correctIndex: 2,
+      explanation: 'Pin 9 is the Square Out pin, which is open-collector.',
+    },
+    {
+      question: 'Why does the square wave output of IC 8038 require an external pull-up resistor?',
+      options: [
+        'Because it is a sine output',
+        'Because Pin 9 is open-collector and needs a pull-up to +V to produce a proper logic-level square wave',
+        'To reduce the frequency',
+        'To increase supply current',
+      ],
+      correctIndex: 1,
+      explanation: 'The square output is open-collector, so a pull-up resistor to +V is required for it to swing properly.',
+    },
+    {
+      question: 'What is the internal signal that is shaped into a sine wave inside IC 8038?',
+      options: ['A square wave', 'A triangle wave', 'A sawtooth wave', 'The supply voltage directly'],
+      correctIndex: 1,
+      explanation: 'The internally generated triangle wave is fed into a shaping network that converts it into a sine wave.',
+    },
+    {
+      question: 'What is the approximate frequency formula for IC 8038 with R1 = R2 = R?',
+      options: ['f ≈ R × C', 'f ≈ 1 / (R × C)', 'f ≈ R / C', 'f ≈ C / R'],
+      correctIndex: 1,
+      explanation: 'The approximate output frequency is f ≈ 1/(R×C) for a symmetrical waveform.',
+    },
+    {
+      question: 'What is the purpose of the trim potentiometers connected to Pins 1 and 12?',
+      options: [
+        'To set the supply voltage',
+        'To adjust duty cycle/distortion and clean up the sine wave shape',
+        'To change the IC package type',
+        'To control the square wave pull-up',
+      ],
+      correctIndex: 1,
+      explanation: 'These trim pots reduce distortion in the sine output, giving a cleaner sine waveform.',
+    },
+    {
+      question: 'How can the duty cycle of the output waveforms be made adjustable?',
+      options: [
+        'By using different values for the two timing resistors (R1 and R2)',
+        'By changing the supply voltage only',
+        'It is fixed and cannot be adjusted',
+        'By removing the timing capacitor',
+      ],
+      correctIndex: 0,
+      explanation: 'Using different R1 and R2 values changes the charge/discharge timing, adjusting duty cycle.',
+    },
+    {
+      question: 'After building an IC 8038 test circuit, how should the output waveforms be verified?',
+      options: [
+        'By listening to them with an audio speaker only',
+        'By observing them on an oscilloscope and checking shape, amplitude, and frequency',
+        'There is no need to verify the output',
+        'By measuring only the supply voltage',
+      ],
+      correctIndex: 1,
+      explanation: 'The datasheet-based procedure verifies waveform shape, amplitude, and frequency on an oscilloscope.',
+    },
+    {
+      question: 'Which of these is a typical application of an IC 8038-based function generator?',
+      options: [
+        'High-voltage power transmission',
+        'Testing amplifier, filter, and audio circuits, and calibrating oscilloscopes',
+        'Rectifying AC mains to DC',
+        'Storing digital waveforms permanently',
+      ],
+      correctIndex: 1,
+      explanation: 'IC 8038 function generators are commonly used as low-cost bench signal sources for testing and calibration.',
+    },
+  ]}
+/>

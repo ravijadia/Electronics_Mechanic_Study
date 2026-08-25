@@ -1,0 +1,112 @@
+---
+title: Quiz — Types of Switches
+description: Module 6 lesson quiz — Types of switches
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Types of Switches
+
+Lesson: [Types of Switches](/docs/module-06-soldering-switches/types-of-switches) · Module 6: Soldering/Desoldering and Various Switches
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'In switch terminology, what does "Pole" refer to?',
+      options: [
+        'The number of positions a switch can select between',
+        'The number of separate circuits a switch can control at once',
+        'The voltage rating of the switch',
+        'The physical size of the switch',
+      ],
+      correctIndex: 1,
+      explanation: 'Pole is the number of separate circuits a single switch action controls.',
+    },
+    {
+      question: 'In switch terminology, what does "Throw" refer to?',
+      options: [
+        'The number of circuits controlled',
+        'The number of positions/output paths each pole can connect to',
+        'The switch’s current rating',
+        'How hard you must press the switch',
+      ],
+      correctIndex: 1,
+      explanation: 'Throw is the number of possible output positions for each pole.',
+    },
+    {
+      question: 'A simple on/off switch controlling one circuit is which type?',
+      options: ['SPDT', 'DPST', 'SPST', 'DPDT'],
+      correctIndex: 2,
+      explanation: 'SPST (Single Pole, Single Throw) is the basic on/off switch for one circuit.',
+    },
+    {
+      question: 'Which switch type would you use for two-way (staircase) light switching, where one input can go to either of two outputs?',
+      options: ['SPST', 'SPDT', 'DPST', 'DIP switch'],
+      correctIndex: 1,
+      explanation: 'SPDT (Single Pole, Double Throw) connects one input to either of two output paths — ideal for two-way switching.',
+    },
+    {
+      question: 'Which switch configuration is commonly used to reverse a DC motor’s direction?',
+      options: ['SPST', 'SPDT', 'DPDT', 'DPST'],
+      correctIndex: 2,
+      explanation: 'DPDT switches can reverse the polarity across a motor by swapping both connections simultaneously, reversing direction.',
+    },
+    {
+      question: 'A Normally Closed (NC) contact is:',
+      options: [
+        'Open in the switch’s resting/unactuated state',
+        'Closed in the switch’s resting/unactuated state',
+        'Always open, regardless of switch position',
+        'Only found in rotary switches',
+      ],
+      correctIndex: 1,
+      explanation: 'Normally Closed means the contact is closed (circuit complete) when the switch is at rest.',
+    },
+    {
+      question: 'A small bank of miniature SPST switches on a PCB, used to set configuration options, is called a:',
+      options: ['Reed switch', 'DIP switch', 'Rocker switch', 'Rotary switch'],
+      correctIndex: 1,
+      explanation: 'A DIP switch is a compact bank of small SPST switches used for setting configuration options.',
+    },
+    {
+      question: 'A switch whose contacts close when a magnet is brought near, sealed inside a glass tube, is called a:',
+      options: ['Micro switch', 'Reed switch', 'Toggle switch', 'Slide switch'],
+      correctIndex: 1,
+      explanation: 'A reed switch has sealed contacts that close in the presence of a magnetic field.',
+    },
+    {
+      question: 'A relay is best described as:',
+      options: [
+        'A manually-operated toggle switch',
+        'An electromagnetically operated switch, letting a small control current switch a larger load',
+        'A switch that only works with AC signals',
+        'A type of fuse',
+      ],
+      correctIndex: 1,
+      explanation: 'A relay uses a coil energized by a small control current to mechanically operate contacts controlling a larger load.',
+    },
+    {
+      question: 'What is the standard way to test whether a switch is working using a multimeter?',
+      options: [
+        'Set the meter to voltage mode and measure across the open switch',
+        'Set the meter to continuity/resistance mode and check for continuity when closed, open circuit when open',
+        'Set the meter to current mode and short the terminals',
+        'Switches cannot be tested with a multimeter',
+      ],
+      correctIndex: 1,
+      explanation: 'Continuity/resistance mode shows near-0Ω (or a beep) when the switch is closed, and OL (open) when it is open.',
+    },
+    {
+      question: 'Why is it important to match a switch’s voltage/current rating to the load it controls?',
+      options: [
+        'It only affects the switch’s price',
+        'Using a switch rated below the load’s actual voltage/current can cause failure or a safety hazard',
+        'Rating has no real effect on switch operation',
+        'Higher-rated switches always work slower',
+      ],
+      correctIndex: 1,
+      explanation: 'An under-rated switch can arc, overheat, or fail when handling more current/voltage than it is rated for.',
+    },
+  ]}
+/>

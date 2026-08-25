@@ -1,0 +1,102 @@
+---
+title: Quiz — Electrical Terms
+description: Module 2 lesson quiz — Electrical Terms
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Electrical Terms
+
+Lesson: [Electrical Terms](/docs/module-02-ac-electrical-cables-meters/electrical-terms) · Module 2: AC and Electrical Cables, Single Range Meters
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'What is the SI unit of electric charge?',
+      options: ['Ampere', 'Volt', 'Coulomb', 'Ohm'],
+      correctIndex: 2,
+      explanation: 'Electric charge is measured in coulombs (C).',
+    },
+    {
+      question: 'Which particle carries a negative charge?',
+      options: ['Proton', 'Electron', 'Neutron', 'Nucleus'],
+      correctIndex: 1,
+      explanation: 'The electron carries negative charge; the proton carries positive charge and the neutron is uncharged.',
+    },
+    {
+      question: 'Electric current is defined by which formula?',
+      options: ['I = Q / t', 'I = V × R', 'I = P / V', 'I = R / V'],
+      correctIndex: 0,
+      explanation: 'Current I equals charge Q divided by time t (I = Q/t).',
+    },
+    {
+      question: 'Which instrument is used to measure current, and how is it connected in a circuit?',
+      options: [
+        'Voltmeter, in series',
+        'Ammeter, in series',
+        'Ammeter, in parallel',
+        'Voltmeter, in parallel',
+      ],
+      correctIndex: 1,
+      explanation: 'An ammeter measures current and must be connected in series so the current flows through it.',
+    },
+    {
+      question: 'What does EMF (Electromotive Force) refer to?',
+      options: [
+        'The voltage drop across a resistor',
+        'The total voltage of a source with no load connected',
+        'The current drawn by a load',
+        'The resistance of a conductor',
+      ],
+      correctIndex: 1,
+      explanation: 'EMF is the total voltage available from a source (battery/generator) before any load is connected.',
+    },
+    {
+      question: 'What factors does a conductor’s resistance depend on?',
+      options: [
+        'Only its color',
+        'Material, length, cross-sectional area, and temperature',
+        'Only its length',
+        'Only the current flowing through it',
+      ],
+      correctIndex: 1,
+      explanation: 'Resistance depends on the material, length, cross-sectional area, and temperature of the conductor.',
+    },
+    {
+      question: 'According to Ohm’s Law, if R = 100Ω and V = 10V, what is the current?',
+      options: ['0.01 A', '0.1 A', '1 A', '10 A'],
+      correctIndex: 1,
+      explanation: 'I = V / R = 10 / 100 = 0.1 A.',
+    },
+    {
+      question: 'Which formula correctly gives electrical power?',
+      options: ['P = V / I', 'P = V × I', 'P = I / V', 'P = V + I'],
+      correctIndex: 1,
+      explanation: 'Power P equals voltage V multiplied by current I.',
+    },
+    {
+      question: 'Electrical energy is calculated using which formula?',
+      options: ['E = P / t', 'E = P × t', 'E = V × t', 'E = I × t'],
+      correctIndex: 1,
+      explanation: 'Energy E equals power P multiplied by time t, commonly expressed in watt-hours or kWh.',
+    },
+    {
+      question: 'What is the key difference between AC and DC?',
+      options: [
+        'AC flows in one direction only; DC direction constantly changes',
+        'DC flows in one direction only; AC direction constantly changes',
+        'AC and DC are identical in direction',
+        'DC has a sine waveform; AC has a straight-line waveform',
+      ],
+      correctIndex: 1,
+      explanation: 'DC flows in a single, constant direction, while AC direction reverses periodically (typically a sine wave).',
+    },
+    {
+      question: 'What is the standard mains supply frequency in India?',
+      options: ['25 Hz', '50 Hz', '60 Hz', '100 Hz'],
+      correctIndex: 1,
+      explanation: 'India’s household AC mains supply frequency is 50 Hz.',
+    },
+  ]}
+/>

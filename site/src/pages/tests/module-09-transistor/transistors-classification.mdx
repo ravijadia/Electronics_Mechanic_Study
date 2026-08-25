@@ -1,0 +1,92 @@
+---
+title: Quiz — Transistors and Classification
+description: Module 9 lesson quiz — Transistors and Classification
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Transistors and Classification
+
+Lesson: [Transistors and Classification](/docs/module-09-transistor/transistors-classification) · Module 9: Transistor
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'A BJT is formed from how many PN junctions?',
+      options: ['One', 'Two', 'Three', 'Four'],
+      correctIndex: 1,
+      explanation: 'A bipolar junction transistor has two PN junctions: emitter-base and collector-base.',
+    },
+    {
+      question: 'In an NPN transistor, which layer is sandwiched between the other two?',
+      options: ['N-type', 'P-type', 'Neither, all layers are the same type', 'Insulator layer'],
+      correctIndex: 1,
+      explanation: 'NPN means a P-type layer is sandwiched between two N-type layers.',
+    },
+    {
+      question: 'Which transistor terminal is heavily doped and supplies the majority charge carriers?',
+      options: ['Base', 'Collector', 'Emitter', 'Gate'],
+      correctIndex: 2,
+      explanation: 'The emitter is heavily doped to inject (emit) a large number of majority carriers into the base.',
+    },
+    {
+      question: 'Why is the base region made thin and lightly doped?',
+      options: [
+        'To increase base current',
+        'So that most carriers from the emitter pass through to the collector instead of recombining',
+        'To block all current flow',
+        'To make the transistor cheaper only',
+      ],
+      correctIndex: 1,
+      explanation: 'A thin, lightly doped base lets most emitter carriers cross to the collector rather than recombine in the base.',
+    },
+    {
+      question: 'In the standard transistor current relation, IE equals:',
+      options: ['IB − IC', 'IB + IC', 'IC − IB', 'IB × IC'],
+      correctIndex: 1,
+      explanation: 'Emitter current is always the sum of base and collector currents: IE = IB + IC.',
+    },
+    {
+      question: 'Common Emitter (CE) configuration is most widely used because it offers:',
+      options: [
+        'Voltage gain close to unity only',
+        'High current and voltage gain',
+        'No gain at all',
+        'Only current gain less than 1',
+      ],
+      correctIndex: 1,
+      explanation: 'CE configuration provides both good current gain and good voltage gain, making it the most common choice.',
+    },
+    {
+      question: 'Which transistor configuration is commonly used as a buffer/emitter follower for impedance matching?',
+      options: ['Common Base (CB)', 'Common Emitter (CE)', 'Common Collector (CC)', 'Common Gate'],
+      correctIndex: 2,
+      explanation: 'Common Collector gives voltage gain near unity and high current gain, ideal for impedance matching.',
+    },
+    {
+      question: 'The common base current gain, alpha (α), is defined as:',
+      options: ['IC / IB', 'IC / IE', 'IB / IE', 'IE / IC'],
+      correctIndex: 1,
+      explanation: 'α = IC / IE, typically between 0.95 and 0.99.',
+    },
+    {
+      question: 'A transistor has IB = 40 µA and β = 50. What is IC?',
+      options: ['0.8 mA', '2 mA', '4 mA', '20 mA'],
+      correctIndex: 1,
+      explanation: 'IC = β × IB = 50 × 40 µA = 2000 µA = 2 mA.',
+    },
+    {
+      question: 'A transistor has IB = 40 µA and β = 50. What is IE?',
+      options: ['1.96 mA', '2.00 mA', '2.04 mA', '2.4 mA'],
+      correctIndex: 2,
+      explanation: 'IC = β × IB = 2 mA; IE = IB + IC = 0.04 mA + 2 mA = 2.04 mA.',
+    },
+    {
+      question: 'In a PNP transistor symbol, which direction does the emitter arrow point?',
+      options: ['Outward, away from the base', 'Inward, toward the base', 'Perpendicular to the base', 'There is no arrow on a PNP symbol'],
+      correctIndex: 1,
+      explanation: 'PNP: the emitter arrow points inward, toward the base ("Pointing iN Permanently").',
+    },
+  ]}
+/>

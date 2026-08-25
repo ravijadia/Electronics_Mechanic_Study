@@ -1,0 +1,97 @@
+---
+title: Quiz — Oscillators
+description: Module 9 lesson quiz — Oscillators
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Oscillators
+
+Lesson: [Oscillators](/docs/module-09-transistor/oscillators) · Module 9: Transistor
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'An oscillator generates a continuous AC waveform:',
+      options: [
+        'Only when given an external AC input signal',
+        'Without any external AC input, converting DC power to AC output',
+        'Only when connected to another oscillator',
+        'Only at mains frequency',
+      ],
+      correctIndex: 1,
+      explanation: 'An oscillator needs no external AC input — it converts DC into a self-sustained AC output.',
+    },
+    {
+      question: 'Which three blocks make up a basic oscillator circuit?',
+      options: [
+        'Rectifier, filter, regulator',
+        'Amplifier, feedback network, frequency-determining network',
+        'Transformer, diode, capacitor only',
+        'Encoder, decoder, multiplexer',
+      ],
+      correctIndex: 1,
+      explanation: 'An oscillator needs an amplifier for gain, a feedback network, and a network that sets the oscillation frequency.',
+    },
+    {
+      question: 'What type of feedback is used to sustain oscillation?',
+      options: ['Negative feedback', 'Positive feedback', 'No feedback', 'Feed-forward only'],
+      correctIndex: 1,
+      explanation: 'Positive feedback, in phase with the input, sustains continuous oscillation.',
+    },
+    {
+      question: 'According to the Barkhausen criterion, what must the loop gain (Aβ) equal for sustained oscillation?',
+      options: ['0', '1', '2', 'Infinity'],
+      correctIndex: 1,
+      explanation: 'Loop gain Aβ must equal exactly 1 for stable, sustained oscillation.',
+    },
+    {
+      question: 'According to the Barkhausen criterion, what must the total loop phase shift equal?',
+      options: ['90°', '180°', '0° (or 360°)', '270°'],
+      correctIndex: 2,
+      explanation: 'The feedback signal must return to the input exactly in phase — a total phase shift of 0° or 360°.',
+    },
+    {
+      question: 'What happens if an oscillator’s loop gain is less than 1?',
+      options: ['Output waveform clips/distorts', 'Oscillations die out', 'Frequency doubles', 'Nothing changes'],
+      correctIndex: 1,
+      explanation: 'Loop gain below 1 cannot sustain the feedback loop, so oscillations decay and stop.',
+    },
+    {
+      question: 'What happens if an oscillator’s loop gain is greater than 1?',
+      options: ['Oscillations die out immediately', 'The amplifier saturates and the waveform distorts (clips)', 'Frequency becomes zero', 'The circuit stops needing DC power'],
+      correctIndex: 1,
+      explanation: 'Excess loop gain drives the amplifier into saturation/cutoff, clipping the output waveform.',
+    },
+    {
+      question: 'Which type of oscillator is best suited for generating stable radio-frequency (RF) signals?',
+      options: ['RC oscillator', 'LC oscillator', 'Neither can generate RF', 'Only crystal oscillators exist'],
+      correctIndex: 1,
+      explanation: 'LC oscillators use an inductor-capacitor tank circuit suited to the RF (kHz–MHz) range.',
+    },
+    {
+      question: 'What is the key constructional difference between a Hartley and a Colpitts oscillator?',
+      options: [
+        'Hartley uses a tapped inductor; Colpitts uses a tapped capacitor',
+        'Hartley uses no capacitor at all',
+        'Colpitts uses a crystal instead of L-C components',
+        'They are identical circuits with different names',
+      ],
+      correctIndex: 0,
+      explanation: 'Hartley taps an inductor for feedback; Colpitts taps a capacitor (two capacitors in series) instead.',
+    },
+    {
+      question: 'Which type of oscillator provides the highest frequency stability?',
+      options: ['RC oscillator', 'LC oscillator', 'Crystal oscillator', 'None, all are equally stable'],
+      correctIndex: 2,
+      explanation: 'Crystal oscillators use a piezoelectric quartz crystal, giving very precise and stable frequency output.',
+    },
+    {
+      question: 'Which type of oscillator is best suited for low/audio-frequency applications?',
+      options: ['LC oscillator', 'RC oscillator', 'Crystal oscillator only', 'None can operate at audio frequency'],
+      correctIndex: 1,
+      explanation: 'RC oscillators (e.g. RC Phase Shift, Wien Bridge) are well suited to low/audio frequency ranges.',
+    },
+  ]}
+/>

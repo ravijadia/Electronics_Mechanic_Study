@@ -1,0 +1,122 @@
+---
+title: Quiz — DSO Controls & Single Shot Capture
+description: Module 5 lesson quiz — DSO front panel controls & single shot signal capture
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: DSO Front Panel Controls & Single Shot Capture
+
+Lesson: [DSO Front Panel Controls & Single Shot Capture](/docs/module-05-digital-storage-oscilloscope/dso-controls-single-shot) · Module 5: Digital Storage Oscilloscope
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'What is the main functional difference between an analog CRO and a DSO?',
+      options: [
+        'A DSO cannot display waveforms at all',
+        'A DSO samples and digitizes the signal, storing it in memory, instead of drawing it directly with an electron beam',
+        'An analog CRO uses more memory',
+        'A DSO only works with DC signals',
+      ],
+      correctIndex: 1,
+      explanation: 'A DSO samples the input via an ADC and stores digital values, unlike an analog CRO which draws the trace directly.',
+    },
+    {
+      question: 'Which block in a DSO converts the analog input signal into digital values?',
+      options: ['Attenuator', 'Trigger circuit', 'ADC (Analog-to-Digital Converter)', 'Time base'],
+      correctIndex: 2,
+      explanation: 'The ADC samples the analog signal at regular intervals and converts each sample into a digital number.',
+    },
+    {
+      question: 'What does the "Volts/Div" control set on a DSO?',
+      options: [
+        'How much time each grid division represents',
+        'How many volts each grid division represents (vertical scale)',
+        'The trigger voltage level',
+        'The sample rate',
+      ],
+      correctIndex: 1,
+      explanation: 'Volts/Div sets the vertical scale — voltage represented per grid division.',
+    },
+    {
+      question: 'Which coupling setting blocks any DC offset in the input signal, showing only its AC component?',
+      options: ['DC coupling', 'AC coupling', 'GND coupling', 'None of these'],
+      correctIndex: 1,
+      explanation: 'AC coupling blocks the DC component and displays only the AC part of the signal.',
+    },
+    {
+      question: 'What does the "Single" (Single Shot) acquisition mode do?',
+      options: [
+        'Continuously refreshes the display forever',
+        'Arms the scope to capture exactly one triggered event, then stops and holds it on screen',
+        'Averages multiple captures to reduce noise',
+        'Automatically sets Volts/Div and Time/Div',
+      ],
+      correctIndex: 1,
+      explanation: 'Single mode captures one triggered event and freezes the display, ideal for non-repeating events.',
+    },
+    {
+      question: 'Which acquisition mode is best suited for catching narrow, infrequent glitches in a signal?',
+      options: ['Normal', 'Average', 'Peak Detect', 'Autoset'],
+      correctIndex: 2,
+      explanation: 'Peak Detect mode is designed to catch narrow glitches that might otherwise be missed between samples.',
+    },
+    {
+      question: 'According to the Nyquist rule, the sample rate must be at least:',
+      options: [
+        'Equal to the signal’s highest frequency',
+        'Twice the signal’s highest frequency component',
+        'Half the signal’s highest frequency',
+        'Independent of the signal’s frequency',
+      ],
+      correctIndex: 1,
+      explanation: 'The Nyquist rule requires a sample rate of at least twice the highest frequency component to reconstruct the signal accurately.',
+    },
+    {
+      question: 'What does "Memory Depth" determine in a DSO?',
+      options: [
+        'The voltage range the scope can measure',
+        'How many samples the scope can store per capture, affecting the time window at a given sample rate',
+        'The number of channels available',
+        'The trigger slope',
+      ],
+      correctIndex: 1,
+      explanation: 'Memory depth is how many samples can be stored; more depth allows a longer capture window at a given sample rate.',
+    },
+    {
+      question: 'What is the first step when setting up to capture a non-repeating event using Single Shot mode?',
+      options: [
+        'Press Single immediately without any other setup',
+        'Connect the probe and set correct coupling, then set Volts/Div, Time/Div, and trigger before pressing Single',
+        'Turn off the trigger circuit',
+        'Set the scope to Run mode',
+      ],
+      correctIndex: 1,
+      explanation: 'Proper probe connection, scaling, and trigger setup must precede arming the scope with Single.',
+    },
+    {
+      question: 'If a Single Shot capture shows a blank/unchanged display, what should be checked first?',
+      options: [
+        'Replace the oscilloscope',
+        'Re-check the trigger level/source/slope and re-arm by pressing Single again',
+        'Increase the supply voltage',
+        'Switch to GND coupling permanently',
+      ],
+      correctIndex: 1,
+      explanation: 'A failed single-shot capture usually means the trigger settings need adjustment before re-arming.',
+    },
+    {
+      question: 'Which of the following is an advantage of a DSO over an analog CRO?',
+      options: [
+        'It cannot store waveforms',
+        'It can capture and hold a one-time (non-repeating) event on screen',
+        'It requires an electron beam to draw traces',
+        'It has no automatic measurement capability',
+      ],
+      correctIndex: 1,
+      explanation: 'Unlike an analog scope, a DSO can freeze and hold a single non-repeating event thanks to digital storage.',
+    },
+  ]}
+/>

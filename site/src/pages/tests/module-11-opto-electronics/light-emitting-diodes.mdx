@@ -1,0 +1,118 @@
+---
+title: Quiz — Light Emitting Diodes (LEDs)
+description: Module 11 lesson quiz — Light Emitting Diodes
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Light Emitting Diodes (LEDs)
+
+Lesson: [Light Emitting Diodes (LEDs)](/docs/module-11-opto-electronics/light-emitting-diodes) · Module 11: Opto Electronics
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'What is the name of the process by which an LED converts electrical energy directly into light?',
+      options: ['Rectification', 'Electroluminescence', 'Photoconduction', 'Thermionic emission'],
+      correctIndex: 1,
+      explanation: 'Electroluminescence is the direct conversion of electrical energy into light in a forward-biased LED junction.',
+    },
+    {
+      question: 'Why are LEDs made from compound semiconductors like GaAs or GaN instead of plain silicon?',
+      options: [
+        'Silicon is too expensive',
+        'Silicon junctions release recombination energy mainly as heat, not light',
+        'Silicon cannot be doped to form a p-n junction',
+        'Silicon only works in reverse bias',
+      ],
+      correctIndex: 1,
+      explanation: 'In silicon, recombination energy dissipates as heat; compound semiconductors release it as light photons instead.',
+    },
+    {
+      question: 'In an LED, at what point does electron-hole recombination take place?',
+      options: ['At the anode lead', 'At the p-n junction', 'Inside the epoxy dome only', 'At the cathode flat edge'],
+      correctIndex: 1,
+      explanation: 'Forward bias pushes electrons and holes together at the junction, where they recombine and release energy.',
+    },
+    {
+      question: 'What determines the color (wavelength) of light emitted by an LED?',
+      options: [
+        'The size of the epoxy dome',
+        'The energy bandgap of the semiconductor material',
+        'The length of the connecting leads',
+        'The current-limiting resistor value',
+      ],
+      correctIndex: 1,
+      explanation: 'A larger bandgap produces higher-energy, shorter-wavelength (bluer) light; a smaller bandgap gives longer wavelength (redder) light.',
+    },
+    {
+      question: 'According to E = h × c / λ, a semiconductor with a larger energy bandgap emits light of:',
+      options: ['Longer wavelength', 'Shorter wavelength', 'No visible wavelength', 'The same wavelength as any other bandgap'],
+      correctIndex: 1,
+      explanation: 'Photon energy is inversely proportional to wavelength, so a larger bandgap (higher energy) means shorter wavelength.',
+    },
+    {
+      question: 'Which of these typically has the lowest forward voltage drop among common LED colors?',
+      options: ['Blue', 'White', 'Infrared', 'Green'],
+      correctIndex: 2,
+      explanation: 'Infrared LEDs (GaAs) have the smallest bandgap among common types, giving the lowest forward voltage, around 1.2–1.6V.',
+    },
+    {
+      question: 'A red LED (Vf = 1.8V, If = 10 mA) is to be operated from a 9V supply. What series resistor is required?',
+      options: ['180Ω', '360Ω', '720Ω', '900Ω'],
+      correctIndex: 2,
+      explanation: 'R = (Vsupply − Vf) / If = (9 − 1.8) / 0.010 = 7.2 / 0.010 = 720Ω.',
+    },
+    {
+      question: 'Why must an LED never be connected directly across a supply without a series resistor?',
+      options: [
+        'It would emit no light at all',
+        'Its low resistance would let current rise uncontrolled and destroy it',
+        'It would only work in reverse bias then',
+        'The supply voltage would drop to zero',
+      ],
+      correctIndex: 1,
+      explanation: 'Without current limiting, an LED\'s low forward resistance allows destructive current to flow.',
+    },
+    {
+      question: 'How can the anode lead of an LED typically be identified?',
+      options: [
+        'It is the shorter of the two leads',
+        'It is the longer of the two leads',
+        'It is always colored red',
+        'It has no distinguishing feature',
+      ],
+      correctIndex: 1,
+      explanation: 'The longer lead is conventionally the anode; the cathode side of the epoxy body usually has a flat edge.',
+    },
+    {
+      question: 'What is the key difference between a photodiode and a phototransistor as light sensors?',
+      options: [
+        'A photodiode requires no bias at all, unlike a phototransistor',
+        'A phototransistor gives higher sensitivity (current gain) than a photodiode',
+        'A photodiode is forward biased in normal operation, unlike a phototransistor',
+        'There is no functional difference between them',
+      ],
+      correctIndex: 1,
+      explanation: 'A phototransistor amplifies the light-generated base current through transistor action, giving greater sensitivity than a plain photodiode.',
+    },
+    {
+      question: 'What is the main purpose of an optocoupler (optoisolator)?',
+      options: [
+        'To increase LED brightness',
+        'To transfer a signal between two circuits using light while keeping them electrically isolated',
+        'To convert AC to DC',
+        'To regulate LED forward voltage',
+      ],
+      correctIndex: 1,
+      explanation: 'An optocoupler pairs an LED with a photodetector to pass a signal optically, protecting circuits from each other electrically.',
+    },
+    {
+      question: 'A photodiode used for light sensing is normally operated in which mode?',
+      options: ['Forward bias', 'Reverse bias', 'Zero bias with no supply', 'AC bias only'],
+      correctIndex: 1,
+      explanation: 'A photodiode is reverse biased; its reverse leakage current increases in proportion to the light falling on the junction.',
+    },
+  ]}
+/>

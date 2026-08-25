@@ -1,0 +1,122 @@
+---
+title: Quiz — Magnetism & Relay
+description: Module 7 lesson quiz — Magnetism, Relay
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Magnetism & Relay
+
+Lesson: [Magnetism, Relay](/docs/module-07-active-passive-components/magnetism-relay) · Module 7: Active and Passive Components
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'How do like magnetic poles behave toward each other?',
+      options: ['They attract', 'They repel', 'They have no effect on each other', 'They cancel each other permanently'],
+      correctIndex: 1,
+      explanation: 'Like poles (N-N or S-S) repel; unlike poles (N-S) attract.',
+    },
+    {
+      question: 'What is magnetic flux density measured in?',
+      options: ['Weber', 'Henry', 'Tesla', 'Farad'],
+      correctIndex: 2,
+      explanation: 'Flux density (B) — flux per unit area — is measured in Tesla (T).',
+    },
+    {
+      question: 'What creates a magnetic field around a straight current-carrying conductor?',
+      options: [
+        'The conductor’s resistance alone',
+        'The current flowing through it',
+        'Only when connected to AC, never DC',
+        'The conductor’s color',
+      ],
+      correctIndex: 1,
+      explanation: 'Any current flow, AC or DC, produces a circular magnetic field around a conductor.',
+    },
+    {
+      question: 'Why does winding a conductor into a coil strengthen its magnetic field?',
+      options: [
+        'It reduces the current',
+        'The magnetic fields of each turn combine, concentrating the field',
+        'It converts the coil into a capacitor',
+        'It has no effect on field strength',
+      ],
+      correctIndex: 1,
+      explanation: 'Combining the fields of many turns produces a stronger, more concentrated field similar to a bar magnet.',
+    },
+    {
+      question: 'Why is an iron core often added inside a coil?',
+      options: [
+        'To reduce the coil’s weight',
+        'Iron conducts magnetic flux far better than air, strengthening the field',
+        'To convert AC into DC',
+        'To insulate the winding electrically',
+      ],
+      correctIndex: 1,
+      explanation: 'An iron core concentrates and strengthens the magnetic field compared to an air core.',
+    },
+    {
+      question: 'What is a relay, fundamentally?',
+      options: [
+        'A device that amplifies voltage directly',
+        'An electrically-operated switch using an electromagnetic coil to move contacts',
+        'A type of resistor',
+        'A capacitor used for filtering',
+      ],
+      correctIndex: 1,
+      explanation: 'A relay uses a small control current through a coil to mechanically operate switch contacts.',
+    },
+    {
+      question: 'In a relay’s de-energized (rest) state, what is true of its contacts?',
+      options: [
+        'NO is closed, NC is open',
+        'NC is closed, NO is open',
+        'Both NO and NC are closed',
+        'Both NO and NC are open',
+      ],
+      correctIndex: 1,
+      explanation: 'At rest (coil off), the spring holds the armature so the Normally Closed contact is closed and Normally Open is open.',
+    },
+    {
+      question: 'What happens to a relay’s contacts when its coil is energized?',
+      options: [
+        'Nothing changes',
+        'NO closes and NC opens',
+        'NC closes further and NO stays open',
+        'Both contacts open',
+      ],
+      correctIndex: 1,
+      explanation: 'Energizing the coil pulls the armature, closing the NO contact and opening the NC contact.',
+    },
+    {
+      question: 'What returns a relay’s armature to its rest position when the coil is de-energized?',
+      options: ['A second coil', 'A spring', 'Gravity only', 'A capacitor'],
+      correctIndex: 1,
+      explanation: 'A spring pulls the armature back to rest once the magnetic field collapses.',
+    },
+    {
+      question: 'Why is a relay used to control a high-power load from a low-power control circuit?',
+      options: [
+        'It amplifies the control signal’s voltage directly',
+        'It lets a small control current safely switch a much larger load current, with electrical isolation',
+        'It converts AC to DC',
+        'It has no real advantage over direct connection',
+      ],
+      correctIndex: 1,
+      explanation: 'Relays isolate and let a low-power signal control a separate higher-power circuit safely.',
+    },
+    {
+      question: 'Which of these is a typical application of a relay?',
+      options: [
+        'Filtering high-frequency noise from a signal',
+        'Automatic switching of a motor or heater from a low-voltage control circuit',
+        'Storing charge for a power supply',
+        'Converting AC to DC',
+      ],
+      correctIndex: 1,
+      explanation: 'Relays are commonly used to let control circuits switch motors, heaters, and similar loads.',
+    },
+  ]}
+/>

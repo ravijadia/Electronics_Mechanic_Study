@@ -1,0 +1,112 @@
+---
+title: Quiz — Ohm's Law, Kirchhoff's Laws & DC Series Circuits
+description: Module 7 lesson quiz — Ohm's law, Kirchhoff's laws, DC series circuit
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Ohm's Law, Kirchhoff's Laws & DC Series Circuits
+
+Lesson: [Ohm's Law, Kirchhoff's Laws, DC Series Circuit](/docs/module-07-active-passive-components/ohms-kirchhoffs-dc-series) · Module 7: Active and Passive Components
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'Ohm’s Law states that current is:',
+      options: [
+        'Directly proportional to voltage and directly proportional to resistance',
+        'Directly proportional to voltage and inversely proportional to resistance',
+        'Inversely proportional to voltage and directly proportional to resistance',
+        'Independent of both voltage and resistance',
+      ],
+      correctIndex: 1,
+      explanation: 'I = V/R — current increases with voltage and decreases as resistance increases.',
+    },
+    {
+      question: 'A 12V supply is connected across a 6Ω resistor. What current flows?',
+      options: ['0.5A', '2A', '6A', '72A'],
+      correctIndex: 1,
+      explanation: 'I = V/R = 12/6 = 2A.',
+    },
+    {
+      question: 'What does Kirchhoff’s Current Law (KCL) state?',
+      options: [
+        'Voltage around a loop always sums to zero',
+        'Current entering a junction equals current leaving it',
+        'Resistance at a junction is always zero',
+        'Power at a junction is always conserved as heat',
+      ],
+      correctIndex: 1,
+      explanation: 'KCL: current cannot accumulate or vanish at a node — what goes in must come out.',
+    },
+    {
+      question: 'At a junction, 5A enters and one branch carries 2A away. How much current flows in the other branch?',
+      options: ['2A', '3A', '5A', '7A'],
+      correctIndex: 1,
+      explanation: 'By KCL, total current out equals total current in: 5 − 2 = 3A.',
+    },
+    {
+      question: 'What does Kirchhoff’s Voltage Law (KVL) state?',
+      options: [
+        'The sum of all voltage rises and drops around a closed loop equals zero',
+        'Current is the same everywhere in a loop',
+        'Total resistance in a loop is always zero',
+        'Voltage always increases around a loop',
+      ],
+      correctIndex: 0,
+      explanation: 'KVL: supply voltage equals the sum of all voltage drops around a closed loop.',
+    },
+    {
+      question: 'A 12V supply drives a series circuit with three resistors dropping 3V and 4V on two of them. What must the third resistor drop?',
+      options: ['3V', '4V', '5V', '12V'],
+      correctIndex: 2,
+      explanation: 'By KVL, drops must sum to the supply voltage: 12 − 3 − 4 = 5V.',
+    },
+    {
+      question: 'In a DC series circuit, how does current behave through each component?',
+      options: [
+        'It is different through each component',
+        'It is the same through every component',
+        'It doubles at each component',
+        'It only flows through the largest resistor',
+      ],
+      correctIndex: 1,
+      explanation: 'In series, there is only one path for current, so it is identical everywhere in the loop.',
+    },
+    {
+      question: 'In a DC series circuit, how does voltage distribute across the components?',
+      options: [
+        'Equally, regardless of resistance',
+        'In proportion to each component’s resistance',
+        'Only across the last component',
+        'It does not divide; each component gets full supply voltage',
+      ],
+      correctIndex: 1,
+      explanation: 'Voltage divider principle: V_x = V_supply × (R_x / R_total).',
+    },
+    {
+      question: 'A 24V supply connects to three series resistors: 2Ω, 4Ω, 6Ω. What is the circuit current?',
+      options: ['1A', '2A', '4A', '12A'],
+      correctIndex: 1,
+      explanation: 'R_total = 2+4+6 = 12Ω; I = V/R = 24/12 = 2A.',
+    },
+    {
+      question: 'What happens to current flow in the rest of a series circuit if one component fails open?',
+      options: [
+        'Current increases in the remaining components',
+        'Current stops flowing in the entire circuit',
+        'Current is unaffected',
+        'Only that component loses current, others keep working normally',
+      ],
+      correctIndex: 1,
+      explanation: 'A series circuit has only one current path — an open anywhere breaks the whole loop.',
+    },
+    {
+      question: 'Three resistors of 10Ω, 20Ω, and 30Ω are in series across a 60V supply. What is the circuit current?',
+      options: ['1A', '2A', '3A', '6A'],
+      correctIndex: 0,
+      explanation: 'R_total = 10+20+30 = 60Ω; I = 60/60 = 1A.',
+    },
+  ]}
+/>

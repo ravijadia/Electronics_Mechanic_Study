@@ -1,0 +1,106 @@
+---
+title: Quiz — Encoder & Decoder
+description: Module 12 lesson quiz — Concept of encoder and decoder
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Encoder & Decoder
+
+Lesson: [Concept of Encoder and Decoder](/docs/module-12-digital-logic/encoder-decoder) · Module 12: Basic Gates, Combinational Circuits, Flip-Flops
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'What does an encoder do?',
+      options: [
+        'Converts a binary code into one active output line',
+        'Converts one active input line (among many) into a compact binary output code',
+        'Amplifies a digital signal',
+        'Stores one bit of data',
+      ],
+      correctIndex: 1,
+      explanation: 'An encoder compresses which one of several active inputs into a binary code identifying it.',
+    },
+    {
+      question: 'What does a decoder do?',
+      options: [
+        'Converts a binary input code into one active output line among 2^n outputs',
+        'Converts multiple inputs into a single binary code',
+        'Stores multiple bits permanently',
+        'Only works with analog signals',
+      ],
+      correctIndex: 0,
+      explanation: 'A decoder expands an n-bit binary code into activating exactly one of 2^n output lines.',
+    },
+    {
+      question: 'A 4-to-2 line encoder has how many inputs and how many outputs?',
+      options: ['2 inputs, 4 outputs', '4 inputs, 2 outputs', '4 inputs, 4 outputs', '2 inputs, 2 outputs'],
+      correctIndex: 1,
+      explanation: 'A 4-to-2 encoder takes 4 input lines and produces a 2-bit output code.',
+    },
+    {
+      question: 'What is the main limitation of a basic (non-priority) encoder?',
+      options: [
+        'It cannot handle more than 2 inputs',
+        'It malfunctions if two or more inputs are active at the same time',
+        'It requires an external clock',
+        'It only outputs analog voltages',
+      ],
+      correctIndex: 1,
+      explanation: 'A basic encoder assumes only one input is active; multiple simultaneous active inputs cause invalid output.',
+    },
+    {
+      question: 'What problem does a priority encoder solve?',
+      options: [
+        'It reduces power consumption',
+        'It correctly outputs the code for the highest-priority active input when multiple inputs are active',
+        'It converts AC to DC',
+        'It eliminates the need for a decoder',
+      ],
+      correctIndex: 1,
+      explanation: 'A priority encoder resolves multiple simultaneously active inputs by outputting the code of the highest-priority one.',
+    },
+    {
+      question: 'A 2-to-4 line decoder has how many output lines?',
+      options: ['2', '4', '8', '16'],
+      correctIndex: 1,
+      explanation: 'With a 2-bit input code, a decoder activates one of 2² = 4 output lines.',
+    },
+    {
+      question: 'In a 2-to-4 decoder, how many output lines are active at any given time?',
+      options: ['All 4', 'Exactly 1', 'Exactly 2', 'None'],
+      correctIndex: 1,
+      explanation: 'Exactly one output line goes active for each unique input combination; the rest stay at 0.',
+    },
+    {
+      question: 'Which of these is a typical application of a decoder?',
+      options: [
+        'Keypad key-press encoding',
+        'BCD-to-seven-segment display driving',
+        'Analog-to-digital conversion',
+        'Amplifying a weak audio signal',
+      ],
+      correctIndex: 1,
+      explanation: 'Decoders are commonly used to drive seven-segment displays from a BCD input code.',
+    },
+    {
+      question: 'Which of these is a typical application of an encoder?',
+      options: [
+        'Memory address decoding',
+        'Driving a seven-segment display',
+        'Converting a pressed key on a keypad into a binary code',
+        'Filtering ripple in a power supply',
+      ],
+      correctIndex: 2,
+      explanation: 'Keypad/keyboard encoding is a classic encoder application, converting a key press into a binary value.',
+    },
+    {
+      question: 'A decoder with a 4-bit input code can activate how many possible output lines?',
+      options: ['4', '8', '16', '32'],
+      correctIndex: 2,
+      explanation: 'A 4-bit code gives 2⁴ = 16 possible output lines.',
+    },
+  ]}
+/>

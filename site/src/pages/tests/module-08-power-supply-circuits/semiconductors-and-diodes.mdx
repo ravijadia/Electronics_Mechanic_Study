@@ -1,0 +1,108 @@
+---
+title: Quiz — Semiconductor & Diode
+description: Module 8 lesson quiz — Semiconductor materials & diode basics
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Semiconductor & Diode
+
+Lesson: [Semiconductor & Diode](/docs/module-08-power-supply-circuits/semiconductors-and-diodes) · Module 8: Power Supply Circuits
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'Which of the following is a semiconductor material?',
+      options: ['Copper', 'Silicon', 'Rubber', 'Glass'],
+      correctIndex: 1,
+      explanation: 'Silicon and germanium are the two most common semiconductor materials.',
+    },
+    {
+      question: 'A semiconductor’s conductivity lies between which two material types?',
+      options: [
+        'Conductor and insulator',
+        'Two different conductors',
+        'Two different insulators',
+        'Magnet and conductor',
+      ],
+      correctIndex: 0,
+      explanation: 'Semiconductor conductivity is between that of a conductor and an insulator, and can be controlled.',
+    },
+    {
+      question: 'Doping silicon with phosphorus produces which type of material?',
+      options: ['P-type', 'N-type', 'Insulator', 'Pure conductor'],
+      correctIndex: 1,
+      explanation: 'Phosphorus contributes extra free electrons, producing N-type material.',
+    },
+    {
+      question: 'Doping silicon with boron produces which type of material, and why?',
+      options: [
+        'N-type, due to extra electrons',
+        'P-type, due to holes (missing electrons)',
+        'N-type, due to holes',
+        'It has no effect on conductivity',
+      ],
+      correctIndex: 1,
+      explanation: 'Boron creates holes (electron vacancies) that behave as positive charge carriers, giving P-type material.',
+    },
+    {
+      question: 'A PN junction formed by joining P-type and N-type material is essentially what component?',
+      options: ['A resistor', 'A diode', 'A capacitor', 'An inductor'],
+      correctIndex: 1,
+      explanation: 'A diode is simply a PN junction with anode and cathode terminals.',
+    },
+    {
+      question: 'Which diode terminal is on the P-type side?',
+      options: ['Cathode', 'Anode', 'Gate', 'Base'],
+      correctIndex: 1,
+      explanation: 'The anode is the P-type side; the cathode (marked with a band) is the N-type side.',
+    },
+    {
+      question: 'Approximately what forward voltage drop does a silicon diode have when conducting?',
+      options: ['0.3V', '0.7V', '1.5V', '5V'],
+      correctIndex: 1,
+      explanation: 'Silicon diodes typically start conducting at about 0.7V forward bias.',
+    },
+    {
+      question: 'Approximately what forward voltage drop does a germanium diode have when conducting?',
+      options: ['0.3V', '0.7V', '1.2V', '2V'],
+      correctIndex: 0,
+      explanation: 'Germanium diodes conduct starting at a lower forward voltage, around 0.3V.',
+    },
+    {
+      question: 'In reverse bias, how does an ideal diode behave?',
+      options: [
+        'It conducts fully, same as forward bias',
+        'It blocks current, with only a tiny leakage current flowing',
+        'It always gets damaged immediately',
+        'It doubles the input voltage',
+      ],
+      correctIndex: 1,
+      explanation: 'A reverse-biased diode is OFF, blocking current except for a very small leakage current.',
+    },
+    {
+      question: 'A 6V battery is connected in series with a 470Ω resistor and a forward-biased silicon diode. What is the approximate circuit current?',
+      options: ['0.3 mA', '11.3 mA', '113 mA', '1.13 A'],
+      correctIndex: 1,
+      explanation: 'I = (6 − 0.7) / 470 = 5.3 / 470 ≈ 11.3 mA.',
+    },
+    {
+      question: 'What is the process of converting AC to DC using a diode called?',
+      options: ['Switching', 'Rectification', 'Amplification', 'Modulation'],
+      correctIndex: 1,
+      explanation: 'Using diodes to convert AC into DC is called rectification.',
+    },
+    {
+      question: 'What can happen if the reverse voltage across a normal diode exceeds its rated limit?',
+      options: [
+        'Nothing, diodes are immune to reverse voltage',
+        'The diode may be damaged at its breakdown voltage',
+        'The diode conducts more current than usual, safely',
+        'The diode’s color changes permanently',
+      ],
+      correctIndex: 1,
+      explanation: 'Exceeding the rated reverse (breakdown) voltage can permanently damage an ordinary diode.',
+    },
+  ]}
+/>

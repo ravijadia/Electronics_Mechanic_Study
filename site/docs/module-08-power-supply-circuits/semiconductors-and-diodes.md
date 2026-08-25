@@ -132,5 +132,5 @@ I ≈ 11.3 mA
 *આગળનો ટોપિક: Zener Diode અને તેના ઉપયોગો*
 
 :::tip અભ્યાસ કરો (Practice)
-આ પ્રકરણ પર **MCQ ટેસ્ટ** આપવા માટે [Module 8 Test](/tests/module-08-test) પર જાઓ.
+આ પ્રકરણ પર **MCQ ટેસ્ટ** આપવા માટે [Quiz: Semiconductor & Diode](/tests/module-08-power-supply-circuits/semiconductors-and-diodes) પર જાઓ.
 :::

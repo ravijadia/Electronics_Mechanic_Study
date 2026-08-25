@@ -1,0 +1,91 @@
+---
+title: Quiz — RC Phase Shift Oscillator
+description: Module 9 lesson quiz — RC Phase Shift Oscillator
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: RC Phase Shift Oscillator
+
+Lesson: [RC Phase Shift Oscillator](/docs/module-09-transistor/rc-phase-shift-oscillator) · Module 9: Transistor
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'What transistor configuration is used as the amplifier stage in an RC phase shift oscillator?',
+      options: ['Common Base', 'Common Emitter', 'Common Collector', 'None, only diodes are used'],
+      correctIndex: 1,
+      explanation: 'A Common Emitter amplifier is used, providing a 180° phase shift between input and output.',
+    },
+    {
+      question: 'How many identical RC sections are typically used in the feedback network?',
+      options: ['One', 'Two', 'Three', 'Five'],
+      correctIndex: 2,
+      explanation: 'Three cascaded RC sections are used to reliably produce the needed 180° phase shift.',
+    },
+    {
+      question: 'How much phase shift do the three RC sections together contribute?',
+      options: ['90°', '180°', '270°', '360°'],
+      correctIndex: 1,
+      explanation: 'Three RC sections together contribute 180° phase shift (about 60° each at the design frequency).',
+    },
+    {
+      question: 'Why can’t a single RC section be used instead of three?',
+      options: [
+        'A single RC section provides too much phase shift',
+        'A single RC section can approach but never reach a full 90° phase shift',
+        'A single RC section is more expensive',
+        'A single RC section only works with AC input, not with amplifiers',
+      ],
+      correctIndex: 1,
+      explanation: 'One RC section alone cannot reliably reach 180° with practical component values; three sections are needed.',
+    },
+    {
+      question: 'What is the total loop phase shift in a correctly designed RC phase shift oscillator, satisfying the Barkhausen criterion?',
+      options: ['90°', '180°', '270°', '360° (0°)'],
+      correctIndex: 3,
+      explanation: '180° from the CE amplifier plus 180° from the RC network gives 360° (equivalent to 0°) total.',
+    },
+    {
+      question: 'What is the frequency formula for a 3-section RC phase shift oscillator with equal R and C in each section?',
+      options: [
+        'f = 1 / (2π√(LC))',
+        'f = 1 / (2π√6 × RC)',
+        'f = RC / (2π)',
+        'f = 2π × RC',
+      ],
+      correctIndex: 1,
+      explanation: 'f = 1 / (2π√6 RC) is the standard formula for a 3-stage identical RC phase shift network.',
+    },
+    {
+      question: 'Find the oscillation frequency for R = 10 kΩ and C = 0.01 µF in each of three identical RC sections.',
+      options: ['65 Hz', '650 Hz', '6.5 kHz', '65 kHz'],
+      correctIndex: 1,
+      explanation: 'RC = 10×10³ × 0.01×10⁻⁶ = 1×10⁻⁴; f = 1/(2π×2.449×1×10⁻⁴) ≈ 650 Hz.',
+    },
+    {
+      question: 'What type of output waveform does an RC phase shift oscillator produce?',
+      options: ['Square wave', 'Sawtooth wave', 'Sine wave', 'Triangular wave'],
+      correctIndex: 2,
+      explanation: 'An RC phase shift oscillator is designed to produce a sine wave output.',
+    },
+    {
+      question: 'In what frequency range does an RC phase shift oscillator typically operate?',
+      options: ['Audio (low) frequency range', 'Radio frequency (RF) range only', 'Microwave range', 'It has no defined range'],
+      correctIndex: 0,
+      explanation: 'RC oscillators are best suited to low/audio-frequency sine wave generation.',
+    },
+    {
+      question: 'Compared to a crystal oscillator, an RC phase shift oscillator has:',
+      options: [
+        'Better frequency stability',
+        'Moderate frequency stability, less stable than a crystal oscillator',
+        'Identical stability',
+        'No defined frequency at all',
+      ],
+      correctIndex: 1,
+      explanation: 'RC phase shift oscillators offer moderate stability, less precise than crystal oscillators.',
+    },
+  ]}
+/>

@@ -1,0 +1,96 @@
+---
+title: Quiz — Timer IC Applications
+description: Module 14 lesson quiz — Timer IC and its Applications
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Timer IC Applications
+
+Lesson: [Timer IC and its Applications](/docs/module-14-op-amp-timer/timer-ic-applications) · Module 14: Op Amp and Timer Applications
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'How many operating modes does the 555 timer IC have?',
+      options: ['1', '2', '3', '4'],
+      correctIndex: 2,
+      explanation: 'The 555 timer can operate in astable, monostable, and bistable modes.',
+    },
+    {
+      question: 'Which 555 timer mode produces a continuous, free-running square wave with no external trigger needed?',
+      options: ['Monostable', 'Astable', 'Bistable', 'None of the modes'],
+      correctIndex: 1,
+      explanation: 'Astable mode is a self-running oscillator that continuously charges and discharges the timing capacitor.',
+    },
+    {
+      question: 'In monostable mode, what happens to the 555 timer output after it is triggered?',
+      options: [
+        'It toggles between high and low forever',
+        'It goes high for a fixed time, then automatically returns low',
+        'It stays low permanently',
+        'It generates a continuous square wave',
+      ],
+      correctIndex: 1,
+      explanation: 'Monostable mode produces a single, precise output pulse per trigger, then returns to its resting LOW state.',
+    },
+    {
+      question: 'On the 555 timer, what is the function of the Threshold pin (pin 6)?',
+      options: [
+        'Starts the timing cycle when pulled low',
+        'Ends the timing cycle when pulled above 2/3 VCC',
+        'Provides the ground connection',
+        'Resets the output regardless of trigger',
+      ],
+      correctIndex: 1,
+      explanation: 'The threshold pin ends the timing cycle once the capacitor voltage rises above 2/3 VCC.',
+    },
+    {
+      question: 'What is the purpose of the Discharge pin (pin 7) on the 555 timer?',
+      options: [
+        'It supplies the main output signal',
+        'It provides a path to discharge the timing capacitor',
+        'It sets the reference voltage',
+        'It is the main power supply pin',
+      ],
+      correctIndex: 1,
+      explanation: 'The discharge pin connects internally to a transistor that discharges the timing capacitor during part of the cycle.',
+    },
+    {
+      question: 'What is the formula for output frequency of a 555 timer in astable mode?',
+      options: [
+        'f = 1.1 / (RC)',
+        'f = 1.44 / ((R1 + 2R2) × C)',
+        'f = 1 / (2πRC)',
+        'f = RC / 1.44',
+      ],
+      correctIndex: 1,
+      explanation: 'Astable frequency is f = 1.44 / ((R1 + 2R2)C).',
+    },
+    {
+      question: 'What is the formula for the output pulse width of a 555 timer in monostable mode?',
+      options: ['t = 1.44RC', 't = 1.1RC', 't = RC/1.1', 't = 2πRC'],
+      correctIndex: 1,
+      explanation: 'Monostable pulse width is t = 1.1 × R × C.',
+    },
+    {
+      question: 'A 555 astable circuit has R1 = 1kΩ, R2 = 10kΩ, C = 0.1µF. What is the approximate output frequency?',
+      options: ['68.6 Hz', '686 Hz', '6860 Hz', '68,600 Hz'],
+      correctIndex: 1,
+      explanation: 'f = 1.44 / ((1000 + 20000) × 0.1×10⁻⁶) = 1.44 / (2.1×10⁻³) ≈ 686 Hz.',
+    },
+    {
+      question: 'Which of these is a typical application of the 555 timer in astable mode?',
+      options: ['Debouncing a mechanical switch', 'LED flasher / clock pulse generator', 'One-shot pulse on button press', 'Voltage regulation'],
+      correctIndex: 1,
+      explanation: 'Astable mode continuously oscillates, making it ideal for LED flashers and clock/tone generation.',
+    },
+    {
+      question: 'Which of these is a typical application of the 555 timer in monostable mode?',
+      options: ['Continuous tone generation', 'Debouncing a mechanical switch with a single clean pulse per press', 'Free-running clock source', 'AC to DC rectification'],
+      correctIndex: 1,
+      explanation: 'Monostable mode generates one precise pulse per trigger, useful for debouncing switches and pulse-width generation.',
+    },
+  ]}
+/>

@@ -1,0 +1,117 @@
+---
+title: Quiz — RC Time Constant & RLC Circuits
+description: Module 7 lesson quiz — RC time constant, RC differentiator, RLC series/parallel circuits
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: RC Time Constant & RLC Circuits
+
+Lesson: [RC Time Constant, RC Differentiator, RLC Series/Parallel Circuits](/docs/module-07-active-passive-components/rc-time-constant-rlc) · Module 7: Active and Passive Components
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'What does the RC time constant (τ) represent?',
+      options: [
+        'The maximum voltage a capacitor can hold',
+        'The time for a capacitor’s voltage to change by about 63.2% toward its final value',
+        'The resistance value alone',
+        'The frequency at which the circuit resonates',
+      ],
+      correctIndex: 1,
+      explanation: 'τ = R × C defines the characteristic charging/discharging speed of an RC circuit.',
+    },
+    {
+      question: 'What is the time constant for R = 10kΩ and C = 100µF?',
+      options: ['0.1 second', '1 second', '10 seconds', '100 seconds'],
+      correctIndex: 1,
+      explanation: 'τ = R × C = 10,000 × 0.0001 = 1 second.',
+    },
+    {
+      question: 'After how many time constants is a capacitor considered essentially fully charged?',
+      options: ['1τ', '2τ', '3τ', '5τ'],
+      correctIndex: 3,
+      explanation: 'After about 5τ, a capacitor is more than 99% charged and considered fully charged.',
+    },
+    {
+      question: 'In an RC differentiator circuit, where is the output taken from?',
+      options: [
+        'Across the capacitor',
+        'Across the resistor',
+        'Across the power supply',
+        'Between the resistor and ground only',
+      ],
+      correctIndex: 1,
+      explanation: 'A differentiator has the capacitor in series with the input and takes output across the resistor to ground.',
+    },
+    {
+      question: 'What output shape does an RC differentiator produce when fed a square wave, with τ much smaller than the signal period?',
+      options: [
+        'A reproduced square wave',
+        'A smooth sine wave',
+        'Sharp positive and negative spikes at each edge transition',
+        'A constant DC level',
+      ],
+      correctIndex: 2,
+      explanation: 'A differentiator outputs pulses proportional to the rate of change — spikes at rising/falling edges.',
+    },
+    {
+      question: 'What is a common application of an RC differentiator?',
+      options: [
+        'Voltage regulation',
+        'Generating trigger pulses from a square wave for timing/digital circuits',
+        'Power amplification',
+        'Rectifying AC to DC',
+      ],
+      correctIndex: 1,
+      explanation: 'Differentiators are used to generate short trigger/edge pulses from square wave inputs.',
+    },
+    {
+      question: 'What is the resonant frequency formula for a series (or parallel) RLC circuit?',
+      options: ['f₀ = 2π√(LC)', 'f₀ = 1/(2π√(LC))', 'f₀ = LC/2π', 'f₀ = R/(LC)'],
+      correctIndex: 1,
+      explanation: 'f₀ = 1/(2π√(LC)) is the standard resonant frequency formula for series and parallel RLC circuits.',
+    },
+    {
+      question: 'At resonance in a series RLC circuit, what happens to impedance and current?',
+      options: [
+        'Impedance is maximum, current is minimum',
+        'Impedance is minimum, current is maximum',
+        'Both impedance and current are zero',
+        'Neither impedance nor current is affected',
+      ],
+      correctIndex: 1,
+      explanation: 'At resonance, X_L and X_C cancel, leaving only resistance — minimum impedance, maximum current.',
+    },
+    {
+      question: 'At resonance in a parallel RLC circuit, what happens to impedance and supply current?',
+      options: [
+        'Impedance is minimum, supply current is maximum',
+        'Impedance is maximum, supply current is minimum',
+        'Both stay unchanged from non-resonant conditions',
+        'Impedance becomes zero',
+      ],
+      correctIndex: 1,
+      explanation: 'At resonance, inductive and capacitive branch currents cancel, giving minimum supply current and maximum impedance.',
+    },
+    {
+      question: 'Why are parallel RLC circuits commonly used in radio tuning circuits?',
+      options: [
+        'They block all frequencies equally',
+        'They act as tank circuits that select/reject a specific resonant frequency',
+        'They convert AC to DC',
+        'They only work at DC',
+      ],
+      correctIndex: 1,
+      explanation: 'Parallel resonant "tank" circuits are used to select a desired frequency, such as a radio station.',
+    },
+    {
+      question: 'Calculate the time constant for R = 4.7kΩ and C = 220µF.',
+      options: ['0.1034 seconds', '1.034 seconds', '10.34 seconds', '103.4 seconds'],
+      correctIndex: 1,
+      explanation: 'τ = R × C = 4700 × 0.00022 = 1.034 seconds.',
+    },
+  ]}
+/>

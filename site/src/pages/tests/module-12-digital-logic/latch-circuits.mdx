@@ -1,0 +1,96 @@
+---
+title: Quiz — Latch Circuits
+description: Module 12 lesson quiz — Latch circuits and applications
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Latch Circuits
+
+Lesson: [Latch Circuits and Applications](/docs/module-12-digital-logic/latch-circuits) · Module 12: Basic Gates, Combinational Circuits, Flip-Flops
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'What is a latch?',
+      options: [
+        'A circuit that amplifies a digital signal',
+        'The simplest digital memory circuit that can store and hold one bit',
+        'A circuit that only performs arithmetic',
+        'A type of power supply regulator',
+      ],
+      correctIndex: 1,
+      explanation: 'A latch stores one bit of data and holds it even after the setting input is removed.',
+    },
+    {
+      question: 'A basic SR latch built from NAND gates uses how many cross-coupled gates?',
+      options: ['One', 'Two', 'Three', 'Four'],
+      correctIndex: 1,
+      explanation: 'The SR latch is built from two cross-coupled NAND gates, each feeding the other.',
+    },
+    {
+      question: 'In the active-low NAND-based SR latch convention, which input combination is considered invalid?',
+      options: ['S=1, R=1', 'S=0, R=0', 'S=1, R=0', 'S=0, R=1'],
+      correctIndex: 1,
+      explanation: 'For a NAND-based (active-low) SR latch, S=0 and R=0 simultaneously is the invalid condition.',
+    },
+    {
+      question: 'In a NOR-gate-based SR latch (active-high), which input combination is invalid?',
+      options: ['S=0, R=0', 'S=1, R=0', 'S=0, R=1', 'S=1, R=1'],
+      correctIndex: 3,
+      explanation: 'For a NOR-based SR latch, S=1 and R=1 together forces both outputs to 0, which is invalid.',
+    },
+    {
+      question: 'How does a D (Data) latch avoid the SR latch’s invalid-state problem?',
+      options: [
+        'It uses three inputs instead of two',
+        'It derives Set and Reset internally from a single Data input, so both can never be asserted invalidly at once',
+        'It has no memory at all',
+        'It only works with AC signals',
+      ],
+      correctIndex: 1,
+      explanation: 'A D latch uses one data line to drive both Set and Reset internally, eliminating the invalid combination.',
+    },
+    {
+      question: 'When the Enable input of a D latch is active, the output Q does what?',
+      options: ['Stays fixed regardless of D', 'Follows the D input directly', 'Always goes to 0', 'Toggles every clock edge'],
+      correctIndex: 1,
+      explanation: 'While enabled, a D latch is "transparent" — Q simply follows D.',
+    },
+    {
+      question: 'When the Enable input of a D latch is inactive, what happens to Q?',
+      options: ['It follows D', 'It holds its last value', 'It resets to 0 immediately', 'It becomes undefined'],
+      correctIndex: 1,
+      explanation: 'With Enable inactive, the latch holds (remembers) its last output value.',
+    },
+    {
+      question: 'What is the key difference between a latch and a flip-flop?',
+      options: [
+        'A latch is edge-triggered, a flip-flop is level-triggered',
+        'A latch is level-triggered (transparent while enabled); a flip-flop is edge-triggered (changes only on a clock edge)',
+        'There is no functional difference',
+        'A flip-flop cannot store data',
+      ],
+      correctIndex: 1,
+      explanation: 'Latches respond continuously while enabled; flip-flops only change state at a clock edge.',
+    },
+    {
+      question: 'Which of the following is a practical application of an SR latch?',
+      options: [
+        'Debouncing a mechanically noisy switch signal',
+        'Rectifying AC to DC',
+        'Amplifying an audio signal',
+        'Converting binary to decimal',
+      ],
+      correctIndex: 0,
+      explanation: 'An SR latch can clean up a noisy mechanical switch signal into a single clean transition.',
+    },
+    {
+      question: 'Latches serve as the fundamental building block for which more complex sequential circuits?',
+      options: ['Rectifiers and filters', 'Flip-flops and registers', 'Transformers', 'Diodes and transistors'],
+      correctIndex: 1,
+      explanation: 'Flip-flops, registers, and other sequential circuits are built up from latch elements.',
+    },
+  ]}
+/>

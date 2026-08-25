@@ -1,0 +1,87 @@
+---
+title: Quiz — Active/Passive Components & Resistors
+description: Module 7 lesson quiz — Active/passive electronic components, Resistors
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Active/Passive Components & Resistors
+
+Lesson: [Active/Passive Electronic Components, Resistors](/docs/module-07-active-passive-components/active-passive-resistors) · Module 7: Active and Passive Components
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'What is the key difference between an active and a passive component?',
+      options: [
+        'Active components are always larger in size',
+        'Active components can add energy/gain and need an external power source; passive components cannot',
+        'Passive components need an external power source; active components do not',
+        'There is no functional difference, only naming',
+      ],
+      correctIndex: 1,
+      explanation: 'Active components control/amplify and need power; passive components only store, dissipate, or oppose current.',
+    },
+    {
+      question: 'Which of these is a passive component?',
+      options: ['Transistor', 'Diode', 'Resistor', 'Op-amp'],
+      correctIndex: 2,
+      explanation: 'A resistor only opposes current flow and dissipates energy as heat — it cannot add gain.',
+    },
+    {
+      question: 'What does a resistor do to excess electrical energy in a circuit?',
+      options: ['Stores it in a magnetic field', 'Converts it into heat', 'Stores it in an electric field', 'Amplifies it'],
+      correctIndex: 1,
+      explanation: 'A resistor dissipates excess electrical energy as heat while opposing current flow.',
+    },
+    {
+      question: 'Which resistor type is commonly used as a variable voltage divider with 3 terminals?',
+      options: ['Thermistor', 'LDR', 'Potentiometer', 'Wire-wound resistor'],
+      correctIndex: 2,
+      explanation: 'A potentiometer has 3 terminals and a wiper, making it suitable as a voltage divider.',
+    },
+    {
+      question: 'A resistor whose resistance changes significantly with temperature is called a:',
+      options: ['Rheostat', 'Thermistor', 'LDR', 'Wire-wound resistor'],
+      correctIndex: 1,
+      explanation: 'A thermistor is used for temperature sensing/compensation because its resistance varies strongly with temperature.',
+    },
+    {
+      question: 'On a 4-band resistor, what does the 3rd band represent?',
+      options: ['First digit', 'Second digit', 'Multiplier', 'Tolerance'],
+      correctIndex: 2,
+      explanation: 'Band 1 = first digit, Band 2 = second digit, Band 3 = multiplier, Band 4 = tolerance.',
+    },
+    {
+      question: 'A resistor has color bands Yellow-Violet-Red-Gold. What is its value?',
+      options: ['47Ω ±5%', '470Ω ±10%', '4700Ω ±5%', '4.7Ω ±5%'],
+      correctIndex: 2,
+      explanation: 'Yellow=4, Violet=7, Red=×100 → 47×100 = 4700Ω, Gold = ±5% tolerance.',
+    },
+    {
+      question: 'Three resistors of 100Ω, 220Ω, and 330Ω are connected in series. What is the total resistance?',
+      options: ['110Ω', '450Ω', '650Ω', '73.3Ω'],
+      correctIndex: 2,
+      explanation: 'Series resistance simply adds: 100 + 220 + 330 = 650Ω.',
+    },
+    {
+      question: 'Two resistors of 100Ω and 200Ω are connected in parallel. What is the total resistance (approximately)?',
+      options: ['300Ω', '150Ω', '66.7Ω', '50Ω'],
+      correctIndex: 2,
+      explanation: '1/Rt = 1/100 + 1/200 = 3/200, so Rt = 200/3 ≈ 66.7Ω.',
+    },
+    {
+      question: 'What determines the maximum power a resistor can safely dissipate before overheating?',
+      options: ['Its color code', 'Its power (wattage) rating', 'Its physical color', 'Its tolerance band'],
+      correctIndex: 1,
+      explanation: 'The wattage rating (P = I²R = V²/R) sets the maximum safe power dissipation for a resistor.',
+    },
+    {
+      question: 'Which passive component has resistance that changes with light intensity?',
+      options: ['Thermistor', 'LDR (Light Dependent Resistor)', 'Potentiometer', 'Wire-wound resistor'],
+      correctIndex: 1,
+      explanation: 'An LDR’s resistance decreases as light intensity increases, making it useful for light-sensing circuits.',
+    },
+  ]}
+/>

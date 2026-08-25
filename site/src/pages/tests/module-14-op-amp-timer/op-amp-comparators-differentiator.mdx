@@ -1,0 +1,86 @@
+---
+title: Quiz — Op-Amp Comparators & Differentiator
+description: Module 14 lesson quiz — Op-Amp Applications, Comparators, Differentiator
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Op-Amp Comparators & Differentiator
+
+Lesson: [Op-Amp Applications — Comparators, Differentiator](/docs/module-14-op-amp-timer/op-amp-comparators-differentiator) · Module 14: Op Amp and Timer Applications
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'In what configuration is an op-amp connected when used as a comparator?',
+      options: ['Closed loop with heavy negative feedback', 'Open loop, with no feedback resistor', 'Positive feedback only', 'As a voltage follower'],
+      correctIndex: 1,
+      explanation: 'A comparator uses the op-amp open-loop, relying on its very high gain to fully saturate the output.',
+    },
+    {
+      question: 'When Vin at the + input is greater than Vref at the − input in a comparator, what happens to the output?',
+      options: ['It stays at 0V', 'It swings fully to +Vsat (high)', 'It swings fully to −Vsat (low)', 'It oscillates continuously'],
+      correctIndex: 1,
+      explanation: 'The output swings to +Vsat whenever the non-inverting input exceeds the inverting input.',
+    },
+    {
+      question: 'A zero-crossing detector is a comparator with what specific configuration?',
+      options: ['Vref set to the supply voltage', 'Vref set to 0V (grounded reference input)', 'A capacitor added at the input', 'Two feedback resistors'],
+      correctIndex: 1,
+      explanation: 'A zero-crossing detector grounds the reference input, so output switches exactly at each zero crossing of the input.',
+    },
+    {
+      question: 'What is a common application of a zero-crossing detector?',
+      options: ['Amplifying DC signals', 'Converting sine waves to square waves', 'Storing charge', 'Stepping down voltage'],
+      correctIndex: 1,
+      explanation: 'Zero-crossing detectors are widely used to convert sine waves into square waves synchronized with the zero crossings.',
+    },
+    {
+      question: 'In a differentiator circuit, which component replaces the normal input resistor of an inverting amplifier?',
+      options: ['A capacitor', 'An inductor', 'A second op-amp', 'A Zener diode'],
+      correctIndex: 0,
+      explanation: 'A differentiator uses a capacitor at the input in place of the resistor Rin used in a standard inverting amplifier.',
+    },
+    {
+      question: 'What does the output of a differentiator circuit depend on?',
+      options: ['The amplitude of the input signal', 'The rate of change (slope) of the input signal', 'The DC offset of the input', 'The supply voltage only'],
+      correctIndex: 1,
+      explanation: 'Vout = −RC(dVin/dt) — the output depends on how fast the input is changing, not on its absolute level.',
+    },
+    {
+      question: 'What does a differentiator produce at the output when a triangular wave is applied at the input?',
+      options: ['A sine wave', 'A square wave', 'Sharp spikes', 'A DC level'],
+      correctIndex: 1,
+      explanation: 'A triangular wave has a constant slope on each ramp, so the differentiator output is a square wave.',
+    },
+    {
+      question: 'A differentiator has R = 10kΩ and C = 0.1µF. The input changes at 2V/ms. What is the output voltage?',
+      options: ['−0.2V', '−2V', '−20V', '−200V'],
+      correctIndex: 1,
+      explanation: 'RC = 10×10³ × 0.1×10⁻⁶ = 1ms; dVin/dt = 2000 V/s; Vout = −(1×10⁻³)(2000) = −2V.',
+    },
+    {
+      question: 'Why are differentiator circuits particularly sensitive to noise?',
+      options: [
+        'Noise has a very low, slow rate of change',
+        'Sharp noise spikes have a very high rate of change, which the differentiator amplifies strongly',
+        'Differentiators have no gain at all',
+        'Differentiators only respond to DC signals',
+      ],
+      correctIndex: 1,
+      explanation: 'Since output depends on dV/dt, fast noise transients (high dV/dt) produce large, unwanted output spikes.',
+    },
+    {
+      question: 'How does a comparator differ fundamentally from a linear op-amp amplifier circuit?',
+      options: [
+        'A comparator gives a proportional analog output; an amplifier gives a two-state output',
+        'A comparator gives a two-state (high/low) output; an amplifier gives a proportional analog output',
+        'There is no functional difference',
+        'A comparator requires a capacitor at its input, an amplifier does not',
+      ],
+      correctIndex: 1,
+      explanation: 'A comparator saturates fully high or low based on which input is larger; a feedback amplifier gives an output proportional to the input.',
+    },
+  ]}
+/>

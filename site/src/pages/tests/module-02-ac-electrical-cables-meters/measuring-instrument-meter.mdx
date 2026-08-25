@@ -1,0 +1,107 @@
+---
+title: Quiz — Measuring Instrument Meter
+description: Module 2 lesson quiz — Measuring Instrument Meter
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Measuring Instrument Meter
+
+Lesson: [Measuring Instrument Meter](/docs/module-02-ac-electrical-cables-meters/measuring-instrument-meter) · Module 2: AC and Electrical Cables, Single Range Meters
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'Which instrument measures electric current, and in what unit?',
+      options: ['Voltmeter, in Volts', 'Ammeter, in Amperes', 'Ohmmeter, in Ohms', 'Wattmeter, in Watts'],
+      correctIndex: 1,
+      explanation: 'An ammeter measures current in amperes (A).',
+    },
+    {
+      question: 'How must a voltmeter be connected in a circuit?',
+      options: ['In series with the component', 'In parallel with the component', 'It cannot be connected while power is on', 'Directly across the battery terminals only'],
+      correctIndex: 1,
+      explanation: 'A voltmeter is connected in parallel across the component to measure the potential difference.',
+    },
+    {
+      question: 'How must an ammeter be connected in a circuit?',
+      options: ['In series, so current flows through it', 'In parallel with the load', 'Across the supply only', 'It does not matter how it is connected'],
+      correctIndex: 0,
+      explanation: 'An ammeter must be connected in series so the full circuit current passes through it.',
+    },
+    {
+      question: 'Why must an ammeter have very low internal resistance?',
+      options: [
+        'To increase circuit voltage',
+        'So it does not significantly affect the circuit current it is measuring',
+        'To measure resistance accurately',
+        'So it can be connected in parallel safely',
+      ],
+      correctIndex: 1,
+      explanation: 'A low-resistance ammeter minimally disturbs the current flow it is trying to measure.',
+    },
+    {
+      question: 'Why must a voltmeter have very high internal resistance?',
+      options: [
+        'So it draws negligible current and does not affect the circuit being measured',
+        'So it can be connected in series safely',
+        'To increase measurement error',
+        'To reduce battery life',
+      ],
+      correctIndex: 0,
+      explanation: 'A high-resistance voltmeter draws very little current, minimizing its effect on the circuit.',
+    },
+    {
+      question: 'What must be done before connecting an ohmmeter to measure a component’s resistance?',
+      options: [
+        'Nothing special is required',
+        'Power to the circuit must be switched off',
+        'The component must be under full load current',
+        'The circuit must be connected to AC mains',
+      ],
+      correctIndex: 1,
+      explanation: 'An ohmmeter must only be used on a de-energized circuit/component; measuring a powered circuit can damage the meter.',
+    },
+    {
+      question: 'Which instrument can measure voltage, current, and resistance depending on the selected function?',
+      options: ['Wattmeter', 'Multimeter', 'Ammeter only', 'Ohmmeter only'],
+      correctIndex: 1,
+      explanation: 'A multimeter combines voltmeter, ammeter, and ohmmeter functions in a single instrument.',
+    },
+    {
+      question: 'What does a wattmeter measure, and what does it require to do so?',
+      options: [
+        'Current only, using a single coil',
+        'Power, using both a voltage coil and a current coil',
+        'Resistance only, using two coils',
+        'Frequency, using a single coil',
+      ],
+      correctIndex: 1,
+      explanation: 'A wattmeter measures power and internally uses both a current coil and a voltage coil.',
+    },
+    {
+      question: 'In reading an analog meter, what is "least count"?',
+      options: [
+        'The maximum value the meter can read',
+        'The value represented by the smallest division between two main scale markings',
+        'The number of times the pointer moves',
+        'The resistance of the meter',
+      ],
+      correctIndex: 1,
+      explanation: 'Least count is the smallest measurable increment on the scale, found from the spacing between main divisions and subdivisions.',
+    },
+    {
+      question: 'What reading error can occur if the eye is not held directly in line with the pointer on an analog meter?',
+      options: ['Overheating error', 'Parallax error', 'Range error', 'Polarity error'],
+      correctIndex: 1,
+      explanation: 'Viewing the scale from an angle causes parallax error, giving an inaccurate reading.',
+    },
+    {
+      question: 'What can happen if too small a measurement range is selected on a meter?',
+      options: ['Nothing, the meter adjusts automatically', 'The meter may be damaged by exceeding its rated range', 'The reading becomes more accurate', 'The meter automatically switches off'],
+      correctIndex: 1,
+      explanation: 'Selecting too low a range for the actual value being measured can overload and damage the meter.',
+    },
+  ]}
+/>

@@ -1,0 +1,102 @@
+---
+title: Quiz — Binary Arithmetic
+description: Module 12 lesson quiz — Binary arithmetic
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Binary Arithmetic
+
+Lesson: [Binary Arithmetic](/docs/module-12-digital-logic/binary-arithmetic) · Module 12: Basic Gates, Combinational Circuits, Flip-Flops
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'In binary addition, what is the result of 1 + 1?',
+      options: ['Sum = 1, Carry = 0', 'Sum = 0, Carry = 1', 'Sum = 1, Carry = 1', 'Sum = 0, Carry = 0'],
+      correctIndex: 1,
+      explanation: '1 + 1 produces a Sum bit of 0 with a Carry of 1, same as decimal 2 in binary (10).',
+    },
+    {
+      question: 'What is 1011 (binary) + 0110 (binary) equal to, in decimal?',
+      options: ['15', '17', '19', '21'],
+      correctIndex: 1,
+      explanation: '1011 (11) + 0110 (6) = 10001 in binary, which is 17 in decimal.',
+    },
+    {
+      question: 'What is the 1’s complement of 1010?',
+      options: ['0101', '1010', '0110', '1101'],
+      correctIndex: 0,
+      explanation: '1’s complement inverts every bit: 1010 → 0101.',
+    },
+    {
+      question: 'What is the 2’s complement of 1010?',
+      options: ['0101', '0110', '1001', '1100'],
+      correctIndex: 1,
+      explanation: '2’s complement = 1’s complement + 1: 0101 + 1 = 0110.',
+    },
+    {
+      question: 'Why do digital circuits use 2’s complement for subtraction?',
+      options: [
+        'It requires a separate subtractor circuit',
+        'It allows subtraction to be performed using only adder hardware',
+        'It only works for even numbers',
+        'It eliminates the need for binary addition entirely',
+      ],
+      correctIndex: 1,
+      explanation: '2’s complement lets subtraction be done by simply adding the complement, avoiding separate subtractor hardware.',
+    },
+    {
+      question: 'When subtracting using 2’s complement addition, a carry-out of the leftmost bit that is discarded indicates:',
+      options: ['The result is negative', 'The result is positive', 'An error occurred', 'The result is zero'],
+      correctIndex: 1,
+      explanation: 'A discarded carry-out after 2’s complement addition means the result is positive.',
+    },
+    {
+      question: 'If there is no carry-out after a 2’s complement subtraction, what does that mean?',
+      options: [
+        'The result is positive and needs no further action',
+        'The result is negative and is itself in 2’s complement form',
+        'The operation failed',
+        'Both operands were equal',
+      ],
+      correctIndex: 1,
+      explanation: 'No carry-out signals a negative result, represented in 2’s complement form (re-complement to find its magnitude).',
+    },
+    {
+      question: 'A half adder has which inputs and outputs?',
+      options: [
+        'Inputs A, B, Carry-in; Outputs Sum, Carry-out',
+        'Inputs A, B; Outputs Sum, Carry',
+        'Input A only; Output Sum only',
+        'Inputs A, B, C; Output Sum only',
+      ],
+      correctIndex: 1,
+      explanation: 'A half adder takes two bits A and B, and produces a Sum and a Carry — no carry-in.',
+    },
+    {
+      question: 'What distinguishes a full adder from a half adder?',
+      options: [
+        'A full adder has no carry output',
+        'A full adder accepts an additional carry-in input, allowing multi-bit addition to be chained',
+        'A full adder can only subtract',
+        'A full adder only works with 1-bit numbers',
+      ],
+      correctIndex: 1,
+      explanation: 'A full adder adds two bits plus a carry-in, letting multiple stages cascade for multi-bit addition.',
+    },
+    {
+      question: 'In a half adder, the Sum output is produced by which logic operation on A and B?',
+      options: ['A AND B', 'A OR B', 'A XOR B', 'A NAND B'],
+      correctIndex: 2,
+      explanation: 'Sum = A XOR B in a half adder; Carry = A AND B.',
+    },
+    {
+      question: 'Subtracting 3 from 9 using 4-bit 2’s complement arithmetic gives which result?',
+      options: ['4', '5', '6', '7'],
+      correctIndex: 2,
+      explanation: '9 (1001) + 2’s complement of 3 (1101) = 10110 → discard carry → 0110 = 6, matching 9 − 3 = 6.',
+    },
+  ]}
+/>

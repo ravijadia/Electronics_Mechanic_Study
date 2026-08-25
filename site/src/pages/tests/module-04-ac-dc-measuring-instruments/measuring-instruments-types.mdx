@@ -1,0 +1,97 @@
+---
+title: Quiz — Types of Measuring Instruments
+description: Module 4 lesson quiz — Types of Measuring Instruments
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Types of Measuring Instruments
+
+Lesson: [Types of Measuring Instruments](/docs/module-04-ac-dc-measuring-instruments/measuring-instruments-types) · Module 4: AC/DC Measuring Instruments, Basic Workshop Practice
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'An instrument that totals up a measured quantity over time, such as an energy meter, is classified as:',
+      options: ['Indicating instrument', 'Recording instrument', 'Integrating instrument', 'Digital instrument'],
+      correctIndex: 2,
+      explanation: 'An integrating instrument (like a kWh energy meter) totals a quantity over time rather than just showing an instantaneous value.',
+    },
+    {
+      question: 'A meter that shows the reading at the moment of measurement but does not record it over time is which type?',
+      options: ['Indicating instrument', 'Recording instrument', 'Integrating instrument', 'Chart recorder'],
+      correctIndex: 0,
+      explanation: 'Ammeters, voltmeters, and multimeters are typical indicating instruments — they display the current reading only.',
+    },
+    {
+      question: 'What does a PMMC (Permanent Magnet Moving Coil) meter movement measure directly?',
+      options: ['AC only', 'DC only', 'Both AC and DC equally well', 'Neither AC nor DC'],
+      correctIndex: 1,
+      explanation: 'PMMC movements respond to DC only; measuring AC with one requires a rectifier first.',
+    },
+    {
+      question: 'Which meter movement type can measure both AC and DC directly, and is commonly used for rugged AC panel meters?',
+      options: ['PMMC', 'Moving Iron (MI)', 'Digital only', 'Thermocouple only'],
+      correctIndex: 1,
+      explanation: 'Moving Iron meters work on both AC and DC and are simple and rugged, common in panel meters.',
+    },
+    {
+      question: 'A dynamometer-type meter movement, using a fixed coil and a moving coil, is commonly used to build which instrument?',
+      options: ['Ohmmeter', 'Wattmeter', 'Frequency counter', 'Function generator'],
+      correctIndex: 1,
+      explanation: 'Dynamometer movements interact between a fixed and moving coil and are widely used in wattmeters.',
+    },
+    {
+      question: 'What does "accuracy" of a measuring instrument describe?',
+      options: [
+        'The smallest change it can detect',
+        'How close a reading is to the true value, often stated as % of full-scale reading',
+        'The smallest increment a digital display can show',
+        'How well the scale tracks the quantity across its range',
+      ],
+      correctIndex: 1,
+      explanation: 'Accuracy is typically specified as a percentage of full-scale deflection (FSD), showing how close readings are to the true value.',
+    },
+    {
+      question: 'What term describes the smallest increment a digital instrument can display?',
+      options: ['Sensitivity', 'Linearity', 'Resolution', 'Range'],
+      correctIndex: 2,
+      explanation: 'Resolution is the smallest increment/step a digital instrument’s display can show.',
+    },
+    {
+      question: 'Why would a standard average-responding AC multimeter give an inaccurate reading on a distorted (non-sinusoidal) waveform?',
+      options: [
+        'It only works on DC',
+        'It scales an average-value reading assuming a pure sine wave, which is inaccurate for distorted waveforms',
+        'It has no scale at all',
+        'It cannot be used with any AC signal',
+      ],
+      correctIndex: 1,
+      explanation: 'Average-responding meters assume a sine wave; a True RMS meter is needed for accurate readings on non-sinusoidal AC.',
+    },
+    {
+      question: 'Which instrument allows measuring current in a conductor without breaking the circuit?',
+      options: ['Multimeter (in series)', 'Clamp meter', 'Wattmeter', 'Energy meter'],
+      correctIndex: 1,
+      explanation: 'A clamp meter measures current by clamping around a conductor, with no need to open the circuit.',
+    },
+    {
+      question: 'What is the main purpose of a function generator in the workshop?',
+      options: [
+        'To measure resistance precisely',
+        'To display waveform shape over time',
+        'To produce test signals of adjustable frequency and amplitude for testing circuits',
+        'To total energy consumption for billing',
+      ],
+      correctIndex: 2,
+      explanation: 'A function generator produces sine, square, and triangle test signals used to exercise and test circuits.',
+    },
+    {
+      question: 'Compared to analog instruments, digital instruments are generally:',
+      options: ['Less accurate and harder to read', 'More accurate and easier to read', 'Only usable for DC', 'Unable to show a numeric value'],
+      correctIndex: 1,
+      explanation: 'Digital instruments display a numeric reading directly, generally offering better accuracy and easier reading than analog scales.',
+    },
+  ]}
+/>

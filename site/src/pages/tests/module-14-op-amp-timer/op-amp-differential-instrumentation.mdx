@@ -1,0 +1,121 @@
+---
+title: Quiz — Differential & Instrumentation Amplifiers
+description: Module 14 lesson quiz — Op-Amp Applications, Differential & Instrumentation Amplifiers
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Differential & Instrumentation Amplifiers
+
+Lesson: [Op-Amp Applications — Differential and Instrumentation Amplifiers](/docs/module-14-op-amp-timer/op-amp-differential-instrumentation) · Module 14: Op Amp and Timer Applications
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'What does a differential amplifier amplify?',
+      options: [
+        'Only the voltage at the inverting input',
+        'The sum of both input voltages',
+        'Only the difference between its two input voltages',
+        'The supply voltage ripple',
+      ],
+      correctIndex: 2,
+      explanation: 'A differential amplifier amplifies only the difference between its two inputs, Vout = (Rf/R1)(V2 − V1).',
+    },
+    {
+      question: 'What is a "common-mode signal" in the context of a differential amplifier?',
+      options: [
+        'A signal present differently on each input',
+        'A signal or noise present equally on both inputs',
+        'The output signal itself',
+        'The DC supply voltage',
+      ],
+      correctIndex: 1,
+      explanation: 'A common-mode signal appears equally on both inputs (e.g. mains hum picked up on both leads) and is ideally cancelled.',
+    },
+    {
+      question: 'What does CMRR stand for?',
+      options: [
+        'Circuit Maximum Rated Ratio',
+        'Common Mode Rejection Ratio',
+        'Current Measurement Response Rate',
+        'Comparator Mode Response Ratio',
+      ],
+      correctIndex: 1,
+      explanation: 'CMRR = Common Mode Rejection Ratio, measuring how well an amplifier rejects common-mode signals.',
+    },
+    {
+      question: 'A higher CMRR value indicates:',
+      options: [
+        'Worse noise rejection',
+        'Better rejection of common-mode noise, closer to ideal',
+        'Higher output impedance',
+        'Lower differential gain',
+      ],
+      correctIndex: 1,
+      explanation: 'CMRR = Differential Gain / Common-Mode Gain — a higher value means better common-mode noise rejection.',
+    },
+    {
+      question: 'What is a key limitation of a basic (single op-amp) differential amplifier?',
+      options: [
+        'It has infinite input impedance',
+        'Its input impedance is limited by R1, which can load down weak sensor sources',
+        'It cannot amplify any signal',
+        'It requires no external resistors',
+      ],
+      correctIndex: 1,
+      explanation: 'The R1 resistor sets a finite input impedance that can load sensitive, high-impedance sensor sources.',
+    },
+    {
+      question: 'How many op-amps are used in a standard instrumentation amplifier?',
+      options: ['1', '2', '3', '4'],
+      correctIndex: 2,
+      explanation: 'A standard instrumentation amplifier uses 3 op-amps: two input buffers and one differential output stage.',
+    },
+    {
+      question: 'What role do the two input-stage op-amps play in an instrumentation amplifier?',
+      options: [
+        'They rectify the input signal',
+        'They act as high-input-impedance buffers, one per input line',
+        'They generate the timing clock',
+        'They store the peak input voltage',
+      ],
+      correctIndex: 1,
+      explanation: 'The two input buffers give very high input impedance so the sensor source is not loaded.',
+    },
+    {
+      question: 'How is the overall gain of a standard instrumentation amplifier typically adjusted?',
+      options: [
+        'By changing the supply voltage',
+        'With a single external gain-setting resistor (Rgain) between the buffer stages',
+        'It cannot be adjusted once built',
+        'By adding more op-amps',
+      ],
+      correctIndex: 1,
+      explanation: 'A single Rgain resistor between the two input buffers precisely sets the overall gain.',
+    },
+    {
+      question: 'Which of these is a key advantage of an instrumentation amplifier over a basic differential amplifier?',
+      options: [
+        'Lower input impedance',
+        'Very high input impedance and very high CMRR',
+        'It uses fewer components',
+        'It only works with DC signals',
+      ],
+      correctIndex: 1,
+      explanation: 'Instrumentation amplifiers offer very high input impedance and excellent CMRR, ideal for weak sensor signals.',
+    },
+    {
+      question: 'Which application is a typical use case for an instrumentation amplifier?',
+      options: [
+        'Stepping down mains AC voltage',
+        'Amplifying a millivolt-level signal from a strain gauge in a noisy industrial environment',
+        'Rectifying AC to DC',
+        'Generating a fixed clock frequency',
+      ],
+      correctIndex: 1,
+      explanation: 'Instrumentation amplifiers are the standard front-end for weak sensor signals (strain gauges, thermocouples, ECG) in noisy environments.',
+    },
+  ]}
+/>

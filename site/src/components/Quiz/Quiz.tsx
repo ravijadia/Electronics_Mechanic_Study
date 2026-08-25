@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import Translate from '@docusaurus/Translate';
 import styles from './styles.module.css';
 
@@ -20,6 +20,7 @@ export default function Quiz({title, questions, passPercent = 60}: QuizProps): J
     () => questions.map(() => null),
   );
   const [submitted, setSubmitted] = useState(false);
+  const quizRef = useRef<HTMLDivElement>(null);
 
   const allAnswered = answers.every((a) => a !== null);
 
@@ -43,6 +44,7 @@ export default function Quiz({title, questions, passPercent = 60}: QuizProps): J
 
   function handleSubmit() {
     setSubmitted(true);
+    quizRef.current?.scrollIntoView({behavior: 'smooth', block: 'start'});
   }
 
   function handleRetry() {
@@ -51,7 +53,7 @@ export default function Quiz({title, questions, passPercent = 60}: QuizProps): J
   }
 
   return (
-    <div className={styles.quiz}>
+    <div className={styles.quiz} ref={quizRef}>
       {title && <h2>{title}</h2>}
 
       {submitted && (

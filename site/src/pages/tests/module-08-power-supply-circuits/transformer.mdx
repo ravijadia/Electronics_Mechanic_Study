@@ -1,0 +1,102 @@
+---
+title: Quiz — Transformer
+description: Module 8 lesson quiz — Transformer
+---
+
+import Quiz from '@site/src/components/Quiz/Quiz';
+
+# Quiz: Transformer
+
+Lesson: [Transformer](/docs/module-08-power-supply-circuits/transformer) · Module 8: Power Supply Circuits
+
+<Quiz
+  passPercent={60}
+  questions={[
+    {
+      question: 'A transformer transfers energy between its primary and secondary windings using which principle?',
+      options: ['Direct electrical connection', 'Electromagnetic induction', 'Chemical reaction', 'Mechanical friction'],
+      correctIndex: 1,
+      explanation: 'A changing magnetic field in the shared core induces voltage in the secondary — electromagnetic induction.',
+    },
+    {
+      question: 'Why does a transformer work only on AC and not on DC?',
+      options: [
+        'DC current is too small',
+        'A transformer needs a continuously changing magnetic field, which only AC provides',
+        'DC would burn out the core instantly',
+        'Transformers are only rated for AC voltages by convention',
+      ],
+      correctIndex: 1,
+      explanation: 'Steady DC produces a constant (non-changing) magnetic field, which cannot induce voltage in the secondary.',
+    },
+    {
+      question: 'What provides electrical isolation between a transformer’s primary and secondary circuits?',
+      options: [
+        'A direct wire connection',
+        'The windings are linked only through the magnetic field, not electrically connected',
+        'A fuse between windings',
+        'The transformer core being grounded',
+      ],
+      correctIndex: 1,
+      explanation: 'Primary and secondary windings are not electrically connected — only magnetically coupled through the core.',
+    },
+    {
+      question: 'The voltage transformation ratio of a transformer equals:',
+      options: ['Np / Ns', 'Ns / Np', 'Np × Ns', 'Np + Ns'],
+      correctIndex: 1,
+      explanation: 'Vs / Vp = Ns / Np — the secondary-to-primary turns ratio.',
+    },
+    {
+      question: 'A step-down transformer has:',
+      options: [
+        'More secondary turns than primary, higher output voltage',
+        'Fewer secondary turns than primary, lower output voltage',
+        'Equal turns on both sides',
+        'No core at all',
+      ],
+      correctIndex: 1,
+      explanation: 'Step-down: Ns < Np, so output voltage is lower than input voltage.',
+    },
+    {
+      question: 'A transformer primary has 1000 turns connected to 230V AC. The secondary has 100 turns. What is the secondary voltage?',
+      options: ['2.3V', '23V', '230V', '2300V'],
+      correctIndex: 1,
+      explanation: 'Vs = Vp × (Ns/Np) = 230 × (100/1000) = 23V.',
+    },
+    {
+      question: 'For an ideal transformer, which relationship holds true?',
+      options: ['Vp = Vs always', 'Vp × Ip = Vs × Is', 'Ip = Is always', 'Power output exceeds power input'],
+      correctIndex: 1,
+      explanation: 'Ideal transformers conserve power: input power equals output power.',
+    },
+    {
+      question: 'What type of transformer has a 1:1 turns ratio and is used purely for safety isolation, not voltage change?',
+      options: ['Step-up transformer', 'Auto-transformer', 'Isolation transformer', 'Center-tapped transformer'],
+      correctIndex: 2,
+      explanation: 'An isolation transformer has equal primary and secondary turns; it isolates without changing voltage.',
+    },
+    {
+      question: 'Why does an auto-transformer NOT provide electrical isolation?',
+      options: [
+        'It has no magnetic core',
+        'It shares part of a single winding between primary and secondary',
+        'It only works on DC',
+        'It has three separate windings',
+      ],
+      correctIndex: 1,
+      explanation: 'An auto-transformer uses a single tapped winding shared between primary and secondary, so there is a direct electrical connection.',
+    },
+    {
+      question: 'Which type of transformer is commonly used with a full-wave rectifier circuit?',
+      options: ['Auto-transformer', 'Isolation transformer only', 'Center-tapped (CT) transformer', 'Step-up transformer only'],
+      correctIndex: 2,
+      explanation: 'A center-tapped transformer provides the tap needed by a center-tapped full-wave rectifier.',
+    },
+    {
+      question: 'A transformer has Np = 500 and Ns = 50, with Vp = 230V. What is Vs?',
+      options: ['2.3V', '23V', '46V', '2300V'],
+      correctIndex: 1,
+      explanation: 'Vs = 230 × (50/500) = 23V.',
+    },
+  ]}
+/>
