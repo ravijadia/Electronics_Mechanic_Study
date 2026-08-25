@@ -128,11 +128,6 @@ const config: Config = {
           position: 'right',
           value: '<div id="google_translate_element"></div>',
         },
-        {
-          href: 'https://github.com/ravijadia/Electronics_Mechanic_Study',
-          label: 'GitHub',
-          position: 'right',
-        },
       ],
     },
     footer: {
