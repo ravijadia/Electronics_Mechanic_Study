@@ -75,3 +75,7 @@ The output frequency depends on the RC time constants of the coupling networks (
 ---
 
 *Next chapter: Clipper Circuit*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Multivibrators and Circuit Diagram Study](/tests/module-09-transistor/multivibrators)
+:::

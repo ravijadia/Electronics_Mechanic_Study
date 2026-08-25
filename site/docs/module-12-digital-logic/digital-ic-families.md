@@ -80,3 +80,7 @@ Digital logic gates (AND, OR, NOT, NAND, NOR, etc.) are built inside integrated 
 ---
 
 *Next chapter: Binary Arithmetic*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Digital IC Families and Their Operational Characteristics](/tests/module-12-digital-logic/digital-ic-families)
+:::

@@ -97,3 +97,7 @@ This "transparent while enabled" behavior is why it is called a latch (as oppose
 ---
 
 *Next chapter: Module 13 — Electronic Simulation Software*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Latch Circuits and Applications](/tests/module-12-digital-logic/latch-circuits)
+:::

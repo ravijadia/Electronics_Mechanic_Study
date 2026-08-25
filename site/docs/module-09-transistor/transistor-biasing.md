@@ -99,3 +99,7 @@ S = ΔIC / ΔICO
 ---
 
 *Next chapter: Oscillators*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Biasing of Transistors](/tests/module-09-transistor/transistor-biasing)
+:::

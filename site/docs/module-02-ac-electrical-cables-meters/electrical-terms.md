@@ -124,3 +124,7 @@ I = V / R = 10 / 100 = 0.1 A
 ---
 
 *આગળનું પ્રકરણ: માપન સાધન મીટર (Measuring Instrument Meter)*
+
+:::tip અભ્યાસ કરો (Practice)
+આ પ્રકરણ પર **MCQ ટેસ્ટ** આપવા માટે [Quiz: Electrical Terms](/tests/module-02-ac-electrical-cables-meters/electrical-terms) પર જાઓ.
+:::

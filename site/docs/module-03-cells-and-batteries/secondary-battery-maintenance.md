@@ -87,3 +87,7 @@ Most modern chargers (e.g. for lead-acid or Li-ion) combine methods — Constant
 ---
 
 *Next module: Module 4 — AC/DC Measuring Instruments, Basic Workshop Practice*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Secondary Battery – Charge, Discharge and Maintenance](/tests/module-03-cells-and-batteries/secondary-battery-maintenance)
+:::

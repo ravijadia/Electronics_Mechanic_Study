@@ -86,3 +86,7 @@ PMMC meters are generally more sensitive and accurate for DC; Moving Iron meters
 ---
 
 *Next chapter: Controls and Functions of Oscilloscope*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Types of Measuring Instruments](/tests/module-04-ac-dc-measuring-instruments/measuring-instruments-types)
+:::

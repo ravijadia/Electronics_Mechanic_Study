@@ -105,3 +105,7 @@ R = 3 / 0.020 = 150 Ω
 ---
 
 *Next chapter: Module 12 — Digital IC Families*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Light Emitting Diodes (LEDs)](/tests/module-11-opto-electronics/light-emitting-diodes)
+:::

@@ -85,3 +85,7 @@ Adding a DC bias voltage in series with the diode shifts the clamped waveform to
 ---
 
 *Next chapter: Module 10 — Field Effect Transistor*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Clamper Circuits](/tests/module-09-transistor/clamper-circuits)
+:::

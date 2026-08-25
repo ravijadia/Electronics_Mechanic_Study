@@ -96,3 +96,7 @@ Rather than building a discrete Zener-based regulator for every supply, most pra
 ---
 
 *Next module: Module 9 — Transistor*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Regulated Power Supply and Integrated Circuit Voltage Regulators](/tests/module-08-power-supply-circuits/regulated-power-supply-ic-regulators)
+:::

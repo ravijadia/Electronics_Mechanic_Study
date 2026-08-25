@@ -91,3 +91,7 @@ Vout = −RC × (dVin/dt) = −(1×10⁻³) × 2000 = −2V
 ---
 
 *Next chapter: Op-Amp Applications — Differential & Instrumentation Amplifier*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Op-Amp Applications — Comparators, Differentiator](/tests/module-14-op-amp-timer/op-amp-comparators-differentiator)
+:::

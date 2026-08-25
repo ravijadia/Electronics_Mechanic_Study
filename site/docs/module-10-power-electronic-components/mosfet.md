@@ -105,3 +105,7 @@ The gate oxide layer is extremely thin and can be permanently punctured by stati
 ---
 
 *Next chapter: Module 11 — Light Emitting Diodes*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: MOSFET](/tests/module-10-power-electronic-components/mosfet)
+:::

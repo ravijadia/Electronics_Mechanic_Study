@@ -102,3 +102,7 @@ A full adder is essentially two half adders combined with an OR gate to handle t
 ---
 
 *Next chapter: Encoder & Decoder*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Binary Arithmetic](/tests/module-12-digital-logic/binary-arithmetic)
+:::

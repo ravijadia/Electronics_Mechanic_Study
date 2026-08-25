@@ -85,3 +85,7 @@ CMRR = Differential Gain / Common-Mode Gain
 ---
 
 *Next chapter: Timer IC and its Applications*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Op-Amp Applications — Differential and Instrumentation Amplifiers](/tests/module-14-op-amp-timer/op-amp-differential-instrumentation)
+:::

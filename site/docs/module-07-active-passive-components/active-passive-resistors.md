@@ -107,3 +107,7 @@ Every resistor has a **power (wattage) rating** — the maximum power it can saf
 ---
 
 *Next chapter: Ohm's Law, Kirchhoff's Laws & DC Series Circuits*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Active/Passive Electronic Components, Resistors](/tests/module-07-active-passive-components/active-passive-resistors)
+:::

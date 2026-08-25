@@ -115,3 +115,7 @@ Vout = −(10kΩ / 1kΩ) × 0.5V = −5V
 ---
 
 *Next chapter: Op-Amp Applications — Comparators & Differentiator*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Operational Amplifier and its Applications](/tests/module-14-op-amp-timer/operational-amplifiers)
+:::

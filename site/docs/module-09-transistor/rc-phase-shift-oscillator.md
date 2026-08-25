@@ -97,3 +97,7 @@ f ≈ 650 Hz
 ---
 
 *Next chapter: Multivibrators*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: RC Phase Shift Oscillator](/tests/module-09-transistor/rc-phase-shift-oscillator)
+:::

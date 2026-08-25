@@ -94,3 +94,7 @@ A DC reference (bias) voltage is added in series with the diode, which shifts th
 ---
 
 *Next chapter: Clamper Circuits*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Clipper Circuit](/tests/module-09-transistor/clipper-circuit)
+:::

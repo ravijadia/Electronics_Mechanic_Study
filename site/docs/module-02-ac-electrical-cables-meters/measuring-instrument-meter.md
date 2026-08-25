@@ -78,3 +78,7 @@ sidebar_label: માપન સાધન મીટર (Measuring Instrument Mete
 ---
 
 *આગળનું પ્રકરણ: કોષો અને બેટરીઓ (Cells and Batteries)*
+
+:::tip અભ્યાસ કરો (Practice)
+આ પ્રકરણ પર **MCQ ટેસ્ટ** આપવા માટે [Quiz: Measuring Instrument Meter](/tests/module-02-ac-electrical-cables-meters/measuring-instrument-meter) પર જાઓ.
+:::

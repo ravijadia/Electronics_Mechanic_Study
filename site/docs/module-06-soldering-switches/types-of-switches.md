@@ -93,3 +93,7 @@ A **switch** is a device that makes or breaks an electrical circuit, controlling
 ---
 
 *Next module: Module 7 — Active and Passive Components*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Types of Switches](/tests/module-06-soldering-switches/types-of-switches)
+:::

@@ -86,3 +86,7 @@ R_s = 6.4 / 0.02 = 320Ω
 ---
 
 *Next chapter: Regulated Power Supply and IC Voltage Regulators*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Working Principle of Zener Diodes](/tests/module-08-power-supply-circuits/zener-diodes)
+:::

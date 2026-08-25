@@ -100,3 +100,7 @@ A basic TRIAC lamp dimmer/fan regulator consists of:
 ---
 
 *Next chapter: MOSFET*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Lamp Dimmer / Fan Motor Speed Regulator using TRIAC and DIAC](/tests/module-10-power-electronic-components/triac-diac-dimmer)
+:::

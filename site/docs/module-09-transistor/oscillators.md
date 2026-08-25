@@ -82,3 +82,7 @@ f = 1 / (2π√(LC))
 ---
 
 *Next chapter: RC Phase Shift Oscillator*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Oscillators](/tests/module-09-transistor/oscillators)
+:::

@@ -116,3 +116,7 @@ IE = IB + IC = 0.02 mA + 2 mA = 2.02 mA
 ---
 
 *Next chapter: Biasing of Transistors*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Transistors and Classification](/tests/module-09-transistor/transistors-classification)
+:::

@@ -98,3 +98,7 @@ A **single shot** capture is used for one-time or non-repeating events — a pow
 ---
 
 *Next chapter: Function Generator using IC 8038*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: DSO Front Panel Controls & Single Shot Signal Capture](/tests/module-05-digital-storage-oscilloscope/dso-controls-single-shot)
+:::

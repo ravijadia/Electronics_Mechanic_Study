@@ -80,3 +80,7 @@ Each unique input combination activates exactly one output line, leaving the oth
 ---
 
 *Next chapter: Multiplexers & Demultiplexers*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Concept of Encoder and Decoder](/tests/module-12-digital-logic/encoder-decoder)
+:::

@@ -79,3 +79,7 @@ All non-selected outputs remain at logic 0 while the selected output follows the
 ---
 
 *Next chapter: Latch Circuits and Applications*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Multiplexers and Demultiplexers](/tests/module-12-digital-logic/multiplexers-demultiplexers)
+:::

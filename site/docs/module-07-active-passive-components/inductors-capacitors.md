@@ -98,3 +98,7 @@ C_total = 20/3 ≈ 6.67µF
 ---
 
 *Next chapter: Magnetism and Relays*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Inductors and Capacitors](/tests/module-07-active-passive-components/inductors-capacitors)
+:::

@@ -110,3 +110,7 @@ Terminal Voltage = 12 − 1 = 11V
 ---
 
 *Next chapter: Secondary Battery – Charge, Discharge and Maintenance*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Cells and Batteries](/tests/module-03-cells-and-batteries/cells-and-batteries)
+:::

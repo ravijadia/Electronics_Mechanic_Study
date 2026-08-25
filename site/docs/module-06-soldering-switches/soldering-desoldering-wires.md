@@ -115,3 +115,7 @@ Used to remove an existing solder joint, e.g. to replace a component or correct 
 ---
 
 *Next chapter: Types of Switches*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Soldering and Desoldering of Wires](/tests/module-06-soldering-switches/soldering-desoldering-wires)
+:::

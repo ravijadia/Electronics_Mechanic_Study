@@ -93,3 +93,7 @@ In an **RLC parallel circuit**, R, L, and C are connected across the same two no
 ---
 
 *Next module: Module 8 — Power Supply Circuits*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: RC Time Constant, RC Differentiator, RLC Series/Parallel Circuits](/tests/module-07-active-passive-components/rc-time-constant-rlc)
+:::

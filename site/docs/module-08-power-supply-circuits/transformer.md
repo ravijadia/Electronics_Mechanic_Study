@@ -100,3 +100,7 @@ Vs = Vp × (Ns / Np) = 230 × (100/1000) = 23V
 ---
 
 *Next chapter: Rectifiers*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Transformer](/tests/module-08-power-supply-circuits/transformer)
+:::

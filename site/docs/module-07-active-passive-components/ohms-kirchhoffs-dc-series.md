@@ -106,3 +106,7 @@ Check (KVL): 4 + 8 + 12 = 24V ✓
 ---
 
 *Next chapter: Inductors and Capacitors*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Ohm's Law, Kirchhoff's Laws, DC Series Circuit](/tests/module-07-active-passive-components/ohms-kirchhoffs-dc-series)
+:::

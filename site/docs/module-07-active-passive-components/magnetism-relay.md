@@ -90,3 +90,7 @@ A **relay** is an electrically-operated switch: a small control current energize
 ---
 
 *Next chapter: RC Time Constant, Differentiator and RLC Circuits*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Magnetism, Relay](/tests/module-07-active-passive-components/magnetism-relay)
+:::

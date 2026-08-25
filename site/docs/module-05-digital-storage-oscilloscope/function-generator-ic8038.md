@@ -95,3 +95,7 @@ A **function generator** is a test instrument that produces different waveform s
 ---
 
 *Next module: Module 6 — Soldering/Desoldering and Various Switches*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Function Generator using IC 8038](/tests/module-05-digital-storage-oscilloscope/function-generator-ic8038)
+:::

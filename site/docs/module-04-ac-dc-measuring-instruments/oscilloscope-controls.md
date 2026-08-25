@@ -85,3 +85,7 @@ An oscilloscope is built from a few key blocks:
 ---
 
 *Next module: Module 5 — Digital Storage Oscilloscope*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Controls and Functions of Oscilloscope](/tests/module-04-ac-dc-measuring-instruments/oscilloscope-controls)
+:::

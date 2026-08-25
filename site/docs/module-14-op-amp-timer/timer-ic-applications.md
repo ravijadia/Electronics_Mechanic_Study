@@ -97,3 +97,7 @@ f ≈ 685.7 Hz
 ---
 
 *This completes the current syllabus (Module 2 – Module 14).*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Timer IC and its Applications](/tests/module-14-op-amp-timer/timer-ic-applications)
+:::

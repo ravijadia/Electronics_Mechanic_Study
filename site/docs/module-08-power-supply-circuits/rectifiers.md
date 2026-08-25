@@ -95,3 +95,7 @@ The output of any rectifier alone is **pulsating DC**, not smooth DC — it stil
 ---
 
 *Next chapter: Zener Diode Working Principle*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Rectifiers](/tests/module-08-power-supply-circuits/rectifiers)
+:::

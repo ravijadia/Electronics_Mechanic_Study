@@ -92,3 +92,7 @@ Before a circuit is ever built on a breadboard or a PCB, it can be built and tes
 ---
 
 *Next chapter: Module 14 — Operational Amplifiers*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Electronic Simulation Software](/tests/module-13-circuit-simulator/electronic-simulation-software)
+:::

@@ -108,3 +108,7 @@ ID = 8mA × 0.25 = 2mA
 ---
 
 *Next chapter: TRIAC & DIAC — Lamp Dimmer / Fan Speed Regulator*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Field Effect Transistor (FET)](/tests/module-10-power-electronic-components/field-effect-transistor)
+:::
