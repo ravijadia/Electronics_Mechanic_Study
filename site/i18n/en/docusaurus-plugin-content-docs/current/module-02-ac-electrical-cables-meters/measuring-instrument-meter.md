@@ -78,3 +78,7 @@ An analog meter has a **Pointer** that moves across a **Scale**.
 ---
 
 *Next chapter: Cells and Batteries*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Measuring Instrument Meter](/tests/module-02-ac-electrical-cables-meters/measuring-instrument-meter)
+:::

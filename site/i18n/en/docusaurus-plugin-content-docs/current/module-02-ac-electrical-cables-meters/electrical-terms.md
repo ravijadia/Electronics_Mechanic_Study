@@ -124,3 +124,7 @@ I = V / R = 10 / 100 = 0.1 A
 ---
 
 *Next chapter: Measuring Instrument Meter*
+
+:::tip Practice
+Take the **MCQ quiz** for this chapter: [Quiz: Electrical Terms](/tests/module-02-ac-electrical-cables-meters/electrical-terms)
+:::
