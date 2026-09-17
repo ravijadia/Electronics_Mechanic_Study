@@ -6,13 +6,20 @@ sidebar_label: Electronic Simulation Software
 # Chapter: Electronic Simulation Software
 
 **Module:** Electronic Circuit Simulator — Electronic Mechanic Trade
-**Study No.:** 1.13.123 – 1.13.126
+**Lesson No.:** 13.1 (1.13.123 – 1.13.126)
 
 ---
 
 ## 1. Introduction
 
 Before a circuit is ever built on a breadboard or a PCB, it can be built and tested inside a computer. **Circuit simulation software** lets a technician draw a schematic, assign values to every component, and then predict — with mathematical accuracy — how voltages, currents, and waveforms will behave at any point in the circuit. This is one of the most important tools in modern electronics work: it turns "let's try it and see" into "let's calculate it and confirm it."
+
+<Video
+  url="https://www.youtube.com/watch?v=InusAmkYRKU"
+  number="13.1"
+  title="Proteus Design Guide: From Resistors to Simulation"
+  caption="Beginner walkthrough of designing and simulating a circuit in Proteus."
+/>
 
 ---
 

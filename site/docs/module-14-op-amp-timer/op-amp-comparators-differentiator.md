@@ -6,13 +6,20 @@ sidebar_label: 'Op-Amp: Comparators & Differentiator'
 # Chapter: Op-Amp Applications — Comparators, Differentiator
 
 **Module:** Op Amp and Timer Applications — Electronic Mechanic Trade
-**Study No.:** 1.14.129 & 1.14.130
+**Lesson No.:** 14.2 (1.14.129 & 1.14.130)
 
 ---
 
 ## 1. Introduction
 
 Beyond simple amplification, an op-amp used **without negative feedback** (open loop) acts as a **comparator**, while an op-amp with a **capacitor in the input path** acts as a **differentiator**, producing an output proportional to the rate of change of the input.
+
+<Video
+  url="https://www.youtube.com/watch?v=d6670gSIbiM"
+  number="14.2"
+  title="Op-Amp Comparator Explained — Simple Circuit, Powerful Applications"
+  caption="Explains the op-amp comparator circuit and its practical applications."
+/>
 
 ---
 

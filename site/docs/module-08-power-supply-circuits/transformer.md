@@ -6,13 +6,20 @@ sidebar_label: Transformer
 # Chapter: Transformer
 
 **Module:** Power Supply Circuits — Electronic Mechanic Trade
-**Study No.:** 1.8.70 – 1.8.71
+**Lesson No.:** 8.2 (1.8.70 – 1.8.71)
 
 ---
 
 ## 1. Introduction
 
 Almost every mains-powered electronic device needs its incoming AC voltage changed to a different, usually lower, level before it can be rectified into DC. The **transformer** is the component that does this — it transfers electrical energy between two circuits using electromagnetic induction, changing voltage (and current) without any moving parts or direct electrical connection between input and output.
+
+<Video
+  url="https://www.youtube.com/watch?v=Cx4_7lIjoBA"
+  number="8.2"
+  title="What is a Transformer And How Do They Work? | Transformer Working Principle"
+  caption="Explains electromagnetic induction and step-up/step-down transformer operation."
+/>
 
 ---
 

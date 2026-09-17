@@ -6,13 +6,20 @@ sidebar_label: RC Phase Shift Oscillator
 # Chapter: RC Phase Shift Oscillator
 
 **Module:** Transistor — Electronic Mechanic Trade
-**Study No.:** 1.9.90
+**Lesson No.:** 9.4 (1.9.90)
 
 ---
 
 ## 1. Introduction
 
 The **RC Phase Shift Oscillator** is a low-frequency (audio range) sine wave generator that uses a network of resistor-capacitor (RC) sections, instead of an LC tank circuit, to set the frequency of oscillation and provide the phase shift required for positive feedback.
+
+<Video
+  url="https://www.youtube.com/watch?v=xJOkHephQ8s"
+  number="9.4"
+  title="RC Phase Shift Oscillator using OpAmp (Basics, Circuit, Working & Gain Calculation)"
+  caption="Derives and explains the RC phase shift oscillator circuit and gain requirement."
+/>
 
 ---
 

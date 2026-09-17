@@ -6,13 +6,20 @@ sidebar_label: Ohm's/Kirchhoff's Laws & DC Series Circuits
 # Chapter: Ohm's Law, Kirchhoff's Laws and DC Series Circuits
 
 **Module:** Active and Passive Components — Electronic Mechanic Trade
-**Study No.:** 1.7.54 – 1.7.57
+**Lesson No.:** 7.2 (1.7.54 – 1.7.57)
 
 ---
 
 ## 1. Introduction
 
 Two laws form the foundation of all circuit analysis: **Ohm's Law**, which relates voltage, current, and resistance; and **Kirchhoff's Laws**, which govern how current and voltage behave at junctions and around loops. Together with these, understanding a simple **DC series circuit** is the starting point for analyzing any circuit.
+
+<Video
+  url="https://www.youtube.com/watch?v=2Zu3ppq3n8I"
+  number="7.2"
+  title="Kirchhoff's Law, Junction & Loop Rule, Ohm's Law - KCL & KVL Circuit Analysis"
+  caption="Applies Ohm's law and Kirchhoff's laws to analyze a DC series circuit."
+/>
 
 ---
 

@@ -6,13 +6,20 @@ sidebar_label: Operational Amplifiers
 # Chapter: Operational Amplifier and its Applications
 
 **Module:** Op Amp and Timer Applications — Electronic Mechanic Trade
-**Study No.:** 1.14.127 & 1.14.128
+**Lesson No.:** 14.1 (1.14.127 & 1.14.128)
 
 ---
 
 ## 1. Introduction
 
 An **Operational Amplifier (Op-Amp)** is a high-gain, direct-coupled differential amplifier IC used as a basic building block in analog electronics — from simple signal amplifiers to comparators, filters, and oscillators. It amplifies the voltage difference between its two inputs by a very large factor.
+
+<Video
+  url="https://www.youtube.com/watch?v=n2wnyZv0rmc"
+  number="14.1"
+  title="Op Amps for Beginners | Operational Amplifier Basics"
+  caption="Introduces op-amp basics and common application circuits."
+/>
 
 ---
 

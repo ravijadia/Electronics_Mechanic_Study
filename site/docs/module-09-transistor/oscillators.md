@@ -6,13 +6,20 @@ sidebar_label: Oscillators
 # Chapter: Oscillators
 
 **Module:** Transistor — Electronic Mechanic Trade
-**Study No.:** 1.9.88 & 1.9.89
+**Lesson No.:** 9.3 (1.9.88 & 1.9.89)
 
 ---
 
 ## 1. Introduction
 
 An **oscillator** is an electronic circuit that generates a continuous, repetitive AC waveform (sine, square, or other) **without any external AC input signal** — it converts DC power into an AC output at a specific frequency using positive feedback.
+
+<Video
+  url="https://www.youtube.com/watch?v=aJAZHPqEUKU"
+  number="9.3"
+  title="What is an oscillator? Oscillator tutorial in HD!"
+  caption="Introduces oscillator basics with sine and square wave demo circuits."
+/>
 
 ---
 

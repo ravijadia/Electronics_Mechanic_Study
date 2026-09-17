@@ -6,13 +6,20 @@ sidebar_label: Regulated Power Supply & IC Regulators
 # Chapter: Regulated Power Supply and Integrated Circuit Voltage Regulators
 
 **Module:** Power Supply Circuits — Electronic Mechanic Trade
-**Study No.:** 1.8.76 – 1.8.80
+**Lesson No.:** 8.5 (1.8.76 – 1.8.80)
 
 ---
 
 ## 1. Introduction
 
 The chapters so far — transformer, rectifier, and Zener diode — are the building blocks of a complete **regulated DC power supply**: a circuit that takes AC mains input and delivers a steady, constant DC output regardless of variations in input voltage or load. This chapter puts those blocks together, and introduces **IC voltage regulators**, which simplify regulation into a single component.
+
+<Video
+  url="https://www.youtube.com/watch?v=4Xnx4kh8UAk"
+  number="8.5"
+  title="7805 Voltage Regulator Explained: Pinout & Circuit Tutorial"
+  caption="Explains the 7805 IC regulator's pinout and use in a regulated power supply."
+/>
 
 ---
 

@@ -6,13 +6,20 @@ sidebar_label: Active/Passive Components & Resistors
 # Chapter: Active and Passive Electronic Components, Resistors
 
 **Module:** Active and Passive Components — Electronic Mechanic Trade
-**Study No.:** 1.7.50 – 1.7.53
+**Lesson No.:** 7.1 (1.7.50 – 1.7.53)
 
 ---
 
 ## 1. Introduction
 
 Every electronic circuit is built from individual **components**. Before studying any specific component, it's important to understand the basic split every component falls into: **active** or **passive**. This chapter also introduces the most common passive component of all — the **resistor**.
+
+<Video
+  url="https://www.youtube.com/watch?v=kTvYf0o0AB8"
+  number="7.1"
+  title="Basic PASSIVE Components in Electronics Explained in 5 Minutes"
+  caption="Introduces passive components, with resistors as the key example."
+/>
 
 ---
 

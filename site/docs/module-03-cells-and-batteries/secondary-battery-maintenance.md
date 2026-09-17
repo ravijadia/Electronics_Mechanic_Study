@@ -14,6 +14,13 @@ sidebar_label: Secondary Battery Maintenance
 
 A secondary (rechargeable) battery is only as good as the way it's charged and maintained. Charging it wrong, or neglecting maintenance, shortens its life drastically. In this chapter we'll learn the common charging methods, how to judge a battery's state of charge, and the maintenance practices used to keep secondary batteries — especially lead-acid batteries — healthy.
 
+<Video
+  url="https://www.youtube.com/watch?v=pgeSdeoHb7A"
+  number="3.2"
+  title="Charging & Discharging process of Lead acid Battery"
+  caption="Shows the chemical reactions during charging and discharging of a lead-acid battery."
+/>
+
 ---
 
 ## 2. Methods of Charging

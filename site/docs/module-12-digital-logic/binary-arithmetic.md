@@ -6,13 +6,20 @@ sidebar_label: Binary Arithmetic
 # Chapter: Binary Arithmetic
 
 **Module:** Basic Gates, Combinational Circuits, Flip-Flops — Electronic Mechanic Trade
-**Study No.:** 1.12.112 – 1.12.114
+**Lesson No.:** 12.2 (1.12.112 – 1.12.114)
 
 ---
 
 ## 1. Introduction
 
 Digital circuits store and process information as binary numbers (0s and 1s). Before designing arithmetic circuits like adders, a technician must understand how binary addition and subtraction work, including how negative numbers are represented using **complements** — the method digital systems use since they have no separate "minus" hardware for subtraction.
+
+<Video
+  url="https://www.youtube.com/watch?v=-lQE1narsRU"
+  number="12.2"
+  title="Binary Addition and Subtraction | Binary Multiplication and Division | Digital Electronics"
+  caption="Walks through binary addition, subtraction, multiplication and division."
+/>
 
 ---
 

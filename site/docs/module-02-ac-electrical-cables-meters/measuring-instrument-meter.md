@@ -6,13 +6,20 @@ sidebar_label: માપન સાધન મીટર (Measuring Instrument Mete
 # પ્રકરણ: માપન સાધન મીટર (Measuring Instrument Meter)
 
 **મોડ્યુલ 2:** એસી અને ઇલેક્ટ્રીકલ કેબલ્સ, સિંગલ રેન્જ મીટર
-**અભ્યાસ સં.:** 1.2.22 – 1.2.27
+**Lesson No.:** 2.2 (1.2.22 – 1.2.27)
 
 ---
 
 ## 1. પરિચય (Introduction)
 
 આગલા પ્રકરણમાં આપણે વોલ્ટેજ, કરંટ અને અવરોધ વિશે શીખ્યા. પણ આ રાશિઓ (quantities) ને ખરેખર માપવા માટે **મીટર (Meter)** જોઈએ. આ પ્રકરણમાં આપણે મુખ્ય માપન સાધનો, તેમના પ્રકાર અને તેમને સર્કિટમાં કેવી રીતે જોડવા તે શીખીશું.
+
+<Video
+  url="https://www.youtube.com/watch?v=4lAyzRxsbDc"
+  number="2.2"
+  title="How to use a multimeter like a pro! The Ultimate guide"
+  caption="Complete guide to measuring voltage, current, resistance and continuity with a multimeter."
+/>
 
 ---
 

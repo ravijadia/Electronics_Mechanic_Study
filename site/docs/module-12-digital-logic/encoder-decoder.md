@@ -6,13 +6,20 @@ sidebar_label: Encoder & Decoder
 # Chapter: Concept of Encoder and Decoder
 
 **Module:** Basic Gates, Combinational Circuits, Flip-Flops — Electronic Mechanic Trade
-**Study No.:** 1.12.115 & 1.12.116
+**Lesson No.:** 12.3 (1.12.115 & 1.12.116)
 
 ---
 
 ## 1. Introduction
 
 Encoders and decoders are combinational logic circuits that convert data from one code format to another. They are used everywhere digital systems need to compress multiple input lines into fewer output lines (encoding) or expand a compact code back into individual active lines (decoding) — for example in keypad scanning, memory addressing, and display driving.
+
+<Video
+  url="https://www.youtube.com/watch?v=qvX-vmtAz44"
+  number="12.3"
+  title="Encoder and Decoder in DLD | Explained with Examples"
+  caption="Explains encoder and decoder combinational logic circuits with examples."
+/>
 
 ---
 

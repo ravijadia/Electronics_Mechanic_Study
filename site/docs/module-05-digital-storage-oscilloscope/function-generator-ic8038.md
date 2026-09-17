@@ -14,6 +14,13 @@ sidebar_label: Function Generator (IC 8038)
 
 A **function generator** is a test instrument that produces different waveform shapes — sine, square, and triangle — at an adjustable frequency, used to feed a known test signal into a circuit under test (often viewed on an oscilloscope). The **IC 8038** is a popular precision waveform generator chip that produces all three of these waveforms simultaneously from a single, simple circuit — making it a common trainer-level way to build a function generator.
 
+<Video
+  url="https://www.youtube.com/watch?v=dAxIi6zqiIw"
+  number="5.2"
+  title="EP0182 8038 Function Generator"
+  caption="Builds and demonstrates a function generator circuit using the ICL8038 waveform IC."
+/>
+
 ---
 
 ## 2. IC 8038 Overview

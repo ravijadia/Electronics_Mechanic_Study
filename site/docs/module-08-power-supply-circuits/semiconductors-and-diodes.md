@@ -7,13 +7,20 @@ sidebar_label: સેમિકન્ડક્ટર અને ડાયોડ (S
 
 **મોડ્યુલ:** Basic Electronics — Electronic Mechanic Trade
 **વિષય:** Semiconductor Materials & Diode Basics
-**અભ્યાસ સં.:** 1.8.67 – 69
+**Lesson No.:** 8.1 (1.8.67 – 69)
 
 ---
 
 ## 1. પરિચય (Introduction)
 
 ઇલેક્ટ્રોનિક્સની દુનિયામાં સૌથી પહેલો અને સૌથી મહત્વનો ખ્યાલ છે **સેમિકન્ડક્ટર (Semiconductor)**. મોબાઈલ ફોન હોય, ટીવી હોય કે પછી ઇન્વર્ટર — આ બધા ડિવાઈસની અંદર સેમિકન્ડક્ટર મટીરીયલમાંથી બનેલા કમ્પોનન્ટ્સ કામ કરે છે. આ પોસ્ટમાં આપણે સેમિકન્ડક્ટર શું છે, તે કેવી રીતે કામ કરે છે, અને તેમાંથી બનતું સૌથી પહેલું ને સૌથી બેઝિક કમ્પોનન્ટ — **ડાયોડ (Diode)** — સમજીશું.
+
+<Video
+  url="https://www.youtube.com/watch?v=Fwj_d3uO5g8"
+  number="8.1"
+  title="Diodes Explained - The basics how diodes work working principle pn junction"
+  caption="Explains the p-n junction and how semiconductor diodes conduct current."
+/>
 
 ---
 

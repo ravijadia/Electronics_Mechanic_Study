@@ -14,6 +14,13 @@ sidebar_label: DSO Controls & Single Shot Capture
 
 A **Digital Storage Oscilloscope (DSO)** does everything an analog CRO does — but instead of drawing a trace directly with an electron beam, it **samples** the input signal, converts it to digital values, stores them in memory, and displays the result on an LCD/LED screen. This gives it abilities an analog scope doesn't have: freezing a single fast event, storing waveforms, measuring automatically, and connecting to a computer.
 
+<Video
+  url="https://www.youtube.com/watch?v=4urHNFbERD4"
+  number="5.1"
+  title="#EP-60 How To Use Oscilloscope Basic Function (Capture Waveform, Triggering, Single shot)"
+  caption="Demonstrates capturing a waveform using single-shot triggering on a DSO."
+/>
+
 ---
 
 ## 2. Basic Block Diagram

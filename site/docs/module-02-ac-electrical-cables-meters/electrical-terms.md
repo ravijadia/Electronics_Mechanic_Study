@@ -6,13 +6,20 @@ sidebar_label: વિદ્યુત શરતો (Electrical Terms)
 # પ્રકરણ: વિદ્યુત શરતો (Electrical Terms)
 
 **મોડ્યુલ 2:** એસી અને ઇલેક્ટ્રીકલ કેબલ્સ, સિંગલ રેન્જ મીટર
-**અભ્યાસ સં.:** 1.2.13 – 1.2.21
+**Lesson No.:** 2.1 (1.2.13 – 1.2.21)
 
 ---
 
 ## 1. પરિચય (Introduction)
 
 ઇલેક્ટ્રોનિક્સ કે ઇલેક્ટ્રિકલનું કોઈપણ કામ કરતાં પહેલાં થોડા પાયાના શબ્દો (basic terms) સમજવા જરૂરી છે. આ શબ્દો દરેક સર્કિટ, દરેક મીટર રીડિંગ, અને દરેક કેલ્ક્યુલેશનમાં વારંવાર વપરાય છે. આ પોસ્ટમાં આપણે એ બધા મૂળભૂત વિદ્યુત શબ્દો (electrical terms) સમજીશું.
+
+<Video
+  url="https://www.youtube.com/watch?v=QNgBPTTDfts"
+  number="2.1"
+  title="Basic Electrical Terms Explained: Current, Voltage, Power & More"
+  caption="Explains voltage, current, resistance and power as core electrical terms."
+/>
 
 ---
 

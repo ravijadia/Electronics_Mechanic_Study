@@ -6,13 +6,20 @@ sidebar_label: Field Effect Transistor
 # Chapter: Field Effect Transistor (FET)
 
 **Module:** Power Electronic Components — Electronic Mechanic Trade
-**Study No.:** 1.10.96 & 1.10.97
+**Lesson No.:** 10.1 (1.10.96 & 1.10.97)
 
 ---
 
 ## 1. Introduction
 
 A **Field Effect Transistor (FET)** is a three-terminal semiconductor device in which current flow is controlled by an electric **field** produced by a voltage applied at the control terminal, rather than by a current as in a Bipolar Junction Transistor (BJT). Because the control terminal draws almost no current, a FET is a **voltage-controlled**, **unipolar** device (conduction is carried by only one type of charge carrier — electrons or holes) and offers a very high input impedance.
+
+<Video
+  url="https://www.youtube.com/watch?v=TnVkkRFVB1M"
+  number="10.1"
+  title="What is a Field Effect Transistor (FET)? | How FET Works Explained Visually"
+  caption="Visually explains how a FET uses gate voltage to control current."
+/>
 
 ---
 

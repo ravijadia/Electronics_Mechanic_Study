@@ -6,13 +6,20 @@ sidebar_label: Light Emitting Diodes (LED)
 # Chapter: Light Emitting Diodes (LEDs)
 
 **Module:** Opto Electronics — Electronic Mechanic Trade
-**Study No.:** 1.11.105 – 1.11.108
+**Lesson No.:** 11.1 (1.11.105 – 1.11.108)
 
 ---
 
 ## 1. Introduction
 
 A **Light Emitting Diode (LED)** is a p-n junction semiconductor device that emits light when it is forward biased. Unlike an ordinary silicon or germanium diode, an LED is made from special compound semiconductor materials that convert electrical energy directly into light energy — a process called **electroluminescence**. LEDs are widely used as indicators, display elements, and light sources because they are small, efficient, long-lasting, and low-voltage.
+
+<Video
+  url="https://www.youtube.com/watch?v=myqqCCBVyY8"
+  number="11.1"
+  title="Light Emitting Diode (LED): Construction, Working Principle and Applications"
+  caption="Covers LED construction, working principle and common applications."
+/>
 
 ---
 

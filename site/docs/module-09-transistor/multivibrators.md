@@ -6,13 +6,20 @@ sidebar_label: Multivibrators
 # Chapter: Multivibrators and Circuit Diagram Study
 
 **Module:** Transistor — Electronic Mechanic Trade
-**Study No.:** 1.9.91
+**Lesson No.:** 9.5 (1.9.91)
 
 ---
 
 ## 1. Introduction
 
 A **multivibrator** is a two-stage transistor switching circuit that uses regenerative (positive) feedback between two amplifying stages, each cross-coupled to the other, to produce output waveforms that switch between two voltage states (typically a square or rectangular waveform).
+
+<Video
+  url="https://www.youtube.com/watch?v=FwrZPsycw9c"
+  number="9.5"
+  title="What is Multivibrator? Astable, Monostable and Bistable Multivibrators Explained"
+  caption="Covers the three multivibrator types and their circuit diagrams."
+/>
 
 ---
 

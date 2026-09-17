@@ -6,13 +6,20 @@ sidebar_label: 'Op-Amp: Differential & Instrumentation Amp'
 # Chapter: Op-Amp Applications — Differential and Instrumentation Amplifiers
 
 **Module:** Op Amp and Timer Applications — Electronic Mechanic Trade
-**Study No.:** 1.14.131 & 1.14.132
+**Lesson No.:** 14.3 (1.14.131 & 1.14.132)
 
 ---
 
 ## 1. Introduction
 
 Many real-world sensors (thermocouples, strain gauges, bio-signals) produce a very small differential voltage riding on a large common noise signal. A **differential amplifier** amplifies only the difference between two inputs, while an **instrumentation amplifier** improves on this with very high input impedance and excellent noise rejection — making it the standard front-end for precision sensor signal conditioning.
+
+<Video
+  url="https://www.youtube.com/watch?v=byLFy2_Y4h4"
+  number="14.3"
+  title="Instrumentation Amplifier Explained | Why It's Better than a Difference Amplifier"
+  caption="Compares the differential amplifier to the instrumentation amplifier and why it's preferred."
+/>
 
 ---
 

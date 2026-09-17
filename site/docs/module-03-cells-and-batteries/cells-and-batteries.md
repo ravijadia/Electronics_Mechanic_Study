@@ -14,6 +14,13 @@ sidebar_label: Cells and Batteries
 
 Every portable electronic or electrical device — a torch, a mobile phone, an inverter, a UPS — needs a source of DC power that doesn't depend on the mains supply. That source is a **cell** or a **battery**. In this chapter we'll learn what a cell is, the types of cells and batteries, and the basic terms used to describe them.
 
+<Video
+  url="https://www.youtube.com/watch?v=0-U1mLQPKjs"
+  number="3.1"
+  title="Cells and Batteries | Chemistry"
+  caption="Covers how electrochemical cells combine to form batteries."
+/>
+
 ---
 
 ## 2. What is a Cell?

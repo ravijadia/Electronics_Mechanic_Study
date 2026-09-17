@@ -14,6 +14,13 @@ sidebar_label: Oscilloscope Controls
 
 A multimeter tells you a single number. An **oscilloscope (CRO — Cathode Ray Oscilloscope)** shows you the actual *shape* of a signal — how voltage changes over time. This makes it one of the most important instruments for diagnosing electronic circuits: seeing a distorted waveform, noise, ripple, or timing problem that a multimeter simply can't reveal.
 
+<Video
+  url="https://www.youtube.com/watch?v=vMkdbOfSpxo"
+  number="4.2"
+  title="Oscilloscopes - Basics, Controls, Ports, Scaling, Divisions, Offset, Coupling, Trigger"
+  caption="Walks through every major oscilloscope control: scaling, offset, coupling and trigger."
+/>
+
 ---
 
 ## 2. Basic Block Diagram

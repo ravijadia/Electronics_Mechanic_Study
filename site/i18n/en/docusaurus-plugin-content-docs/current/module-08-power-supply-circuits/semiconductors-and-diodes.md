@@ -7,13 +7,20 @@ sidebar_label: Semiconductor & Diode
 
 **Module:** Basic Electronics — Electronic Mechanic Trade
 **Topic:** Semiconductor Materials & Diode Basics
-**Study No.:** 1.8.67 – 69
+**Lesson No.:** 8.1 (1.8.67 – 69)
 
 ---
 
 ## 1. Introduction
 
 The very first and most important concept in the world of electronics is the **Semiconductor**. Whether it's a mobile phone, a TV, or an inverter — all these devices work using components made from semiconductor material. In this chapter we'll understand what a semiconductor is, how it works, and the very first and most basic component made from it — the **Diode**.
+
+<Video
+  url="https://www.youtube.com/watch?v=Fwj_d3uO5g8"
+  number="8.1"
+  title="Diodes Explained - The basics how diodes work working principle pn junction"
+  caption="Explains the p-n junction and how semiconductor diodes conduct current."
+/>
 
 ---
 

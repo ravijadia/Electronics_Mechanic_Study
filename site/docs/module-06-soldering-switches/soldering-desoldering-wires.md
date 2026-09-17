@@ -14,6 +14,12 @@ sidebar_label: Soldering & Desoldering of Wires
 
 **Soldering** is the process of joining two metal surfaces (usually wires or component leads) by melting a filler metal — **solder** — between them, so that when it cools it forms a strong, low-resistance, permanent electrical and mechanical connection. It is one of the most fundamental hand skills for an Electronic Mechanic, used to assemble and repair every kind of circuit.
 
+<Video
+  url="https://www.youtube.com/watch?v=bG7yW9FigJA"
+  number="6.1"
+  title="Soldering and desoldering of wires"
+/>
+
 ---
 
 ## 2. Tools and Materials

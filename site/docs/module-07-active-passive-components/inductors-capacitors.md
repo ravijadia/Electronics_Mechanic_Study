@@ -6,13 +6,27 @@ sidebar_label: Inductors & Capacitors
 # Chapter: Passive Components – Inductors and Capacitors
 
 **Module:** Active and Passive Components — Electronic Mechanic Trade
-**Study No.:** 1.7.58 – 1.7.60
+**Lesson No.:** 7.3 (1.7.58 – 1.7.60)
 
 ---
 
 ## 1. Introduction
 
 Alongside the resistor, the **inductor** and **capacitor** are the other two fundamental passive components. Unlike a resistor, which dissipates energy as heat, these two components **store** energy — an inductor stores it in a magnetic field, and a capacitor stores it in an electric field. This storing behavior is what makes them essential in filters, power supplies, and timing circuits.
+
+<Figure
+  src="/img/figures/module-07-active-passive-components/inductors-capacitors/capacitor-inductor-symbols.svg"
+  number="7.1"
+  alt="Schematic symbols for a capacitor drawn as two parallel plates, and an inductor drawn as a coil of four humps"
+  caption="Standard circuit symbols: the capacitor (C) as two parallel plates, the inductor (L) as a coil."
+/>
+
+<Video
+  url="https://www.youtube.com/watch?v=aShkoXvRjT4"
+  number="7.3"
+  title="Capacitors and Inductors (Circuits for Beginners #19)"
+  caption="Introduces how capacitors and inductors store energy and behave in circuits."
+/>
 
 ---
 

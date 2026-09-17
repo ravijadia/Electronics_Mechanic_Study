@@ -6,13 +6,20 @@ sidebar_label: Transistors & Classification
 # Chapter: Transistors and Classification
 
 **Module:** Transistor — Electronic Mechanic Trade
-**Study No.:** 1.9.81 – 1.9.83
+**Lesson No.:** 9.1 (1.9.81 – 1.9.83)
 
 ---
 
 ## 1. Introduction
 
 A **transistor** is a three-terminal semiconductor device used to amplify or switch electronic signals. It is the building block of nearly all modern electronic circuits — amplifiers, oscillators, switches, and digital logic gates. The most common type used in basic electronics is the **Bipolar Junction Transistor (BJT)**.
+
+<Video
+  url="https://www.youtube.com/watch?v=AcxDiesy-nI"
+  number="9.1"
+  title="Transistors - NPN & PNP - Basic Introduction"
+  caption="Introduces bipolar junction transistors and the NPN/PNP classification."
+/>
 
 ---
 

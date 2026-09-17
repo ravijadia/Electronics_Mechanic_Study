@@ -14,6 +14,13 @@ sidebar_label: Types of Measuring Instruments
 
 A technician's work depends on trustworthy measurements — of voltage, current, resistance, and waveforms. Different jobs need different instruments, and each instrument has its own accuracy, features, and correct way of being used. This chapter covers how measuring instruments are classified and the common types you'll use on the job.
 
+<Video
+  url="https://www.youtube.com/watch?v=3OF3G05qHio"
+  number="4.1"
+  title="Classification of Electrical Instruments | Basics"
+  caption="Classifies electrical measuring instruments and their basic operating principles."
+/>
+
 ---
 
 ## 2. Classification of Measuring Instruments

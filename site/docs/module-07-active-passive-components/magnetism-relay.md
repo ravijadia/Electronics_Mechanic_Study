@@ -6,13 +6,20 @@ sidebar_label: Magnetism & Relay
 # Chapter: Magnetism and Relays
 
 **Module:** Active and Passive Components — Electronic Mechanic Trade
-**Study No.:** 1.7.61 – 1.7.63
+**Lesson No.:** 7.4 (1.7.61 – 1.7.63)
 
 ---
 
 ## 1. Introduction
 
 **Magnetism** and electricity are closely linked — current flowing through a conductor produces a magnetic field, and a changing magnetic field can induce current in a conductor. This relationship (electromagnetism) is the working principle behind transformers, motors, and — most relevant here — the **relay**, an electromagnetically-operated switch used throughout electronic and electrical systems.
+
+<Video
+  url="https://www.youtube.com/watch?v=gz4NBNdTddU"
+  number="7.4"
+  title="Electromagnetic Relay, Construction, and Working Explained in detail"
+  caption="Explains how magnetism drives relay construction and switching action."
+/>
 
 ---
 

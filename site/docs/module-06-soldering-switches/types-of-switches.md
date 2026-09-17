@@ -6,13 +6,20 @@ sidebar_label: Types of Switches
 # Chapter: Types of Switches
 
 **Module:** Soldering/Desoldering and Various Switches — Electronic Mechanic Trade
-**Study No.:** 1.6.48 – 1.6.49
+**Lesson No.:** 6.2 (1.6.48 – 1.6.49)
 
 ---
 
 ## 1. Introduction
 
 A **switch** is a device that makes or breaks an electrical circuit, controlling whether current flows or not. Switches range from a simple toggle on a wall to precision components inside electronic equipment. Understanding switch types, their contact arrangements, and ratings is essential for wiring, repair, and circuit design work.
+
+<Video
+  url="https://www.youtube.com/watch?v=bh5e2bGpIJg"
+  number="6.2"
+  title="Every Type of Electrical Switch Explained"
+  caption="Surveys toggle, push-button, rocker, slide, rotary and dimmer switches."
+/>
 
 ---
 

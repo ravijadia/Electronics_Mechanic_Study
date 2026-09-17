@@ -6,13 +6,20 @@ sidebar_label: Rectifiers
 # Chapter: Rectifiers
 
 **Module:** Power Supply Circuits — Electronic Mechanic Trade
-**Study No.:** 1.8.72 – 1.8.73
+**Lesson No.:** 8.3 (1.8.72 – 1.8.73)
 
 ---
 
 ## 1. Introduction
 
 A **rectifier** converts alternating current (AC) into direct current (DC) by allowing current to flow in only one direction, using the one-way conducting property of diodes. It is the essential first stage of nearly every DC power supply, sitting right after the transformer.
+
+<Video
+  url="https://www.youtube.com/watch?v=nltpZNGyLCg"
+  number="8.3"
+  title="Half Wave and Full Wave Rectifier Explained with Circuit Diagrams and Waveforms"
+  caption="Compares half-wave and full-wave rectifier circuits and their output waveforms."
+/>
 
 ---
 

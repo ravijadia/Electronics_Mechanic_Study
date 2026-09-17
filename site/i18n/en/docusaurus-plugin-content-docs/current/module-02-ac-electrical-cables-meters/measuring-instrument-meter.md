@@ -6,13 +6,20 @@ sidebar_label: Measuring Instrument Meter
 # Chapter: Measuring Instrument Meter
 
 **Module 2:** AC & Electrical Cables, Single Range Meters
-**Study No.:** 1.2.22 – 1.2.27
+**Lesson No.:** 2.2 (1.2.22 – 1.2.27)
 
 ---
 
 ## 1. Introduction
 
 In the last chapter we learned about voltage, current, and resistance. But to actually measure these quantities, we need a **Meter**. In this chapter we'll learn about the main measuring instruments, their types, and how to connect them in a circuit.
+
+<Video
+  url="https://www.youtube.com/watch?v=4lAyzRxsbDc"
+  number="2.2"
+  title="How to use a multimeter like a pro! The Ultimate guide"
+  caption="Complete guide to measuring voltage, current, resistance and continuity with a multimeter."
+/>
 
 ---
 

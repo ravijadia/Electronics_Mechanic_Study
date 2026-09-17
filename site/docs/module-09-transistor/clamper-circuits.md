@@ -6,13 +6,20 @@ sidebar_label: Clamper Circuits
 # Chapter: Clamper Circuits
 
 **Module:** Transistor — Electronic Mechanic Trade
-**Study No.:** 1.9.94 & 1.9.95
+**Lesson No.:** 9.7 (1.9.94 & 1.9.95)
 
 ---
 
 ## 1. Introduction
 
 A **clamper circuit** is a diode-based wave-shaping circuit that shifts an entire input waveform up or down to a different DC level, **without changing its shape**. Unlike a clipper, which removes part of the waveform, a clamper preserves the full waveform and simply repositions it relative to a new reference voltage — this is why it is also called a **DC restorer** or **DC level shifter**.
+
+<Video
+  url="https://www.youtube.com/watch?v=XYpY5NdjFxU"
+  number="9.7"
+  title="Introduction to Clamper Circuit, Diode Clamper Circuit Analysis"
+  caption="Introduces diode clamper circuits and how they shift a waveform's DC level."
+/>
 
 ---
 

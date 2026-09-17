@@ -6,13 +6,20 @@ sidebar_label: TRIAC & DIAC Dimmer/Regulator
 # Chapter: Lamp Dimmer / Fan Motor Speed Regulator using TRIAC and DIAC
 
 **Module:** Power Electronic Components — Electronic Mechanic Trade
-**Study No.:** 1.10.98 – 1.10.100
+**Lesson No.:** 10.2 (1.10.98 – 1.10.100)
 
 ---
 
 ## 1. Introduction
 
 TRIAC and DIAC are power semiconductor devices widely used together to control the amount of AC power delivered to a load — the most common example being a **lamp dimmer** or a **ceiling fan speed regulator**. Both devices can conduct in **both directions** of an AC cycle, unlike an SCR, which conducts in only one direction.
+
+<Video
+  url="https://www.youtube.com/watch?v=KYpuzYZHcGk"
+  number="10.2"
+  title="How to Make a Triac Diac Light Dimmer Circuit | Step-by-Step Tutorial"
+  caption="Builds a TRIAC/DIAC-based lamp dimmer circuit step by step."
+/>
 
 ---
 

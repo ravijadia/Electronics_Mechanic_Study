@@ -6,13 +6,20 @@ sidebar_label: Multiplexers & Demultiplexers
 # Chapter: Multiplexers and Demultiplexers
 
 **Module:** Basic Gates, Combinational Circuits, Flip-Flops — Electronic Mechanic Trade
-**Study No.:** 1.12.117 & 1.12.118
+**Lesson No.:** 12.4 (1.12.117 & 1.12.118)
 
 ---
 
 ## 1. Introduction
 
 Multiplexers and demultiplexers are combinational circuits that manage the flow of data between multiple lines and a single line, under the control of **select lines**. They are widely used to reduce wiring in data transmission, share a single communication channel among multiple signals, and route data to a specific destination.
+
+<Video
+  url="https://www.youtube.com/watch?v=ULV6HP9AI0o"
+  number="12.4"
+  title="Multiplexer and Demultiplexer Circuits | Digital Electronics Explained"
+  caption="Explains how multiplexers and demultiplexers route digital signals."
+/>
 
 ---
 

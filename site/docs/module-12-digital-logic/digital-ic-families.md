@@ -6,13 +6,20 @@ sidebar_label: Digital IC Families
 # Chapter: Digital IC Families and Their Operational Characteristics
 
 **Module:** Basic Gates, Combinational Circuits, Flip-Flops — Electronic Mechanic Trade
-**Study No.:** 1.12.109 – 1.12.111
+**Lesson No.:** 12.1 (1.12.109 – 1.12.111)
 
 ---
 
 ## 1. Introduction
 
 Digital logic gates (AND, OR, NOT, NAND, NOR, etc.) are built inside integrated circuits using different families of transistor technology. Each **IC family** has its own way of implementing the basic gates, and this choice affects speed, power consumption, noise immunity, and how easily different ICs can be connected together. Knowing the major families and their characteristics is essential for selecting the right IC for a circuit and for troubleshooting compatibility problems.
+
+<Video
+  url="https://www.youtube.com/watch?v=MnmYoCO2LFA"
+  number="12.1"
+  title="What is TTL & CMOS? | TTL vs CMOS explained | TTL CMOS compatibility"
+  caption="Compares TTL and CMOS digital logic families and their compatibility."
+/>
 
 ---
 

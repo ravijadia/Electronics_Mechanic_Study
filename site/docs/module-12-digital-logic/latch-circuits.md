@@ -6,13 +6,20 @@ sidebar_label: Latch Circuits
 # Chapter: Latch Circuits and Applications
 
 **Module:** Basic Gates, Combinational Circuits, Flip-Flops — Electronic Mechanic Trade
-**Study No.:** 1.12.119 – 1.12.122
+**Lesson No.:** 12.5 (1.12.119 – 1.12.122)
 
 ---
 
 ## 1. Introduction
 
 A **latch** is the simplest form of digital memory circuit — it can store one bit of data (0 or 1) and hold it even after the input that set it has been removed. Latches are the building blocks of flip-flops, registers, and other sequential circuits used to store and retain digital information.
+
+<Video
+  url="https://www.youtube.com/watch?v=L5V1IxFhq0k"
+  number="12.5"
+  title="SR Latch Circuit - Basic Introduction"
+  caption="Introduces the SR latch and how it stores one bit of data."
+/>
 
 ---
 

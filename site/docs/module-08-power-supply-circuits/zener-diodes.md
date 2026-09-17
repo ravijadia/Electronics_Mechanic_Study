@@ -6,13 +6,20 @@ sidebar_label: Zener Diode
 # Chapter: Working Principle of Zener Diodes
 
 **Module:** Power Supply Circuits — Electronic Mechanic Trade
-**Study No.:** 1.8.74 – 1.8.75
+**Lesson No.:** 8.4 (1.8.74 – 1.8.75)
 
 ---
 
 ## 1. Introduction
 
 A normal (rectifier) diode is designed to never be operated in reverse breakdown — doing so usually destroys it. The **Zener diode** is a special-purpose diode designed specifically to operate safely in reverse breakdown, at a precise, repeatable voltage. This property makes it extremely useful as a simple, stable **voltage reference** or **voltage regulator** element.
+
+<Video
+  url="https://www.youtube.com/watch?v=2n3pDP0nWbY"
+  number="8.4"
+  title="What is Zener diode & working as voltage regulator"
+  caption="Shows how a zener diode maintains constant voltage in reverse breakdown."
+/>
 
 ---
 

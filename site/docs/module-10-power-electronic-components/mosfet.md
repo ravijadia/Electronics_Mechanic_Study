@@ -6,13 +6,20 @@ sidebar_label: MOSFET
 # Chapter: MOSFET
 
 **Module:** Power Electronic Components — Electronic Mechanic Trade
-**Study No.:** 1.10.101 – 1.10.104
+**Lesson No.:** 10.3 (1.10.101 – 1.10.104)
 
 ---
 
 ## 1. Introduction
 
 A **MOSFET (Metal Oxide Semiconductor Field Effect Transistor)** is a voltage-controlled unipolar device similar in principle to a JFET, but its gate is completely insulated from the channel by a thin layer of silicon dioxide (SiO₂). This insulated-gate construction gives the MOSFET an even higher input impedance than a JFET (typically 10¹⁰ to 10¹⁵ Ω) and makes it the most widely used transistor in modern digital ICs and power-switching circuits.
+
+<Video
+  url="https://www.youtube.com/watch?v=DLd5dUychY8"
+  number="10.3"
+  title="What is a MOSFET? How MOSFETs Work? (MOSFET Tutorial)"
+  caption="Explains MOSFET structure and switching operation."
+/>
 
 ---
 

@@ -6,13 +6,20 @@ sidebar_label: RC Time Constant & RLC Circuits
 # Chapter: RC Time Constant, RC Differentiator, and RLC Series/Parallel Circuits
 
 **Module:** Active and Passive Components — Electronic Mechanic Trade
-**Study No.:** 1.7.64 – 1.7.66
+**Lesson No.:** 7.5 (1.7.64 – 1.7.66)
 
 ---
 
 ## 1. Introduction
 
 When a resistor is combined with a capacitor (or an inductor), the circuit no longer responds instantly to a change in voltage — it responds gradually, over a characteristic time. This chapter covers the **RC time constant**, the **RC differentiator**, and how resistors, inductors, and capacitors interact together in **RLC circuits**.
+
+<Video
+  url="https://www.youtube.com/watch?v=uyisBvgY5i0"
+  number="7.5"
+  title="RC Circuits and the Time Constant (Full Visual Explanation)"
+  caption="Visually explains the RC time constant during capacitor charging and discharging."
+/>
 
 ---
 

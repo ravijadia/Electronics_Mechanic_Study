@@ -6,13 +6,20 @@ sidebar_label: Clipper Circuit
 # Chapter: Clipper Circuit
 
 **Module:** Transistor — Electronic Mechanic Trade
-**Study No.:** 1.9.92 & 1.9.93
+**Lesson No.:** 9.6 (1.9.92 & 1.9.93)
 
 ---
 
 ## 1. Introduction
 
 A **clipper (or limiter) circuit** is a diode-based wave-shaping circuit that removes (clips off) a portion of an input waveform above or below a certain reference voltage level, without distorting the remaining part of the waveform. Clippers are used to protect circuits from over-voltage, shape waveforms, and generate square waves from sine waves.
+
+<Video
+  url="https://www.youtube.com/watch?v=S76CnEJMl5E"
+  number="9.6"
+  title="Clipper Circuit Explained (with Solved Examples)"
+  caption="Explains diode clipper circuits with worked example problems."
+/>
 
 ---
 

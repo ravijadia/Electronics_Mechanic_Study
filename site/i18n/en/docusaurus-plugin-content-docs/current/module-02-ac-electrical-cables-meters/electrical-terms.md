@@ -6,13 +6,20 @@ sidebar_label: Electrical Terms
 # Chapter: Electrical Terms
 
 **Module 2:** AC & Electrical Cables, Single Range Meters
-**Study No.:** 1.2.13 – 1.2.21
+**Lesson No.:** 2.1 (1.2.13 – 1.2.21)
 
 ---
 
 ## 1. Introduction
 
 Before doing any electronics or electrical work, it's necessary to understand a few basic terms. These terms come up again and again in every circuit, every meter reading, and every calculation. In this chapter we'll go through all these fundamental electrical terms.
+
+<Video
+  url="https://www.youtube.com/watch?v=QNgBPTTDfts"
+  number="2.1"
+  title="Basic Electrical Terms Explained: Current, Voltage, Power & More"
+  caption="Explains voltage, current, resistance and power as core electrical terms."
+/>
 
 ---
 

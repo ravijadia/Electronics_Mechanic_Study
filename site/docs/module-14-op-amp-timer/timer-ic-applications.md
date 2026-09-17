@@ -6,13 +6,20 @@ sidebar_label: Timer IC Applications
 # Chapter: Timer IC and its Applications
 
 **Module:** Op Amp and Timer Applications — Electronic Mechanic Trade
-**Study No.:** 1.14.133 – 1.14.136
+**Lesson No.:** 14.4 (1.14.133 – 1.14.136)
 
 ---
 
 ## 1. Introduction
 
 The **555 Timer IC** is one of the most widely used ICs in electronics, capable of generating precise time delays and oscillations. It can operate in three modes — **astable** (free-running oscillator), **monostable** (one-shot pulse generator), and **bistable** — using just a handful of external resistors and capacitors.
+
+<Video
+  url="https://www.youtube.com/watch?v=4I4lVltpXio"
+  number="14.4"
+  title="NE555 Timer IC Explained + Easy Projects for Beginners (Step-by-Step Tutorial)"
+  caption="Explains the 555 timer IC and walks through simple beginner projects."
+/>
 
 ---
 

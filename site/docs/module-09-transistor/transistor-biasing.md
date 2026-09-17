@@ -6,13 +6,20 @@ sidebar_label: Biasing of Transistors
 # Chapter: Biasing of Transistors
 
 **Module:** Transistor — Electronic Mechanic Trade
-**Study No.:** 1.9.84 – 1.9.87
+**Lesson No.:** 9.2 (1.9.84 – 1.9.87)
 
 ---
 
 ## 1. Introduction
 
 For a transistor to work correctly as an amplifier, its junctions must be supplied with the correct DC voltages before any AC signal is applied. This process is called **biasing**. Proper biasing sets up a stable operating point (Q-point) so the transistor amplifies the signal without distortion.
+
+<Video
+  url="https://www.youtube.com/watch?v=yxVavc1rFK0"
+  number="9.2"
+  title="Transistor Biasing: Q-Point and Load Line Explained"
+  caption="Explains DC biasing, the Q-point and load line for a BJT."
+/>
 
 ---
 
