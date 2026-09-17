@@ -33,6 +33,13 @@ Before a circuit is ever built on a breadboard or a PCB, it can be built and tes
 
 ---
 
+<Figure
+  src="/img/figures/module-13-circuit-simulator/electronic-simulation-software/schematic-and-spice-waveform.png"
+  number="13.1"
+  alt="A schematic editor (gschem) showing a two-transistor circuit on the left, and a separate simulator window (ngspice) on the right plotting the input, output and intermediate node voltages against time"
+  caption="A schematic editor and a SPICE simulation engine working together — the schematic on the left, the resulting voltage-vs-time waveforms on the right. (Screenshot of gschem/ngspice, free software, BSD license.)"
+/>
+
 ## 3. Types of Simulation Tools
 
 - **SPICE-based simulators:** Most professional and free circuit simulators are built around **SPICE** (Simulation Program with Integrated Circuit Emphasis), a simulation engine developed for analyzing analog and mixed electronic circuits using the mathematical models of components (resistors, diodes, transistors, ICs, etc.).
