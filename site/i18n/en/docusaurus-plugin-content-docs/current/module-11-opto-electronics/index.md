@@ -5,6 +5,6 @@ sidebar_label: Overview
 
 # Module 11: Opto Electronics
 
-| Study No. | Topic | Status |
+| Lesson No. | Topic | Status |
 |---|---|---|
-| 1.11.105 – 108 | [Light Emitting Diodes (LEDs)](module-11-opto-electronics/light-emitting-diodes) | ✅ Ready |
+| 11.1 (1.11.105 – 108) | [Light Emitting Diodes (LEDs)](module-11-opto-electronics/light-emitting-diodes) | ✅ Ready |

@@ -5,7 +5,7 @@ sidebar_label: Overview
 
 # Module 6: Soldering/Desoldering and Various Switches
 
-| Study No. | Topic | Status |
+| Lesson No. | Topic | Status |
 |---|---|---|
-| 1.6.44 – 47 | [Soldering and desoldering of wires](module-06-soldering-switches/soldering-desoldering-wires) | ✅ Ready |
-| 1.6.48 & 49 | [Types of switches](module-06-soldering-switches/types-of-switches) | ✅ Ready |
+| 6.1 (1.6.44 – 47) | [Soldering and desoldering of wires](module-06-soldering-switches/soldering-desoldering-wires) | ✅ Ready |
+| 6.2 (1.6.48 & 49) | [Types of switches](module-06-soldering-switches/types-of-switches) | ✅ Ready |

@@ -7,7 +7,7 @@ sidebar_label: Overview
 
 *(Basics of AC and Electrical cables, Single range meters)*
 
-| Study No. | Topic | Status |
+| Lesson No. | Topic | Status |
 |---|---|---|
-| 1.2.13 – 21 | [Electrical terms](module-02-ac-electrical-cables-meters/electrical-terms) | ✅ Ready |
-| 1.2.22 – 27 | [Measuring instrument meter](module-02-ac-electrical-cables-meters/measuring-instrument-meter) | ✅ Ready |
+| 2.1 (1.2.13 – 21) | [Electrical terms](module-02-ac-electrical-cables-meters/electrical-terms) | ✅ Ready |
+| 2.2 (1.2.22 – 27) | [Measuring instrument meter](module-02-ac-electrical-cables-meters/measuring-instrument-meter) | ✅ Ready |
