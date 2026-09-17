@@ -6,7 +6,7 @@ sidebar_label: Function Generator (IC 8038)
 # Chapter: Function Generator Using IC 8038
 
 **Module:** Digital Storage Oscilloscope — Electronic Mechanic Trade
-**Study No.:** 1.5.43
+**Lesson No.:** 5.2 (1.5.43)
 
 ---
 
@@ -26,6 +26,13 @@ A **function generator** is a test instrument that produces different waveform s
 ---
 
 ## 3. Key Pins and Their Function
+
+<Figure
+  src="/img/figures/module-05-digital-storage-oscilloscope/function-generator-ic8038/ic8038-pinout-diagram.png"
+  number="5.2"
+  alt="14-pin DIP pinout diagram of the ICL8038 showing Sine Wave Adjust, Sine Wave Out, Triangle Out, Duty Cycle/Frequency Adjust, Vcc, FM Bias, FM Sweep Input, Square Wave Out, Timing Capacitor, V-/GND, and Sine Wave Adjust pins"
+  caption="Pin assignment of the IC 8038 (ICL8038) waveform generator, 14-pin DIP package."
+/>
 
 | Pin (typical) | Function |
 |---|---|
@@ -54,6 +61,13 @@ A **function generator** is a test instrument that produces different waveform s
 ---
 
 ## 5. Basic Test Circuit — Steps to Build and Test
+
+<Figure
+  src="/img/figures/module-05-digital-storage-oscilloscope/function-generator-ic8038/ic8038-function-generator-circuit.jpg"
+  number="5.3"
+  alt="Schematic of an IC 8038 function generator circuit showing timing resistors R1, R2, R7, a 1K frequency-adjust potentiometer R3, timing capacitors C1 and C2, pull-up resistor R4, output stage on Pin 8, and Sine/Triangle/Square outputs on Pins 2, 3, and 9, powered from +15V/-15V"
+  caption="Example IC 8038 test circuit with typical timing and adjustment component values."
+/>
 
 1. Connect IC 8038 on a breadboard/PCB with supply pins (Pin 6, Pin 11) wired to the chosen power supply.
 2. Connect the timing resistors (Pins 4 & 5) and timing capacitor (Pin 10) per the datasheet reference circuit — select R and C values for the desired frequency range.

@@ -6,7 +6,7 @@ sidebar_label: Types of Measuring Instruments
 # Chapter: Types of Measuring Instruments, Equipment, Uses and Features
 
 **Module:** AC/DC Measuring Instruments, Basic Workshop Practice — Electronic Mechanic Trade
-**Study No.:** 1.4.35 & 1.4.36
+**Lesson No.:** 4.1 (1.4.35 & 1.4.36)
 
 ---
 
@@ -55,6 +55,20 @@ PMMC meters are generally more sensitive and accurate for DC; Moving Iron meters
 ---
 
 ## 5. Common Instruments Used in the Workshop
+
+<Figure
+  src="/img/figures/module-04-ac-dc-measuring-instruments/measuring-instruments-types/electrical-testing-tools.jpg"
+  number="4.1"
+  alt="Six electrical testing tools: a digital multimeter, a non-contact voltage tester, a clamp meter, a phase tester, an insulation tester, and a network cable tester"
+  caption="Common electrical testing tools used in the workshop."
+/>
+
+<Figure
+  src="/img/figures/module-04-ac-dc-measuring-instruments/measuring-instruments-types/electrical-measuring-tools-overview.jpg"
+  number="4.2"
+  alt="Nine electrical measuring tools illustrated as icons: multimeter, clamp meter, oscilloscope, insulation tester (megger), voltage tester, wattmeter, ohmmeter, galvanometer, and earth ground tester"
+  caption="Overview of common electrical measuring instruments."
+/>
 
 - **Multimeter (Analog or Digital):** Measures voltage, current, and resistance; the most-used general-purpose instrument.
 - **Clamp meter:** Measures current without breaking the circuit, by clamping around a conductor.

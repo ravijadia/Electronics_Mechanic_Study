@@ -6,7 +6,7 @@ sidebar_label: Soldering & Desoldering of Wires
 # Chapter: Soldering and Desoldering of Wires
 
 **Module:** Soldering/Desoldering and Various Switches — Electronic Mechanic Trade
-**Study No.:** 1.6.44 – 1.6.47
+**Lesson No.:** 6.1 (1.6.44 – 1.6.47)
 
 ---
 
@@ -41,6 +41,13 @@ sidebar_label: Soldering & Desoldering of Wires
 ---
 
 ## 4. Soldering Procedure (Wire-to-Wire / Wire-to-Terminal)
+
+<Figure
+  src="/img/figures/module-06-soldering-switches/soldering-desoldering-wires/solder-joint-diagram.jpg"
+  number="6.1"
+  alt="Diagram of a component lead soldered to a copper pad on a circuit board, with the soldering iron tip touching the joint and solder wire being fed in from the other side"
+  caption="Correct soldering technique: heat applied to the joint (lead and pad together), solder fed into the joint."
+/>
 
 1. Switch on the soldering iron and allow it to reach full temperature (usually 2–3 minutes).
 2. Position the wires to be joined so they make firm mechanical contact (e.g. hook or twist them together, or hold them against the terminal).

@@ -6,7 +6,7 @@ sidebar_label: Cells and Batteries
 # Chapter: Cells and Batteries
 
 **Module:** Cells and Batteries — Electronic Mechanic Trade
-**Study No.:** 1.3.28
+**Lesson No.:** 3.1 (1.3.28)
 
 ---
 
@@ -27,6 +27,20 @@ A **cell** is a device that converts chemical energy directly into electrical en
 When the electrodes are connected through an external circuit, a chemical reaction at each electrode drives electrons through the circuit — that flow of electrons is the current the cell supplies.
 
 A **battery** is simply two or more cells connected together (in series, parallel, or a combination) to get the voltage or current rating a device needs.
+
+<Figure
+  src="/img/figures/module-03-cells-and-batteries/cells-and-batteries/cell-and-battery-symbols.png"
+  number="3.1"
+  alt="Circuit symbols for a cell (single long and short line, plus a torch cell) and a battery (multiple line pairs, plus a 12V lead-acid battery), shown one above the other"
+  caption="Circuit symbol and typical appearance of a single cell versus a battery (multiple cells)."
+/>
+
+<Figure
+  src="/img/figures/module-03-cells-and-batteries/cells-and-batteries/cell-vs-battery-comparison.jpg"
+  number="3.2"
+  alt="Side-by-side comparison: a stack of coin cells labelled 'Cell — converts chemical energy into electrical energy', and an AA battery labelled 'Battery — stores electrical energy and can be charged'"
+  caption="Cell versus battery at a glance."
+/>
 
 ---
 

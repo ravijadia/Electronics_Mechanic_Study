@@ -6,7 +6,7 @@ sidebar_label: Oscilloscope Controls
 # Chapter: Controls and Functions of Oscilloscope
 
 **Module:** AC/DC Measuring Instruments, Basic Workshop Practice — Electronic Mechanic Trade
-**Study No.:** 1.4.37 – 1.4.39
+**Lesson No.:** 4.2 (1.4.37 – 1.4.39)
 
 ---
 
@@ -28,6 +28,20 @@ An oscilloscope is built from a few key blocks:
 ---
 
 ## 3. Front Panel Controls
+
+<Figure
+  src="/img/figures/module-04-ac-dc-measuring-instruments/oscilloscope-controls/analog-oscilloscope-front-panel.png"
+  number="4.3"
+  alt="Front panel of an analog oscilloscope with labelled Display, Vertical, Horizontal, and Trigger control groups, and labelled Power Switch, Vertical Input, Horizontal Input, and External Trigger connectors"
+  caption="Front panel layout of a typical analog oscilloscope (CRO)."
+/>
+
+<Figure
+  src="/img/figures/module-04-ac-dc-measuring-instruments/oscilloscope-controls/dso-front-panel-controls.jpg"
+  number="4.4"
+  alt="Front panel of a digital storage oscilloscope with labelled Ch1/Ch2 vertical controls, time controls, trigger controls, soft menu buttons, and channel/trigger inputs"
+  caption="Equivalent front panel layout on a modern digital storage oscilloscope (DSO) — the same control groups, digitized."
+/>
 
 | Control | Function |
 |---|---|

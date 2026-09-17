@@ -6,7 +6,7 @@ sidebar_label: DSO Controls & Single Shot Capture
 # Chapter: Digital Storage Oscilloscope – Front Panel Controls and Single Shot Capture
 
 **Module:** Digital Storage Oscilloscope — Electronic Mechanic Trade
-**Study No.:** 1.5.40 – 1.5.42
+**Lesson No.:** 5.1 (1.5.40 – 1.5.42)
 
 ---
 
@@ -27,6 +27,13 @@ A **Digital Storage Oscilloscope (DSO)** does everything an analog CRO does — 
 ---
 
 ## 3. Front Panel Controls
+
+<Figure
+  src="/img/figures/module-05-digital-storage-oscilloscope/dso-controls-single-shot/dso-front-panel-controls.jpg"
+  number="5.1"
+  alt="Front panel of a digital storage oscilloscope with labelled Ch1/Ch2 vertical controls, time controls, trigger controls, soft menu buttons, and channel/trigger inputs"
+  caption="Front panel layout of a typical DSO — the vertical, horizontal, and trigger control groups referred to below."
+/>
 
 | Control | Function |
 |---|---|

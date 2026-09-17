@@ -6,7 +6,7 @@ sidebar_label: Secondary Battery Maintenance
 # Chapter: Secondary Battery – Types of Charge, Discharge and Maintenance
 
 **Module:** Cells and Batteries — Electronic Mechanic Trade
-**Study No.:** 1.3.29 – 1.3.34
+**Lesson No.:** 3.2 (1.3.29 – 1.3.34)
 
 ---
 
@@ -27,6 +27,13 @@ A secondary (rechargeable) battery is only as good as the way it's charged and m
 
 Most modern chargers (e.g. for lead-acid or Li-ion) combine methods — Constant Current first, then switching to Constant Voltage as the battery nears full charge.
 
+<Figure
+  src="/img/figures/module-03-cells-and-batteries/secondary-battery-maintenance/lithium-ion-charge-discharge.png"
+  number="3.3"
+  alt="Diagram of a lithium-ion cell showing ions moving from the cathode to the anode during charging, and back from anode to cathode during discharging"
+  caption="Ion movement between the cathode and anode during charging and discharging."
+/>
+
 ---
 
 ## 3. Checking State of Charge
@@ -46,6 +53,13 @@ Most modern chargers (e.g. for lead-acid or Li-ion) combine methods — Constant
 ---
 
 ## 5. Maintenance Practices (Lead-Acid Batteries)
+
+<Figure
+  src="/img/figures/module-03-cells-and-batteries/secondary-battery-maintenance/lead-acid-battery-cutaway.jpg"
+  number="3.4"
+  alt="Cutaway diagram of a lead-acid battery labelling the protective casing, positive and negative terminals, cell divider, positive electrode (lead dioxide), negative electrode (lead), and dilute sulfuric acid electrolyte"
+  caption="Construction of a lead-acid battery — the parts referred to in the maintenance tasks below."
+/>
 
 - **Check electrolyte level** regularly (for non-sealed/vented batteries) — top up with **distilled water only**, never tap water or acid, when the level is low.
 - **Check specific gravity** with a hydrometer periodically to judge state of charge and detect a weak cell.

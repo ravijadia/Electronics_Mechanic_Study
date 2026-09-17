@@ -1,0 +1,38 @@
+.figure {
+  margin: 1.75rem auto;
+  text-align: center;
+  max-width: 100%;
+}
+
+.img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--ifm-global-radius);
+}
+
+/* Default "printed figure" look: a white plate so transparent black-on-white
+   schematics stay readable in dark mode. Opt out with the `bare` prop for photos. */
+.plate {
+  background: #ffffff;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  padding: 0.9rem;
+}
+
+/* Alternative for dark line-art with no dark variant: flip colours in dark mode. */
+[data-theme='dark'] .invertInDark {
+  filter: invert(1) hue-rotate(180deg);
+  background: transparent;
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+.caption {
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.number {
+  color: var(--ifm-color-emphasis-800);
+  white-space: nowrap;
+}
