@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 240" role="img"
+     aria-label="Schematic symbols for a capacitor and an inductor">
+  <style>
+    .stroke { fill: none; stroke: #1c1e21; stroke-width: 3; stroke-linecap: round; }
+    .lbl { fill: #1c1e21; font-family: Georgia, 'Times New Roman', serif; }
+    .big { font-size: 30px; font-style: italic; }
+    .name { font-size: 18px; }
+  </style>
+
+  <!-- ================= Capacitor ================= -->
+  <!-- leads -->
+  <path class="stroke" d="M40 120 H150" />
+  <path class="stroke" d="M186 120 H296" />
+  <!-- plates -->
+  <path class="stroke" d="M150 78 V162" />
+  <path class="stroke" d="M186 78 V162" />
+  <!-- labels -->
+  <text class="lbl big" x="160" y="55" text-anchor="middle">C</text>
+  <text class="lbl name" x="168" y="205" text-anchor="middle">Capacitor</text>
+
+  <!-- ================= Inductor ================= -->
+  <!-- leads -->
+  <path class="stroke" d="M360 120 H408" />
+  <path class="stroke" d="M536 120 H600" />
+  <!-- four coil humps -->
+  <path class="stroke" d="M408 120 a16 16 0 0 1 32 0 a16 16 0 0 1 32 0 a16 16 0 0 1 32 0 a16 16 0 0 1 32 0" />
+  <!-- labels -->
+  <text class="lbl big" x="472" y="86" text-anchor="middle">L</text>
+  <text class="lbl name" x="472" y="205" text-anchor="middle">Inductor</text>
+</svg>
