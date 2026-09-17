@@ -29,6 +29,13 @@ Digital logic gates (AND, OR, NOT, NAND, NOR, etc.) are built inside integrated 
 - **CMOS (Complementary Metal-Oxide-Semiconductor):** Built using paired P-channel and N-channel MOSFETs. Very low static power consumption, high noise immunity, wide supply voltage range (3V–15V typical for older CMOS, lower for modern logic).
 - **ECL (Emitter-Coupled Logic):** Bipolar transistors operated in their active (non-saturating) region for very high switching speed, at the cost of high power consumption. Used in high-speed applications like early supercomputers and RF equipment.
 
+<Figure
+  src="/img/figures/module-12-digital-logic/digital-ic-families/ic-chips-macro.png"
+  number="12.1"
+  alt="Close-up macro photo of several black integrated circuit chips"
+  caption="Digital logic gates are manufactured inside packaged ICs like these."
+/>
+
 ---
 
 ## 3. Key Operational Characteristics

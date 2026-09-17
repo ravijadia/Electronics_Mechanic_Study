@@ -27,6 +27,13 @@ Multiplexers and demultiplexers are combinational circuits that manage the flow 
 
 A **multiplexer** selects one of several input data lines and connects it to a single output, based on the binary value applied to its select lines. It works like a rotary switch controlled electronically.
 
+<Figure
+  src="/img/figures/module-12-digital-logic/multiplexers-demultiplexers/4to1-multiplexer.png"
+  number="12.4"
+  alt="A 4:1 multiplexer block with four data inputs X0-X3, two select lines C1-C0, and a single output M, next to a truth table showing which input is selected for each select-line combination"
+  caption="A 4:1 multiplexer block and its select-line truth table."
+/>
+
 **Example: 4:1 Multiplexer**
 
 | S1 | S0 | Output Y |
@@ -43,6 +50,13 @@ With 4 data inputs (I0–I3), 2 select lines (S1, S0) are needed since 2² = 4. 
 ## 3. Demultiplexer (DEMUX) — Data Distributor
 
 A **demultiplexer** performs the reverse operation: it takes a single input data line and routes it to one of several output lines, chosen by the select lines.
+
+<Figure
+  src="/img/figures/module-12-digital-logic/multiplexers-demultiplexers/1to8-demultiplexer.png"
+  number="12.5"
+  alt="A 1:8 demultiplexer block with a single input I, three select lines S1-S3, and eight outputs Y0-Y7"
+  caption="A demultiplexer with more outputs (1:8) than the worked example below — the same select-line principle scales to any size."
+/>
 
 **Example: 1:4 Demultiplexer**
 

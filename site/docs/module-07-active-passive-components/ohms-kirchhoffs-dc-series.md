@@ -44,6 +44,13 @@ I = V/R = 12/6 = 2A
 
 ## 3. Kirchhoff's Current Law (KCL)
 
+<Figure
+  src="/img/figures/module-07-active-passive-components/ohms-kirchhoffs-dc-series/kirchhoffs-voltage-current-law.png"
+  number="7.4"
+  alt="Left: a resistor loop ABCD with Kirchhoff's Voltage Law equation. Right: currents entering and leaving a node with Kirchhoff's Current Law equation"
+  caption="Kirchhoff's Voltage Law (sum of drops around a loop) and Kirchhoff's Current Law (sum of currents at a node)."
+/>
+
 **Statement:** The total current entering a junction (node) equals the total current leaving that junction — current cannot "pile up" or disappear at a node.
 
 ```

@@ -34,6 +34,13 @@ For a transistor to work correctly as an amplifier, its junctions must be suppli
 
 ## 3. Common Biasing Methods
 
+<Figure
+  src="/img/figures/module-09-transistor/transistor-biasing/biasing-circuits-comparison.png"
+  number="9.2"
+  alt="Table comparing three transistor biasing circuits side by side: fixed bias, collector-to-fixed bias, and voltage divider bias, with their stability, feedback and application notes"
+  caption="The three biasing circuits described below, shown side by side."
+/>
+
 ### a) Fixed Bias (Base Resistor Method)
 
 A single resistor RB connects the base to the supply VCC, setting a fixed base current.

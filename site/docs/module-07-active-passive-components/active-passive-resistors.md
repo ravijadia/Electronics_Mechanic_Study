@@ -69,6 +69,13 @@ Fixed resistors use colored bands to indicate their value.
 
 **Example:** Yellow-Violet-Red-Gold = 47 × 100 = 4700Ω (4.7kΩ), ±5% tolerance.
 
+<Figure
+  src="/img/figures/module-07-active-passive-components/active-passive-resistors/resistor-color-bands.png"
+  number="7.2"
+  alt="A single axial resistor with yellow, violet, red and gold color bands, held near a soldering iron tip"
+  caption="A resistor's color bands encode its resistance value and tolerance."
+/>
+
 ---
 
 ## 5. Resistors in Series and Parallel

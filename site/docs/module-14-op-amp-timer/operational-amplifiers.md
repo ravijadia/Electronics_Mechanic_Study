@@ -25,6 +25,13 @@ An **Operational Amplifier (Op-Amp)** is a high-gain, direct-coupled differentia
 
 ## 2. Pin Diagram — IC 741
 
+<Figure
+  src="/img/figures/module-14-op-amp-timer/operational-amplifiers/ic-chips-macro.png"
+  number="14.1"
+  alt="Macro close-up of small black integrated circuit packages"
+  caption="An op-amp like the 741 is manufactured and packaged the same way as any other IC — commonly as an 8-pin DIP or small surface-mount package."
+/>
+
 The **IC 741** is the most common general-purpose op-amp, available as an 8-pin DIP package:
 
 | Pin | Name | Function |

@@ -106,6 +106,13 @@ I ≈ 11.3 mA
 
 ---
 
+<Figure
+  src="/img/figures/module-08-power-supply-circuits/semiconductors-and-diodes/types-of-diodes.png"
+  number="8.3"
+  alt="Three types of diodes illustrated: rectifier diode (used for converting AC to DC), zener diode (used for voltage regulation), and schottky diode (used for fast switching and low voltage drop)"
+  caption="Common diode types and what each is used for, beyond the basic rectifier diode covered above."
+/>
+
 ## 7. Applications of Diode
 
 - **Rectification:** Converting AC to DC (in power supplies)

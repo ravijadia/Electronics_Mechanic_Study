@@ -25,6 +25,13 @@ The **RC Phase Shift Oscillator** is a low-frequency (audio range) sine wave gen
 
 ## 2. Circuit Description
 
+<Figure
+  src="/img/figures/module-09-transistor/rc-phase-shift-oscillator/rc-phase-shift-oscillator-circuit.png"
+  number="9.4"
+  alt="An RC phase shift oscillator circuit with a transistor amplifier, three RC sections (C1-C3 and R1-R3) forming the feedback network, and component values for a 6.5kHz sine wave output"
+  caption="Example RC phase shift oscillator circuit with three RC feedback sections."
+/>
+
 The circuit consists of:
 
 - A single-stage **transistor amplifier in Common Emitter (CE) configuration** — CE gives a 180° phase shift between its input and output.

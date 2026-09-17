@@ -35,6 +35,14 @@ AC Mains → Transformer → Rectifier → Filter Capacitor → Regulator → DC
 - **Filter capacitor:** Smooths the pulsating DC into DC with reduced ripple.
 - **Regulator:** Removes remaining ripple and holds the output at a fixed voltage, even if input voltage or load current changes.
 
+<Figure
+  src="/img/figures/module-08-power-supply-circuits/regulated-power-supply-ic-regulators/power-supply-board.png"
+  number="8.2"
+  alt="A power supply circuit board showing a small transformer, several black electrolytic filter capacitors, and regulator/transistor components mounted on metal heatsinks"
+  caption="A real power supply board: a small transformer, filter capacitors, and heatsink-mounted regulator components implementing the stages above."
+  bare
+/>
+
 ---
 
 ## 3. Why Regulation Is Needed

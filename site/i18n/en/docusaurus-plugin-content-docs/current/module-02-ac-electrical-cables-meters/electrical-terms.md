@@ -92,6 +92,13 @@ I = V / R = 10 / 100 = 0.1 A
 - **Formula:** E = P × t
 - **Unit:** Watt-hour, or the "unit" (kWh) used on household electricity bills.
 
+<Figure
+  src="/img/figures/module-02-ac-electrical-cables-meters/electrical-terms/tangled-electrical-wires.png"
+  number="2.1"
+  alt="A dense tangle of overhead electrical cables and wires bundled along a utility pole"
+  caption="Real-world AC power distribution cables — the physical form of the current and voltage described above."
+/>
+
 ---
 
 ## 9. AC and DC

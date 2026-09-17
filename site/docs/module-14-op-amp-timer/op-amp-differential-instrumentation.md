@@ -65,6 +65,13 @@ CMRR = Differential Gain / Common-Mode Gain
 
 ## 5. Applications
 
+<Figure
+  src="/img/figures/module-14-op-amp-timer/op-amp-differential-instrumentation/ecg-electrodes-patient.png"
+  number="14.3"
+  alt="A healthcare worker placing ECG electrodes on a patient's chest"
+  caption="ECG electrodes pick up a very weak heart signal buried in mains-hum noise — exactly the kind of signal an instrumentation amplifier is built to amplify cleanly."
+/>
+
 - Amplifying small signals from strain gauges, thermocouples, and load cells
 - Bio-medical instruments (ECG, EEG) where the wanted signal is millivolts but common-mode noise (mains hum) can be volts
 - Industrial sensor signal conditioning in noisy environments

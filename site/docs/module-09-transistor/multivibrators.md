@@ -33,6 +33,13 @@ A **multivibrator** is a two-stage transistor switching circuit that uses regene
 
 ---
 
+<Figure
+  src="/img/figures/module-09-transistor/multivibrators/multivibrator-types-waveforms.png"
+  number="9.5"
+  alt="Block diagrams of astable, monostable, and bistable multivibrators showing their trigger inputs and output waveforms: continuous pulses for astable, one pulse per trigger for monostable, and a level change per trigger for bistable"
+  caption="Input/output relationship for the three multivibrator types."
+/>
+
 ## 3. Astable Multivibrator — Basic Circuit
 
 A basic transistor astable multivibrator uses:
@@ -55,6 +62,13 @@ The output frequency depends on the RC time constants of the coupling networks (
 ---
 
 ## 5. Applications
+
+<Figure
+  src="/img/figures/module-09-transistor/multivibrators/multivibrator-555-circuits.png"
+  number="9.6"
+  alt="Three 555 timer IC circuit variants labelled astable, monostable and bistable, each with their rail voltage, trigger, threshold, discharge and output/reset connections"
+  caption="The same three multivibrator types built with a 555 timer IC — a common alternative to the two-transistor circuit described above."
+/>
 
 - **Astable:** Square wave/clock pulse generators, LED flashers, tone generators.
 - **Monostable:** Pulse width generation, timing/delay circuits, debouncing switches.

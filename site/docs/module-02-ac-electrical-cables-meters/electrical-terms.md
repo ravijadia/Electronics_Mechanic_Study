@@ -92,6 +92,13 @@ I = V / R = 10 / 100 = 0.1 A
 - **સૂત્ર:** E = P × t
 - **એકમ:** વોટ-કલાક (Watt-hour) અથવા યુનિટ (kWh — ઘરવપરાશના વીજ બિલમાં આ જ વપરાય છે)
 
+<Figure
+  src="/img/figures/module-02-ac-electrical-cables-meters/electrical-terms/tangled-electrical-wires.png"
+  number="2.1"
+  alt="A dense tangle of overhead electrical cables and wires bundled along a utility pole"
+  caption="Real-world AC power distribution cables — the physical form of the current and voltage described above."
+/>
+
 ---
 
 ## 9. AC અને DC

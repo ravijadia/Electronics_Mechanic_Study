@@ -25,6 +25,14 @@ Almost every mains-powered electronic device needs its incoming AC voltage chang
 
 ## 2. Construction
 
+<Figure
+  src="/img/figures/module-08-power-supply-circuits/transformer/hv-transformer-insulators.png"
+  number="8.1"
+  alt="Close-up of a high-voltage power transformer installation showing tall ceramic insulator stacks and bushings mounted on a steel support frame"
+  caption="Ceramic insulators and bushings on a high-voltage power transformer, used to safely bring the winding connections out to the surrounding conductors."
+  bare
+/>
+
 - **Primary winding:** Coil connected to the AC input supply.
 - **Secondary winding:** Coil that delivers the transformed AC output.
 - **Core:** A laminated iron (or ferrite, for high-frequency transformers) core that both windings share, concentrating and guiding the magnetic flux between them.

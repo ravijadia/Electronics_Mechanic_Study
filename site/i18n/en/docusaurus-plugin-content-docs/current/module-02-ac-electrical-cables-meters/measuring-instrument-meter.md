@@ -33,6 +33,13 @@ In the last chapter we learned about voltage, current, and resistance. But to ac
 | Multimeter | All three (V, I, R) | All | Depending on the selected function |
 | Wattmeter | Power | Watt (W) | Both voltage coil and current coil |
 
+<Figure
+  src="/img/figures/module-02-ac-electrical-cables-meters/measuring-instrument-meter/digital-multimeter-workshop.png"
+  number="2.2"
+  alt="A red digital multimeter with its dial set to a measurement range, connected to test leads on a workshop bench"
+  caption="A digital multimeter — the general-purpose tool that combines ammeter, voltmeter and ohmmeter functions."
+/>
+
 ---
 
 ## 3. Circuit Connection of Ammeter and Voltmeter

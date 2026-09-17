@@ -54,6 +54,13 @@ A **rectifier** converts alternating current (AC) into direct current (DC) by al
 
 ## 4. Full-Wave Bridge Rectifier
 
+<Figure
+  src="/img/figures/module-08-power-supply-circuits/rectifiers/bridge-rectifier-waveform.png"
+  number="8.4"
+  alt="A bridge rectifier circuit with four diodes D1-D4 feeding a load RL, alongside waveform graphs of the AC supply, output voltage, diode voltage, and ripple voltage"
+  caption="Bridge rectifier circuit and its output/ripple waveforms."
+/>
+
 **Circuit:** Four diodes arranged in a bridge configuration; does not require a center-tapped transformer.
 
 **Working:**
@@ -64,6 +71,13 @@ A **rectifier** converts alternating current (AC) into direct current (DC) by al
 **Result:** Same double-pulse-per-cycle output as the center-tapped full-wave rectifier, but without needing a center tap — the most common rectifier configuration in modern power supplies, often built as a single "bridge rectifier" package.
 
 ---
+
+<Figure
+  src="/img/figures/module-08-power-supply-circuits/rectifiers/half-wave-full-wave-rectifier.png"
+  number="8.5"
+  alt="Two circuit diagrams: a half-wave rectifier with a single diode and reservoir capacitor, and a full-wave bridge rectifier with four diodes and a reservoir capacitor, each with an output waveform sketch"
+  caption="Half-wave rectifier compared with a full-wave bridge rectifier, each with a smoothing (reservoir) capacitor."
+/>
 
 ## 5. Comparing the Three Rectifier Types
 

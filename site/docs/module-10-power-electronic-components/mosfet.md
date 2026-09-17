@@ -25,6 +25,13 @@ A **MOSFET (Metal Oxide Semiconductor Field Effect Transistor)** is a voltage-co
 
 ## 2. Terminals
 
+<Figure
+  src="/img/figures/module-10-power-electronic-components/mosfet/mosfet-pinout.png"
+  number="10.3"
+  alt="A TO-220 package MOSFET with its symbol and three pins labelled Gate (1), Drain (2) and Source (3)"
+  caption="MOSFET pin identification on a typical TO-220 package."
+/>
+
 - **Source (S)**, **Drain (D)**, **Gate (G)** — same functional roles as in a JFET.
 - **Substrate/Body (B):** The base semiconductor material; in many discrete MOSFETs this is internally connected to the Source.
 
@@ -60,6 +67,13 @@ Channel forms only when VGS > VGS(th)   (for N-channel Enhancement MOSFET)
 ```
 
 ---
+
+<Figure
+  src="/img/figures/module-10-power-electronic-components/mosfet/mosfet-vs-bjt.png"
+  number="10.4"
+  alt="MOSFET and BJT component photos side by side, with enhancement-mode and depletion-mode MOSFET symbols below the MOSFET, and PNP/NPN BJT symbols below the BJT"
+  caption="MOSFET versus BJT: component appearance and schematic symbols compared."
+/>
 
 ## 5. Advantages over BJT
 

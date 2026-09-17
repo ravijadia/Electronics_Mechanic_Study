@@ -27,6 +27,13 @@ Encoders and decoders are combinational logic circuits that convert data from on
 
 An **encoder** has 2^n input lines (only one active at a time) and produces an n-bit binary output code identifying which input is active. It is the reverse operation of a decoder.
 
+<Figure
+  src="/img/figures/module-12-digital-logic/encoder-decoder/4x2-encoder.png"
+  number="12.2"
+  alt="A 4x2 encoder block with four data inputs D0-D3 and two outputs Q0-Q1, next to a truth table showing which single input produces each output combination"
+  caption="A 4-to-2 line encoder block and its truth table."
+/>
+
 **Example: 4-to-2 Line Encoder**
 
 | I3 | I2 | I1 | I0 | Output Y1 | Output Y0 |
@@ -45,6 +52,13 @@ Only one input is active (logic 1) at a time; the 2-bit output identifies which 
 ## 3. Decoder
 
 A **decoder** does the opposite: it takes an n-bit binary input code and activates exactly one of 2^n output lines corresponding to that code.
+
+<Figure
+  src="/img/figures/module-12-digital-logic/encoder-decoder/2to4-binary-decoder.png"
+  number="12.3"
+  alt="A 2-to-4 binary decoder block diagram with inputs A and B and outputs Q0-Q3, its truth table, and the internal inverter and AND-gate logic that implements it"
+  caption="A 2-to-4 line decoder: block diagram, truth table, and internal gate-level implementation."
+/>
 
 **Example: 2-to-4 Line Decoder**
 

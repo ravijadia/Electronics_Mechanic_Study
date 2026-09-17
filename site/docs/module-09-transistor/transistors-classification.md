@@ -25,6 +25,13 @@ A **transistor** is a three-terminal semiconductor device used to amplify or swi
 
 ## 2. Construction
 
+<Figure
+  src="/img/figures/module-09-transistor/transistors-classification/bjt-mosfet-jfet-igbt-types.png"
+  number="9.1"
+  alt="Four transistor families with their component photos and schematic symbols: BJT (NPN/PNP bipolar), MOSFET (N-channel D and E mode), JFET (N-channel and P-channel), and IGBT"
+  caption="The BJT covered in this chapter is one of several transistor families — MOSFET, JFET and IGBT are covered in later modules."
+/>
+
 A BJT is formed by sandwiching one type of semiconductor material between two layers of the opposite type, creating two PN junctions:
 
 - **NPN transistor:** A P-type layer sandwiched between two N-type layers.

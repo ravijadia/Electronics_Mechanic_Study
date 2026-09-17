@@ -33,6 +33,13 @@ When a capacitor charges or discharges through a resistor, it doesn't change ins
 
 Where τ is in seconds, R in ohms, C in farads.
 
+<Figure
+  src="/img/figures/module-07-active-passive-components/rc-time-constant-rlc/rc-time-constant-charging-curve.png"
+  number="7.5"
+  alt="An RC charging circuit diagram next to a graph of capacitor voltage rising toward Vi, reaching 0.63Vi at time T, with the formulas T = R times C"
+  caption="Capacitor charging curve: voltage reaches ~63% of the supply after one time constant (T = RC)."
+/>
+
 - After **1τ**, the capacitor reaches ≈63% of full charge (or discharges to ≈37% of initial voltage).
 - After **5τ**, the capacitor is considered essentially fully charged (>99%) or fully discharged.
 

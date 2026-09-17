@@ -31,6 +31,13 @@ A **Light Emitting Diode (LED)** is a p-n junction semiconductor device that emi
 - The whole assembly is encapsulated in a transparent or tinted epoxy resin dome, which also acts as a lens to focus/spread the emitted light.
 - **Lead identification:** the longer lead is the anode; the cathode side of the epoxy body usually has a flat edge.
 
+<Figure
+  src="/img/figures/module-11-opto-electronics/light-emitting-diodes/led-breadboard-glowing.png"
+  number="11.1"
+  alt="A red LED glowing while connected to an Arduino microcontroller on a breadboard"
+  caption="An LED lit up (forward biased) in a simple breadboard circuit."
+/>
+
 ---
 
 ## 3. Working Principle

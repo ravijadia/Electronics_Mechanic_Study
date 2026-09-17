@@ -46,9 +46,23 @@ A **switch** is a device that makes or breaks an electrical circuit, controlling
 
 ## 4. Common Switch Types by Construction
 
+<Figure
+  src="/img/figures/module-06-soldering-switches/types-of-switches/toggle-switch-power.png"
+  number="6.2"
+  alt="A yellow industrial toggle switch mounted on a metal panel, labelled POWER with ON and OFF positions"
+  caption="A toggle switch used as a panel-mounted power control."
+/>
+
 - **Toggle switch:** Lever-operated, snaps between positions; common in panels and household wiring.
 - **Push-button switch:** Operated by pressing; may be momentary (returns to rest when released) or latching (stays in position until pressed again).
 - **Rocker switch:** Flat paddle rocks between two positions when pressed at either end; common on power strips and appliances.
+
+<Figure
+  src="/img/figures/module-06-soldering-switches/types-of-switches/rocker-switches.png"
+  number="6.3"
+  alt="A bank of five white rocker light switches mounted on a wall plate"
+  caption="A gang of rocker switches, as used for household lighting control."
+/>
 - **Slide switch:** Moved sideways along a track between positions; common in small electronics and toys.
 - **Rotary switch:** A knob is turned to select between several positions/circuits — used for range selection (e.g. multimeter function selector).
 - **DIP switch:** A small bank of miniature SPST switches on a PCB, used to set configuration options in electronic equipment.

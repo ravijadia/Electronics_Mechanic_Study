@@ -52,6 +52,13 @@ A **relay** is an electrically-operated switch: a small control current energize
 - **Contacts:** Fixed contact points that the armature connects or disconnects as it moves — typically providing both Normally Open (NO) and Normally Closed (NC) paths.
 - **Spring:** Returns the armature to its rest position when the coil is de-energized.
 
+<Figure
+  src="/img/figures/module-07-active-passive-components/magnetism-relay/relay-module-board.png"
+  number="7.3"
+  alt="A 4-relay module board with blue relay units, screw terminal blocks, and multicolored control wires"
+  caption="A multi-relay module — each blue relay switches a separate circuit when its coil is energized."
+/>
+
 **Working:**
 
 1. When the coil is **not energized**, the spring holds the armature at rest — the NC contact is closed, NO contact is open.

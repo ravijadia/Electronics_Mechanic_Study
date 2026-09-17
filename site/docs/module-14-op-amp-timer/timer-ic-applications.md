@@ -46,6 +46,13 @@ Internally, the 555 consists of two comparators, an SR flip-flop, a discharge tr
 
 The capacitor continuously charges through (R1+R2) and discharges through R2, so the output is a **continuous square wave** with no external trigger needed.
 
+<Figure
+  src="/img/figures/module-14-op-amp-timer/timer-ic-applications/breadboard-wiring.png"
+  number="14.4"
+  alt="Close-up of a breadboard circuit with multicolored jumper wires"
+  caption="A 555 astable (LED flasher) circuit is typically built and tested on a breadboard like this before being soldered onto a permanent board."
+/>
+
 ```
 f = 1.44 / ((R1 + 2R2) × C)
 ```

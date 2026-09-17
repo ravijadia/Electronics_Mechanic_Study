@@ -58,6 +58,13 @@ Load power ∝ conduction angle of the TRIAC within each AC half-cycle
 
 ## 5. Circuit Description
 
+<Figure
+  src="/img/figures/module-10-power-electronic-components/triac-diac-dimmer/triac-diac-dimmer-circuit.png"
+  number="10.2"
+  alt="A lamp dimmer circuit with a 250k potentiometer and 75nF capacitor forming the timing network, a DIAC triggering a TRIAC, controlling a 40W lightbulb load from a 60Hz AC source"
+  caption="A basic TRIAC/DIAC phase-control lamp dimmer circuit."
+/>
+
 A basic TRIAC lamp dimmer/fan regulator consists of:
 - AC mains → Load (lamp/fan) → TRIAC (MT1–MT2) → Neutral
 - Potentiometer + fixed resistor + capacitor forming the RC timing (phase-shift) network across the TRIAC

@@ -25,6 +25,13 @@ Beyond simple amplification, an op-amp used **without negative feedback** (open 
 
 ## 2. Comparator Circuit
 
+<Figure
+  src="/img/figures/module-14-op-amp-timer/op-amp-comparators-differentiator/oscilloscope-lab.png"
+  number="14.2"
+  alt="A digital oscilloscope on a laboratory workbench"
+  caption="An oscilloscope is the usual way to observe a comparator's output snapping between +Vsat and -Vsat as the input crosses the reference voltage."
+/>
+
 - The op-amp is used in **open-loop** configuration (no feedback resistor).
 - Since open-loop gain is extremely high, even a tiny voltage difference between the two inputs drives the output fully to +Vsat or −Vsat (near the supply rails).
 - If Vin (at + input) > Vref (at − input) → output = +Vsat (high)

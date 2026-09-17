@@ -25,6 +25,13 @@ A normal (rectifier) diode is designed to never be operated in reverse breakdown
 
 ## 2. Zener Breakdown
 
+<Figure
+  src="/img/figures/module-08-power-supply-circuits/zener-diodes/zener-diode-symbol-vi-curve.png"
+  number="8.6"
+  alt="A zener diode photo, its circuit symbol between anode and cathode, its forward/reverse V-I curve showing avalanche and zener breakdown, and a basic zener voltage regulator circuit with series resistor Rs and load RL"
+  caption="Zener diode symbol, its reverse breakdown region on the V-I curve, and a basic voltage regulator circuit."
+/>
+
 - When a Zener diode is **forward-biased**, it behaves exactly like a normal diode — conducting with a small forward voltage drop (~0.7V for silicon).
 - When **reverse-biased** with increasing voltage, at a specific voltage called the **Zener voltage (Vz)**, the diode enters **breakdown** — current increases sharply while the voltage across it stays essentially constant at Vz.
 - Unlike an ordinary diode's destructive reverse breakdown, this breakdown is **controlled and non-destructive**, as long as the current through the diode is kept within its rated limits (usually by a series resistor).

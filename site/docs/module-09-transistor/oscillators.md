@@ -58,6 +58,13 @@ If loop gain is less than 1, oscillations die out. If greater than 1, the amplif
 
 ## 5. Brief Overview of LC Oscillators
 
+<Figure
+  src="/img/figures/module-09-transistor/oscillators/hartley-vs-colpitts-oscillator.png"
+  number="9.3"
+  alt="Side-by-side circuit diagrams of a Hartley oscillator (tapped inductor) and a Colpitts oscillator (tapped capacitor), each with a transistor and feedback network, and a comparison of their properties"
+  caption="Hartley oscillator (tapped inductor) versus Colpitts oscillator (tapped capacitor)."
+/>
+
 - **Hartley Oscillator:** Uses a tapped inductor (two inductors, or one inductor with a center tap) with a single capacitor to form the LC tank circuit and provide feedback.
 - **Colpitts Oscillator:** Uses a tapped capacitor (two capacitors in series) with a single inductor to form the tank circuit and provide feedback — mirror-image of the Hartley in construction.
 

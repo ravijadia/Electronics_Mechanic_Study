@@ -33,6 +33,13 @@ sidebar_label: માપન સાધન મીટર (Measuring Instrument Mete
 | મલ્ટિમીટર (Multimeter) | ત્રણેય (V, I, R) | બધા | પસંદ કરેલા ફંક્શન પ્રમાણે |
 | વોટમીટર (Wattmeter) | પાવર (Power) | વોટ (W) | વોલ્ટેજ કોઈલ + કરંટ કોઈલ બંને |
 
+<Figure
+  src="/img/figures/module-02-ac-electrical-cables-meters/measuring-instrument-meter/digital-multimeter-workshop.png"
+  number="2.2"
+  alt="A red digital multimeter with its dial set to a measurement range, connected to test leads on a workshop bench"
+  caption="A digital multimeter — the general-purpose tool that combines ammeter, voltmeter and ohmmeter functions."
+/>
+
 ---
 
 ## 3. એમ્મીટર અને વોલ્ટમીટરનું સર્કિટ જોડાણ

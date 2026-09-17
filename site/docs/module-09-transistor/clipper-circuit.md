@@ -25,6 +25,13 @@ A **clipper (or limiter) circuit** is a diode-based wave-shaping circuit that re
 
 ## 2. Basic Principle
 
+<Figure
+  src="/img/figures/module-09-transistor/clipper-circuit/transistor-clipper-circuit.png"
+  number="9.7"
+  alt="A textbook figure of a transistor used as a clipper: base resistor RB and input Vin drive the base, with collector resistor RC to Vcc and output taken at the collector"
+  caption="A transistor can also act as a clipper by driving it between cutoff and saturation — a related clipping technique to the diode clippers below."
+/>
+
 A clipper uses one or more diodes, arranged either in **series** or in **shunt (parallel)** with the load, along with a DC reference (bias) voltage in some designs, to allow the diode to conduct only during part of the input cycle — the portion during which it does not conduct is "clipped" from the output.
 
 ---

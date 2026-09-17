@@ -25,6 +25,13 @@ A **Field Effect Transistor (FET)** is a three-terminal semiconductor device in 
 
 ## 2. Terminals
 
+<Figure
+  src="/img/figures/module-10-power-electronic-components/field-effect-transistor/fet-symbol-and-working.png"
+  number="10.1"
+  alt="A field effect transistor component photo with Gate, Drain and Source pins labelled, its N-channel and P-channel schematic symbols, and a cross-section diagram showing the depletion region between source and drain"
+  caption="FET terminals, symbol, and internal channel/depletion-region structure."
+/>
+
 - **Source (S):** Terminal through which majority carriers enter the channel.
 - **Drain (D):** Terminal through which majority carriers leave the channel.
 - **Gate (G):** Control terminal; the voltage applied here controls the channel width and hence the drain current.
