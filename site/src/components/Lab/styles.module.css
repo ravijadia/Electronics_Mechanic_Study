@@ -1,0 +1,897 @@
+/* Shared look for the virtual practicals. Colours are tokens on .root so dark
+   mode only has to redefine them once. */
+
+.root {
+  --lab-panel: #ffffff;
+  --lab-sunken: #f3f5f4;
+  --lab-line: #d5dcd8;
+  --lab-ink: #17211c;
+  --lab-muted: #5a6b62;
+  --lab-accent: #2e8555;
+  --lab-accent-ink: #ffffff;
+  --lab-kit: #24313a;
+  --lab-kit-edge: #182128;
+  --lab-kit-ink: #e9eef0;
+  --lab-kit-muted: #9fb0ba;
+  --lab-wire: #d9dee2;
+  --lab-live: #ffcf3f;
+  --lab-lcd: #c8d7b4;
+  --lab-lcd-ink: #1d2618;
+  --lab-dmm: #f2c230;
+  --lab-dmm-edge: #c99a10;
+  --lab-good: #1f8a4c;
+  --lab-warn: #b86e00;
+  --lab-bad: #c8352a;
+  --s1: #2a78d6;
+  --s2: #eb6834;
+  --s3: #1baf7a;
+  --s4: #eda100;
+
+  margin: 2rem 0;
+  border: 1px solid var(--lab-line);
+  border-radius: 14px;
+  background: var(--lab-panel);
+  color: var(--lab-ink);
+  /* clip (not hidden) so the sticky task panel still sticks to the viewport */
+  overflow: clip;
+  container-type: inline-size;
+}
+
+[data-theme='dark'] .root {
+  --lab-panel: #1b1f1d;
+  --lab-sunken: #232826;
+  --lab-line: #36403b;
+  --lab-ink: #e6ece8;
+  --lab-muted: #a2b2a9;
+  --lab-accent: #3fbf7f;
+  --lab-accent-ink: #0d1a13;
+  --lab-kit: #141b20;
+  --lab-kit-edge: #0b1013;
+  --lab-good: #4cc584;
+  --lab-warn: #f0a63a;
+  --lab-bad: #ff7466;
+  --s1: #3987e5;
+  --s2: #d95926;
+  --s3: #199e70;
+  --s4: #c98500;
+}
+
+/* ---------- header ---------- */
+
+.header {
+  padding: 1rem 1.1rem 0.9rem;
+  border-bottom: 1px solid var(--lab-line);
+  background: var(--lab-sunken);
+}
+.kicker {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--lab-accent);
+}
+.title {
+  margin: 0.15rem 0 0.4rem;
+  font-size: 1.35rem;
+  line-height: 1.25;
+}
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--lab-muted);
+}
+.pbar {
+  flex: 0 1 220px;
+  height: 8px;
+  border-radius: 8px;
+  background: var(--lab-line);
+  overflow: hidden;
+}
+.pbar span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--lab-accent);
+  transform-origin: left center;
+  transition: transform 0.4s;
+}
+
+/* ---------- sections ---------- */
+
+.section {
+  padding: 1rem 1.1rem;
+  border-bottom: 1px solid var(--lab-line);
+}
+.section:last-child {
+  border-bottom: 0;
+}
+.section > h4,
+.sectionTitle {
+  margin: 0 0 0.6rem;
+  font-size: 1.02rem;
+}
+.section p:last-child,
+.section ol:last-child,
+.section ul:last-child {
+  margin-bottom: 0;
+}
+.muted {
+  color: var(--lab-muted);
+  font-size: 0.9rem;
+}
+
+details.section > summary {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.02rem;
+}
+details.section[open] > summary {
+  margin-bottom: 0.6rem;
+}
+
+.twoCol {
+  display: grid;
+  gap: 1rem;
+}
+@media (min-width: 760px) {
+  .twoCol {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.tasks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+.tasks li {
+  display: flex;
+  gap: 0.55rem;
+  align-items: flex-start;
+}
+.check {
+  flex: 0 0 auto;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.15rem;
+  border-radius: 50%;
+  border: 2px solid var(--lab-line);
+  display: grid;
+  place-items: center;
+  font-size: 0.75rem;
+  font-weight: 800;
+  line-height: 1;
+}
+.check.done {
+  background: var(--lab-good);
+  border-color: var(--lab-good);
+  color: #fff;
+}
+
+/* ---------- bench ---------- */
+
+.kit {
+  border-radius: 12px;
+  padding: 0.4rem;
+  background: var(--lab-kit);
+  box-shadow: inset 0 0 0 2px var(--lab-kit-edge);
+}
+.kit {
+  overflow-x: auto;
+}
+.kit svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+/* On phones keep drawings big enough to read; the kit scrolls sideways. */
+@media (max-width: 759px) {
+  .kit svg {
+    min-width: 560px;
+  }
+}
+@media print {
+  .kit svg {
+    min-width: 0;
+  }
+}
+.wire {
+  stroke: var(--lab-wire);
+  stroke-width: 3;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.flow {
+  stroke: var(--lab-live);
+  stroke-width: 3;
+  fill: none;
+  stroke-dasharray: 2 12;
+  stroke-linecap: round;
+  animation: flow linear infinite;
+}
+@keyframes flow {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .flow {
+    animation: none;
+  }
+}
+.kitText {
+  fill: var(--lab-kit-ink);
+  font-family: var(--ifm-font-family-base);
+  font-size: 12px;
+}
+.kitText.small {
+  font-size: 10.5px;
+  fill: var(--lab-kit-muted);
+}
+.kitText.bold {
+  font-weight: 700;
+}
+.slotBox {
+  fill: none;
+  stroke: var(--lab-kit-muted);
+  stroke-dasharray: 4 4;
+  stroke-width: 1.3;
+}
+.clickable {
+  cursor: pointer;
+}
+
+.controls {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 0.9rem;
+}
+@media (min-width: 760px) {
+  .controls {
+    grid-template-columns: minmax(0, 1.5fr) minmax(250px, 1fr);
+  }
+}
+.card {
+  border: 1px solid var(--lab-line);
+  border-radius: 12px;
+  padding: 0.75rem 0.85rem;
+  background: var(--lab-panel);
+}
+.cardTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.cardTitle output {
+  font-family: var(--ifm-font-family-monospace);
+  color: var(--lab-accent);
+  font-size: 1.05rem;
+}
+.label {
+  display: block;
+  margin: 0.55rem 0 0.3rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--lab-muted);
+}
+
+.range {
+  width: 100%;
+  accent-color: var(--lab-accent);
+  height: 32px;
+  margin: 0;
+}
+.row {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.btn,
+.seg button {
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0.38rem 0.75rem;
+  border-radius: 8px;
+  border: 1.5px solid var(--lab-line);
+  background: transparent;
+  color: var(--lab-ink);
+  cursor: pointer;
+  min-height: 36px;
+}
+.btn:hover,
+.seg button:hover {
+  border-color: var(--lab-accent);
+}
+.btn:focus-visible,
+.seg button:focus-visible,
+.chip:focus-visible {
+  outline: 3px solid var(--lab-accent);
+  outline-offset: 2px;
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.primary {
+  background: var(--lab-accent);
+  border-color: var(--lab-accent);
+  color: var(--lab-accent-ink);
+}
+.danger {
+  border-color: var(--lab-bad);
+  color: var(--lab-bad);
+}
+.seg {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+.seg button[aria-pressed='true'] {
+  background: var(--lab-accent);
+  border-color: var(--lab-accent);
+  color: var(--lab-accent-ink);
+}
+
+.power {
+  font-weight: 800;
+  min-width: 96px;
+}
+.power[aria-pressed='true'] {
+  background: var(--lab-bad);
+  border-color: var(--lab-bad);
+  color: #fff;
+}
+
+.tray {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.4rem;
+}
+.chip {
+  font: inherit;
+  border: 1.5px solid var(--lab-line);
+  border-radius: 10px;
+  background: var(--lab-sunken);
+  color: var(--lab-ink);
+  padding: 0.3rem 0.2rem 0.25rem;
+  cursor: pointer;
+  display: grid;
+  justify-items: center;
+  gap: 0.1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.chip[aria-pressed='true'] {
+  border-color: var(--lab-accent);
+  box-shadow: 0 0 0 2px var(--lab-accent);
+}
+.chip svg {
+  width: 100%;
+  max-width: 84px;
+  height: auto;
+}
+
+.message {
+  --tone: var(--lab-accent);
+  margin-top: 0.8rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--tone) 45%, transparent);
+  background: color-mix(in srgb, var(--tone) 9%, var(--lab-panel));
+  font-size: 0.92rem;
+}
+.message.warn {
+  --tone: var(--lab-warn);
+}
+.message.bad {
+  --tone: var(--lab-bad);
+}
+.message.good {
+  --tone: var(--lab-good);
+}
+.message.info {
+  --tone: var(--lab-muted);
+}
+
+/* ---------- multimeter ---------- */
+
+.dmm {
+  border-radius: 14px;
+  padding: 0.6rem;
+  background: var(--lab-dmm);
+  box-shadow: inset 0 0 0 2px var(--lab-dmm-edge);
+  color: #1d1a10;
+}
+.dmmHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-weight: 800;
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+}
+.dmmHead small {
+  font-weight: 600;
+}
+.lcd {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  gap: 0.4rem;
+  background: var(--lab-lcd);
+  color: var(--lab-lcd-ink);
+  border-radius: 8px;
+  padding: 0.35rem 0.6rem;
+  min-height: 3.1rem;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25);
+  font-family: var(--ifm-font-family-monospace);
+}
+.lcd b {
+  font-size: 1.85rem;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+}
+.lcd span {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+.lcd.off {
+  opacity: 0.55;
+}
+.dmm .seg {
+  margin-top: 0.5rem;
+}
+.dmm .seg button,
+.dmm .btn {
+  border-color: rgba(0, 0, 0, 0.35);
+  color: #1d1a10;
+  background: rgba(255, 255, 255, 0.35);
+  font-size: 0.8rem;
+  padding: 0.3rem 0.5rem;
+}
+.dmm .seg button[aria-pressed='true'] {
+  background: #1d1a10;
+  border-color: #1d1a10;
+  color: var(--lab-dmm);
+}
+.dmmFoot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.45rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.blown {
+  color: #8f1d14;
+  font-weight: 800;
+}
+
+/* ---------- tables & graph ---------- */
+
+.tableWrap {
+  overflow-x: auto;
+  margin-bottom: 0.8rem;
+}
+.table {
+  width: 100%;
+  display: table;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin: 0;
+}
+.table th,
+.table td {
+  border: 1px solid var(--lab-line);
+  padding: 0.35rem 0.5rem;
+  text-align: center;
+}
+.table thead th {
+  background: var(--lab-sunken);
+}
+.table tr:nth-child(2n) {
+  background: transparent;
+}
+.num {
+  font-family: var(--ifm-font-family-monospace);
+  font-variant-numeric: tabular-nums;
+}
+.swatch {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.35rem;
+}
+.iconBtn {
+  font: inherit;
+  border: 0;
+  background: transparent;
+  color: var(--lab-muted);
+  cursor: pointer;
+  padding: 0.15rem 0.4rem;
+  border-radius: 6px;
+}
+.iconBtn:hover {
+  color: var(--lab-bad);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  font-size: 0.85rem;
+  color: var(--lab-muted);
+  margin-bottom: 0.35rem;
+}
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.graph {
+  position: relative;
+}
+.graph svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.axis {
+  stroke: var(--lab-muted);
+  stroke-width: 1;
+}
+.grid {
+  stroke: var(--lab-line);
+  stroke-width: 1;
+}
+.tick {
+  fill: var(--lab-muted);
+  font-size: 11px;
+  font-family: var(--ifm-font-family-base);
+}
+.axisTitle {
+  fill: var(--lab-ink);
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--ifm-font-family-base);
+}
+.tooltip {
+  position: absolute;
+  pointer-events: none;
+  transform: translate(-50%, calc(-100% - 10px));
+  background: var(--lab-panel);
+  border: 1px solid var(--lab-line);
+  border-radius: 8px;
+  padding: 0.3rem 0.55rem;
+  font-size: 0.82rem;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+.empty {
+  padding: 1.4rem;
+  text-align: center;
+  border: 1.5px dashed var(--lab-line);
+  border-radius: 10px;
+  color: var(--lab-muted);
+  font-size: 0.92rem;
+}
+
+.input {
+  font: inherit;
+  width: 100%;
+  max-width: 7.5rem;
+  padding: 0.3rem 0.45rem;
+  border-radius: 6px;
+  border: 1.5px solid var(--lab-line);
+  background: var(--lab-panel);
+  color: var(--lab-ink);
+}
+.field {
+  display: grid;
+  gap: 0.2rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--lab-muted);
+}
+.field .input {
+  max-width: none;
+}
+.fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.6rem;
+  margin-bottom: 0.8rem;
+}
+.ok {
+  color: var(--lab-good);
+  font-weight: 700;
+}
+.no {
+  color: var(--lab-bad);
+  font-weight: 700;
+}
+
+.viva {
+  display: grid;
+  gap: 0.4rem;
+}
+.viva details {
+  border: 1px solid var(--lab-line);
+  border-radius: 8px;
+  padding: 0.45rem 0.7rem;
+}
+.viva summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.viva details p {
+  margin: 0.4rem 0 0.1rem;
+}
+
+.printOnly {
+  display: none;
+}
+
+@media print {
+  .noPrint {
+    display: none !important;
+  }
+  .printOnly {
+    display: block;
+  }
+  .root {
+    border: 0;
+    margin: 0;
+  }
+  .kit {
+    background: #fff !important;
+    box-shadow: inset 0 0 0 1px #999;
+  }
+  .flow {
+    display: none;
+  }
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media print {
+  .wire {
+    stroke: #333;
+  }
+  .kitText,
+  .kitText.small {
+    fill: #111;
+  }
+  .slotBox {
+    stroke: #555;
+  }
+}
+
+/* The printed record is always black-on-white, whatever theme is on screen. */
+@media print {
+  .root,
+  [data-theme='dark'] .root {
+    --lab-panel: #ffffff;
+    --lab-sunken: #f1f1f1;
+    --lab-line: #999999;
+    --lab-ink: #000000;
+    --lab-muted: #333333;
+    --lab-accent: #1d6b43;
+    --lab-good: #1f6b3c;
+    --lab-bad: #a3241b;
+    --s1: #2a78d6;
+    --s2: #eb6834;
+    --s3: #1baf7a;
+    --s4: #eda100;
+    background: #fff;
+    color: #000;
+  }
+}
+
+.lcdIndicator {
+  margin-right: auto;
+  align-self: center;
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+/* ---------- probes ---------- */
+
+.probePoint {
+  fill: #c79a52;
+  stroke: #6b4e1f;
+  stroke-width: 1.5;
+}
+.clickable:hover .probePoint,
+.clickable:focus-visible .probePoint {
+  stroke: var(--lab-live);
+  stroke-width: 3;
+}
+.clickable:focus-visible {
+  outline: none;
+}
+.probeBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.8rem;
+  margin-top: 0.7rem;
+}
+.probeDot {
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  border: 1.5px solid #fff;
+  box-shadow: 0 0 0 1px #888;
+  vertical-align: -1px;
+}
+.select {
+  font: inherit;
+  font-size: 0.9rem;
+  padding: 0.3rem 0.45rem;
+  border-radius: 6px;
+  border: 1.5px solid var(--lab-line);
+  background: var(--lab-panel);
+  color: var(--lab-ink);
+  min-height: 34px;
+}
+
+/* ---------- analog meter ---------- */
+
+.analog {
+  display: block;
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+  margin: 0 auto;
+}
+.chatter {
+  animation: chatter 0.09s linear infinite alternate;
+}
+@keyframes chatter {
+  from {
+    transform: rotate(-1.4deg);
+  }
+  to {
+    transform: rotate(1.4deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chatter {
+    animation: none;
+  }
+}
+.meterGrid {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.micro {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* ---------- sheet layout: practical + task panel ---------- */
+
+.body {
+  display: grid;
+}
+.main {
+  min-width: 0;
+}
+.taskPanel {
+  padding: 0.6rem 1.1rem 0.7rem;
+  border-bottom: 1px solid var(--lab-line);
+  background: var(--lab-sunken);
+  font-size: 0.9rem;
+  /* narrow layout: a slim progress bar that stays in view */
+  position: sticky;
+  top: var(--ifm-navbar-height);
+  z-index: 3;
+}
+.taskHead {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+.taskHead b {
+  margin-right: auto;
+}
+.taskToggle {
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  min-height: 32px;
+  border-radius: 8px;
+  border: 1.5px solid var(--lab-line);
+  background: var(--lab-panel);
+  color: var(--lab-ink);
+  cursor: pointer;
+}
+.tasksCollapsed {
+  display: none;
+}
+.taskHead span {
+  font-weight: 700;
+  color: var(--lab-muted);
+  font-variant-numeric: tabular-nums;
+}
+.taskPanel .pbar {
+  display: block;
+  max-width: none;
+}
+.taskPanel .tasks {
+  margin-top: 0.7rem;
+}
+.taskPanel .tasks {
+  gap: 0.5rem;
+}
+.taskDone {
+  color: var(--lab-muted);
+}
+.allDone {
+  margin-top: 0.8rem;
+  font-weight: 700;
+  color: var(--lab-good);
+}
+@container (min-width: 900px) {
+  .body {
+    grid-template-columns: minmax(0, 1fr) 260px;
+  }
+  .main {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .taskPanel {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+    position: sticky;
+    top: calc(var(--ifm-navbar-height) + 0.75rem);
+    margin: 0.9rem 0.9rem 0.9rem 0;
+    padding: 0.85rem 1.1rem;
+    border: 1px solid var(--lab-line);
+    border-radius: 12px;
+    z-index: auto;
+  }
+  .taskToggle {
+    display: none;
+  }
+  .tasksCollapsed {
+    display: grid;
+  }
+}
+
+/* Drawings that stay legible when shrunk to phone width. */
+@media (max-width: 759px) {
+  .kit.fit svg {
+    min-width: 0;
+  }
+}

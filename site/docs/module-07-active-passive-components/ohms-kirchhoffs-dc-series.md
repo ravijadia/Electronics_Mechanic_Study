@@ -99,7 +99,15 @@ Check (KVL): 4 + 8 + 12 = 24V ✓
 
 ---
 
-## 6. Key Points to Remember
+## 6. Virtual Practical: Verify Ohm's Law
+
+Exercise **1.7.54** on a virtual trainer kit. All practicals: [Virtual Lab](/practicals).
+
+<OhmsLawLab />
+
+---
+
+## 7. Key Points to Remember
 
 - Ohm's Law: V = I × R — connects voltage, current, and resistance
 - KCL: current entering a junction equals current leaving it
@@ -109,7 +117,7 @@ Check (KVL): 4 + 8 + 12 = 24V ✓
 
 ---
 
-## 7. Practice Questions
+## 8. Practice Questions
 
 1. A 9V battery is connected across a 3Ω resistor. Find the current.
 2. State Kirchhoff's Current Law in your own words.

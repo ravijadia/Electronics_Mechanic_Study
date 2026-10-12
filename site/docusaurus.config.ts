@@ -118,6 +118,7 @@ const config: Config = {
           label: 'Study Material',
         },
         {to: '/tests', label: 'Tests', position: 'left'},
+        {to: '/practicals', label: 'Virtual Lab', position: 'left'},
         {to: '/blog', label: 'Announcements', position: 'left'},
         {
           type: 'localeDropdown',

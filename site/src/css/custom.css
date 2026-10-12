@@ -28,3 +28,30 @@
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+/* Virtual practicals: "Print / Save record" prints only the practical sheet. */
+@media print {
+  html.lab-printing body * {
+    visibility: hidden;
+  }
+  html.lab-printing .lab-print-root,
+  html.lab-printing .lab-print-root * {
+    visibility: visible;
+  }
+  html.lab-printing .lab-print-root {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+  }
+}
+@media print {
+  html.lab-printing,
+  html.lab-printing body {
+    background: #fff !important;
+  }
+}
+
+/* Virtual practical pages: wide, centred */
+.lab-page main.container {
+  max-width: 1360px;
+}
