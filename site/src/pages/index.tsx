@@ -19,13 +19,16 @@ function HomepageHeader() {
         </Heading>
         <p className="hero__subtitle">
           <Translate id="homepage.hero.subtitle">
-            Study Material, MCQ Tests and Announcements for Electronic
-            Mechanic Trade Trainees
+            Study Material, MCQ Tests, Virtual Lab and Announcements for
+            Electronic Mechanic Trade Trainees
           </Translate>
         </p>
         <div className={styles.buttons}>
           <Link className="button button--secondary button--lg" to="/docs/intro">
             <Translate id="homepage.hero.cta">View Study Material</Translate>
+          </Link>
+          <Link className="button button--outline button--secondary button--lg" to="/practicals">
+            <Translate id="homepage.hero.lab">Open Virtual Lab</Translate>
           </Link>
         </div>
       </div>

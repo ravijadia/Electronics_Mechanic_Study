@@ -1,9 +1,18 @@
 {
   "homepage.hero.subtitle": {
-    "message": "સ્ટડી મટીરીયલ, MCQ ટેસ્ટ અને જાહેરાતો — Electronic Mechanic Trade ટ્રેઇનીઓ માટે"
+    "message": "સ્ટડી મટીરીયલ, MCQ ટેસ્ટ, વર્ચ્યુઅલ લેબ અને જાહેરાતો — Electronic Mechanic Trade ટ્રેઇનીઓ માટે"
   },
   "homepage.hero.cta": {
     "message": "સ્ટડી મટીરીયલ જુઓ"
+  },
+  "homepage.hero.lab": {
+    "message": "વર્ચ્યુઅલ લેબ ખોલો"
+  },
+  "homepage.feature.lab.title": {
+    "message": "વર્ચ્યુઅલ લેબ"
+  },
+  "homepage.feature.lab.description": {
+    "message": "પ્રેક્ટિકલ સ્ક્રીન પર કરો — સર્કિટ જોડો, રીડિંગ લો અને પ્રેક્ટિકલ રેકોર્ડ પ્રિન્ટ કરો."
   },
   "homepage.meta.description": {
     "message": "Electronic Mechanic Trade — સ્ટડી મટીરીયલ, MCQ ટેસ્ટ અને જાહેરાતો"

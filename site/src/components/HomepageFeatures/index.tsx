@@ -38,6 +38,17 @@ const FeatureList: FeatureItem[] = [
     ),
   },
   {
+    title: <Translate id="homepage.feature.lab.title">Virtual Lab</Translate>,
+    Svg: require('@site/static/img/virtual_lab.svg').default,
+    to: '/practicals',
+    description: (
+      <Translate id="homepage.feature.lab.description">
+        Do the practicals on screen — wire circuits, take readings and print
+        your practical record.
+      </Translate>
+    ),
+  },
+  {
     title: (
       <Translate id="homepage.feature.announcements.title">
         Announcements
@@ -55,7 +66,7 @@ const FeatureList: FeatureItem[] = [
 
 function Feature({title, Svg, description, to}: FeatureItem) {
   return (
-    <div className={clsx('col col--4')}>
+    <div className={clsx('col col--3')}>
       <Link to={to} className={styles.featureLink}>
         <div className="text--center">
           <Svg className={styles.featureSvg} role="img" />
