@@ -72,10 +72,11 @@ export function AnalogIcTesterLab(): React.JSX.Element {
         {q: 'What should you do with a FAIL result?', a: 'Replace the IC. Do not fit it back in a circuit.'},
         {q: 'What can happen if an IC is inserted the wrong way round?', a: 'The supply is reversed across it and it can be destroyed.'},
       ]}
-      tasks={[
-        {label: 'Run the test on all six ICs.', done: items.every((_, k) => ran[k])},
-        {label: 'Record good / faulty for all six.', done: items.every((_, k) => ok(k))},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Check pin 1 sits at the socket notch.', hint: 'Use Turn IC round if it does not. A reversed IC is damaged.', done: items.some((_, k) => ran[k]) || !reversed},
+        {label: `Select each IC and press Run test. Tested: ${items.filter((_, k) => ran[k]).length}/${items.length}`, hint: 'The ICs are in the row above the tester.', done: items.every((_, k) => ran[k])},
+        {label: `Mark each IC Good or Faulty in the table. Right: ${items.filter((_, k) => ok(k)).length}/${items.length}`, hint: 'PASS = Good, FAIL = Faulty.', done: items.every((_, k) => ok(k))},
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -254,11 +255,11 @@ export function OpAmpAmplifierLab(): React.JSX.Element {
         {q: 'Minimum possible gain of a non-inverting amplifier?', a: '1 (unity, when Rf = 0, the voltage follower).'},
         {q: 'Why does the measured Vout differ a little from the calculated value?', a: 'Resistors have a tolerance (±5 %), so the real ratio Rf/Rin is not exactly the marked one.'},
       ]}
-      tasks={[
-        {label: 'Verify the inverting amplifier (2+ readings).', done: done('inv')},
-        {label: 'Verify the non-inverting amplifier (2+ readings).', done: done('noninv')},
-        {label: 'Verify the summing amplifier (2+ readings).', done: done('sum')},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: `Inverting: pick Rin, Rf and Vin, then press Note reading. Readings: ${Math.min(useful('inv').length, 2)}/2`, hint: 'Change Vin or Rf between readings. Gain = −Rf/Rin.', done: done('inv')},
+        {label: `Non-inverting: select it and note 2 readings. Readings: ${Math.min(useful('noninv').length, 2)}/2`, hint: 'Gain = 1 + Rf/Rin. Output is in phase.', done: done('noninv')},
+        {label: `Summing: select it and note 2 readings. Readings: ${Math.min(useful('sum').length, 2)}/2`, hint: 'Set Vin1 and Vin2. Vout = −Rf(Vin1/Rin + Vin2/Rin2).', done: done('sum')},
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -355,12 +356,12 @@ export function DifferentiatorIntegratorLab(): React.JSX.Element {
         {q: 'Why does a differentiator replace Rin with a capacitor?', a: 'So the input current (and hence Vout) depends on dVin/dt, not Vin itself.'},
         {q: 'Formula for the differentiator?', a: 'Vout = −RC(dVin/dt).'},
       ]}
-      tasks={[
-        {label: 'Observe the differentiator with a triangular input.', done: !!seen['diff:triangle']},
-        {label: 'Observe the differentiator with a square-wave input.', done: !!seen['diff:square']},
-        {label: 'Observe the integrator with a square-wave input.', done: !!seen['int:square']},
-        {label: 'Observe the integrator with a sine input.', done: !!seen['int:sine']},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Differentiator, triangular input: press Note this waveform.', hint: 'Compare CH1 (input) with CH2 (output). Expect a square wave.', done: !!seen['diff:triangle']},
+        {label: 'Differentiator, square-wave input: set the generator and note it.', hint: 'Expect sharp spikes at each edge.', done: !!seen['diff:square']},
+        {label: 'Select Integrator, square-wave input: note it.', hint: 'Expect a triangular wave.', done: !!seen['int:square']},
+        {label: 'Integrator, sine input: note it.', hint: 'Expect a cosine, shifted 90°.', done: !!seen['int:sine']},
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -463,9 +464,11 @@ export function ZeroCrossingLab(): React.JSX.Element {
         {q: 'Why is the output not exactly ±15 V?', a: 'A 741 output cannot reach the supply rails; it saturates about 1.5 V short of each.'},
         {q: 'Name one application.', a: 'Converting a sine wave to a square wave / timing reference / frequency counting.'},
       ]}
-      tasks={[
-        {label: 'Set up the comparator and view both traces together.', done: checked},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Switch the function generator output on (sine).', hint: 'A 6 V peak sine is a good start.', done: fg.state.on},
+        {label: 'Show CH1 and CH2 together on the scope.', hint: 'Turn both channels on and set the display to DUAL.', done: bothShown},
+        {label: 'Check the output flips at every input zero crossing, then press Confirm.', hint: 'CH1 is the input sine, CH2 the square output.', done: checked},
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -568,6 +571,7 @@ export function InstrumentationAmpLab(): React.JSX.Element {
   const vout = instrumentationAmp(v1, v2, rGain * tol.rg, IA_R * tol.r, VCC, tol.leak);
   const calc = instrumentationAmp(v1, v2, rGain, IA_R, VCC);
   const saturated = isSaturated(vout, VCC);
+  const diffRows = rows.filter((x) => x.v1 !== x.v2);
 
   const noteIt = () => {
     if (saturated) {
@@ -601,10 +605,11 @@ export function InstrumentationAmpLab(): React.JSX.Element {
         {q: 'What should Vout be when V1 = V2?', a: 'Close to 0 V. A common-mode signal is rejected.'},
         {q: 'Why is Vout not exactly 0 V for a common-mode input?', a: 'The output-stage resistors are not perfectly matched, so a little common-mode signal leaks through (finite CMRR).'},
       ]}
-      tasks={[
-        {label: 'Measure Vout for 2+ readings.', done: rows.length >= 2},
-        {label: 'Apply a common-mode signal (V1 = V2) and confirm Vout ≈ 0.', done: cmTested},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: `Pick Rgain and V2 − V1, then press Note reading. Readings: ${Math.min(diffRows.length, 2)}/2`, hint: 'Gain = 1 + 2R/Rgain. Keep the output off the rails.', done: diffRows.length >= 2},
+        {label: 'Change Rgain and note a reading again.', hint: 'A smaller Rgain gives a larger gain.', done: new Set(diffRows.map((x) => x.rGain)).size >= 2},
+        {label: 'Set V2 − V1 to 0 (V2 = V1) and note Vout.', hint: 'Common-mode input: Vout should be close to 0 V.', done: cmTested},
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -745,10 +750,10 @@ export function DacLab(): React.JSX.Element {
         {q: 'Output step size of a 4-bit DAC with Vref = 5 V?', a: '5 V / 16 = 0.3125 V per step.'},
         {q: 'Why is the binary-weighted DAC output negative?', a: 'It is an inverting summing amplifier. The R-2R ladder here feeds a non-inverting buffer.'},
       ]}
-      tasks={[
-        {label: 'Test 4 or more codes on the binary-weighted DAC.', done: rows.bw.length >= 4},
-        {label: 'Test 4 or more codes on the R-2R ladder DAC.', done: rows.r2r.length >= 4},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: `Select Binary-weighted and note 4 codes. Codes: ${Math.min(rows.bw.length, 4)}/4`, hint: 'Tap b3…b0 to set a code, then Note reading. Output is negative.', done: rows.bw.length >= 4},
+        {label: `Select R-2R ladder and note 4 codes. Codes: ${Math.min(rows.r2r.length, 4)}/4`, hint: 'Step size is Vref/16 for both DACs.', done: rows.r2r.length >= 4},
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

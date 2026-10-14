@@ -68,9 +68,10 @@ export function IdentifyFlipFlopLab(): React.JSX.Element {
         {q: 'What does "master-slave" mean for a flip-flop?', a: 'Two internal latch stages: the master captures the input while the clock is high, the slave only updates on the falling edge, avoiding mid-pulse glitches.'},
         {q: 'Why is 7475 called a latch and not a flip-flop?', a: 'It is level-triggered (transparent while its enable is active), not edge-triggered.'},
       ]}
-      tasks={[
-        {label: 'Classify all eight ICs.', done},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: `Choose a type for every IC in the Observation table. Chosen: ${items.filter((_, k) => !!ans[k]).length}/${items.length}`, hint: 'Read the marking on each IC. Look it up in the data book.', done: items.every((_, k) => !!ans[k])},
+        {label: 'Correct every ✗ until all eight are right.', hint: 'Check the type column in the data book.', done},
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Component tray">

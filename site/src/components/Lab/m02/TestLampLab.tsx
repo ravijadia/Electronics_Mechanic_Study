@@ -96,11 +96,11 @@ export default function TestLampLab(): React.JSX.Element {
         {q: 'The lamp glows between right–left and left–earth, but not between right–earth. What is wrong?', a: 'Phase is on the left hole, so phase and neutral are reversed.'},
         {q: 'Which is safer for testing live circuits: a test lamp or a neon tester? Why?', a: 'Both need care. A test lamp needs two insulated prods and a properly rated lamp. A neon tester uses your body as the return path through a very high resistance, so it only shows phase.'},
       ]}
-      tasks={[
-        {label: 'Select the correct parts and build the test lamp.', done: built},
-        {label: 'Test all three hole pairs on every board.', done: tested.length === boards.length},
-        {label: 'Diagnose every board correctly.', done: correct.length === boards.length},
-        {label: 'Fill in your details and print or save the record.', done: printed},
+      steps={[
+        {label: 'Choose the correct parts and build the test lamp.', hint: 'Pick only the parts a safe test lamp needs.', done: built},
+        {label: 'Test all three hole pairs on each board.', hint: 'Use the test lamp on every board.', done: tested.length === boards.length},
+        {label: 'Diagnose each board.', hint: 'Judge from the lamp glow.', done: correct.length === boards.length},
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Step 1: Build the test lamp" noPrint={built}>

@@ -136,11 +136,11 @@ export default function ContinuityLab(): React.JSX.Element {
         {q: 'What should a good switch read in its ON and OFF positions?', a: 'ON: nearly 0 Ω with a beep. OFF: OL.'},
         {q: 'Why must continuity never be tested on a live circuit?', a: 'The meter sends its own small current. External voltage can damage the meter and give a false reading.'},
       ]}
-      tasks={[
-        {label: 'Check the meter and its leads by touching the probes together.', done: leadsChecked && leadsOk},
-        {label: 'Test every item (the switch in both positions).', done: allTested},
-        {label: 'Mark every item good or faulty correctly.', done: allJudged && allRight},
-        {label: 'Fill in your details and print or save the record.', done: printed},
+      steps={[
+        {label: 'Touch the probes together to check the meter and leads.', hint: 'Reading near 0 Ω means the leads are good.', done: leadsChecked && leadsOk},
+        {label: 'Test every item. Test the switch in both positions.', hint: 'Items must not be connected to any supply.', done: allTested},
+        {label: 'Mark each item good or faulty.', hint: 'Judge from your readings.', done: allJudged && allRight},
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

@@ -64,11 +64,11 @@ export function FourBitLatchLab(): React.JSX.Element {
         {q: 'What happens to Q1, Q2 when C1 goes LOW?', a: 'They hold (freeze at) whatever value they last had.'},
         {q: 'Why are the four bits split into two enable groups?', a: 'So two independent nibbles (or a byte split across two 7475s) can be latched at different times.'},
       ]}
-      tasks={[
-        {label: 'Show Q following D (a 1 on D) while enabled.', done: seenFollow},
-        {label: 'Show Q holding while disabled (D differs from Q).', done: seenHold},
-        {label: 'Observation table: 4+ rows.', done: rows.length >= 4},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Set C1 or C2 HIGH, set a data bit to 1: Q follows. Press Note reading.', hint: 'Enabled latch: Q copies D at once.', done: seenFollow},
+        {label: 'Set the enable LOW and change D so it differs from Q. Note reading.', hint: 'Disabled latch: Q stays frozen.', done: seenHold},
+        {label: `Note at least 4 rows. Rows: ${Math.min(rows.length, 4)}/4`, hint: 'Note the enable state with every reading.', done: rows.length >= 4},
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -207,13 +207,13 @@ export function RsFlipFlopLab(): React.JSX.Element {
         {q: 'What does adding two clock-gating NAND gates achieve?', a: 'It lets S and R change freely, but the latch only acts on them when the clock input is active — a gated (clocked) S-R flip-flop.'},
         {q: 'What is the hold condition?', a: 'S̄ = R̄ = 1 (direct) or no clock pulse (clocked): Q keeps its last value.'},
       ]}
-      tasks={[
-        {label: 'Set (direct S̄ = 0, R̄ = 1 → Q = 1).', done: seenSet},
-        {label: 'Reset (direct S̄ = 1, R̄ = 0 → Q = 0).', done: seenReset},
-        {label: 'Hold (S̄ = R̄ = 1, Q stays 1).', done: seenHold},
-        {label: 'Invalid state (both inputs active).', done: seenInvalid},
-        {label: 'Clocked: note Q with S, R set, pulse, note Q again.', done: seenClockHold},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Direct mode: set S̄ = 0, R̄ = 1. Q goes to 1. Note reading.', hint: 'S̄ and R̄ are active-LOW.', done: seenSet},
+        {label: 'Set S̄ = R̄ = 1: Q stays 1 (hold). Note reading.', hint: 'Q must be 1 before you try hold.', done: seenHold},
+        {label: 'Set S̄ = 1, R̄ = 0. Q goes to 0. Note reading.', hint: 'R̄ = 0 resets the latch.', done: seenReset},
+        {label: 'Set S̄ = R̄ = 0: the invalid state. Note reading.', hint: 'Both outputs go HIGH. Avoid this in real use.', done: seenInvalid},
+        {label: 'Clocked mode: set S, R and note Q, press the clock, note Q again.', hint: 'Q changes only after the clock pulse.', done: seenClockHold},
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -355,7 +355,7 @@ export function FlipFlopTruthLab(): React.JSX.Element {
   };
 
   const rowsFor = rows.filter((r) => r.type === type);
-  const seenCombos = new Set(rowsFor.map((r) => `${r.a}${r.b}`)).size;
+  const combos = (k: FfKind) => new Set(rows.filter((r) => r.type === k).map((r) => `${r.a}${r.b}`)).size;
 
   return (
     <PracticalSheet
@@ -374,13 +374,13 @@ export function FlipFlopTruthLab(): React.JSX.Element {
         {q: 'What makes JK better than R-S?', a: 'J = K = 1 gives a defined toggle action instead of the R-S latch’s invalid state.'},
         {q: 'How can a JK flip-flop be made to work as a D or a T flip-flop?', a: 'Tie K = J̄ for D-type action; tie J = K = T for T-type action.'},
       ]}
-      tasks={[
-        {label: 'R-S: all combinations, including the invalid one.', done: type !== 'rs' ? rows.some((r) => r.type === 'rs' && r.invalid) && new Set(rows.filter((r) => r.type === 'rs').map((r) => `${r.a}${r.b}`)).size >= 4 : seenCombos >= 4 && rowsFor.some((r) => r.invalid)},
-        {label: 'D: both combinations, Q follows D.', done: (type === 'd' ? seenCombos : new Set(rows.filter((r) => r.type === 'd').map((r) => `${r.a}${r.b}`)).size) >= 2},
-        {label: 'T: both combinations (toggle / hold).', done: (type === 't' ? seenCombos : new Set(rows.filter((r) => r.type === 't').map((r) => `${r.a}${r.b}`)).size) >= 2},
-        {label: 'JK: all four combinations, including toggle at J = K = 1.', done: (type === 'jk' ? seenCombos : new Set(rows.filter((r) => r.type === 'jk').map((r) => `${r.a}${r.b}`)).size) >= 4},
-        {label: 'Master-slave JK: all four combinations.', done: (type === 'msjk' ? seenCombos : new Set(rows.filter((r) => r.type === 'msjk').map((r) => `${r.a}${r.b}`)).size) >= 4},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'R-S: try all 4 input combinations, including S = R = 1.', hint: `Select R-S, set S and R, press the clock. Combinations: ${combos('rs')}/4`, done: combos('rs') >= 4 && rows.some((r) => r.type === 'rs' && r.invalid)},
+        {label: 'D: try both values of D.', hint: `Select D. Q follows D after the clock. Combinations: ${combos('d')}/2`, done: combos('d') >= 2},
+        {label: 'T: try T = 0 and T = 1.', hint: `Select T. T = 1 toggles Q. Combinations: ${combos('t')}/2`, done: combos('t') >= 2},
+        {label: 'JK: try all 4 combinations.', hint: `Select JK. J = K = 1 toggles Q. Combinations: ${combos('jk')}/4`, done: combos('jk') >= 4},
+        {label: 'Master-slave JK: try all 4 combinations.', hint: `Select Master-Slave JK. Combinations: ${combos('msjk')}/4`, done: combos('msjk') >= 4},
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

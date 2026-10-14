@@ -495,15 +495,48 @@ export default function OhmsLawLab(): React.JSX.Element {
     fitR: t.rows.length >= 2 ? t.fitR : null,
   }));
 
-  const tasks = [
-    {label: 'Wire the bench: ammeter in series (Slot A), voltmeter across R (Slot B).', done: flags.wired || readings.length > 0},
-    {label: `Record at least ${MIN_READINGS} readings for one resistor.`, done: complete.length >= 1},
-    {label: `Repeat with a second resistor (${MIN_READINGS} readings).`, done: complete.length >= 2},
+  const partial = tested.find((t) => t.rows.length < MIN_READINGS)?.rows.length ?? 0;
+  const steps = [
     {
-      label: 'Read the colour code of every resistor you tested.',
+      label: 'Put one DMM in Slot A and set it to DC mA.',
+      hint: 'Ammeter: in line with R. Supply must be OFF to change slots.',
+      done: ammeterKey != null,
+    },
+    {
+      label: 'Put the other DMM in Slot B and set it to DC V.',
+      hint: 'Voltmeter: across R.',
+      done: voltmeterKey != null,
+    },
+    {
+      label: 'Switch the supply ON.',
+      hint: 'Press Power or tap S1 on the bench.',
+      done: flags.wired || readings.length > 0,
+    },
+    {
+      label: `Raise the supply 1–2 V at a time and press Record reading. Readings: ${complete.length >= 1 ? MIN_READINGS : partial}/${MIN_READINGS}`,
+      hint: 'Use the lowest range that does not show OL. Keep R within its power rating.',
+      done: complete.length >= 1,
+    },
+    {
+      label: 'Switch OFF and pick a second resistor from the tray.',
+      hint: 'Read its colour bands.',
+      done: tested.length >= 2 || (complete.length >= 1 && !powerOn && !tested.some((t) => t.spec.id === rid)),
+    },
+    {
+      label: `Record ${MIN_READINGS} readings for the second resistor. Readings: ${complete.length >= 2 ? MIN_READINGS : complete.length >= 1 ? partial : 0}/${MIN_READINGS}`,
+      hint: 'Same wiring, switch ON, raise the supply in steps.',
+      done: complete.length >= 2,
+    },
+    {
+      label: 'Type the colour-code value (Ω) of each resistor in the Result table.',
+      hint: 'The table is below the graph. Colour code chart is there too.',
       done: tested.length > 0 && tested.every((t) => t.codeOK),
     },
-    {label: 'Fill in your details and print or save the record.', done: flags.printed},
+    {
+      label: 'Enter your details and press Print / Save as PDF.',
+      hint: 'Practical record, below the result.',
+      done: flags.printed,
+    },
   ];
 
   const deleteRow = (target: Reading) => setReadings((rs) => rs.filter((r) => r !== target));
@@ -562,7 +595,7 @@ export default function OhmsLawLab(): React.JSX.Element {
         {q: 'A 100 Ω resistor has 10 V across it. What power rating does it need?', a: 'P = V²/R = 100 / 100 = 1 W. Use a 2 W resistor for a safety margin.'},
         {q: 'Name two devices that do not obey Ohm’s law.', a: 'A diode and a filament lamp. Their V–I graphs are not straight lines.'},
       ]}
-      tasks={tasks}
+      steps={steps}
       onPrinted={(t) => {
         if (t.name.trim()) setFlags((f) => ({...f, printed: true}));
       }}>

@@ -126,13 +126,14 @@ export default function FetAmpLab(): React.JSX.Element {
         {q: 'Voltage gain of a CS amplifier?', a: 'Av = gm × (RD ∥ RL) with CS; lower without CS.'},
         {q: 'Compare FET and BJT amplifiers.', a: 'FET: higher input impedance, lower noise, lower gain. BJT: higher gain, lower input impedance.'},
       ]}
-      tasks={[
-        {label: 'DC operating point: ID and VGS.', done: ok.id && ok.vgs},
-        {label: 'Gain with CS.', done: ok.gB},
-        {label: 'Gain without CS.', done: ok.gU},
-        {label: 'Phase.', done: ok.ph},
-        {label: 'Input impedance (1 MΩ method).', done: ok.zin},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Measure VS and VD to ground.', hint: 'Meter on DC V. Black probe on G, red on S, then D.', done: rec.VS != null && rec.VD != null},
+        {label: 'Work out ID and VGS and enter them.', hint: 'ID = (VDD − VD) ÷ RD. VGS = −VS.', done: ok.id && ok.vgs},
+        {label: 'Measure the gain with CS fitted.', hint: 'Meter on AC V. Note Vin (IN), then Vout (OUT). Av = Vout ÷ Vin.', done: ok.gB},
+        {label: 'Remove CS and measure the gain again.', hint: 'Tap the capacitor to remove it. Same input.', done: ok.gU},
+        {label: 'Compare the phase of input and output on the CRO.', hint: 'CH1 = input, CH2 = output. Enter the angle.', done: ok.ph},
+        {label: 'Find Zin with the 1 MΩ test resistor.', hint: 'Note Vgen and Vin. Zin = 1 MΩ × Vin ÷ (Vgen − Vin).', done: ok.zin},
+        {label: 'Enter your details and print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

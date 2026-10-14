@@ -84,9 +84,11 @@ export function PowerDevicesLab(): React.JSX.Element {
         {q: 'Why is an IGBT used in inverters and drives?', a: 'It combines the easy voltage gate drive of a MOSFET with the low on-state loss of a BJT at high voltage.'},
         {q: 'Terminals of a UJT?', a: 'Emitter (E), base 1 (B1) and base 2 (B2).'},
       ]}
-      tasks={[
-        {label: 'Identify all eight with ratings and pin 1.', done: items.every((_, k) => ok(k))},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Read the type number on each part and name the device.', hint: 'Choose the device in the table, row by row.', done: items.every((d, k) => ans[k]?.dev === d.id)},
+        {label: 'Open the data sheet and pick pin 1 for each part.', hint: 'Pins 1-2-3 from the left, printed face towards you.', done: items.every((d, k) => ans[k]?.pin1 === d.pin1)},
+        {label: 'Enter the current and voltage rating of each part.', hint: 'Use the first rating in the data sheet.', done: items.every((_, k) => ok(k))},
+        {label: 'Enter your details and print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Component tray">
@@ -387,7 +389,6 @@ export function MosfetTestLab(): React.JSX.Element {
   const b = useGateBench(kit, KEY);
   const [ans, setAns] = useStoredState<Record<number, {ch?: string; cond?: string}>>(`lab:${KEY}:ans`, {});
   const [printed, setPrinted] = useStoredState(`lab:${KEY}:printed`, false);
-  const tested = (k: number) => (kit[k].fault === 'good' ? !!(b.log[k]?.diode && b.log[k]?.on && b.log[k]?.off) : true);
   const rowOk = (k: number) => ans[k]?.cond === (kit[k].fault === 'good' ? 'good' : 'bad') && ans[k]?.ch === (kit[k].pch ? 'p' : 'n');
 
   return (
@@ -410,10 +411,24 @@ export function MosfetTestLab(): React.JSX.Element {
         {q: 'What is the body diode?', a: 'A diode formed between source and drain by the MOSFET’s construction (anode at S for N-channel).'},
         {q: 'Why is a pull-down resistor fitted from gate to source in circuits?', a: 'To discharge the gate so the MOSFET switches off when the drive is removed.'},
       ]}
-      tasks={[
-        {label: 'Full test on every good device (diode, ON, OFF).', done: kit.every((_, k) => tested(k))},
-        {label: 'Channel and condition of all four.', done: kit.every((_, k) => rowOk(k))},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: 'Diode-test D–S on each MOSFET and press Note reading.',
+          hint: 'Meter on diode test. N-channel: red on S, black on D, about 0.5 V.',
+          done: kit.every((d, k) => d.fault !== 'good' || !!b.log[k]?.diode),
+        },
+        {
+          label: 'Charge the gate and note D–S switched ON.',
+          hint: 'Red on G, black on S. Then D–S reads almost 0.',
+          done: kit.every((d, k) => d.fault !== 'good' || !!b.log[k]?.on),
+        },
+        {
+          label: 'Short the gate and note D–S switched OFF.',
+          hint: 'Press Short gate. D–S returns to OL.',
+          done: kit.every((d, k) => d.fault !== 'good' || !!b.log[k]?.off),
+        },
+        {label: 'Choose the channel and condition of all four.', hint: 'A low D–S or G–S reading that never changes = faulty.', done: kit.every((_, k) => rowOk(k))},
+        {label: 'Enter your details and print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -472,7 +487,6 @@ export function IgbtTestLab(): React.JSX.Element {
   useEffect(() => {
     if (b.gateEvent === 'on' && !b.meterTurnsOn && !triedMeter) setTriedMeter(true);
   }, [b.gateEvent, b.meterTurnsOn, triedMeter, setTriedMeter]);
-  const tested = (k: number) => (kit[k].fault === 'good' ? !!(b.log[k]?.on && b.log[k]?.off) : true);
   const rowOk = (k: number) => ans[k]?.cond === (kit[k].fault === 'good' ? 'good' : 'bad') && ans[k]?.ch === (kit[k].diode ? 'diode' : 'nodiode');
 
   return (
@@ -494,11 +508,13 @@ export function IgbtTestLab(): React.JSX.Element {
         {q: 'Why do many IGBTs have a built-in diode?', a: 'For freewheeling current in inductive loads such as motors and inverters.'},
         {q: 'IGBT terminals?', a: 'Gate, collector and emitter.'},
       ]}
-      tasks={[
-        {label: 'Try the meter alone on the gate (and see it fail).', done: triedMeter},
-        {label: 'Full test on every good IGBT (ON with 9 V, OFF).', done: kit.every((_, k) => tested(k))},
-        {label: 'Diode and condition of all four.', done: kit.every((_, k) => rowOk(k))},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Diode-test C–E on each IGBT and press Note reading.', hint: 'Red on E, black on C: about 0.4 V if a diode is built in, else OL.', done: kit.every((d, k) => d.fault !== 'good' || !d.diode || !!b.log[k]?.diode)},
+        {label: 'Try to switch one on with the meter alone.', hint: 'Red on G, black on E. The meter’s 3 V is below the threshold.', done: triedMeter},
+        {label: 'Charge the gate with the 9 V battery and note C–E ON.', hint: 'Tool “9 V battery G–E”, then red on C, black on E: about 0.8 V.', done: kit.every((d, k) => d.fault !== 'good' || !!b.log[k]?.on)},
+        {label: 'Short the gate and note C–E OFF.', hint: 'Press Short gate. C–E returns to OL.', done: kit.every((d, k) => d.fault !== 'good' || !!b.log[k]?.off)},
+        {label: 'Choose the diode type and condition of all four.', done: kit.every((_, k) => rowOk(k))},
+        {label: 'Enter your details and print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

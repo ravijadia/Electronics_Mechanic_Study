@@ -121,12 +121,13 @@ function LightSwitchLab({s}: {s: Spec}): React.JSX.Element {
       procedure={s.procedure}
       precautions={s.precautions}
       viva={s.viva}
-      tasks={[
-        {label: 'Sensor current at 6+ light levels, dark to 800 lx or more.', done: spread},
-        {label: 'Sensitivity (µA per lux) from the table.', done: sensOk},
-        {label: 'Set the preset so the lamp switches at 150–250 lx; note the level.', done: luxOk},
-        {label: 'Street light: lamp on NC — ON in the dark, OFF in bright light.', done: !!seen.ncDark && !!seen.ncBright},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Choose a meter range and switch the supply ON.', hint: 'The meter is in series with the sensor. OFF opens the circuit.', done: power || pts.length > 0},
+        {label: `Raise the LIGHT in steps and note each sensor current. Readings: ${Math.min(pts.length, 6)}/6`, hint: 'From dark (0 lx) up to 800 lx or more. Press Note reading each time.', done: spread},
+        {label: 'Calculate the sensitivity (µA per lux) and enter it.', hint: 'ΔI ÷ Δlux, from the table.', done: sensOk},
+        {label: 'Set PRESET VR so the relay picks up at 150–250 lx, and enter that level.', hint: 'Raise the light slowly and watch the relay pick up.', done: luxOk},
+        {label: 'Street light: put the lamp on NC and check ON in the dark, OFF in bright light.', hint: 'Switch off to change NO/NC. Then vary the light.', done: !!seen.ncDark && !!seen.ncBright},
+        {label: 'Enter your details and print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

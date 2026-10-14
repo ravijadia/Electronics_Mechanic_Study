@@ -95,10 +95,28 @@ export default function BatteryTestLab(): React.JSX.Element {
         {q: 'How do you tell a flat battery from a faulty one?', a: 'A flat battery has low OCV and low SG in all cells evenly, and recovers after charging. A faulty one has one dead cell (one SG much lower, OCV near 10.5 V), or good OCV that collapses under load.'},
         {q: 'Why is a load test needed if the OCV is fine?', a: 'A sulphated battery can show good OCV but cannot deliver current. Only a load test reveals that.'},
       ]}
-      tasks={[
-        {label: 'Do all three tests on all four batteries.', done: tested === bats.length},
-        {label: 'Give the correct verdict for every battery.', done: right === bats.length},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: `Measure the open-circuit voltage of each battery. Done: ${bats.filter((x) => obs[x.id]?.ocv != null).length}/${bats.length}`,
+          hint: 'Pick a battery, press Open-circuit voltage. Full charge reads about 12.6 V.',
+          done: bats.every((x) => obs[x.id]?.ocv != null),
+        },
+        {
+          label: `Read the SG of all six cells of each battery. Done: ${bats.filter((x) => obs[x.id]?.sg).length}/${bats.length}`,
+          hint: 'Press Hydrometer (6 cells). One very low cell means a faulty battery.',
+          done: bats.every((x) => obs[x.id]?.sg),
+        },
+        {
+          label: `Load test each battery for 15 s. Done: ${bats.filter((x) => obs[x.id]?.load != null).length}/${bats.length}`,
+          hint: `Press Load test 15 s. A healthy battery stays above ${LOAD_LIMIT} V.`,
+          done: bats.every((x) => obs[x.id]?.load != null),
+        },
+        {
+          label: 'Choose the correct verdict for every battery.',
+          hint: 'Ready for use, needs recharging, or faulty: compare OCV, SG and load result.',
+          done: right === bats.length,
+        },
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

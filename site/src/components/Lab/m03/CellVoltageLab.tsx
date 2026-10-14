@@ -132,11 +132,38 @@ export default function CellVoltageLab(): React.JSX.Element {
         {q: 'Why does a used cell read lower?', a: 'Its chemicals are partly used up, and its internal resistance rises.'},
         {q: 'Why might analog and digital readings differ slightly?', a: 'Analog scale reading error, meter accuracy class, and the analog meter loading the cell.'},
       ]}
-      tasks={[
-        {label: 'Measure all seven sources with the digital meter.', done: sources.every((s) => obs[s.id]?.dmm)},
-        {label: 'Read four sources correctly on the analog meter.', done: sources.filter((s) => anaOk(obs[s.id])).length >= 4},
-        {label: 'Measure cells in series and in parallel.', done: !!(obs.ser?.dmm && obs.par?.dmm)},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: 'Set the digital meter to a DC V range.',
+          hint: 'Start high, then use the lowest range that does not show OL.',
+          done: fn !== 'off' || sources.some((s) => obs[s.id]?.dmm),
+        },
+        {
+          label: 'Touch red to + and black to − of one source.',
+          hint: 'Click the red and black probes on the two terminals.',
+          done: !!src || sources.some((s) => obs[s.id]?.dmm),
+        },
+        {
+          label: `Measure the five single cells and batteries, pressing Note reading. Done: ${['new', 'old', 'li', 'nine', 'lead'].filter((id) => obs[id]?.dmm).length}/5`,
+          hint: 'Reversed probes show a minus sign.',
+          done: ['new', 'old', 'li', 'nine', 'lead'].every((id) => obs[id]?.dmm),
+        },
+        {
+          label: 'Measure 2 cells in series, then in parallel.',
+          hint: 'Series adds the voltages. Parallel keeps one cell voltage.',
+          done: !!(obs.ser?.dmm && obs.par?.dmm),
+        },
+        {
+          label: 'Switch to Analog and pick a range above the voltage.',
+          hint: 'Start on DC V 50 and come down. A reversed meter kicks back.',
+          done: meter === 'ana' || sources.some((s) => obs[s.id]?.ana != null),
+        },
+        {
+          label: `Read four sources on the analog meter. Correct: ${Math.min(4, sources.filter((s) => anaOk(obs[s.id])).length)}/4`,
+          hint: 'Type the reading, then press Note reading. 1 division = range ÷ 50.',
+          done: sources.filter((s) => anaOk(obs[s.id])).length >= 4,
+        },
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

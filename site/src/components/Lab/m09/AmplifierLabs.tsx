@@ -145,10 +145,11 @@ export function BiasLab(): React.JSX.Element {
         {q: 'Why is voltage-divider bias the most stable?', a: 'The divider fixes the base voltage almost independently of β, and Re sets the emitter current.'},
         {q: 'What is thermal runaway?', a: 'Heat raises Ic, which heats the transistor more, until it is destroyed. Good bias prevents it.'},
       ]}
-      tasks={[
-        ...KINDS.map((k) => ({label: `${BIAS[k].name}: both transistors measured and worked out.`, done: rowOk(k, 'A') && rowOk(k, 'B')})),
-        {label: '% change in Ic for each circuit; pick the most stable.', done: KINDS.every(pctOk) && best === 'divider'},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        ...KINDS.map((k) => ({label: `${BIAS[k].name}: measure and work out both transistors.`, hint: 'Do transistor A, then B. Fill the table.', done: rowOk(k, 'A') && rowOk(k, 'B')})),
+        {label: 'Work out the % change in Ic for each circuit.', hint: 'Compare transistor A with B.', done: KINDS.every(pctOk)},
+        {label: 'Pick the most stable bias circuit.', hint: 'The smallest % change.', done: best === 'divider'},
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -361,12 +362,12 @@ export function CeAmpLab(): React.JSX.Element {
         {q: 'Why is a lower gain sometimes preferred?', a: 'Without Ce the gain is stable, less distorted, with a wider bandwidth and higher input impedance.'},
         {q: 'What causes clipping?', a: 'The output swing reaches cut-off or saturation.'},
       ]}
-      tasks={[
-        {label: 'Gain with Ce (unclipped).', done: okRows.some((r) => r.label === 'With Ce')},
-        {label: 'Gain without Ce.', done: okRows.some((r) => r.label === 'Without Ce')},
-        {label: 'Phase between input and output.', done: phase === '180'},
-        {label: 'Note a clipped output.', done: rows.some((r) => r.clipped)},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Measure the gain with Ce fitted.', hint: 'Keep the output unclipped.', done: okRows.some((r) => r.label === 'With Ce')},
+        {label: 'Remove Ce and measure the gain again.', hint: 'Use the Ce switch on the board.', done: okRows.some((r) => r.label === 'Without Ce')},
+        {label: 'Find the phase between input and output.', hint: 'Compare both traces on the CRO.', done: phase === '180'},
+        {label: 'Raise the input until the output clips, and note it.', hint: 'Watch the output on the CRO.', done: rows.some((r) => r.clipped)},
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -526,12 +527,12 @@ export function EmitterFollowerLab(): React.JSX.Element {
         {q: 'Main use of an emitter follower?', a: 'A buffer: high input impedance, low output impedance, gain ≈ 1.'},
         {q: 'Phase shift?', a: '0°: output in phase with input.'},
       ]}
-      tasks={[
-        {label: 'Measure VB and VE (DC).', done: dcOk},
-        {label: 'Voltage gain (AC).', done: gTrue != null && near(num(ans.gain), gTrue, 0.02)},
-        {label: 'Phase.', done: ans.phase === '0'},
-        {label: 'Input impedance with the 10 kΩ method.', done: zinTrue != null && near(num(ans.zin), zinTrue, 0.04) && near(zinTrue, zin, 0.1)},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Measure VB and VE (DC).', hint: 'Probe the base and the emitter.', done: dcOk},
+        {label: 'Measure the voltage gain (AC).', hint: 'Output ÷ input.', done: gTrue != null && near(num(ans.gain), gTrue, 0.02)},
+        {label: 'Find the phase.', hint: 'Compare both traces on the CRO.', done: ans.phase === '0'},
+        {label: 'Find the input impedance with the 10 kΩ method.', hint: 'Switch in the 10 kΩ series resistor.', done: zinTrue != null && near(num(ans.zin), zinTrue, 0.04) && near(zinTrue, zin, 0.1)},
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -722,12 +723,12 @@ export function TwoStageLab(): React.JSX.Element {
         {q: 'Why does gain fall at high frequency?', a: 'Transistor junction and stray capacitances shunt the signal.'},
         {q: 'Phase of the output relative to input?', a: 'In phase (360°): each stage inverts.'},
       ]}
-      tasks={[
-        {label: 'Mid-band (1 kHz): Vin, Vo1, Vout.', done: !!mid},
-        {label: 'A1, A2, A and gain in dB.', done: !!mid && okMid(ans.a1, mid.vo1 / mid.vin) && okMid(ans.a2, mid.vo2 / mid.vo1) && okMid(ans.a, aTot) && aTot != null && Math.abs((num(ans.db) ?? 0) - 20 * Math.log10(aTot)) < 0.3},
-        {label: 'Frequency sweep: 8+ points beyond both −3 dB points.', done: sweep},
-        {label: 'f1 and f2 from the graph; phase.', done: near(num(ans.f1), f1, 0.25) && near(num(ans.f2) != null ? num(ans.f2)! * 1000 : null, f2, 0.25) && ans.phase === '0'},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Measure Vin, Vo1 and Vout at 1 kHz.', hint: 'Mid-band. Keep the input constant.', done: !!mid},
+        {label: 'Work out A1, A2, A and the gain in dB.', done: !!mid && okMid(ans.a1, mid.vo1 / mid.vin) && okMid(ans.a2, mid.vo2 / mid.vo1) && okMid(ans.a, aTot) && aTot != null && Math.abs((num(ans.db) ?? 0) - 20 * Math.log10(aTot)) < 0.3},
+        {label: 'Sweep the frequency: 8+ points beyond both −3 dB points.', hint: 'Spread the points on a log scale.', done: sweep},
+        {label: 'Read f1 and f2 from the graph, and note the phase.', done: near(num(ans.f1), f1, 0.25) && near(num(ans.f2) != null ? num(ans.f2)! * 1000 : null, f2, 0.25) && ans.phase === '0'},
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

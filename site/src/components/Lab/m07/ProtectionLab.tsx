@@ -225,13 +225,26 @@ export default function ProtectionLab(): React.JSX.Element {
         {q: 'How does a PTC resettable fuse work?', a: 'On overcurrent it heats up and its resistance rises sharply; it resets when it cools.'},
         {q: 'What does C16 on an MCB mean?', a: 'Type C curve (magnetic trip at 5–10 × In), rated current 16 A.'},
       ]}
-      tasks={[
-        {label: 'Identify all six devices.', done: devs.every((_, k) => nameOk(k))},
-        {label: 'Continuity test all six (MCB/RCCB ON and OFF).', done: devs.every((_, k) => tested(k))},
-        {label: 'Mark each good or defective.', done: devs.every((_, k) => condOk(k))},
-        {label: 'MCB load test: five load levels incl. an instant trip.', done: trips.length >= 5 && trips.some((x) => x.t != null && x.t < 0.1)},
-        {label: 'RCCB: T button and leakage test (trip and no trip).', done: rcdTest && rcd.some((x) => x.trip) && rcd.some((x) => !x.trip)},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Name each of the six devices.', hint: 'Read the marking, use the Type list in the table.', done: devs.every((_, k) => nameOk(k))},
+        {
+          label: 'Continuity test all six devices.',
+          hint: `Probes on both terminals, Note reading. Switch MCB and RCCB ON and OFF. Tested: ${devs.filter((_, k) => tested(k)).length}/${devs.length}.`,
+          done: devs.every((_, k) => tested(k)),
+        },
+        {label: 'Mark each device good or defective.', hint: 'A blown fuse reads OL.', done: devs.every((_, k) => condOk(k))},
+        {
+          label: 'Test panel: load the MCB and note the trip time.',
+          hint: `Five levels from 1.5 to 10 × In, incl. an instant trip. Levels: ${trips.length}/5.`,
+          done: trips.length >= 5 && trips.some((x) => x.t != null && x.t < 0.1),
+        },
+        {label: 'Press the RCCB T button.', hint: 'Switch the RCCB ON first.', done: rcdTest},
+        {
+          label: 'Apply leakage currents to the RCCB.',
+          hint: 'Find one level that trips and one that does not.',
+          done: rcd.some((x) => x.trip) && rcd.some((x) => !x.trip),
+        },
+        {label: 'Enter your details and print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench: continuity test">

@@ -85,9 +85,9 @@ export function TransistorTypesLab(): React.JSX.Element {
         {q: 'Why does a power transistor need a heat sink?', a: 'Power lost in it (Vce × Ic) heats the junction. The heat sink carries the heat away so the junction stays below its limit.'},
         {q: 'How do you tell NPN from PNP by the number?', a: 'From the data book (e.g. BC547 NPN, BC557 PNP). Many complementary pairs differ by one digit.'},
       ]}
-      tasks={[
-        {label: 'Identify all eight transistors.', done: items.every((_, k) => ok(k))},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Identify all eight transistors.', hint: 'Read the mark. Use the data book extract.', done: items.every((_, k) => ok(k))},
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Component tray">
@@ -246,10 +246,10 @@ export function TransistorTestLab(): React.JSX.Element {
         {q: 'How do you tell emitter from collector?', a: 'The B–E junction shows a slightly higher forward voltage than the B–C junction.'},
         {q: 'What does a low reading between C and E both ways mean?', a: 'A collector–emitter short: the transistor is faulty.'},
       ]}
-      tasks={[
-        {label: 'Test all six combinations on all four.', done: kit.every((_, k) => tested(k))},
-        {label: 'Base, type and condition of all four (and emitter of good ones).', done: kit.every((_, k) => ok(k))},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Test all six lead combinations on each of the four.', hint: 'Ohmmeter, one pair of leads at a time.', done: kit.every((_, k) => tested(k))},
+        {label: 'Give the base, type and condition of each transistor.', hint: 'Also the emitter of the good ones.', done: kit.every((_, k) => ok(k))},
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -471,12 +471,12 @@ export function RelayDriverLab(): React.JSX.Element {
         {q: 'What happens if the diode is fitted the wrong way?', a: 'It is forward biased across the supply when the transistor turns on, and the transistor or diode burns.'},
         {q: 'Vce when the transistor is OFF?', a: 'Equal to the supply voltage (12 V), as no current flows through the coil.'},
       ]}
-      tasks={[
-        {label: 'Calculate Rb (max) for saturation.', done: near(num(rbCalc), rbMax, 0.03)},
-        {label: 'Note input OFF and input ON (saturated, relay ON).', done: rows.some((r) => !r.input && r.vce > 11) && rows.some((r) => r.input && r.relay && r.vce < 0.3)},
-        {label: 'Note a too-large Rb (relay does not operate).', done: rows.some((r) => r.input && !r.relay)},
-        {label: 'Switch off 3 times safely with the flyback diode.', done: goodSwitches >= 3},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Calculate Rb (max) for saturation.', hint: 'Use the coil current and β from the procedure.', done: near(num(rbCalc), rbMax, 0.03)},
+        {label: 'Note input OFF, then input ON (saturated, relay ON).', done: rows.some((r) => !r.input && r.vce > 11) && rows.some((r) => r.input && r.relay && r.vce < 0.3)},
+        {label: 'Fit a too-large Rb and note that the relay does not operate.', done: rows.some((r) => r.input && !r.relay)},
+        {label: 'Switch off 3 times safely with the flyback diode.', hint: 'Fit the diode the right way round.', done: goodSwitches >= 3},
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

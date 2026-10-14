@@ -313,7 +313,7 @@ export function useNetworkBench({
     </>
   );
 
-  return {view, records, setRecords, truth, volts};
+  return {view, records, setRecords, truth, volts, power};
 }
 
 export function valueList(nominal: Record<string, number>): string {

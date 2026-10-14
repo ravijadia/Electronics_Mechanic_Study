@@ -164,10 +164,28 @@ export function TerminalsLab(): React.JSX.Element {
         {q: 'How is + marked on a lead-acid battery?', a: 'The + post is thicker, and it is marked “+” (often with a red cap).'},
         {q: 'What does a minus sign on the DMM mean?', a: 'The red probe is on the negative terminal.'},
       ]}
-      tasks={[
-        {label: 'Identify + on all five cells.', done: cells.every((c, k) => ans[k] === c.plus)},
-        {label: 'Confirm at least three with the meter.', done: verified.length >= 3},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: `Look at each cell and choose its + terminal (A or B). Correct: ${cells.filter((c, k) => ans[k] === c.plus).length}/5`,
+          hint: 'Raised nub end is +. 9 V: small round snap is +.',
+          done: cells.every((c, k) => ans[k] === c.plus),
+        },
+        {
+          label: 'Set the meter to DC V 20.',
+          hint: 'Use the function knob on the multimeter.',
+          done: fn === 'dcv20' || verified.length > 0,
+        },
+        {
+          label: 'Touch red to your + terminal and black to the other.',
+          hint: 'Click the probes on terminals A and B of one cell.',
+          done: on != null || verified.length > 0,
+        },
+        {
+          label: `Press Note reading to confirm three cells. Confirmed: ${Math.min(verified.length, 3)}/3`,
+          hint: 'A positive reading means red is on +.',
+          done: verified.length >= 3,
+        },
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -279,11 +297,23 @@ export function RatingLab(): React.JSX.Element {
         {q: 'What is C20 rating?', a: 'The capacity when discharged evenly over 20 hours.'},
         {q: 'Why is real backup time often less than Ah ÷ A?', a: 'At high currents the usable capacity falls, and the battery is not discharged to zero.'},
       ]}
-      tasks={[
-        {label: 'Read the rated voltage of all five.', done: res.every((r) => r.v)},
-        {label: 'Read the capacity in Ah of all five.', done: res.every((r) => r.ah)},
-        {label: 'Calculate the backup time of all five.', done: res.every((r) => r.h)},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: `Type the rated voltage (V) from each battery label. Correct: ${res.filter((r) => r.v).length}/5`,
+          hint: 'Read the big number with V in the label.',
+          done: res.every((r) => r.v),
+        },
+        {
+          label: `Type the capacity in Ah. Correct: ${res.filter((r) => r.ah).length}/5`,
+          hint: 'Convert mAh to Ah: divide by 1000.',
+          done: res.every((r) => r.ah),
+        },
+        {
+          label: `Calculate the backup time in hours. Correct: ${res.filter((r) => r.h).length}/5`,
+          hint: 'Backup time = Ah ÷ load current (A).',
+          done: res.every((r) => r.h),
+        },
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Battery labels">

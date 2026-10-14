@@ -115,10 +115,18 @@ export function DiodeTypesLab(): React.JSX.Element {
         {q: 'How do you find + on a bridge module?', a: 'It is marked + (often with a longer lead or a chamfered corner). The two ~ terminals take the AC.'},
         {q: 'What is the difference between 1N4001 and 1N4007?', a: 'Both are 1 A rectifiers; the PIV is 50 V for 1N4001 and 1000 V for 1N4007.'},
       ]}
-      tasks={[
-        {label: 'Name all eight.', done: items.every((it, k) => ans[k]?.type === it.type)},
-        {label: 'Write the ratings of all eight.', done: items.every((_, k) => ok(k))},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: `Pick the type of each part in the table. Correct: ${items.filter((it, k) => ans[k]?.type === it.type).length}/8`,
+          hint: 'Use the shape and the printed marking.',
+          done: items.every((it, k) => ans[k]?.type === it.type),
+        },
+        {
+          label: `Write the maximum current and voltage of each part. Correct: ${items.filter((_, k) => ok(k)).length}/8`,
+          hint: 'Open the data book under the tray and look up the type number.',
+          done: items.every((_, k) => ok(k)),
+        },
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Component tray">
@@ -281,11 +289,23 @@ export function DiodeTestLab(): React.JSX.Element {
         {q: 'How do you tell Si from Ge with the meter?', a: 'Forward drop: about 0.6 V for silicon, 0.25 V for germanium.'},
         {q: 'What does the band on a diode mark?', a: 'The cathode (K).'},
       ]}
-      tasks={[
-        {label: 'Diode test (forward) on all four.', done: kit.every((_, k) => !!ans[k]?.vf)},
-        {label: 'Rf and Rr of all four.', done: kit.every((_, k) => !!ans[k]?.rf && !!ans[k]?.rr)},
-        {label: 'Ratio, material and condition of all four.', done: kit.every((_, k) => rowOk(k))},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: `Select Diode test and note the forward Vf of each diode. Done: ${kit.filter((_, k) => !!ans[k]?.vf).length}/4`,
+          hint: 'Red probe on the plain end, black on the band. Press Note reading.',
+          done: kit.every((_, k) => !!ans[k]?.vf),
+        },
+        {
+          label: `Select an Ω range and note Rf and Rr of each diode. Done: ${kit.filter((_, k) => !!ans[k]?.rf && !!ans[k]?.rr).length}/4`,
+          hint: 'Same range for both. Swap the probes for Rr.',
+          done: kit.every((_, k) => !!ans[k]?.rf && !!ans[k]?.rr),
+        },
+        {
+          label: `Fill in Rr ÷ Rf, material and condition of each diode. Correct: ${kit.filter((_, k) => rowOk(k)).length}/4`,
+          hint: 'Write ∞ if Rr is OL, – if Rf is OL. Low both ways = shorted.',
+          done: kit.every((_, k) => rowOk(k)),
+        },
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -547,12 +567,28 @@ export function ForwardCharLab(): React.JSX.Element {
         {q: 'Why is reverse current measured in µA?', a: 'It is only the tiny leakage of minority carriers.'},
         {q: 'Which has more reverse leakage, Si or Ge?', a: 'Germanium.'},
       ]}
-      tasks={[
-        {label: 'Si forward: 8+ readings up to 10 mA or more.', done: enough(fw('si'))},
-        {label: 'Ge forward: 8+ readings up to 10 mA or more.', done: enough(fw('ge'))},
-        {label: 'Reverse bias: 3+ readings.', done: rv.length >= 3},
-        {label: 'Knee voltage of Si and Ge from the graph.', done: kneeOk('si') && kneeOk('ge')},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: `Silicon, forward bias: raise the supply in steps and press Note reading. Readings: ${fw('si').length}/8`,
+          hint: 'Supply OFF to set up. Go up to 10 mA or more; small steps from 0.4 V to 0.8 V.',
+          done: enough(fw('si')),
+        },
+        {
+          label: `Switch OFF, select Ge OA79 and repeat. Readings: ${fw('ge').length}/8`,
+          hint: 'Also go up to 10 mA or more, and take a few readings below 0.5 mA.',
+          done: enough(fw('ge')),
+        },
+        {
+          label: `Switch OFF, select Reverse bias and note 3 readings. Readings: ${Math.min(rv.length, 3)}/3`,
+          hint: 'Use the DC µA 200 range on the ammeter.',
+          done: rv.length >= 3,
+        },
+        {
+          label: 'Read the knee voltage of Si and Ge from the graph and enter both in the Result table.',
+          hint: 'Where the current starts to rise sharply.',
+          done: kneeOk('si') && kneeOk('ge'),
+        },
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -708,11 +744,23 @@ export function ZenerTestLab(): React.JSX.Element {
         {q: 'Max current of a 0.5 W, 5.1 V zener?', a: 'I = P ÷ V = 0.5 ÷ 5.1 ≈ 98 mA.'},
         {q: 'Why is a zener used in reverse bias?', a: 'Its reverse breakdown voltage is constant, so it can hold a voltage steady.'},
       ]}
-      tasks={[
-        {label: 'Test all four in reverse bias.', done: items.every((_, k) => (tested[k] ?? 0) >= 14)},
-        {label: 'Zener or not, and Vz, for all four.', done: items.every((_, k) => vzOk(k))},
-        {label: 'Reverse characteristic of one zener (6+ readings).', done: !!best},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: `Test each device in reverse bias: raise the supply slowly to 14 V or more and press Note reading. Tested: ${items.filter((_, k) => (tested[k] ?? 0) >= 14).length}/4`,
+          hint: 'Choose Z1–Z4, supply ON, both meters on. Switch OFF before changing device.',
+          done: items.every((_, k) => (tested[k] ?? 0) >= 14),
+        },
+        {
+          label: `Say zener or not, and enter Vz, for each device. Correct: ${items.filter((_, k) => vzOk(k)).length}/4`,
+          hint: 'A zener’s voltage stops rising while current climbs. No Vz for a 1N4148.',
+          done: items.every((_, k) => vzOk(k)),
+        },
+        {
+          label: `On one zener, note 6 readings for the reverse characteristic. Readings: ${Math.min(6, Math.max(0, ...items.map((x, k) => (x.vz != null ? curve.filter((p) => p.k === k).length : 0))))}/6`,
+          hint: 'Small supply steps, including readings around Vz.',
+          done: !!best,
+        },
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

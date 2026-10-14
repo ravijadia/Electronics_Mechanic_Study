@@ -889,6 +889,71 @@ details.section[open] > summary {
   }
 }
 
+/* ---------- steps: numbered instructions above the bench ---------- */
+
+.steps {
+  list-style: none;
+  padding: 0;
+  margin: 0.7rem 0 0;
+  display: grid;
+  gap: 0.3rem;
+}
+.step {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  padding: 0.35rem 0.55rem;
+  border-radius: 8px;
+  border: 1.5px solid transparent;
+}
+.stepNo {
+  flex: 0 0 auto;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  border: 2px solid var(--lab-line);
+  display: grid;
+  place-items: center;
+  font-size: 0.8rem;
+  font-weight: 800;
+  line-height: 1;
+}
+.stepNo.done {
+  background: var(--lab-good);
+  border-color: var(--lab-good);
+  color: #fff;
+}
+.stepCurrent {
+  background: var(--lab-panel);
+  border-color: var(--lab-accent);
+  font-weight: 600;
+}
+.stepCurrent .stepNo {
+  border-color: var(--lab-accent);
+}
+.stepDone {
+  color: var(--lab-muted);
+}
+.stepHint {
+  display: block;
+  margin-top: 0.15rem;
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: var(--lab-muted);
+}
+/* Narrow layout: only the current step shows until the panel is opened. */
+.stepOff {
+  display: none;
+}
+@container (min-width: 900px) {
+  .body.hasSteps {
+    grid-template-columns: minmax(0, 1fr) 310px;
+  }
+  .stepOff {
+    display: flex;
+  }
+}
+
 /* Drawings that stay legible when shrunk to phone width. */
 @media (max-width: 759px) {
   .kit.fit svg {

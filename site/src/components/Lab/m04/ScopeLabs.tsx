@@ -64,10 +64,19 @@ export function CroControlsLab(): React.JSX.Element {
         {q: 'Why use GND coupling?', a: 'It disconnects the signal and shows the 0 V line, so you can set the reference before measuring.'},
         {q: 'What is the difference between AC and DC coupling?', a: 'DC coupling shows the whole signal. AC coupling blocks the DC level and shows only the varying part.'},
       ]}
-      tasks={[
-        ...checks.map((c) => ({label: c.label, done: c.done})),
-        {label: 'Match all eight controls to their functions.', done: quizOk},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Turn up INTENSITY until the trace shows.', hint: 'Keep it only as bright as needed.', done: checks[0].done},
+        {label: 'Adjust FOCUS for a sharp trace.', hint: 'Turn until the line is thinnest.', done: checks[1].done},
+        {label: 'Set coupling to DC (not GND) and centre the trace with POSITION.', hint: 'GND shows the 0 V line; DC shows the signal.', done: checks[2].done},
+        {label: 'Set VOLTS/DIV so the height is 2–8 divisions.', hint: 'The signal is 4 V peak to peak.', done: checks[3].done},
+        {label: 'Set TIME/DIV for 2–5 cycles on screen.', hint: 'The signal is 1 kHz, so one cycle is 1 ms.', done: checks[4].done},
+        {label: 'Turn TRIGGER LEVEL until the waveform stands still.', hint: 'The level must lie inside the signal.', done: checks[5].done},
+        {
+          label: `Match all eight controls to their functions. Correct: ${quiz.filter((q) => ans[q.does] === q.control).length}/${quiz.length}`,
+          hint: 'Use the drop-downs in the table.',
+          done: quizOk,
+        },
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">{scope.view}</Section>
@@ -162,12 +171,17 @@ export function CroMeasureLab(): React.JSX.Element {
         {q: 'One cycle covers 4 divisions at 0.5 ms/div. Find f.', a: 'T = 2 ms, so f = 500 Hz.'},
         {q: 'Why does a DC voltage disappear in AC coupling?', a: 'The coupling capacitor blocks DC.'},
       ]}
-      tasks={[
-        {label: 'Measure the DC voltage.', done: !!r.vdc},
-        {label: 'Measure Vpp and Vrms of the sine wave.', done: !!(r.vpp && r.vrms)},
-        {label: 'Measure T and f of the sine wave.', done: !!(r.t && r.f)},
-        {label: 'Measure T and f of the square wave.', done: !!(r.sqT && r.sqF)},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: 'Set the CH1 input to DC supply and read its voltage.',
+          hint: 'GND first to set the zero line, then DC. V = divisions × VOLTS/DIV.',
+          done: !!r.vdc,
+        },
+        {label: 'Switch to Sine source and measure Vpp.', hint: 'Make the waveform as large as possible. Vpp = divisions × VOLTS/DIV.', done: !!r.vpp},
+        {label: 'Calculate the sine Vrms.', hint: 'Vrms = Vpp ÷ 2√2.', done: !!r.vrms},
+        {label: 'Measure the sine period T (ms) and frequency f.', hint: 'T = divisions per cycle × TIME/DIV. f = 1 ÷ T.', done: !!(r.t && r.f)},
+        {label: 'Switch to Square source and measure T and f.', hint: 'Adjust TIME/DIV to show 2–5 cycles.', done: !!(r.sqT && r.sqF)},
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -272,7 +286,15 @@ export function FgControlsLab(): React.JSX.Element {
         {q: 'What does the −20 dB attenuator do?', a: 'It divides the output voltage by 10.'},
         {q: 'What does DC offset do?', a: 'It shifts the whole waveform up or down by a DC level.'},
       ]}
-      tasks={[...targets.map((t, k) => ({label: `Produce: ${describe(t)}`, done: done.includes(k)})), {label: 'Print or save the record.', done: printed}]}
+      steps={[
+        {label: 'Switch the generator output ON.', hint: 'Watch the trace on the scope.', done: fg.state.on || done.length > 0},
+        ...targets.map((t, k) => ({
+          label: `Set signal ${k + 1}: ${describe(t)}, then press Check.`,
+          hint: t.vpp <= 1 ? 'Use ATT −20 dB for small signals. Frequency = RANGE × DIAL.' : 'Frequency = RANGE × DIAL. Check on the scope.',
+          done: done.includes(k),
+        })),
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
+      ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>

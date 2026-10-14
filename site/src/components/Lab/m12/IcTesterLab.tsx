@@ -88,12 +88,13 @@ export function IcTesterLab(): React.JSX.Element {
         {q: 'Why can CMOS run from 3 V to 15 V?', a: 'Its MOSFET switching threshold scales with the supply, so it works correctly over a wide voltage range.'},
         {q: 'How do you tell a NAND IC from an AND IC on the bench?', a: 'Their outputs are the complement of each other for every input combination — compare the truth tables.'},
       ]}
-      tasks={[
-        {label: `Full truth table at 5 V (${need} rows).`, done: rowsOk},
-        {label: 'Identify the gate function from the table.', done: fnOk},
-        {label: 'Note a reading at 5 V and one at a supply outside 4.75–5.25 V.', done: seenIn && seenOut},
-        {label: 'Identify TTL or CMOS from the supply test.', done: famOk},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Wire the switches to the IC inputs and its output to LED Y.', hint: 'Tap a switch, then an input pin. Then the output pin, then the LED.', done: yBit != null},
+        {label: `Set the supply to 5 V. Note every input combination. Rows: ${Math.min(rows.length, need)}/${need}`, hint: 'Rows are only noted with the supply between 4.75 and 5.25 V.', done: rowsOk},
+        {label: 'Choose the gate function in the Result table.', hint: 'Compare your truth table with the known gates.', done: fnOk},
+        {label: 'Change the supply to 3 V or 12 V and press Note reading.', hint: 'Watch the LED. Then return to 5 V.', done: seenIn && seenOut},
+        {label: 'Choose TTL or CMOS in the Result table.', hint: 'TTL only works near 5 V. CMOS works from 3 to 15 V.', done: famOk},
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t2) => t2.name.trim() && setPrinted(true)}>
       <Section title="Bench">

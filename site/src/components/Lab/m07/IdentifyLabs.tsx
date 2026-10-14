@@ -119,10 +119,11 @@ export function ActiveComponentsLab(): React.JSX.Element {
         {q: 'Many parts use the TO-220 package. How do you tell them apart?', a: 'By the type number printed on the body, checked in a data book.'},
         {q: 'Which lead of an LED is the anode?', a: 'The longer lead. The cathode side of the body is flat.'},
       ]}
-      tasks={[
-        {label: 'Name all 12 components.', done: items.every((_, k) => nameOk(k))},
-        {label: 'Mark each active or passive.', done: items.every((_, k) => clsOk(k))},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Look at each component in the tray.', hint: 'Check its shape, leads and printed type number.', done: items.some((_, k) => ans[k]?.name || ans[k]?.cls)},
+        {label: 'Name all 12 components.', hint: `Use the Component list in the table. Named: ${items.filter((_, k) => nameOk(k)).length}/${items.length}.`, done: items.every((_, k) => nameOk(k))},
+        {label: 'Mark each one active or passive.', hint: 'Active parts can amplify or control current.', done: items.every((_, k) => clsOk(k))},
+        {label: 'Enter your details and print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Component tray">
@@ -240,11 +241,15 @@ export function ResistorTypesLab(): React.JSX.Element {
         {q: 'What usually happens to a burnt resistor’s value?', a: 'It increases, or it goes fully open.'},
         {q: 'Can you find an open resistor by looking?', a: 'Not always. An internal break looks normal; only the meter shows OL.'},
       ]}
-      tasks={[
-        {label: 'Name all 8 resistor types.', done: items.every((_, k) => typeOk(k))},
-        {label: 'Measure all 8 with the meter.', done: items.every((_, k) => !!ans[k]?.meas)},
-        {label: 'Find the condition of all 8.', done: items.every((_, k) => condOk(k))},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Name the type of all 8 resistors.', hint: 'Look at the shape and markings. Use the Type list.', done: items.every((_, k) => typeOk(k))},
+        {
+          label: 'Measure all 8 with the meter.',
+          hint: `Probes on both leads, pick an Ω range, Note reading. Measured: ${items.filter((_, k) => !!ans[k]?.meas).length}/${items.length}.`,
+          done: items.every((_, k) => !!ans[k]?.meas),
+        },
+        {label: 'Set the condition of all 8.', hint: 'Also inspect for burns and cracks. OL on the top range means open.', done: items.every((_, k) => condOk(k))},
+        {label: 'Enter your details and print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -377,11 +382,11 @@ export function PowerRatingLab(): React.JSX.Element {
         {q: 'What happens if a resistor dissipates more than its rating?', a: 'It overheats, changes value, discolours and can burn open.'},
         {q: 'Max current in a 1 kΩ, 1/4 W resistor?', a: 'I = √(0.25 ÷ 1000) = 0.0158 A ≈ 15.8 mA.'},
       ]}
-      tasks={[
-        {label: 'Measure the body length of all five.', done: res.every((r) => r.len)},
-        {label: 'Identify the wattage of all five.', done: res.every((r) => r.w)},
-        {label: 'Calculate the maximum current of all five.', done: res.every((r) => r.i)},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Measure the body length of R1 to R5.', hint: 'Read the rule, body only (not the leads). Enter mm.', done: res.every((r) => r.len)},
+        {label: 'Pick the wattage of each from the size chart.', hint: 'Bigger body means higher wattage.', done: res.every((r) => r.w)},
+        {label: 'Calculate the maximum current of each.', hint: 'I = √(P ÷ R). Enter in mA.', done: res.every((r) => r.i)},
+        {label: 'Enter your details and print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

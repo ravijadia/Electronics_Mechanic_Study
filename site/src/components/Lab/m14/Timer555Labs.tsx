@@ -200,10 +200,11 @@ export function AstableLab(): React.JSX.Element {
         {q: 'Why does the measured frequency differ a little from the formula?', a: 'The resistors and capacitor have a tolerance, so the real RC product is not exactly the marked one.'},
         {q: 'Name two uses of an astable 555.', a: 'LED flasher, clock pulse generator, tone generator, PWM source.'},
       ]}
-      tasks={[
-        {label: 'Note 2 or more (R1, R2, C) combinations.', done: rows.length >= 2},
-        {label: 'Confirm a measured frequency matches the formula (within tolerance).', done: rows.some((r) => near(r.f, r.fc, 0.2))},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Pick R1, R2 and C, then press Note reading.', hint: 'Read f and duty on the scope (MEASURE).', done: rows.length >= 1},
+        {label: 'Change R2 or C and note a second reading.', hint: 'Calculated f = 1.44 / ((R1 + 2R2)C).', done: rows.length >= 2},
+        {label: 'Check a measured f is within 20 % of the formula.', hint: 'The table shows both. R is ±5 %, C is ±10 %.', done: rows.some((r) => near(r.f, r.fc, 0.2))},
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -272,10 +273,11 @@ export function MonostableLab(): React.JSX.Element {
         {q: 'What starts the timing cycle?', a: 'A trigger pulse on pin 2 falling below 1/3 Vcc.'},
         {q: 'Name two uses.', a: 'Pulse-width generation, switch debouncing, touch/proximity switches, frequency dividers.'},
       ]}
-      tasks={[
-        {label: 'Note 2 or more (R, C) combinations.', done: rows.length >= 2},
-        {label: 'Confirm a measured pulse width matches 1.1RC (within tolerance).', done: rows.some((r2) => near(r2.tw, r2.twc, 0.2))},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Pick R and C, then press Note reading.', hint: 'Read the pulse width on CH1. CH2 shows the trigger.', done: rows.length >= 1},
+        {label: 'Change R or C and note a second reading.', hint: 'Calculated pulse width = 1.1RC.', done: rows.length >= 2},
+        {label: 'Check a measured pulse width is within 20 % of 1.1RC.', hint: 'The table shows both. R is ±5 %, C is ±10 %.', done: rows.some((r2) => near(r2.tw, r2.twc, 0.2))},
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -352,10 +354,12 @@ export function VcoLab(): React.JSX.Element {
         {q: 'What happens to frequency as control voltage rises?', a: 'It falls. The capacitor must charge to a higher level each cycle, so the cycle takes longer.'},
         {q: 'Name one use of a 555 VCO.', a: 'Voltage-to-frequency conversion for sensor read-out, tone generation, FM-style modulation.'},
       ]}
-      tasks={[
-        {label: 'Measure frequency at 3 or more control voltages.', done: rows.length >= 3},
-        {label: 'Confirm frequency falls as control voltage rises.', done: rows.length >= 2 && rows[0].f > rows[rows.length - 1].f},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Pick a control voltage on pin 5 and press Note reading.', hint: 'Changing R2 or C starts a new table.', done: rows.length >= 1},
+        {label: 'Change the control voltage and note again.', hint: 'Read f on the scope (MEASURE).', done: rows.length >= 2},
+        {label: `Note a third control voltage. Readings: ${Math.min(rows.length, 3)}/3`, hint: 'For example 2 V, 6 V and 10 V.', done: rows.length >= 3},
+        {label: 'Check f falls as the control voltage rises.', hint: 'Compare the first and last rows of the table.', done: rows.length >= 2 && rows[0].f > rows[rows.length - 1].f},
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -431,10 +435,12 @@ export function PwmLab(): React.JSX.Element {
         {q: 'How does PWM differ from the VCO circuit?', a: 'Here the trigger clock fixes the frequency and only the pulse width follows Vc. In the VCO the frequency itself changes.'},
         {q: 'Name one use of 555 PWM.', a: 'Motor speed control, LED dimming, switch-mode power regulation.'},
       ]}
-      tasks={[
-        {label: 'Measure duty cycle at 3 or more control voltages.', done: rows.length >= 3},
-        {label: 'Confirm duty cycle rises with control voltage.', done: rows.length >= 2 && rows[0].duty < rows[rows.length - 1].duty},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Pick a control voltage on pin 5 and press Note reading.', hint: 'Duty = pulse width / clock period. Changing R or C starts a new table.', done: rows.length >= 1},
+        {label: 'Change the control voltage and note again.', hint: 'If the output sticks HIGH, lower R or C.', done: rows.length >= 2},
+        {label: `Note a third control voltage. Readings: ${Math.min(rows.length, 3)}/3`, hint: 'For example 2 V, 6 V and 10 V.', done: rows.length >= 3},
+        {label: 'Check duty cycle rises with the control voltage.', hint: 'Compare the first and last rows of the table.', done: rows.length >= 2 && rows[0].duty < rows[rows.length - 1].duty},
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

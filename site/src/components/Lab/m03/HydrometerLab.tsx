@@ -121,12 +121,25 @@ export default function HydrometerLab(): React.JSX.Element {
         {q: 'Why is a temperature correction needed?', a: 'Electrolyte expands when warm, so it reads low. Add 0.0007 for each °C above 27 °C.'},
         {q: 'What does one cell much lower than the others indicate?', a: 'A weak or faulty cell (internal short, sulphation, or leakage).'},
       ]}
-      tasks={[
-        {label: 'Read the SG of all six cells.', done: res.every((r) => r.obs)},
-        {label: 'Apply the temperature correction to all six.', done: res.every((r) => r.cor)},
-        {label: 'Find the weak cell.', done: Number(weakAns) === kit.weak + 1},
-        {label: 'State the battery’s state of charge.', done: stateAns === stateTruth},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: 'Pick a cell, squeeze the bulb and draw electrolyte.',
+          hint: 'Read the stem where the liquid surface cuts it.',
+          done: drawn || Object.keys(ans).length > 0,
+        },
+        {
+          label: `Type the observed SG of all six cells. Correct: ${res.filter((r) => r.obs).length}/6`,
+          hint: 'Return the electrolyte to the same cell each time. Small mark = 0.005.',
+          done: res.every((r) => r.obs),
+        },
+        {
+          label: `Correct each SG for temperature. Correct: ${res.filter((r) => r.cor).length}/6`,
+          hint: `Add 0.0007 per °C above ${REF_T} °C.`,
+          done: res.every((r) => r.cor),
+        },
+        {label: 'Choose the weak cell.', hint: 'It reads much lower than the others.', done: Number(weakAns) === kit.weak + 1},
+        {label: 'Choose the battery’s state of charge.', hint: 'Use the corrected SG of the good cells.', done: stateAns === stateTruth},
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

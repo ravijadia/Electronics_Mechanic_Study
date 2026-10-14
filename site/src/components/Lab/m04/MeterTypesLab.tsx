@@ -49,10 +49,18 @@ export default function MeterTypesLab(): React.JSX.Element {
         {q: 'How does a rectifier-type meter measure AC with a PMMC movement?', a: 'A diode bridge converts AC to DC for the PMMC movement. The scale is calibrated in RMS for sine waves.'},
         {q: 'What does a wattmeter measure that a voltmeter and ammeter cannot?', a: 'True power, including the effect of power factor.'},
       ]}
-      tasks={[
-        {label: 'Mark the supply type of all seven instruments.', done: INSTRUMENTS.every((i) => sup[i.name] === i.supply)},
-        {label: 'Choose the right instrument for all eight jobs.', done: JOBS.every((j) => pick[j.job] === j.best)},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: `Part A: mark each instrument as DC, AC or Both. Correct: ${INSTRUMENTS.filter((i) => sup[i.name] === i.supply).length}/${INSTRUMENTS.length}`,
+          hint: 'A PMMC movement works on DC only.',
+          done: INSTRUMENTS.every((i) => sup[i.name] === i.supply),
+        },
+        {
+          label: `Part B: choose the best instrument for each job. Correct: ${JOBS.filter((j) => pick[j.job] === j.best).length}/${JOBS.length}`,
+          hint: 'Use the drop-down in each row.',
+          done: JOBS.every((j) => pick[j.job] === j.best),
+        },
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Part A: AC, DC or both?">

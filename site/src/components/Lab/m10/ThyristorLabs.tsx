@@ -128,11 +128,16 @@ export function UjtOscLab(): React.JSX.Element {
         {q: 'Why does the UJT stop oscillating when R is too small?', a: 'The current through R exceeds the valley current, so the UJT stays on and C never recharges.'},
         {q: 'Uses of the UJT oscillator?', a: 'Triggering SCRs and TRIACs, timing and sawtooth generators.'},
       ]}
-      tasks={[
-        {label: 'Peak voltage Vp and η.', done: vpOk && etaOk},
-        {label: 'Three settings: T measured, f calculated.', done: rows.filter(rowOk).length >= 3},
-        {label: 'See the UJT latch at minimum R.', done: latchSeen},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Switch the 12 V supply ON.', hint: 'CH1 shows the emitter sawtooth, CH2 the B1 pulses.', done: power || rows.length > 0},
+        {label: 'Read the sawtooth peak Vp and enter Vp and η.', hint: 'DC coupling. η = (Vp − 0.6) ÷ VBB.', done: vpOk && etaOk},
+        {
+          label: `Add rows for different pot and C settings. Correct rows: ${Math.min(rows.filter(rowOk).length, 3)}/3`,
+          hint: 'Press Add row, read T on the CRO, calculate f = 1 ÷ (R C ln(1 ÷ (1 − η))).',
+          done: rows.filter(rowOk).length >= 3,
+        },
+        {label: 'Turn the pot to 0 % and watch the UJT latch.', hint: 'R is too small: the UJT stays ON, no oscillation.', done: latchSeen},
+        {label: 'Enter your details and print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -289,10 +294,12 @@ export function ScrUjtLab(): React.JSX.Element {
         {q: 'Why is the UJT supply synchronised to the mains?', a: 'So the firing delay is measured from the start of every half cycle and stays the same each cycle.'},
         {q: 'Why does the lamp go off at maximum R?', a: 'The UJT fires after 180°, when the SCR is already reverse biased.'},
       ]}
-      tasks={[
-        {label: 'Four settings: α from CRO, Vdc measured and calculated.', done: rows.filter(rowOk).length >= 4},
-        {label: 'See the lamp go off (no firing).', done: offSeen},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Switch the supply ON.', hint: 'CH1 shows the supply, CH2 the lamp voltage.', done: power || rows.length > 0},
+        {label: `Note Vdc at four pot settings. Rows: ${Math.min(rows.length, 4)}/4`, hint: 'Meter on DC V across the lamp. Set the pot, press Note reading.', done: rows.length >= 4},
+        {label: `Read α on the CRO and calculate Vdc for each row. Correct rows: ${Math.min(rows.filter(rowOk).length, 4)}/4`, hint: 'α = division to the jump ÷ divisions per cycle × 360°. Vdc = Vm (1 + cos α) ÷ 2π.', done: rows.filter(rowOk).length >= 4},
+        {label: 'Turn the pot up until the lamp goes off.', hint: 'The trigger comes after 180°: the SCR never fires.', done: offSeen},
+        {label: 'Enter your details and print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -487,10 +494,12 @@ export function DimmerLab(): React.JSX.Element {
         {q: 'How does the pot change the brightness?', a: 'A larger R charges C more slowly and with more phase lag, so the DIAC fires later (larger α) and less of each half cycle reaches the lamp.'},
         {q: 'Why does a dimmer cause radio interference?', a: 'The sudden switching produces sharp current steps rich in harmonics; an LC filter reduces it.'},
       ]}
-      tasks={[
-        {label: 'Three lit settings: α and lamp V measured, Vrms calculated.', done: lit.length >= 3},
-        {label: 'Find the lamp-off setting.', done: rows.some((x) => x.alpha == null)},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Choose the isolated probe and switch ON.', hint: 'A plain probe shorts the mains: the MCB trips.', done: power || rows.length > 0},
+        {label: `Note the lamp voltage at three lit settings. Rows: ${Math.min(rows.filter((x) => x.alpha != null).length, 3)}/3`, hint: 'Meter on AC V 750 across the lamp. Set the pot, press Note reading.', done: rows.filter((x) => x.alpha != null).length >= 3},
+        {label: `Read α on the CRO and calculate Vrms for each row. Correct rows: ${Math.min(lit.length, 3)}/3`, hint: 'Vrms = Vs √(1 − α/π + sin 2α ÷ 2π).', done: lit.length >= 3},
+        {label: 'Find the setting where the lamp goes off.', hint: 'Turn the pot up until the DIAC never fires. Note a reading.', done: rows.some((x) => x.alpha == null)},
+        {label: 'Enter your details and print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

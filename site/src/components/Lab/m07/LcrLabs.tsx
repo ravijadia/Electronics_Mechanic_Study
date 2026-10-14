@@ -194,11 +194,15 @@ export function InductorLab(): React.JSX.Element {
         {q: 'What is Q of an inductor?', a: 'Quality factor = XL ÷ R. A high Q means low losses.'},
         {q: 'Where is an iron-core choke used?', a: 'At low frequency: power-supply filters, fluorescent lamp ballasts.'},
       ]}
-      tasks={[
-        {label: 'Identify all six types.', done: items.every((_, k) => typeOk(k))},
-        {label: 'Read the marked values.', done: items.every((_, k) => markOk(k) === true)},
-        {label: 'Measure L of all six.', done: items.every((_, k) => !!ans[k]?.meas)},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Name the type of each inductor.', hint: 'Use the Type list in the table.', done: items.every((_, k) => typeOk(k))},
+        {label: 'Read each marking and enter it.', hint: 'Codes are in µH. Enter “–” if unmarked.', done: items.every((_, k) => markOk(k) === true)},
+        {
+          label: 'Measure L of all six on the LCR meter.',
+          hint: `Tap a part, select L and 1 kHz, press Note reading. Measured: ${items.filter((_, k) => !!ans[k]?.meas).length}/${items.length}.`,
+          done: items.every((_, k) => !!ans[k]?.meas),
+        },
+        {label: 'Enter your details and print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -356,12 +360,21 @@ export function CapacitorLab(): React.JSX.Element {
         {q: 'What does a high D (dissipation factor) mean?', a: 'High internal loss: the capacitor is drying out or failing.'},
         {q: 'Why discharge a capacitor before measuring?', a: 'Its stored charge can damage the meter and give a shock.'},
       ]}
-      tasks={[
-        {label: 'Identify all six types.', done: items.every((_, k) => typeOk(k))},
-        {label: 'Decode all six markings.', done: items.every((_, k) => markOk(k))},
-        {label: 'Measure all six (discharge first).', done: items.every((_, k) => !!ans[k]?.meas)},
-        {label: 'Find the faulty capacitor.', done: items.every((_, k) => condOk(k))},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Name the type of each capacitor.', hint: 'Use the Type list in the table.', done: items.every((_, k) => typeOk(k))},
+        {label: 'Decode each marking and enter it.', hint: '3-digit code is in pF: 104 = 100 nF.', done: items.every((_, k) => markOk(k))},
+        {
+          label: 'Discharge every electrolytic and tantalum capacitor.',
+          hint: 'Set “Tap a part to” Discharge, then tap each polar part.',
+          done: items.every((it, k) => !it.polar || discharged.includes(k)) || items.every((_, k) => !!ans[k]?.meas),
+        },
+        {
+          label: 'Measure C of all six on the LCR meter.',
+          hint: `Put in clips, select C, press Note reading. Measured: ${items.filter((_, k) => !!ans[k]?.meas).length}/${items.length}.`,
+          done: items.every((_, k) => !!ans[k]?.meas),
+        },
+        {label: 'Mark each capacitor good or faulty.', hint: 'Far below its value, or high D, means faulty.', done: items.every((_, k) => condOk(k))},
+        {label: 'Enter your details and print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

@@ -8,6 +8,14 @@ export interface PracticalTask {
   done: boolean;
 }
 
+export interface PracticalStep {
+  /** One short instruction. */
+  label: React.ReactNode;
+  /** Extra detail, shown only while this is the current step. */
+  hint?: React.ReactNode;
+  done: boolean;
+}
+
 export interface VivaQuestion {
   q: string;
   a: React.ReactNode;
@@ -29,7 +37,10 @@ export interface PracticalSheetProps {
   procedure: React.ReactNode[];
   precautions: React.ReactNode[];
   viva: VivaQuestion[];
-  tasks: PracticalTask[];
+  /** Side checklist. Ignored when `steps` is given. */
+  tasks?: PracticalTask[];
+  /** Numbered steps shown above the bench in place of the task panel. */
+  steps?: PracticalStep[];
   /** Called after the trainee prints / saves the record. */
   onPrinted?: (trainee: Trainee) => void;
   /** Bench, observation table and result sections, in that order. */
@@ -55,17 +66,21 @@ export default function PracticalSheet({
   procedure,
   precautions,
   viva,
-  tasks,
+  tasks = [],
+  steps,
   onPrinted,
   children,
 }: PracticalSheetProps): React.JSX.Element {
   const standalone = useContext(LabPageContext);
   const rootRef = useRef<HTMLElement>(null);
   const [showTasks, setShowTasks] = useState(false);
+  const hasSteps = !!steps && steps.length > 0;
+  const currentStep = steps ? steps.findIndex((s) => !s.done) : -1;
   // Shared across practicals so the trainee types their details once.
   const [trainee, setTrainee] = useStoredState<Trainee>('lab:trainee', EMPTY_TRAINEE);
-  const doneCount = tasks.filter((t) => t.done).length;
-  const pct = tasks.length ? Math.round((doneCount / tasks.length) * 100) : 0;
+  const items = hasSteps ? steps! : tasks;
+  const doneCount = items.filter((t) => t.done).length;
+  const pct = items.length ? Math.round((doneCount / items.length) * 100) : 0;
   const Title = standalone ? 'h1' : 'h3';
 
   const print = () => {
@@ -104,12 +119,12 @@ export default function PracticalSheet({
         </p>
       </header>
 
-      <div className={styles.body}>
-        <aside className={clsx(styles.taskPanel, styles.noPrint)} aria-label="Tasks">
+      <div className={clsx(styles.body, hasSteps && styles.hasSteps)}>
+        <aside hidden={items.length === 0} className={clsx(styles.taskPanel, styles.noPrint)} aria-label={hasSteps ? 'Steps' : 'Tasks'}>
           <div className={styles.taskHead}>
-            <b>Tasks</b>
+            <b>{hasSteps ? 'Steps' : 'Tasks'}</b>
             <span>
-              {doneCount}/{tasks.length}
+              {doneCount}/{items.length}
             </span>
             <button type="button" className={styles.taskToggle} aria-expanded={showTasks} onClick={() => setShowTasks((x) => !x)}>
               {showTasks ? 'Hide ▴' : 'Show ▾'}
@@ -118,20 +133,43 @@ export default function PracticalSheet({
           <span className={styles.pbar} aria-hidden="true">
             <span style={{transform: `scaleX(${pct / 100})`}} />
           </span>
-          <ul className={clsx(styles.tasks, !showTasks && styles.tasksCollapsed)}>
-            {tasks.map((t, k) => (
-              <li key={k} className={clsx(t.done && styles.taskDone)}>
-                <span className={clsx(styles.check, t.done && styles.done)} aria-hidden="true">
-                  {t.done ? '✓' : ''}
-                </span>
-                <span>
-                  <span className={styles.srOnly}>{t.done ? 'Done: ' : 'To do: '}</span>
-                  {t.label}
-                </span>
-              </li>
-            ))}
-          </ul>
-          {pct === 100 && <div className={styles.allDone}>All tasks done ✓</div>}
+          {hasSteps ? (
+            <ol className={styles.steps}>
+              {steps!.map((s, k) => {
+                const current = k === currentStep;
+                return (
+                  <li
+                    key={k}
+                    className={clsx(styles.step, current && styles.stepCurrent, s.done && styles.stepDone, !current && !showTasks && styles.stepOff)}
+                    aria-current={current ? 'step' : undefined}>
+                    <span className={clsx(styles.stepNo, s.done && styles.done)} aria-hidden="true">
+                      {s.done ? '✓' : k + 1}
+                    </span>
+                    <span>
+                      <span className={styles.srOnly}>{s.done ? 'Done: ' : current ? 'Current step: ' : 'To do: '}</span>
+                      {s.label}
+                      {current && s.hint && <span className={styles.stepHint}>{s.hint}</span>}
+                    </span>
+                  </li>
+                );
+              })}
+            </ol>
+          ) : (
+            <ul className={clsx(styles.tasks, !showTasks && styles.tasksCollapsed)}>
+              {tasks.map((t, k) => (
+                <li key={k} className={clsx(t.done && styles.taskDone)}>
+                  <span className={clsx(styles.check, t.done && styles.done)} aria-hidden="true">
+                    {t.done ? '✓' : ''}
+                  </span>
+                  <span>
+                    <span className={styles.srOnly}>{t.done ? 'Done: ' : 'To do: '}</span>
+                    {t.label}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+          {pct === 100 && <div className={styles.allDone}>{hasSteps ? 'All steps done ✓' : 'All tasks done ✓'}</div>}
         </aside>
 
         <div className={styles.main}>

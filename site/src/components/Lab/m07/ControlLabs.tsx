@@ -144,6 +144,9 @@ export function TimerRelayLab(): React.JSX.Element {
   }, [elapsed]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const goodSets = new Set(runs.filter((r) => r.good).map((r) => r.set));
+  const tb = netsOf([...wiring.wires, ['S1a', 'S1b'] as Wire]);
+  const coilWired = (tb('A1') === tb('L') && tb('A2') === tb('N')) || (tb('A2') === tb('L') && tb('A1') === tb('N'));
+  const contactsWired = tb('T15') === tb('L') && [tb('T16'), tb('T18')].every((n) => ['X1', 'X2', 'Y1', 'Y2'].some((p) => tb(p) === n));
 
   return (
     <PracticalSheet
@@ -165,10 +168,25 @@ export function TimerRelayLab(): React.JSX.Element {
         {q: 'Where are timer relays used?', a: 'Star–delta starters, staircase lights, delayed start of motors and pumps.'},
         {q: 'What is an off-delay timer?', a: 'Contacts change at once when energised and return a set time after the supply is removed.'},
       ]}
-      tasks={[
-        {label: 'Wire it so lamp 1 comes on after the delay and lamp 2 goes off.', done: goodSets.size >= 1},
-        {label: 'Test at three different time settings.', done: goodSets.size >= 3},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'MCB OFF. Wire the coil: L → S1 → A1, A2 → N.', hint: 'Tap two terminals to join them.', done: coilWired || goodSets.size >= 1},
+        {
+          label: 'Wire the contacts: 15 to L, 18 → lamp 1, 16 → lamp 2.',
+          hint: 'Other end of each lamp goes to N.',
+          done: contactsWired || goodSets.size >= 1,
+        },
+        {label: 'Set the time dial, MCB ON, then S1 ON.', hint: 'The timer starts when the coil is energised.', done: start != null || runs.length > 0},
+        {
+          label: 'Watch the lamps: 2 ON, then after the delay 1 ON and 2 OFF.',
+          hint: 'If not, switch off and check the wiring.',
+          done: goodSets.size >= 1,
+        },
+        {
+          label: 'Repeat at three different time settings.',
+          hint: `Switch S1 OFF, change the dial, switch ON. Settings: ${Math.min(goodSets.size, 3)}/3.`,
+          done: goodSets.size >= 3,
+        },
+        {label: 'Enter your details and print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -343,6 +361,13 @@ export function ContactorLab(): React.JSX.Element {
     if (live && coilOn && !offLamp && seen.indOn) setSeen((s) => (s.indOff ? s : {...s, indOff: true}));
   }, [coilOn, start, load, offLamp, live]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const nb = netsOf(wiring.wires);
+  const cb = netsOf([...wiring.wires, ['ST1', 'ST2'] as Wire, ['SR3', 'SR4'] as Wire]);
+  const controlWired = (cb('L') === cb('KA1') && cb('KA2') === cb('N')) || (cb('L') === cb('KA2') && cb('KA1') === cb('N'));
+  const holdWired = (nb('K13') === nb('SR3') && nb('K14') === nb('SR4')) || (nb('K13') === nb('SR4') && nb('K14') === nb('SR3'));
+  const loadWired = nb('KL1') === nb('L') && ['X1', 'X2'].some((x) => nb(x) === nb('KT1')) && ['X1', 'X2'].some((x) => nb(x) === nb('N'));
+  const indWired = nb('K21') === nb('L') && ['Y1', 'Y2'].some((y) => nb(y) === nb('K22')) && ['Y1', 'Y2'].some((y) => nb(y) === nb('N'));
+
   return (
     <PracticalSheet
       number={KEY}
@@ -363,13 +388,24 @@ export function ContactorLab(): React.JSX.Element {
         {q: 'What is the difference between a relay and a contactor?', a: 'A contactor has heavy main contacts for switching loads like motors, plus auxiliary contacts. A relay is for lighter loads and control.'},
         {q: 'What does no-volt protection mean?', a: 'If the supply fails, the contactor drops out and does not restart by itself when power returns.'},
       ]}
-      tasks={[
-        {label: 'Press start: the contactor picks up.', done: !!seen.started},
-        {label: 'Release start: it holds in.', done: !!seen.held},
-        {label: 'Press stop: it drops out.', done: !!seen.stopped},
-        {label: 'Load on only while the contactor is on.', done: !!seen.loadOn && !!seen.loadOff},
-        {label: 'OFF indicator lit only while stopped.', done: !!seen.indOn && !!seen.indOff},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: 'MCB OFF. Wire the control circuit: L → stop → start → A1, A2 → N.',
+          hint: 'Stop is 1–2, start is 3–4. Tap two terminals to join them.',
+          done: controlWired || !!seen.started,
+        },
+        {label: 'Wire the hold-on: contact 13–14 across the start button.', hint: 'Terminals 13 and 14 to 3 and 4.', done: holdWired || !!seen.held},
+        {label: 'Wire the load: L → 1/L1, 2/T1 → load → N.', hint: 'Main contacts carry the load current.', done: loadWired || !!seen.loadOn},
+        {label: 'Wire the OFF indicator: L → 21–22 → red lamp → N.', hint: 'Aux NC contact 21–22.', done: indWired || !!seen.indOn},
+        {label: 'MCB ON. Press and hold START: the contactor picks up.', hint: 'Press and hold the green button.', done: !!seen.started},
+        {label: 'Release START: it holds in.', hint: 'The coil stays on through contact 13–14.', done: !!seen.held},
+        {label: 'Press STOP: it drops out.', hint: 'Red button breaks the coil circuit.', done: !!seen.stopped},
+        {
+          label: 'Check the load and the OFF indicator.',
+          hint: 'Load lit only while on; red lamp lit only while stopped.',
+          done: !!seen.loadOn && !!seen.loadOff && !!seen.indOn && !!seen.indOff,
+        },
+        {label: 'Enter your details and print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

@@ -57,14 +57,18 @@ export function DsoControlsLab(): React.JSX.Element {
         {q: 'When is SINGLE trigger used?', a: 'To capture a one-time event, such as a switch-on surge.'},
         {q: 'What does AUTO SET not guarantee?', a: 'The best view for your purpose. You often still need to adjust the settings by hand.'},
       ]}
-      tasks={[
-        {label: 'Show both channels (DUAL).', done: s.display === 'DUAL' && s.ch1.on && s.ch2.on},
-        {label: 'Both traces 2–8 divisions high.', done: fit(3, s.ch1.vdiv) && fit(6, s.ch2.vdiv)},
-        {label: 'Trigger on CH2, stable display.', done: s.trigSrc === 2 && scope.triggered},
-        {label: 'Turn on MEASURE.', done: s.measure},
-        {label: 'Freeze the display with RUN/STOP.', done: stopped},
-        {label: 'Match all eight controls.', done: quizOk},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Show both channels (DUAL).', hint: 'Turn CH2 on and choose DUAL display.', done: s.display === 'DUAL' && s.ch1.on && s.ch2.on},
+        {label: 'Set VOLTS/DIV so both traces are 2–8 divisions high.', hint: 'CH1 is 3 V and CH2 is 6 V peak to peak.', done: fit(3, s.ch1.vdiv) && fit(6, s.ch2.vdiv)},
+        {label: 'Trigger on CH2 for a stable display.', hint: 'Set TRIGGER SOURCE to CH2, then adjust the level.', done: s.trigSrc === 2 && scope.triggered},
+        {label: 'Turn on MEASURE.', hint: 'It shows Vpp, frequency and period on screen.', done: s.measure},
+        {label: 'Freeze the display with RUN/STOP.', hint: 'Press RUN/STOP once.', done: stopped},
+        {
+          label: `Match all eight controls to their functions. Correct: ${quiz.filter((q) => ans[q.does] === q.control).length}/${quiz.length}`,
+          hint: 'Use the drop-downs in the table.',
+          done: quizOk,
+        },
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">{scope.view}</Section>
@@ -151,7 +155,14 @@ export function DsoMeasureLab(): React.JSX.Element {
         {q: 'A PWM signal has a 1 ms period and is high for 0.25 ms. What is the duty cycle?', a: '25 %.'},
         {q: 'Why does the half-wave rectifier output have the same frequency as the mains?', a: 'There is one output pulse for each input cycle.'},
       ]}
-      tasks={[...signals.map((s, k) => ({label: `Measure the ${s.name.toLowerCase()}.`, done: !!(res[k].vpp && res[k].f && res[k].t)})), {label: 'Print or save the record.', done: printed}]}
+      steps={[
+        ...signals.map((s, k) => ({
+          label: `Measure the ${s.name.toLowerCase()}: Vpp, frequency and period.`,
+          hint: 'Click its button above the scope. Read MEASURE or count divisions. Period in ms.',
+          done: !!(res[k].vpp && res[k].f && res[k].t),
+        })),
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
+      ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={clsx(styles.seg, styles.noPrint)} role="group" aria-label="Signal" style={{marginBottom: '0.7rem'}}>
@@ -249,11 +260,12 @@ export function DsoPrintLab(): React.JSX.Element {
         {q: 'Why must the printout show V/div and time/div?', a: 'Without the scale settings the divisions cannot be turned into volts and seconds.'},
         {q: 'Why may the generator dial and the measured frequency differ slightly?', a: 'The dial is not precise. The scope’s measurement is more accurate.'},
       ]}
-      tasks={[
-        {label: 'Capture the DSO screen.', done: !!shot},
-        {label: 'Read the frequency from the printout.', done: !!fOk},
-        {label: 'Read Vpp from the printout.', done: !!vOk},
-        {label: 'Print or save the record (it includes the screen).', done: printed},
+      steps={[
+        {label: 'Set any signal on the generator and show it clearly.', hint: 'Output ON, 2–5 cycles on the scope.', done: fg.state.on || !!shot},
+        {label: 'Press SAVE / PRINT SCREEN.', hint: 'Freeze first if the signal is changing.', done: !!shot},
+        {label: 'Read the frequency from the printout and type it.', hint: 'Use the time/div shown on the printout. f = 1 ÷ T.', done: !!fOk},
+        {label: 'Read Vpp from the printout and type it.', hint: 'Vpp = divisions × volts/div shown on the printout.', done: !!vOk},
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -384,11 +396,24 @@ export function Icl8038Lab(): React.JSX.Element {
         {q: 'How does the frequency change if C is made 10 times larger?', a: 'It becomes 10 times lower.'},
         {q: 'Why is the measured frequency a little different from the calculation?', a: 'Component tolerances, and the formula is an approximation.'},
       ]}
-      tasks={[
-        {label: 'View all three outputs on the DSO.', done: seen.length === 3},
-        {label: 'Record three R–C combinations correctly.', done: rows.filter(rowOk).length >= 3},
-        {label: 'Get an output of about 1 kHz.', done: near1k},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: `View all three outputs on the DSO. Outputs: ${seen.length}/3`,
+          hint: 'Move the DSO probe to pin 9, pin 3 and pin 2.',
+          done: seen.length === 3,
+        },
+        {
+          label: 'Calculate f, measure it on the DSO, type both and press Note reading.',
+          hint: 'f = 0.33 ÷ (R × C). Read the measured f from MEASURE.',
+          done: rows.length > 0,
+        },
+        {
+          label: `Record three R–C combinations correctly. Correct: ${Math.min(3, rows.filter(rowOk).length)}/3`,
+          hint: 'Change R or C each time.',
+          done: rows.filter(rowOk).length >= 3,
+        },
+        {label: 'Choose R and C to get about 1 kHz and record it.', hint: 'Use f = 0.33 ÷ (R × C) to pick the values.', done: near1k},
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

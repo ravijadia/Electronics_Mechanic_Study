@@ -119,11 +119,20 @@ export function SolarCellLab(): React.JSX.Element {
         {q: 'Why is the power zero at open circuit and at short circuit?', a: 'At open circuit I = 0; at short circuit V = 0. So P = V × I = 0.'},
         {q: 'Why are solar cells connected in series in a module?', a: 'One silicon cell gives only about 0.5–0.6 V.'},
       ]}
-      tasks={[
-        {label: 'Voc and Isc at four lamp distances.', done: both.length >= 4},
-        {label: 'Load test: 6+ loads at one distance.', done: pts.length >= 6},
-        {label: 'Maximum power and its load from your table.', done: pOk && rOk},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Switch the lamp ON and switch both meters on.', hint: 'Voltmeter across the module, ammeter in series. Ammeter on the high range first.', done: lamp || lrows.length > 0 || pts.length > 0},
+        {
+          label: `Note Voc (load Open) and Isc (load Short) at four lamp distances. Distances: ${Math.min(both.length, 4)}/4`,
+          hint: 'Change LAMP DISTANCE, then LOAD BOX to Open and to Short. Press Note reading each time.',
+          done: both.length >= 4,
+        },
+        {
+          label: `Keep the lamp at one distance and note V and I for six loads. Loads: ${Math.min(pts.length, 6)}/6`,
+          hint: 'Step the load box from 1 kΩ down to 10 Ω. Do not move the lamp.',
+          done: pts.length >= 6,
+        },
+        {label: 'Find the maximum power and its load, and enter both.', hint: 'P = V × I. Take the largest P in your table.', done: pOk && rOk},
+        {label: 'Enter your details and print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

@@ -82,10 +82,19 @@ export default function MaintenanceLab(): React.JSX.Element {
         {q: 'Why apply petroleum jelly to terminals?', a: 'It keeps out air and moisture and prevents further corrosion.'},
         {q: 'What is an equalising charge?', a: 'A long, low-rate charge that brings all cells to the same, full state.'},
       ]}
-      tasks={[
-        {label: 'Put the maintenance steps in the correct order.', done: checked && ok},
-        {label: 'Choose the right action for all six problems.', done: casesOk},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: 'Arrange the maintenance steps in the correct order.',
+          hint: 'Use ▲ ▼. Safety first, then clean, check, top up, measure.',
+          done: ok,
+        },
+        {label: 'Press Check order.', hint: 'A ✓ means the order is right.', done: checked && ok},
+        {
+          label: `Choose the right action for each problem. Correct: ${CASES.filter((c, k) => ans[k] === c.fix).length}/6`,
+          hint: 'Part B. Pick from the list for each row.',
+          done: casesOk,
+        },
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Part A: Maintenance steps in order">

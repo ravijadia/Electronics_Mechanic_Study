@@ -145,10 +145,10 @@ export default function VoltageLab(): React.JSX.Element {
         {q: 'What does the multimeter show for mains AC: peak or RMS value?', a: 'The RMS value (230 V). The peak is about 325 V.'},
         {q: 'Why is a new “1.5 V” cell sometimes 1.6 V, and an old one 1.3 V?', a: 'A fresh cell’s open-circuit voltage is slightly above nominal. It falls as the cell discharges.'},
       ]}
-      tasks={[
-        {label: 'Measure every source on the correct function (AC or DC).', done: doneCorrect.length === sources.length},
-        {label: 'Use the best range for at least four sources.', done: doneBest.length >= 4},
-        {label: 'Fill in your details and print or save the record.', done: printed},
+      steps={[
+        {label: 'Set AC or DC to match each source and measure it.', hint: 'Check the source label first.', done: doneCorrect.length === sources.length},
+        {label: 'Use the best range for at least four sources.', hint: 'Lowest range above the voltage.', done: doneBest.length >= 4},
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

@@ -101,11 +101,11 @@ export default function PhaseNeutralEarthLab(): React.JSX.Element {
         {q: 'Why is the earth pin of a plug longer and thicker?', a: 'So that earth connects first and disconnects last, and so the plug cannot be inserted the wrong way round.'},
         {q: 'What is the danger of a socket with phase and neutral reversed?', a: 'The switch then breaks the neutral, so the appliance stays live even when switched off. Anyone touching it can get a shock.'},
       ]}
-      tasks={[
-        {label: 'Use the neon tester on all three holes of every board.', done: neonDone},
-        {label: 'Measure left–right, right–earth and left–earth on every board.', done: voltsDone},
-        {label: 'Identify the phase hole and the wiring of every board correctly.', done: allRight},
-        {label: 'Fill in your details and print or save the record.', done: printed},
+      steps={[
+        {label: 'Use the neon tester on all three holes of each board.', hint: 'The neon glows on the phase hole only.', done: neonDone},
+        {label: 'Measure left–right, right–earth and left–earth on each board.', hint: 'Note all three voltages.', done: voltsDone},
+        {label: 'Identify the phase hole and the wiring of each board.', hint: 'Use the tester and voltmeter results.', done: allRight},
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

@@ -143,10 +143,10 @@ export default function WireGaugeLab(): React.JSX.Element {
         {q: 'As the SWG number increases, does the wire get thicker or thinner?', a: 'Thinner. For example, 14 SWG is about 2.03 mm and 22 SWG is about 0.71 mm.'},
         {q: 'Why measure wire gauge in an electrical trade?', a: 'The diameter decides the current-carrying capacity and the resistance of the wire.'},
       ]}
-      tasks={[
-        {label: 'Find the SWG of all four samples.', done: res.every((r) => r.swg)},
-        {label: 'Read the micrometer correctly for all four samples.', done: res.every((r) => r.msr && r.td && r.dia)},
-        {label: 'Fill in your details and print or save the record.', done: printed},
+      steps={[
+        {label: 'Find the SWG of each wire sample.', hint: 'Select each sample with the sample buttons.', done: res.every((r) => r.swg)},
+        {label: 'Read the micrometer for each sample.', hint: 'Diameter = main scale + thimble reading.', done: res.every((r) => r.msr && r.td && r.dia)},
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

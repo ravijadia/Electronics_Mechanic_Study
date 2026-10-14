@@ -117,10 +117,10 @@ export function DialSymbolsLab(): React.JSX.Element {
         {q: 'What does a star with “2” inside mean?', a: 'The insulation has been tested at 2 kV.'},
         {q: 'Why does a PMMC meter have a uniform scale but a MI meter a cramped one?', a: 'PMMC deflection is proportional to current. MI deflection is roughly proportional to current squared, so the scale is crowded at the start.'},
       ]}
-      tasks={[
-        {label: 'Answer every question for all four meters.', done: answered === meters.length},
-        {label: 'Get every answer right.', done: allOk},
-        {label: 'Fill in your details and print or save the record.', done: printed},
+      steps={[
+        {label: 'Answer the questions for each of the four meters.', hint: 'Read the dial symbols and scale first.', done: answered === meters.length},
+        {label: 'Check your answers and correct any mistakes.', hint: 'All four meters must be right.', done: allOk},
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Meters">
@@ -249,12 +249,12 @@ export function AnalogDemoLab(): React.JSX.Element {
         {q: 'Why did the 9 V reading on the 0–300 V meter look so small?', a: 'It is only 3 % of full scale. Always use a range where the reading falls in the upper part of the scale.'},
         {q: 'Which meter would you use on a 230 V AC panel: MC or MI?', a: 'Moving iron (or a rectifier-type meter), because a plain MC meter cannot read AC.'},
       ]}
-      tasks={[
-        {label: 'Read the MC voltmeter on a DC source correctly.', done: has((r, s) => r.inst === 'MC' && !s.ac && !r.reversed && near(r.entered, r.shows, MC_V))},
-        {label: 'Connect the MC voltmeter to AC and note what happens.', done: has((r, s) => r.inst === 'MC' && s.ac)},
-        {label: 'Reverse the polarity on the MC voltmeter and note what happens.', done: has((r) => r.inst === 'MC' && r.reversed)},
-        {label: 'Read the MI voltmeter on both AC and DC correctly.', done: has((r, s) => r.inst === 'MI' && s.ac && near(r.entered, r.shows, MI_V)) && has((r, s) => r.inst === 'MI' && !s.ac && near(r.entered, r.shows, MI_V))},
-        {label: 'Fill in your details and print or save the record.', done: printed},
+      steps={[
+        {label: 'Read the MC voltmeter on a DC source.', hint: 'Red probe to the + terminal. Enter the value you read.', done: has((r, s) => r.inst === 'MC' && !s.ac && !r.reversed && near(r.entered, r.shows, MC_V))},
+        {label: 'Connect the MC voltmeter to AC and note what happens.', hint: 'Watch the needle.', done: has((r, s) => r.inst === 'MC' && s.ac)},
+        {label: 'Reverse the polarity on the MC voltmeter and note what happens.', hint: 'Watch the needle.', done: has((r) => r.inst === 'MC' && r.reversed)},
+        {label: 'Read the MI voltmeter on both AC and DC.', hint: 'MI works on both. Two readings.', done: has((r, s) => r.inst === 'MI' && s.ac && near(r.entered, r.shows, MI_V)) && has((r, s) => r.inst === 'MI' && !s.ac && near(r.entered, r.shows, MI_V))},
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -402,11 +402,11 @@ export function MeterRangeLab(): React.JSX.Element {
         {q: 'A 0–300 V meter has 30 divisions. What is its least count?', a: '300 ÷ 30 = 10 V.'},
         {q: 'Why should readings be taken in the upper half of the scale?', a: 'The error (a fixed % of full scale) is then a smaller % of the reading.'},
       ]}
-      tasks={[
-        {label: 'Find the maximum value of all four meters.', done: all('max')},
-        {label: 'Find the least count (minimum measurable value) of all four.', done: all('min')},
-        {label: 'Read the needle of all four meters correctly.', done: all('read')},
-        {label: 'Fill in your details and print or save the record.', done: printed},
+      steps={[
+        {label: 'Find the maximum value of each meter.', hint: 'Full-scale reading on the dial.', done: all('max')},
+        {label: 'Find the least count of each meter.', hint: 'Value of the smallest scale division.', done: all('min')},
+        {label: 'Read the needle of each meter.', hint: 'Look straight at the needle, not from the side.', done: all('read')},
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Meters">
@@ -497,12 +497,12 @@ export function ZeroSettingLab(): React.JSX.Element {
         {q: 'The needle rests at +1 V. A reading shows 18 V. What is the true value?', a: '18 − (+1) = 17 V.'},
         {q: 'Why must zero be set with no supply connected?', a: 'Any current through the meter deflects the needle, so you could not tell the true zero.'},
       ]}
-      tasks={[
-        {label: 'Note the zero error correctly.', done: !!zeroOk},
-        {label: 'Note the reading before adjustment correctly.', done: !!beforeOk},
-        {label: 'Set the needle exactly to zero.', done: zeroed},
-        {label: 'Note the reading after adjustment correctly.', done: !!afterOk},
-        {label: 'Fill in your details and print or save the record.', done: printed},
+      steps={[
+        {label: 'With the meter disconnected, note the zero error.', hint: '+ if the needle is right of zero, − if left.', done: !!zeroOk},
+        {label: 'Connect the supply and note the reading before adjustment.', hint: 'Corrected reading = observed − zero error.', done: !!beforeOk},
+        {label: 'Disconnect and turn the zero-adjust screw until the needle is on zero.', hint: 'Gently, a little at a time.', done: zeroed},
+        {label: 'Connect again and note the reading after adjustment.', hint: 'It should match the corrected reading.', done: !!afterOk},
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

@@ -175,7 +175,39 @@ export default function MultimeterLab(): React.JSX.Element {
         {q: 'What does the meter read across an open gap in a live circuit?', a: 'Almost the full supply voltage, because no current flows and nothing drops voltage.'},
         {q: 'Why is resistance measured only with power off?', a: 'The ohmmeter uses its own battery. An external voltage gives a false reading and can damage it.'},
       ]}
-      tasks={[...items.map((x) => ({label: `${x.quantity}: ${x.name}`, done: right(x.id)})), {label: 'Print or save the record.', done: printed}]}
+      steps={[
+        {
+          label: 'Measure the 9 V battery: DC V 20, probes across it.',
+          hint: 'Red lead in VΩmA, red probe on +. Press Note reading.',
+          done: right('bat'),
+        },
+        {
+          label: 'Measure the mains socket: AC V 750, probes across L and N.',
+          hint: 'Mains is live. Touch only the two socket points.',
+          done: right('sock'),
+        },
+        {
+          label: 'Measure the resistor: Ω 20k.',
+          hint: 'The resistor is unpowered. Never use Ω on a live circuit.',
+          done: right('res'),
+        },
+        {
+          label: 'Measure the LED circuit current: DC mA 200, meter in the gap.',
+          hint: 'Meter in series, red lead in VΩmA.',
+          done: right('led'),
+        },
+        {
+          label: 'Measure the 12 V lamp circuit current: DC A 10, red lead in 10A.',
+          hint: 'Large current needs the 10A jack and meter in the gap.',
+          done: right('lamp'),
+        },
+        {
+          label: 'Measure the 230 V lamp circuit current: AC A 10, red lead in 10A.',
+          hint: 'Meter in the gap. Never across the mains.',
+          done: right('acl'),
+        },
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
+      ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>

@@ -185,11 +185,21 @@ export function LedTestLab(): React.JSX.Element {
         {q: 'How do you find the cathode of an LED?', a: 'Shorter lead, and the flat edge on the body.'},
         {q: 'Series R for 20 mA from 5 V with VF = 2 V?', a: '(5 − 2) ÷ 0.02 = 150 Ω.'},
       ]}
-      tasks={[
-        {label: 'VF and IF of three LED colours.', done: done.length >= 3},
-        {label: 'Reverse bias: LED dark, IF ≈ 0.', done: revRow.v != null && revRow.ima != null && revRow.ima < 0.05},
-        {label: 'Series R for 20 mA from 12 V with your red-LED VF.', done: rOk},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Pick an LED and a series resistor, then switch ON.', hint: 'Never run an LED without a series resistor. Start with red.', done: power || Object.keys(rows).length > 0},
+        {
+          label: `Measure VF across the LED for three colours. Colours: ${Math.min(LEDS.filter((l) => rows[l.id]?.vf != null).length, 3)}/3`,
+          hint: 'Meter on DC V, probes across the LED. Include the red LED.',
+          done: LEDS.filter((l) => rows[l.id]?.vf != null).length >= 3,
+        },
+        {
+          label: `Measure IF for the same colours. Colours: ${Math.min(done.length, 3)}/3`,
+          hint: 'Switch off, pull the link, meter on mA with probes in its two sockets.',
+          done: done.length >= 3,
+        },
+        {label: 'Reverse the LED (5 V or less) and note VF and IF.', hint: 'The LED stays dark and IF ≈ 0.', done: revRow.v != null && revRow.ima != null && revRow.ima < 0.05},
+        {label: 'Calculate the series R for 20 mA from 12 V and enter it.', hint: 'R = (12 − VF of your red LED) ÷ 0.02.', done: rOk},
+        {label: 'Enter your details and print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

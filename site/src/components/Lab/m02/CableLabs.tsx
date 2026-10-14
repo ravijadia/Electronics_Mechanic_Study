@@ -210,12 +210,12 @@ export function CablesLab(): React.JSX.Element {
         {q: 'What does an armoured cable’s steel wire layer do?', a: 'It protects against mechanical damage (e.g. underground), and it can also serve as an earth path.'},
         {q: 'What fault do you suspect if two different cores show continuity?', a: 'An insulation failure or short between those cores.'},
       ]}
-      tasks={[
-        {label: 'Name all six cable samples correctly.', done: namesRight},
-        {label: 'Give the new and old colour codes correctly.', done: coloursRight},
-        {label: 'Test every core end to end, and every pair of cores.', done: endToEnd && between},
-        {label: 'Find the fault in the 3-core cable.', done: faultAns === kit.fault},
-        {label: 'Fill in your details and print or save the record.', done: printed},
+      steps={[
+        {label: 'Name each of the six cable samples.', hint: 'Look at the cross-section of each.', done: namesRight},
+        {label: 'Give the new and old colour codes.', hint: 'Phase, neutral and earth.', done: coloursRight},
+        {label: 'Test every core end to end, then every pair of cores.', hint: 'Cable must be disconnected from the supply.', done: endToEnd && between},
+        {label: 'Find the fault in the 3-core cable.', hint: 'Use your continuity results.', done: faultAns === kit.fault},
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Part A: Identify the cables">
@@ -374,10 +374,10 @@ export function CurrentCapacityLab(): React.JSX.Element {
         {q: 'Why does a motor draw more current than P/V?', a: 'Its power factor is less than 1, so I = P ÷ (V × pf).'},
         {q: 'Why does the rating of the same cable change with how it is installed?', a: 'Rating depends on how well heat escapes. Cables bunched in conduit cool less well than cables clipped in open air.'},
       ]}
-      tasks={[
-        {label: 'Calculate the load current for every job.', done: rows.every((r) => r.iOk)},
-        {label: 'Select the correct cable size for every job.', done: rows.every((r) => r.sizeOk)},
-        {label: 'Fill in your details and print or save the record.', done: printed},
+      steps={[
+        {label: 'Calculate the load current for each job.', hint: 'I = P ÷ V.', done: rows.every((r) => r.iOk)},
+        {label: 'Select the correct cable size for each job.', hint: 'Use the current rating table.', done: rows.every((r) => r.sizeOk)},
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Current-rating table">

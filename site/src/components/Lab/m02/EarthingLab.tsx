@@ -97,12 +97,12 @@ export default function EarthingLab(): React.JSX.Element {
 
   const rows = base.map((bd) => ({bd, o: obs[bd.id] ?? EMPTY}));
   const faulty = base.filter((x) => x.fault !== 'healthy');
-  const tasks = [
-    {label: 'Measure P–E and N–E with the multimeter on every board.', done: rows.every((r) => r.o.before.pe != null && r.o.before.ne != null)},
-    {label: 'Check phase–earth with the test lamp on every board.', done: rows.every((r) => r.o.before.lamp)},
-    {label: 'Find and rectify the earthing fault on every faulty board.', done: faulty.every((x) => fixed[x.id])},
-    {label: 'Confirm each repair: the test lamp glows fully between phase and earth.', done: faulty.every((x) => obs[x.id]?.after.lamp === 'full')},
-    {label: 'Fill in your details and print or save the record.', done: printed},
+  const steps = [
+    {label: 'Measure P–E and N–E on each board with the multimeter.', hint: 'Note both voltages for every board.', done: rows.every((r) => r.o.before.pe != null && r.o.before.ne != null)},
+    {label: 'Check phase–earth with the test lamp on each board.', hint: 'Full glow means a good earth.', done: rows.every((r) => r.o.before.lamp)},
+    {label: 'Find and rectify the earthing fault on each faulty board.', hint: 'A healthy board needs no repair.', done: faulty.every((x) => fixed[x.id])},
+    {label: 'Confirm each repair: the test lamp glows fully, phase to earth.', hint: 'Test again after every repair.', done: faulty.every((x) => obs[x.id]?.after.lamp === 'full')},
+    {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
   ];
 
   const val = (v?: number) => (v == null ? '–' : <span className={styles.num}>{v} V</span>);
@@ -133,7 +133,7 @@ export default function EarthingLab(): React.JSX.Element {
         {q: 'What is the purpose of earthing?', a: 'To give fault current a low-resistance path, so the fuse or MCB operates quickly and the metal body never stays at a dangerous voltage.'},
         {q: 'What is the maximum earth resistance usually allowed for domestic installations?', a: 'As low as possible. Use the limit given in your trade theory book (based on IS 3043), and check it with an earth tester.'},
       ]}
-      tasks={tasks}
+      steps={steps}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         {bench.view}

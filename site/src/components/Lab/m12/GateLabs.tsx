@@ -73,7 +73,17 @@ export function GateTruthTableLab(): React.JSX.Element {
         {q: 'Why must every gate input be connected?', a: 'A floating TTL/CMOS input can read either level and makes the output unreliable.'},
         {q: 'How many 2-input gates are in one 7400 IC?', a: 'Four.'},
       ]}
-      tasks={[...GATE_IC_IDS.map((id) => ({label: `${GATE_ICS[id].name} (${GATE_ICS[id].fn}) truth table complete.`, done: doneType(id)})), {label: 'Print or save the record.', done: printed}]}
+      steps={[
+        ...GATE_IC_IDS.map((id) => {
+          const want = GATE_ICS[id].gates[0].ins.length === 2 ? 4 : 2;
+          return {
+            label: `Verify ${GATE_ICS[id].name} (${GATE_ICS[id].fn}): note all ${want} input combinations.`,
+            hint: `Select ${GATE_ICS[id].name}. Wire a switch to an input pin, the gate output to LED Y. Rows: ${Math.min((rows[id] ?? []).length, want)}/${want}`,
+            done: doneType(id),
+          };
+        }),
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
+      ]}
       onPrinted={(t2) => t2.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={clsx(styles.seg, styles.noPrint)} role="group" aria-label="Gate IC" style={{marginBottom: '0.6rem'}}>
@@ -175,12 +185,12 @@ export function UniversalGateLab(): React.JSX.Element {
         {q: 'How do you make a NOT gate from a NAND gate?', a: 'Connect both inputs together to the same signal.'},
         {q: 'How many NAND gates does a 2-input XOR need?', a: 'Four.'},
       ]}
-      tasks={[
-        {label: 'Build and verify NOT (either family).', done: doneTarget('7400', 'NOT') || doneTarget('7402', 'NOT')},
-        {label: 'Build and verify AND (either family).', done: doneTarget('7400', 'AND') || doneTarget('7402', 'AND')},
-        {label: 'Build and verify OR (either family).', done: doneTarget('7400', 'OR') || doneTarget('7402', 'OR')},
-        {label: 'Build and verify XOR using NAND gates only.', done: doneTarget('7400', 'XOR')},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Build NOT from NAND or NOR and verify it.', hint: 'Select NOT. Tie both inputs of one gate to switch A.', done: doneTarget('7400', 'NOT') || doneTarget('7402', 'NOT')},
+        {label: 'Build AND from NAND or NOR and verify it.', hint: 'NAND: NAND the inputs, then invert with a second NAND.', done: doneTarget('7400', 'AND') || doneTarget('7402', 'AND')},
+        {label: 'Build OR from NAND or NOR and verify it.', hint: 'NOR: NOR the inputs, then invert with a second NOR.', done: doneTarget('7400', 'OR') || doneTarget('7402', 'OR')},
+        {label: 'Build XOR from NAND gates only and verify it.', hint: 'Select NAND-only, then XOR. It takes four gates.', done: doneTarget('7400', 'XOR')},
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

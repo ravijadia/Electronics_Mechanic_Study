@@ -140,11 +140,28 @@ export function KirchhoffLab(): React.JSX.Element {
         {q: 'Why is V2 equal to V3 here?', a: 'R2 and R3 are in parallel: both are connected between the same two points.'},
         {q: 'Why is an ammeter connected in series?', a: 'The current to be measured must flow through it.'},
       ]}
-      tasks={[
-        {label: 'Measure Vs, V1, V2, V3.', done: ['Vs', 'V1', 'V2', 'V3'].every((k) => rec[k])},
-        {label: 'Measure I1, I2, I3 using the links.', done: ['I1', 'I2', 'I3'].every((k) => rec[k])},
-        {label: 'Verify KVL and KCL.', done: same && lawDone(laws, rec, ans)},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: 'Set the supply to about 6 V and switch ON.',
+          hint: 'Take every reading at this one setting.',
+          done: bench.power || Object.keys(rec).length > 0,
+        },
+        {
+          label: 'Measure Vs, V1, V2 and V3 on DC V.',
+          hint: 'Red probe on the + side, then Note reading.',
+          done: ['Vs', 'V1', 'V2', 'V3'].every((k) => rec[k]),
+        },
+        {
+          label: 'Measure I1, I2 and I3 at the links.',
+          hint: 'Supply OFF, pull the link, probes in its sockets, DC mA.',
+          done: ['I1', 'I2', 'I3'].every((k) => rec[k]),
+        },
+        {
+          label: 'Add the readings in the Result table.',
+          hint: 'KVL: V1 + V2 = Vs. KCL: I2 + I3 = I1.',
+          done: same && lawDone(laws, rec, ans),
+        },
+        {label: 'Enter your details and print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">{bench.view}</Section>
@@ -282,12 +299,38 @@ export function SeriesParallelLab(): React.JSX.Element {
         {q: 'Which resistor drops the most voltage in series?', a: 'The largest one (V = I × R, same I).'},
         {q: 'Which branch takes the most current in parallel?', a: 'The one with the smallest resistance (I = V ÷ R, same V).'},
       ]}
-      tasks={[
-        {label: 'Series: all voltages and both currents.', done: SQ.every((q) => sr[q.id])},
-        {label: 'Series: current same, V1 + V2 + V3 = Vs, Rt.', done: !!sameI && oneSetting(sr, SQ.map((q) => q.id)) && lawDone(sLaws, sr, ans) && near(num(ans.srt), sRt, 0.01)},
-        {label: 'Parallel: all voltages and currents.', done: PQ.every((q) => pr[q.id])},
-        {label: 'Parallel: voltage same, I1 + I2 + I3 = I, Rt.', done: sameV && oneSetting(pr, PQ.map((q) => q.id)) && lawDone(pLaws, pr, ans) && near(num(ans.prt), pRt, 0.01)},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: 'Series board: switch ON and measure Vs, V1, V2, V3.',
+          hint: 'Tap Series board. DC V, red probe on the + side, Note reading.',
+          done: ['Vs', 'V1', 'V2', 'V3'].every((k) => sr[k]),
+        },
+        {
+          label: 'Series board: measure the current at L1 and L2.',
+          hint: 'Supply OFF, pull the link, DC mA. Refit it after.',
+          done: !!(sr.I1 && sr.I2),
+        },
+        {
+          label: 'Series board: complete the Result table.',
+          hint: 'V1 + V2 + V3 = Vs, and Rt = R1 + R2 + R3.',
+          done: !!sameI && oneSetting(sr, SQ.map((q) => q.id)) && lawDone(sLaws, sr, ans) && near(num(ans.srt), sRt, 0.01),
+        },
+        {
+          label: 'Parallel board: measure Vs, V1, V2, V3.',
+          hint: 'Tap Parallel board. Switch ON, DC V.',
+          done: ['Vs', 'V1', 'V2', 'V3'].every((k) => pr[k]),
+        },
+        {
+          label: 'Parallel board: measure I, I1, I2, I3 at the links.',
+          hint: 'Supply OFF, pull the link, DC mA. Refit it after.',
+          done: ['I', 'I1', 'I2', 'I3'].every((k) => pr[k]),
+        },
+        {
+          label: 'Parallel board: complete the Result table.',
+          hint: 'I1 + I2 + I3 = I, and Rt = 1 ÷ (1/R1 + 1/R2 + 1/R3).',
+          done: sameV && oneSetting(pr, PQ.map((q) => q.id)) && lawDone(pLaws, pr, ans) && near(num(ans.prt), pRt, 0.01),
+        },
+        {label: 'Enter your details and print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -396,7 +439,7 @@ export function NetworkLab(): React.JSX.Element {
     {id: 'i', label: 'I2 + I3 = I1', sum: ['I2', 'I3'], equals: 'I1', unit: 'mA'},
   ];
   const rtCalc = nominal.R1 + 1 / (1 / nominal.R2 + 1 / (nominal.R3 + nominal.R4));
-  const rOk = ['Rt', 'R1', 'R2', 'R3', 'R4'].every((k) => rec[k] && near(rec[k].value, bench.truth(NQ.find((q) => q.id === k)!), 0.02));
+  const rOne = (k: string) => !!rec[k] && near(rec[k].value, bench.truth(NQ.find((q) => q.id === k)!), 0.02);
   const vi = NQ.filter((q) => q.kind !== 'R').map((q) => q.id);
 
   return (
@@ -418,12 +461,22 @@ export function NetworkLab(): React.JSX.Element {
         {q: 'Why switch off before measuring resistance?', a: 'The ohmmeter uses its own battery; the supply voltage gives a false reading and can damage the meter.'},
         {q: 'Formula for Rt of this network?', a: 'Rt = R1 + R2 ∥ (R3 + R4), where a ∥ b = a × b ÷ (a + b).'},
       ]}
-      tasks={[
-        {label: 'Measure Rt and R1–R4 (isolated).', done: rOk},
-        {label: 'Calculate Rt.', done: near(num(ans.rt), rtCalc, 0.01)},
-        {label: 'Measure all voltages and currents.', done: vi.every((k) => rec[k])},
-        {label: 'Check the three laws.', done: oneSetting(rec, vi) && lawDone(laws, rec, ans)},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Supply OFF: measure Rt across the supply terminals.', hint: 'Ω range. Never measure resistance with the supply on.', done: rOne('Rt')},
+        {label: 'Measure R1, R2, R3 and R4 one by one.', hint: 'Pull a link first to isolate R2, R3 or R4.', done: ['R1', 'R2', 'R3', 'R4'].every(rOne)},
+        {label: 'Calculate Rt and enter it in the Result table.', hint: 'Rt = R1 + R2 ∥ (R3 + R4).', done: near(num(ans.rt), rtCalc, 0.01)},
+        {
+          label: 'Refit all links, switch ON and measure Vs, V1 to V4.',
+          hint: 'DC V, red probe on the + side, Note reading.',
+          done: ['Vs', 'V1', 'V2', 'V3', 'V4'].every((k) => rec[k]),
+        },
+        {label: 'Measure I1, I2 and I3 at the links.', hint: 'Supply OFF, pull the link, DC mA.', done: ['I1', 'I2', 'I3'].every((k) => rec[k])},
+        {
+          label: 'Check the three laws in the Result table.',
+          hint: 'V1 + V2 = Vs, V3 + V4 = V2, I2 + I3 = I1.',
+          done: oneSetting(rec, vi) && lawDone(laws, rec, ans),
+        },
+        {label: 'Enter your details and print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">{bench.view}</Section>

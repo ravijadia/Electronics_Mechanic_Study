@@ -152,12 +152,28 @@ export function Ic7812Lab(): React.JSX.Element {
         {q: 'Power dissipated in a 7812 with 19 V in and 1 A out?', a: '(19 − 12) × 1 = 7 W: it needs a heat sink.'},
         {q: 'What is thermal shutdown?', a: 'Built-in protection that cuts the output when the chip gets too hot.'},
       ]}
-      tasks={[
-        {label: 'Connect the pins correctly and get 12 V.', done: good.length > 0 && pinsOk},
-        {label: 'Note Vin and Vout at 0, 0.1, 0.5 and 1 A (15 V tap).', done: LOADS.every((l) => good.some((r) => r.load === l && r.vin))},
-        {label: 'Calculate % load regulation.', done: pctTrue != null && Math.abs((num(pct) ?? 99) - pctTrue) < 0.02},
-        {label: 'Show dropout on the 9 V tap.', done: rows.some((r) => r.tap === 9 && r.vout && Number(r.vout) < 11.5)},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: 'Connect the IC pins: pin 1 to Input, pin 2 to Ground, pin 3 to Output.',
+          hint: 'Switch OFF to change pins. Check the data sheet first.',
+          done: pinsOk,
+        },
+        {
+          label: `Use the 15 V tap, switch Mains ON and note Vin and Vout at 0, 0.1, 0.5 and 1 A. Loads done: ${LOADS.filter((l) => good.some((r) => r.load === l && r.vin)).length}/${LOADS.length}`,
+          hint: 'Black probe on GND, red on IN, then on OUT. Fit the heat sink for high loads.',
+          done: good.length > 0 && LOADS.every((l) => good.some((r) => r.load === l && r.vin)),
+        },
+        {
+          label: 'Calculate the % load regulation and enter it in the Result table.',
+          hint: '(Vout no load − Vout full load) ÷ Vout full load × 100.',
+          done: pctTrue != null && Math.abs((num(pct) ?? 99) - pctTrue) < 0.02,
+        },
+        {
+          label: 'Switch OFF, select the 9 V tap, switch ON and note Vout.',
+          hint: 'Input is too low: the regulator drops out.',
+          done: rows.some((r) => r.tap === 9 && r.vout && Number(r.vout) < 11.5),
+        },
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -370,9 +386,13 @@ export function RegulatorIcsLab(): React.JSX.Element {
         {q: 'Current rating of 78L12?', a: '100 mA (L series).'},
         {q: 'Which pin of a 7812 is connected to the tab?', a: 'Pin 2, ground. (For a 7912 the tab is the input.)'},
       ]}
-      tasks={[
-        {label: 'Identify all eight ICs.', done: items.every((_, k) => ok(k))},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: `Read the marking on each IC and fill in its type, output, maximum current and pin 1. Correct: ${items.filter((_, k) => ok(k)).length}/8`,
+          hint: '78 = positive, 79 = negative, 317/337 = adjustable. Open the data sheet extract for pins.',
+          done: items.every((_, k) => ok(k)),
+        },
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Component tray">
@@ -521,12 +541,28 @@ export function Ic723Lab(): React.JSX.Element {
         {q: 'Why is the 78S40’s input current lower at high Vin?', a: 'A switching regulator transfers power, not current: as Vin rises, Iin falls (Pin ≈ Pout ÷ η).'},
         {q: 'Why is a linear regulator inefficient at high Vin?', a: 'All the extra voltage is dropped across the pass transistor as heat; Iin stays equal to Iout.'},
       ]}
-      tasks={[
-        {label: 'IC 723: 8+ readings from low to high Vin.', done: spread('723')},
-        {label: 'IC 78S40: 8+ readings from low to high Vin.', done: spread('78S40')},
-        {label: 'Minimum Vin for regulation, both ICs.', done: minOk('723', ans.min723) && minOk('78S40', ans.min78)},
-        {label: 'Efficiency at 20 V, both ICs.', done: effOk('723', ans.eff723) && effOk('78S40', ans.eff78)},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: `IC 723: raise Vin in steps from 6 V or less to 20 V or more and press Note reading. Readings: ${Math.min(of('723').length, 8)}/8`,
+          hint: 'Choose IC 723 (linear). Include 20 V. Stay below 40 V.',
+          done: spread('723'),
+        },
+        {
+          label: `IC 78S40: repeat the same Vin steps. Readings: ${Math.min(of('78S40').length, 8)}/8`,
+          hint: 'Choose IC 78S40 (switching). Include 20 V.',
+          done: spread('78S40'),
+        },
+        {
+          label: 'Find the lowest Vin at which Vout stays at 5 V for both ICs and enter it in the Result table.',
+          hint: 'Look in the observation table or the graph.',
+          done: minOk('723', ans.min723) && minOk('78S40', ans.min78),
+        },
+        {
+          label: 'Calculate the efficiency at Vin = 20 V for both ICs and enter it.',
+          hint: 'η = (Vout × Vout ÷ 100) ÷ (Vin × Iin) × 100.',
+          done: effOk('723', ans.eff723) && effOk('78S40', ans.eff78),
+        },
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -706,11 +742,26 @@ export function Lm317Lab(): React.JSX.Element {
         {q: 'Minimum output of an LM317?', a: '1.25 V, when R2 = 0.'},
         {q: 'What sets the maximum output here?', a: 'R2 at its maximum, or the input voltage minus the dropout (about 2.5 V), whichever is lower.'},
       ]}
-      tasks={[
-        {label: 'Five pot positions: R2, Vout and calculated Vout.', done: full.length >= 5},
-        {label: 'Minimum output (pot at 0 %).', done: full.some((p) => p.pos === 0)},
-        {label: 'Maximum output (pot at 100 %).', done: full.some((p) => p.pos === 100)},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: 'Set the pot, switch the supply OFF, select Ω 20k and note R2 across ADJ–GND.',
+          hint: 'Never measure resistance with the supply on.',
+          done: rows.some((p) => p.r2 != null),
+        },
+        {
+          label: 'Switch ON, select DC V and note Vout across OUT–GND.',
+          hint: 'Red probe on OUT, black on GND.',
+          done: rows.some((p) => p.r2 != null && p.vout != null),
+        },
+        {
+          label: 'Calculate Vout = 1.25 × (1 + R2 ÷ R1) and enter it in the table.',
+          hint: 'R1 = 220 Ω. Use your measured R2.',
+          done: full.length >= 1,
+        },
+        {label: `Repeat for five pot positions. Complete rows: ${Math.min(full.length, 5)}/5`, hint: 'Switch OFF before measuring R2 at each new position.', done: full.length >= 5},
+        {label: 'Include the minimum output: pot at 0 %.', hint: 'Vout should be about 1.25 V.', done: full.some((p) => p.pos === 0)},
+        {label: 'Include the maximum output: pot at 100 %.', hint: 'Vout is limited by R2 or by the input voltage.', done: full.some((p) => p.pos === 100)},
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

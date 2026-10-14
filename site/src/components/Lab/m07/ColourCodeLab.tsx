@@ -137,12 +137,16 @@ export default function ColourCodeLab(): React.JSX.Element {
         {q: 'Why use the lowest range that does not show OL?', a: 'It gives the most digits, so the reading is most precise.'},
         {q: 'A 1 kΩ ±5 % resistor reads 1.08 kΩ. Is it good?', a: 'No. The allowed range is 950 Ω to 1050 Ω.'},
       ]}
-      tasks={[
-        {label: 'Colour code value of all six.', done: all('val')},
-        {label: 'Tolerance of all six.', done: all('tol')},
-        {label: 'Measure all six on the best range.', done: all('meas')},
-        {label: 'Mark each within / out of tolerance.', done: all('within')},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Read the colour code value of all six.', hint: 'Tolerance band on the right. Digits, then multiplier.', done: all('val')},
+        {label: 'Enter the tolerance of all six.', hint: 'Gold 5 %, silver 10 %, brown 1 %, red 2 %.', done: all('tol')},
+        {
+          label: 'Measure all six on the best range.',
+          hint: `Hold one lead only. Lowest range without OL, then Note reading. Measured: ${res.filter((r) => r.meas).length}/${res.length}.`,
+          done: all('meas'),
+        },
+        {label: 'Mark each within or out of tolerance.', hint: 'Allowed range = value ± tolerance.', done: all('within')},
+        {label: 'Enter your details and print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

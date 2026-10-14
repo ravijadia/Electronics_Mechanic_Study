@@ -112,11 +112,23 @@ export function ZenerRegulatorLab(): React.JSX.Element {
         {q: 'When does the regulator stop regulating?', a: 'When Vin is too low or the load current is so high that Iz falls below its minimum (knee) current.'},
         {q: 'Disadvantage of a zener regulator?', a: 'Poor efficiency, and only suitable for small load currents.'},
       ]}
-      tasks={[
-        {label: 'Calculate Rs.', done: near(num(rsCalc), rsTrue, 0.02)},
-        {label: 'Line regulation: 6+ readings from below to above Vz.', done: line.length >= 6 && line.some((p) => p.vin < 9) && line.some((p) => p.vin >= 15)},
-        {label: 'Load regulation: 4+ loads incl. open.', done: load.length >= 4 && load.some((p) => p.rl === null || !isFinite(p.rl) || p.il === 0)},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: 'Calculate Rs for Vin = 15 V, IL = 20 mA, IZ = 5 mA and enter it in the Result table.',
+          hint: 'Rs = (Vin − Vz) ÷ (IL + IZ). Vz is 9.1 V.',
+          done: near(num(rsCalc), rsTrue, 0.02),
+        },
+        {
+          label: `Line regulation: set RL = 1 kΩ, switch ON, and press Note: line regulation at each Vin. Readings: ${Math.min(line.length, 6)}/6`,
+          hint: 'Switch OFF to change Rs. Go from below 9 V to 15 V or more.',
+          done: line.length >= 6 && line.some((p) => p.vin < 9) && line.some((p) => p.vin >= 15),
+        },
+        {
+          label: `Load regulation: set Vin = 15 V and press Note: load regulation for 4 loads, including Open. Readings: ${Math.min(load.length, 4)}/4`,
+          hint: 'Change RL from Open down to 220 Ω. Watch the zener power.',
+          done: load.length >= 4 && load.some((p) => p.rl === null || !isFinite(p.rl) || p.il === 0),
+        },
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -309,11 +321,23 @@ export function PercentRegulationLab(): React.JSX.Element {
         {q: 'Why does an unregulated supply’s voltage fall with load?', a: 'Drops in the transformer winding resistance and diodes, and more ripple as the capacitor discharges faster.'},
         {q: 'What is current limiting?', a: 'Protection that stops the current rising above a set value; the output voltage falls instead.'},
       ]}
-      tasks={[
-        {label: 'Regulated: no load to full load (5+ readings).', done: of('reg').filter((r) => r.iset <= 1).length >= 5 && !!pct('reg')},
-        {label: 'Unregulated: no load to full load (5+ readings).', done: of('unreg').filter((r) => r.iset <= 1).length >= 5 && !!pct('unreg')},
-        {label: 'Calculate % regulation of both.', done: ok('reg') && ok('unreg')},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: `Regulated PSU: note V and I from No load up to 1 A. Readings: ${Math.min(of('reg').filter((r) => r.iset <= 1).length, 5)}/5`,
+          hint: 'Choose a load, then press Note reading. Include No load and 1 A.',
+          done: of('reg').filter((r) => r.iset <= 1).length >= 5 && !!pct('reg'),
+        },
+        {
+          label: `Unregulated adapter: repeat from No load up to 1 A. Readings: ${Math.min(of('unreg').filter((r) => r.iset <= 1).length, 5)}/5`,
+          hint: 'Pick Unregulated adapter first. Do not go above 1 A.',
+          done: of('unreg').filter((r) => r.iset <= 1).length >= 5 && !!pct('unreg'),
+        },
+        {
+          label: 'Calculate the % regulation of both and enter it in the Result table.',
+          hint: '(V no load − V full load) ÷ V full load × 100.',
+          done: ok('reg') && ok('unreg'),
+        },
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

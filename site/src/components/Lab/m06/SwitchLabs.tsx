@@ -224,9 +224,23 @@ export function SwitchesLab(): React.JSX.Element {
         {q: 'Difference between NO and NC push buttons?', a: 'NO (normally open) closes only while pressed. NC (normally closed) opens only while pressed.'},
         {q: 'Where is a DPDT switch used?', a: 'For example, to reverse a DC motor, or to change over between two supplies.'},
       ]}
-      tasks={[
-        {label: 'Identify all eight switches (name, poles, throws).', done: SWITCHES.every(ok)},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: 'Operate each switch and watch which lamps light.',
+          hint: 'Tap toggles, press and hold push buttons, tap piano keys.',
+          done: Object.keys(ans).length > 0,
+        },
+        {
+          label: `Choose the name of each switch. Correct: ${SWITCHES.filter((d) => ans[d.id]?.name === d.id).length}/${SWITCHES.length}`,
+          hint: 'Use the Name drop-down in the table.',
+          done: SWITCHES.every((d) => ans[d.id]?.name === d.id),
+        },
+        {
+          label: `Type the poles and throws of each switch. Correct: ${SWITCHES.filter((d) => Number(ans[d.id]?.p) === d.poles && Number(ans[d.id]?.t) === d.throws).length}/${SWITCHES.length}`,
+          hint: 'Poles = circuits switched together. Throws = outputs per pole.',
+          done: SWITCHES.every((d) => Number(ans[d.id]?.p) === d.poles && Number(ans[d.id]?.t) === d.throws),
+        },
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -348,11 +362,24 @@ export function PanelBoardLab(): React.JSX.Element {
         {q: 'In staircase wiring, what connects the two switches?', a: 'Two “traveller” wires, L1 to L1 and L2 to L2.'},
         {q: 'How does a DPDT switch reverse a DC motor?', a: 'It swaps the + and − connections to the motor, so the current through it reverses.'},
       ]}
-      tasks={[
-        {label: 'Choose the right switch for all four jobs.', done: APPS.every((x) => chosen(x.id))},
-        {label: 'Wire the staircase circuit correctly.', done: stairOk && wiringOk},
-        {label: 'Test all four positions of the staircase switches.', done: combos.length === 4},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: `Choose the right switch for each of the four jobs. Correct: ${APPS.filter((x) => chosen(x.id)).length}/${APPS.length}`,
+          hint: 'The reason appears under each choice.',
+          done: APPS.every((x) => chosen(x.id)),
+        },
+        {
+          label: 'Switch off, then set all four staircase connections.',
+          hint: 'Switches go in the phase wire. Travellers join L1 to L1 and L2 to L2.',
+          done: stairOk && WIRES.every((w) => !!wires[w.from]),
+        },
+        {label: 'Make the lamp follow both staircase switches.', hint: 'Fix any connection marked ✗.', done: stairOk && wiringOk},
+        {
+          label: `Test all four positions of switches A and B. Positions: ${combos.length}/4`,
+          hint: 'Press Switch A and Switch B to change position.',
+          done: combos.length === 4,
+        },
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

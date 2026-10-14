@@ -62,10 +62,11 @@ export function DecoderLab(): React.JSX.Element {
         {q: 'How many outputs does a decoder with n inputs have?', a: '2^n — a 2-input decoder has four outputs.'},
         {q: 'Why is a decoder used to drive seven-segment displays or select memory addresses?', a: 'It turns a compact binary code into exactly one active output line, used to pick one of several destinations.'},
       ]}
-      tasks={[
-        {label: 'All four input codes tried.', done: Object.keys(rows).length >= 4},
-        {label: 'Exactly one output HIGH for every code.', done},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Wire the decoder: two NOT gates, then four AND gates to Y0–Y3.', hint: 'Y0 = A1’·A0’, Y1 = A1’·A0, Y2 = A1·A0’, Y3 = A1·A0.', done: outs.every((o) => o != null)},
+        {label: `Set A1A0 to 00, 01, 10 and 11 and press Note reading. Codes: ${Object.keys(rows).length}/4`, hint: 'Tap A1 and A0 to change them.', done: Object.keys(rows).length >= 4},
+        {label: 'Check exactly one output is HIGH for every code.', hint: 'Wrong row? Fix the wiring and note it again.', done},
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -144,10 +145,11 @@ export function EncoderLab(): React.JSX.Element {
         {q: 'What happens if two encoder inputs are active together?', a: 'A basic encoder gives a wrong or ambiguous code; a priority encoder is needed to resolve it.'},
         {q: 'How many inputs does an encoder with a 2-bit output have?', a: 'Four (2^2).'},
       ]}
-      tasks={[
-        {label: 'All four single-active-input cases tried.', done: Object.keys(rows).length >= 4},
-        {label: 'Output code correct for every case.', done},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Wire the encoder: Y1 = I2 OR I3, Y0 = I1 OR I3.', hint: 'Use two of the four OR gates.', done: y1 != null && y0 != null},
+        {label: `Switch ON I0, I1, I2, I3 one at a time and press Note reading. Cases: ${Object.keys(rows).length}/4`, hint: 'Only one input switch ON at a time.', done: Object.keys(rows).length >= 4},
+        {label: 'Check the output code is correct for every input.', hint: 'Wrong row? Fix the wiring and note it again.', done},
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -244,10 +246,11 @@ export function MuxLab(): React.JSX.Element {
         {q: 'How many select lines does a 4:1 MUX need?', a: 'Two (log₂ 4).'},
         {q: 'What does a multiplexer do?', a: 'Connects one of several input lines to a single output, chosen by the select lines.'},
       ]}
-      tasks={[
-        {label: 'All four select codes tried.', done: tried},
-        {label: 'Y follows the selected data input every time (mix of 0s and 1s).', done},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Wire the multiplexer: decode S1S0, AND with I0–I3, OR to Y.', hint: 'Same decode stage as the 2-to-4 decoder.', done: y != null},
+        {label: `Set a mix of 0s and 1s on I0–I3. Step S1S0 through 00–11, pressing Note reading. Codes: ${picks.filter((r) => r != null).length}/4`, hint: 'Use a data pattern with both 0s and 1s.', done: tried},
+        {label: 'Check Y follows the selected input every time.', hint: 'Wrong row? Fix the wiring and note it again.', done},
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -331,11 +334,12 @@ export function DemuxLab(): React.JSX.Element {
         {q: 'What does a demultiplexer do?', a: 'Routes a single input line to one of several outputs, chosen by the select lines — the reverse of a multiplexer.'},
         {q: 'What should the non-selected outputs read?', a: 'Logic 0, regardless of D.'},
       ]}
-      tasks={[
-        {label: 'All four select codes tried with D = 1.', done: highTried},
-        {label: 'Only the selected output follows D each time.', done},
-        {label: 'D = 0: all four outputs stay 0.', done: lowDone && allRows.every(rowOk)},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Wire the demultiplexer: decode S1S0, then AND each line with D.', hint: 'Four outputs Y0–Y3 must not float.', done: outs.every((o) => o != null)},
+        {label: 'Set D = 1. Step S1S0 through 00–11, pressing Note reading each time.', hint: 'Tap D to make it 1.', done: highTried},
+        {label: 'Check only the selected output follows D.', hint: 'Wrong row? Fix the wiring and note it again.', done},
+        {label: 'Set D = 0 and note a reading: all four outputs stay 0.', hint: 'Tap D to make it 0.', done: lowDone && allRows.every(rowOk)},
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

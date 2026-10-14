@@ -68,10 +68,11 @@ export function HalfAdderLab(): React.JSX.Element {
         {q: 'What logic gate gives the Sum output?', a: 'XOR.'},
         {q: 'What logic gate gives the Carry output?', a: 'AND.'},
       ]}
-      tasks={[
-        {label: '4-row truth table: A, B, Sum, Carry.', done: rows.length >= 4},
-        {label: 'All four rows match A XOR B and A AND B.', done},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Wire the half adder: XOR to Sum, AND to Carry.', hint: 'A and B feed both gates. No pin left open.', done: sBit != null && cBit != null},
+        {label: `Set A and B to each of the 4 combinations and press Note reading. Rows: ${rows.length}/4`, hint: 'Tap a switch to change it between 0 and 1.', done: rows.length >= 4},
+        {label: 'Check every row matches A XOR B and A AND B.', hint: 'Wrong row? Fix the wiring and note it again.', done},
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -153,10 +154,11 @@ export function FullAdderLab(): React.JSX.Element {
         {q: 'Why does a full adder need a carry-in?', a: 'So multiple full adders can be chained to add multi-bit numbers, each stage receiving the carry from the one before it.'},
         {q: 'When is Cout = 1?', a: 'When two or more of A, B and Cin are 1.'},
       ]}
-      tasks={[
-        {label: '8-row truth table: A, B, Cin, Sum, Cout.', done: rows.length >= 8},
-        {label: 'All eight rows match the full adder table.', done},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Wire the full adder: two XOR/AND stages and an OR for Cout.', hint: 'Sum = (A XOR B) XOR Cin. Cout = C1 OR C2.', done: sBit != null && cBit != null},
+        {label: `Set A, B and Cin to all 8 combinations and press Note reading. Rows: ${rows.length}/8`, hint: 'Tap a switch to change it between 0 and 1.', done: rows.length >= 8},
+        {label: 'Check all 8 rows match the full adder table.', hint: 'Wrong row? Fix the wiring and note it again.', done},
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -257,10 +259,13 @@ export function AdderSubtractorLab(): React.JSX.Element {
         {q: 'What does the output mean when M = 1 and there is no final carry?', a: 'The result is negative, itself held in 2’s complement form.'},
         {q: 'Why is one extra XOR gate enough to turn an adder into a subtractor?', a: 'It conditionally complements B; the existing Cin input absorbs the "+1" needed for 2’s complement.'},
       ]}
-      tasks={[
-        {label: 'Addition (M = 0): 4-row table correct.', done: addDone},
-        {label: 'Subtraction (M = 1): 4-row table correct.', done: subDone},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Wire the adder-subtractor: M feeds the B-XOR and Cin.', hint: 'Full adder for A, (B XOR M), Cin = M.', done: sBit != null && cBit != null},
+        {label: `Set M = 0 (add). Note the 4 combinations of A and B. Rows: ${rows.filter((r) => !r.m).length}/4`, hint: 'M = 0: the circuit computes A + B.', done: rows.filter((r) => !r.m).length >= 4},
+        {label: 'Check the addition rows are correct.', hint: 'Wrong row? Fix the wiring and note it again.', done: addDone},
+        {label: `Set M = 1 (subtract). Note the 4 combinations of A and B. Rows: ${rows.filter((r) => r.m).length}/4`, hint: 'M = 1: A − B. Cout = 1 means no borrow.', done: rows.filter((r) => r.m).length >= 4},
+        {label: 'Check the subtraction rows are correct.', hint: 'Wrong row? Fix the wiring and note it again.', done: subDone},
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

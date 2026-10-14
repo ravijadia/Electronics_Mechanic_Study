@@ -231,9 +231,9 @@ function WaveshapeLab({s}: {s: Spec}): React.JSX.Element {
       procedure={s.procedure}
       precautions={s.precautions}
       viva={s.viva}
-      tasks={[
-        ...s.need.map((id) => ({label: `${CFGS[id].name}: output levels read correctly.`, done: rows.some((r) => r.cfg === id && ok(r))})),
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        ...s.need.map((id) => ({label: `${CFGS[id].name}: read the output levels.`, hint: 'Pick the circuit, then read the CRO levels.', done: rows.some((r) => r.cfg === id && ok(r))})),
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

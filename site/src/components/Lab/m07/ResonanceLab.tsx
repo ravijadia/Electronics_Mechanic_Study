@@ -163,13 +163,21 @@ export default function ResonanceLab(): React.JSX.Element {
         {q: 'Where are resonant circuits used?', a: 'Tuning circuits in radio receivers, filters, oscillators.'},
         {q: 'What happens to fr if C is made four times bigger?', a: 'fr halves, since fr ∝ 1 ÷ √C.'},
       ]}
-      tasks={[
-        {label: 'Calculate fr = 1 ÷ (2π√LC).', done: near(num(ans.calc) != null ? num(ans.calc)! * 1000 : null, frNom, 0.01)},
-        {label: 'Series: 8+ readings of VR around resonance.', done: spread(sPts)},
-        {label: 'Series: VL and VC at resonance.', done: mag},
-        {label: 'Parallel: 8+ readings of VT around resonance.', done: spread(pPts)},
-        {label: 'Read fr from both graphs.', done: frOk(ans.frs) && frOk(ans.frp)},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Calculate fr = 1 ÷ (2π√LC) and enter it.', hint: 'Use L and C from the apparatus list. Answer in kHz.', done: near(num(ans.calc) != null ? num(ans.calc)! * 1000 : null, frNom, 0.01)},
+        {
+          label: 'Series circuit: note VR at 8+ frequencies.',
+          hint: `Sine wave, output ON, same level. Include points below, near and above fr. Readings: ${sPts.length}.`,
+          done: spread(sPts),
+        },
+        {label: 'Series circuit: note VL and VC at the peak.', hint: 'Both at the same frequency, near fr.', done: mag},
+        {
+          label: 'Parallel circuit: note VT at 8+ frequencies.',
+          hint: `Generator OFF, tap Parallel LC (tank), then repeat. Readings: ${pPts.length}.`,
+          done: spread(pPts),
+        },
+        {label: 'Read fr from both graphs and enter them.', hint: 'fr is at the peak of each graph. Answer in kHz.', done: frOk(ans.frs) && frOk(ans.frp)},
+        {label: 'Enter your details and print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

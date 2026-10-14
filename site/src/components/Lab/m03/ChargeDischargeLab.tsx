@@ -121,12 +121,43 @@ export default function ChargeDischargeLab(): React.JSX.Element {
         {q: 'Why does the charging current fall near the end?', a: 'The battery voltage rises towards the charger’s maximum, so less current flows.'},
         {q: 'What damage does deep discharge cause?', a: 'Hard sulphation of the plates, which permanently reduces capacity.'},
       ]}
-      tasks={[
-        {label: 'Discharge to the cut-off voltage, noting 6+ readings.', done: dis.length >= 6 && reachedCutoff},
-        {label: 'Avoid deep discharge.', done: reachedCutoff && !sim.deep},
-        {label: 'Calculate the Ah delivered.', done: !!ahOk},
-        {label: 'Recharge fully, noting 6+ readings.', done: chg.length >= 6 && fullyCharged},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: 'Choose a load resistor and connect the Load.',
+          hint: 'Press Load under Connect. Change the load only when disconnected.',
+          done: sim.mode === 'discharge' || dis.length > 0,
+        },
+        {
+          label: `Advance the clock and press Note reading. Discharge readings: ${Math.min(dis.length, 6)}/6`,
+          hint: 'Use +1 h, then Note reading. Repeat.',
+          done: dis.length >= 6,
+        },
+        {
+          label: 'Note a reading at the 10.5 V cut-off.',
+          hint: 'The cut-off warning appears below 10.5 V.',
+          done: reachedCutoff,
+        },
+        {
+          label: 'Disconnect the load at the cut-off.',
+          hint: 'Going lower is deep discharge and damages the battery.',
+          done: reachedCutoff && !sim.deep && sim.mode !== 'discharge',
+        },
+        {
+          label: 'Calculate the Ah delivered and enter it.',
+          hint: 'Ah = current × hours.',
+          done: !!ahOk,
+        },
+        {
+          label: 'Put the red clip on + and connect the Charger.',
+          hint: 'Reversed clips blow the charger fuse.',
+          done: sim.mode === 'charge' || chg.length > 0,
+        },
+        {
+          label: `Charge, noting V and I every 1–2 h until the current tapers off. Charge readings: ${Math.min(chg.length, 6)}/6`,
+          hint: 'Stop when the current falls below 0.1 A.',
+          done: chg.length >= 6 && fullyCharged,
+        },
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

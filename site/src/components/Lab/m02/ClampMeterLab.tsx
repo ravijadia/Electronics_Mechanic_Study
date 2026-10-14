@@ -132,12 +132,12 @@ export default function ClampMeterLab(): React.JSX.Element {
         {q: 'Why is the fan’s measured current a little more than P/V?', a: 'A fan motor has a power factor below 1, so I = P / (V × pf).'},
         {q: 'On what principle does an AC clamp meter work?', a: 'The jaws form the core of a current transformer. The conductor is a one-turn primary.'},
       ]}
-      tasks={[
-        {label: 'Measure the current of each load separately (one conductor clamped).', done: LOADS.every((l) => single(l.id))},
-        {label: 'Measure the current with all loads on together.', done: rows.some((r) => r.fn.startsWith('aca') && r.pos !== 'cable' && r.loads.length === LOADS.length)},
-        {label: 'Clamp the whole cable and note the reading.', done: rows.some((r) => r.pos === 'cable')},
-        {label: 'Measure the supply voltage with the test leads.', done: rows.some((r) => r.fn === 'acv600')},
-        {label: 'Fill in your details and print or save the record.', done: printed},
+      steps={[
+        {label: 'Clamp one conductor and measure the current of each load separately.', hint: 'Clamp only one conductor at a time.', done: LOADS.every((l) => single(l.id))},
+        {label: 'Switch all loads on and measure the current again.', hint: 'One conductor in the jaws.', done: rows.some((r) => r.fn.startsWith('aca') && r.pos !== 'cable' && r.loads.length === LOADS.length)},
+        {label: 'Clamp the whole cable and note the reading.', hint: 'Phase and neutral together.', done: rows.some((r) => r.pos === 'cable')},
+        {label: 'Measure the supply voltage with the test leads.', hint: 'AC V, 600 V range.', done: rows.some((r) => r.fn === 'acv600')},
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

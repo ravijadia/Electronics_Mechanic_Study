@@ -105,10 +105,10 @@ export function LcOscLab(): React.JSX.Element {
         {q: 'What is the Barkhausen criterion?', a: 'Loop gain Aβ = 1 and total phase shift 0° (or 360°) round the loop.'},
         {q: 'What happens to f if C is doubled?', a: 'f falls by √2 (to about 0.707 of its value).'},
       ]}
-      tasks={[
-        {label: 'Colpitts: two settings, measured and calculated.', done: good('colpitts') >= 2},
-        {label: 'Hartley: two settings, measured and calculated.', done: good('hartley') >= 2},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Colpitts: set two values; note f measured and calculated.', hint: 'Read the period on the CRO.', done: good('colpitts') >= 2},
+        {label: 'Hartley: set two values; note f measured and calculated.', hint: 'Switch the Oscillator to Hartley.', done: good('hartley') >= 2},
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -239,11 +239,12 @@ export function PhaseShiftLab(): React.JSX.Element {
         {q: 'Minimum gain for oscillation?', a: '29: the three-section network attenuates the signal to 1/29.'},
         {q: 'Why does a high gain distort the output?', a: 'The amplitude grows until the transistor clips.'},
       ]}
-      tasks={[
-        {label: 'Find the onset gain.', done: onsetSeen && near(num(ans.onset), kit.thr, 0.06)},
-        {label: 'Phase shift of the three sections.', done: ans.phase === '180'},
-        {label: 'Two R/C settings: measured and calculated f.', done: rows.filter(rowOk).length >= 2},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Raise the amplifier gain until oscillation starts.', hint: 'Look for a steady sine on the CRO.', done: onsetSeen},
+        {label: 'Enter the onset gain.', hint: 'The gain where oscillation just starts.', done: onsetSeen && near(num(ans.onset), kit.thr, 0.06)},
+        {label: 'Find the phase shift of the three R-C sections.', hint: 'Move the CH2 probe along the sections.', done: ans.phase === '180'},
+        {label: 'Set two R/C values; note f measured and calculated.', done: rows.filter(rowOk).length >= 2},
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -388,11 +389,11 @@ export function CrystalLab(): React.JSX.Element {
         {q: 'What is the piezo-electric effect?', a: 'A crystal produces a voltage when stressed, and vibrates when a voltage is applied.'},
         {q: 'Where are crystal oscillators used?', a: 'Clocks, watches, microcontrollers, radio transmitters.'},
       ]}
-      tasks={[
-        {label: 'Measure all four crystals at 12 V.', done: allX},
-        {label: 'Error (ppm) of the 3.58 MHz crystal.', done: close(ans.ppm, ppmTrue, 0.5)},
-        {label: '% change 9 V → 12 V: crystal and LC.', done: close(ans.xs, xsTrue, 0.0002) && close(ans.lc, lcTrue, 0.02)},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Measure all four crystals at 12 V.', hint: 'Switch off before changing the crystal.', done: allX},
+        {label: 'Work out the error (ppm) of the 3.58 MHz crystal.', done: close(ans.ppm, ppmTrue, 0.5)},
+        {label: 'Change the supply 9 V → 12 V; find the % change for crystal and LC.', done: close(ans.xs, xsTrue, 0.0002) && close(ans.lc, lcTrue, 0.02)},
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -577,11 +578,11 @@ export function MultivibratorLab(): React.JSX.Element {
         {q: 'Uses?', a: 'Astable: clock / flasher. Monostable: timer, pulse stretcher. Bistable: flip-flop, memory, counter.'},
         {q: 'How do you get an unequal mark–space ratio in an astable?', a: 'Use different R (or C) on the two sides.'},
       ]}
-      tasks={[
-        {label: 'Astable: two settings, T measured and calculated.', done: astRows.filter(astOk).length >= 2},
-        {label: 'Monostable: two capacitor values, pulse width checked.', done: monoRows.filter(monoOk).length >= 2},
-        {label: 'Bistable: SET and RESET, including a repeated press.', done: biLog.some((l) => l.startsWith('SET')) && biLog.some((l) => l.startsWith('RESET')) && biLog.some((l) => l.includes('no change'))},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Astable: set two values; note T measured and calculated.', hint: 'Pick Astable at the top of the bench.', done: astRows.filter(astOk).length >= 2},
+        {label: 'Monostable: use two capacitor values; check the pulse width.', hint: 'Pick Monostable.', done: monoRows.filter(monoOk).length >= 2},
+        {label: 'Bistable: press SET and RESET, and repeat a press.', hint: 'A repeated press changes nothing.', done: biLog.some((l) => l.startsWith('SET')) && biLog.some((l) => l.startsWith('RESET')) && biLog.some((l) => l.includes('no change'))},
+        {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

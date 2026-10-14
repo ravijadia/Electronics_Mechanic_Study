@@ -292,9 +292,20 @@ export function RectifierLab(): React.JSX.Element {
         {q: 'Why is the bridge output peak lower than the secondary peak?', a: 'Two diodes conduct in series in each half cycle: about 1.4 V is lost.'},
         {q: 'What is the PIV across each diode in a centre-tapped full-wave rectifier?', a: '2 Vm.'},
       ]}
-      tasks={[
-        ...(['hw', 'fw', 'bridge'] as RectType[]).map((t) => ({label: `${TYPE_NAME[t]}: build, measure and compare.`, done: allOk(t)})),
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        ...(['hw', 'fw', 'bridge'] as RectType[]).flatMap((t) => [
+          {
+            label: `${TYPE_NAME[t]}: fit the diodes, switch Mains ON, then note Vac (secondary) and Vdc (output).`,
+            hint: 'Tap a socket to fit a diode, tap again to turn it. The bar is the cathode. Vac on AC V, Vdc on DC V.',
+            done: !!rows[t]?.built && !!rows[t]?.vac && !!rows[t]?.vdc,
+          },
+          {
+            label: `${TYPE_NAME[t]}: read Vm and frequency on the CRO, then fill Vm, f and theory Vdc.`,
+            hint: `Theory Vdc = ${t === 'hw' ? '0.318' : '0.636'} × Vm. Frequency is of the output.`,
+            done: allOk(t),
+          },
+        ]),
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -450,12 +461,22 @@ export function RippleLab(): React.JSX.Element {
         {q: 'What happens to ripple when the load current increases?', a: 'Ripple rises: the capacitor discharges faster.'},
         {q: 'Why is full-wave ripple easier to filter?', a: 'Its ripple frequency is 100 Hz, twice that of half-wave, so the capacitor has half the time to discharge.'},
       ]}
-      tasks={[
-        {label: 'Six correct rows.', done: good.length >= 6},
-        {label: 'At least three capacitor values (incl. none).', done: caps.size >= 3},
-        {label: 'At least two loads.', done: loads.size >= 2},
-        {label: 'Both half-wave and bridge.', done: good.some((r) => r.type === 'hw') && good.some((r) => r.type === 'bridge')},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: 'Pick a rectifier, capacitor and load. Note Vdc (DC V) and the ripple Vac (AC V).',
+          hint: 'Change the meter function, then press Note meter reading each time.',
+          done: good.length > 0 || (!!draft.vdc && !!draft.vac),
+        },
+        {
+          label: 'Read ripple p-p and frequency on the CRO, work out γ and press Add row.',
+          hint: 'γ = Vac ÷ Vdc. Use AC coupling and a small V/div.',
+          done: good.length > 0,
+        },
+        {label: `Repeat for six correct rows. Correct rows: ${Math.min(good.length, 6)}/6`, hint: 'A wrong row stays in the table; add it again correctly.', done: good.length >= 6},
+        {label: `Use at least three capacitor values, including None. Values: ${Math.min(caps.size, 3)}/3`, hint: 'Change the filter capacitor, then measure again.', done: caps.size >= 3},
+        {label: `Use at least two loads. Loads: ${Math.min(loads.size, 2)}/2`, hint: 'Lower load resistance means more load current.', done: loads.size >= 2},
+        {label: 'Take rows for both half-wave and bridge.', hint: 'Switch the Rectifier button.', done: good.some((r) => r.type === 'hw') && good.some((r) => r.type === 'bridge')},
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

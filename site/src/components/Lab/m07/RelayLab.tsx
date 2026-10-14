@@ -136,12 +136,30 @@ export default function RelayLab(): React.JSX.Element {
         {q: 'What is the coil resistance of a 12 V, 400 Ω relay used for?', a: 'To find the coil current: I = 12 ÷ 400 = 30 mA, so you can choose the driving transistor.'},
         {q: 'Why is a diode connected across a relay coil?', a: 'To absorb the high back-EMF when the coil is switched off, protecting the driver transistor.'},
       ]}
-      tasks={[
-        {label: 'Identify all five pins with the meter.', done: pinsOk},
-        {label: 'Energise the coil and hear it click.', done: clicked},
-        {label: 'Dismantle in the correct order.', done: removed.length === STEPS.length},
-        {label: 'Name all nine parts.', done: namesOk},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: 'Find the two coil pins and mark them in the table.',
+          hint: 'Ω 200 range. The coil pair reads a few hundred ohms.',
+          done: [0, 1, 2, 3, 4].filter((i) => roleKey(role(i)) === 'coil').every((i) => pinAns[i] === 'coil'),
+        },
+        {
+          label: 'Find COM and NC and mark them.',
+          hint: 'With the coil off, COM–NC reads 0 Ω.',
+          done: [0, 1, 2, 3, 4].filter((i) => roleKey(role(i)) === 'com' || roleKey(role(i)) === 'nc').every((i) => pinAns[i] === roleKey(role(i))),
+        },
+        {label: 'Apply 12 V to the coil pins and hear the click.', hint: 'Choose the two coil pins in the supply list.', done: clicked},
+        {
+          label: 'Find NO and mark it.',
+          hint: 'With the coil energised, COM–NO reads 0 Ω.',
+          done: [0, 1, 2, 3, 4].filter((i) => roleKey(role(i)) === 'no').every((i) => pinAns[i] === 'no'),
+        },
+        {
+          label: 'Dismantle the relay in the correct order.',
+          hint: `Cover, spring, armature, contacts, coil. Removed: ${removed.length}/${STEPS.length}.`,
+          done: removed.length === STEPS.length,
+        },
+        {label: 'Name all nine parts.', hint: 'Use the part names in the table.', done: namesOk},
+        {label: 'Enter your details and print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench: pin test">

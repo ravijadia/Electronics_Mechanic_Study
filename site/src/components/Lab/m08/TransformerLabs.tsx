@@ -181,11 +181,23 @@ export function TransformerTypesLab(): React.JSX.Element {
         {q: 'Why is a CT secondary never left open?', a: 'With current in the primary, an open secondary develops a dangerously high voltage.'},
         {q: 'Why is a ferrite core used in SMPS transformers?', a: 'Ferrite has low losses at high frequency (tens of kHz).'},
       ]}
-      tasks={[
-        {label: 'Name all six.', done: kit.every((_, k) => typeOk(k))},
-        {label: 'Measure Rp, Rs, P–S and winding–core on all six.', done: kit.every((_, k) => measured(k))},
-        {label: 'Find the condition of all six.', done: kit.every((_, k) => condOk(k))},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: `Pick the type of each transformer. Correct: ${kit.filter((_, k) => typeOk(k)).length}/6`,
+          hint: 'Look at the core shape and the nameplate marking.',
+          done: kit.every((_, k) => typeOk(k)),
+        },
+        {
+          label: `Select an Ω range and note Rp, Rs, P–S, P–core and S–core of each. Done: ${kit.filter((_, k) => measured(k)).length}/6`,
+          hint: 'Probes on two terminals of one transformer, then Note reading. Core is C.',
+          done: kit.every((_, k) => measured(k)),
+        },
+        {
+          label: `Pick the condition of each transformer. Correct: ${kit.filter((_, k) => condOk(k)).length}/6`,
+          hint: 'OL on a winding = open. A reading to the core = leakage.',
+          done: kit.every((_, k) => condOk(k)),
+        },
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -426,13 +438,34 @@ export function PolarityLab(): React.JSX.Element {
         {q: 'Why is polarity important?', a: 'For connecting windings in series or parallel, and for paralleling transformers. Wrong polarity can cancel the voltage or cause a short circuit.'},
         {q: 'What would happen if 230 V were applied to the 12 V winding?', a: 'Heavy current flows (the winding is overloaded), and the other winding would give about 4400 V. The fuse blows or the transformer burns.'},
       ]}
-      tasks={[
-        {label: 'Measure resistance of both windings.', done: Object.keys(rec).filter((k) => k.startsWith('R')).length >= 2},
-        {label: 'Name the primary terminals.', done: ans.prim === priPair},
-        {label: 'Do the polarity test (Vx with a link).', done: vxRecorded},
-        {label: 'Additive / subtractive and the in-phase terminal.', done: ans.mode != null && ans.mode === linkedPolarity && ans.dot === `T${inPhaseWithLowest + 1}`},
-        {label: 'Turns ratio from Vp ÷ Vs.', done: near(num(ans.ratio), ratio, 0.04)},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: 'With the supply OFF, select Ω 200 and note the resistance of both windings.',
+          hint: 'Two terminal pairs show a value; the rest read OL. Press Note reading.',
+          done: Object.keys(rec).filter((k) => k.startsWith('R')).length >= 2,
+        },
+        {
+          label: 'Pick the two primary terminals in the Result table.',
+          hint: 'Primary of a step-down transformer has the higher resistance.',
+          done: ans.prim === priPair,
+        },
+        {
+          label: 'Fit the link wire between one primary and one secondary terminal.',
+          hint: 'Supply must be OFF to change the link.',
+          done: linked,
+        },
+        {
+          label: 'Connect 230 V across the primary only, switch ON, and note Vp, Vs and Vx.',
+          hint: 'Use AC V 750 for mains. Vx is across the two free terminals.',
+          done: vxRecorded,
+        },
+        {
+          label: 'Pick additive or subtractive, and the secondary terminal in phase with the lowest primary.',
+          hint: 'Vx ≈ Vp + Vs: additive. Vx ≈ Vp − Vs: subtractive.',
+          done: ans.mode != null && ans.mode === linkedPolarity && ans.dot === `T${inPhaseWithLowest + 1}`,
+        },
+        {label: 'Enter the turns ratio Vp ÷ Vs.', hint: 'Use your Vp and Vs readings.', done: near(num(ans.ratio), ratio, 0.04)},
+        {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

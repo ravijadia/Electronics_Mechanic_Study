@@ -129,12 +129,25 @@ export function RcTimeConstantLab(): React.JSX.Element {
         {q: 'R = 100 kΩ, C = 100 µF. τ?', a: '100 × 10³ × 100 × 10⁻⁶ = 10 s.'},
         {q: 'What happens if an electrolytic capacitor is reversed?', a: 'Leakage current flows, it heats up, bulges and can burst.'},
       ]}
-      tasks={[
-        {label: 'Charging: 6+ readings over at least 3 τ.', done: spanOk(charge)},
-        {label: 'Discharging: 6+ readings over at least 3 τ.', done: spanOk(dis)},
-        {label: 'Calculate τ = R × C.', done: calcOk},
-        {label: 'Find τ from the graph.', done: graphOk},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: 'Meter on DC V 20, switch to CHARGE.',
+          hint: 'Capacitor + towards R. The stopwatch restarts.',
+          done: charge.length > 0 || (fn !== 'off' && pos === 'charge'),
+        },
+        {
+          label: 'Note Vc every few seconds while charging.',
+          hint: `Press Note reading. Need 6+ readings over 3 τ. Readings: ${charge.length}.`,
+          done: spanOk(charge),
+        },
+        {
+          label: 'Switch to DISCHARGE and note Vc as it falls.',
+          hint: `Same again: 6+ readings over 3 τ. Readings: ${dis.length}.`,
+          done: spanOk(dis),
+        },
+        {label: 'Calculate τ = R × C and enter it.', hint: 'R in ohms, C in farads.', done: calcOk},
+        {label: 'Read τ from the graph and enter it.', hint: 'Time when Vc = 63.2 % of the supply.', done: graphOk},
+        {label: 'Enter your details and print or save the record.', done: printed},
       ]}
       onPrinted={(tt) => tt.name.trim() && setPrinted(true)}>
       <Section title="Bench">
@@ -424,12 +437,30 @@ export function DifferentiatorLab(): React.JSX.Element {
         {q: 'What does a differentiator give for a square-wave input?', a: 'Sharp positive and negative spikes at each edge.'},
         {q: 'Where are differentiators used?', a: 'To produce trigger pulses from square waves, e.g. in timing and pulse circuits.'},
       ]}
-      tasks={[
-        {label: 'Triangle in, square out: note a correct reading.', done: squares.length > 0},
-        {label: 'Note a large-RC case (output nearly triangle).', done: rows.some((r) => r.wave === 'triangle' && r.shape === 'nearly triangle')},
-        {label: 'Note a square-wave input (spikes).', done: rows.some((r) => r.wave === 'square' && r.shape === 'spikes')},
-        {label: 'Calculate the output p-p.', done: calcOk},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {
+          label: 'Set the generator to a triangular wave, output ON.',
+          hint: 'CH1 shows the input, CH2 the output.',
+          done: rows.length > 0 || (fg.state.on && fg.state.wave === 'triangle'),
+        },
+        {
+          label: 'Choose R and C so that RC is much smaller than T.',
+          hint: 'RC ≤ T/20 gives a square output.',
+          done: squares.length > 0 || (fg.state.on && fg.state.wave === 'triangle' && rcf <= 0.05),
+        },
+        {label: 'Read Vin and Vout p-p on the CRO and note them.', hint: 'Enter both readings, then Note reading.', done: squares.length > 0},
+        {
+          label: 'Choose a large RC and note the output.',
+          hint: 'Output becomes nearly triangle.',
+          done: rows.some((r) => r.wave === 'triangle' && r.shape === 'nearly triangle'),
+        },
+        {
+          label: 'Switch to a square wave with a small RC and note it.',
+          hint: 'Output shows sharp spikes.',
+          done: rows.some((r) => r.wave === 'square' && r.shape === 'spikes'),
+        },
+        {label: 'Calculate Vout p-p and enter it.', hint: 'Vout p-p = 4 × R × C × f × Vin p-p.', done: calcOk},
+        {label: 'Enter your details and print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">

@@ -144,12 +144,22 @@ function SwitchLoadLab({s}: {s: Spec}): React.JSX.Element {
       procedure={s.procedure}
       precautions={s.precautions}
       viva={s.viva}
-      tasks={[
-        {label: `Transfer table: 8+ readings from OFF to fully ON.`, done: spread},
-        {label: `Threshold ${S.g}(th) from the table.`, done: vthOk},
-        {label: s.dev.igbt ? 'VCE(sat) at VGE = 15 V.' : 'RDS(on) = VDS ÷ ID at VGS = 10 V (mΩ).', done: onOk},
-        {label: 'Show why a gate pull-down resistor is needed.', done: !!seen.floating && !!seen.pulldownOk},
-        {label: 'Print or save the record.', done: printed},
+      steps={[
+        {label: 'Switch the supply ON.', hint: 'Pull-down fitted, drive connected, gate drive at 0 V.', done: power || pts.length > 0},
+        {
+          label: `Raise the gate drive in steps and note each reading. Readings: ${Math.min(pts.length, 8)}/8`,
+          hint: `From OFF to fully ON: include 0 V and ${S.g} = ${s.dev.igbt ? 15 : 10} V.`,
+          done: spread,
+        },
+        {label: `Find the threshold ${S.g}(th) and enter it.`, hint: `The ${S.g} where ${S.i} starts to flow.`, done: vthOk},
+        {
+          label: s.dev.igbt ? 'Find VCE(sat) at VGE = 15 V and enter it.' : 'Find RDS(on) at VGS = 10 V and enter it (mΩ).',
+          hint: s.dev.igbt ? 'Use the reading at 15 V.' : 'RDS(on) = VDS ÷ ID, from the reading at 10 V.',
+          done: onOk,
+        },
+        {label: 'Remove the pull-down, drive the gate ON, then remove the drive.', hint: 'Switch OFF before removing the pull-down. The lamp stays ON.', done: !!seen.floating},
+        {label: 'Refit the pull-down and remove the drive again.', hint: 'Drive the gate above threshold first. The lamp turns off.', done: !!seen.pulldownOk},
+        {label: 'Enter your details and print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
