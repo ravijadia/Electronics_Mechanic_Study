@@ -50,7 +50,7 @@ const DATA: string[][] = [
   ['BT136', 'TRIAC', '4 A, 600 V', 'MT1 – MT2 – G'],
   ['DB3', 'DIAC', 'breakover 32 V, 2 A pulse', 'MT – MT (no polarity)'],
   ['2N2646', 'UJT', '50 mA, 35 V (VB2B1)', 'E – B1 – B2'],
-  ['BFW10', 'N-channel JFET', 'IDSS 8–20 mA, 30 V', 'S – D – G'],
+  ['BFW10', 'N-channel JFET', '20 mA, 30 V (IDSS 8–20 mA)', 'S – D – G'],
   ['IRFZ44N', 'N-channel power MOSFET', '49 A, 55 V', 'G – D – S'],
   ['FGA25N120', 'IGBT', '25 A, 1200 V', 'G – C – E'],
   ['6A10', 'Power rectifier diode', '6 A, 1000 V', 'A – K (band)'],
@@ -153,9 +153,14 @@ const DMM_V = 3; // diode-test open-circuit voltage
 /** Reading between lead a (red) and lead b (black). */
 function swReading(d: Sw, charged: boolean, a: number, b: number, fn: string): string {
   if (fn === 'off') return '';
-  const ta = d.pins[a];
-  const tb = d.pins[b];
+  let ta = d.pins[a];
+  let tb = d.pins[b];
   const [D, S] = d.igbt ? ['C', 'E'] : ['D', 'S'];
+  // A gate–source short makes the gate act as the source for the drain.
+  if (d.fault === 'gsShort') {
+    if (ta === 'G' && tb === D) ta = S;
+    else if (tb === 'G' && ta === D) tb = S;
+  }
   const pair = new Set([ta, tb]);
   let v: number | null = null;
   if (d.fault === 'open') v = null;

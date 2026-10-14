@@ -77,6 +77,8 @@ function SwitchLoadLab({s}: {s: Spec}): React.JSX.Element {
   const o = dead ? {i: s.vs / s.rl, v: 0} : power ? operate(dev, s.vs, s.rl, vg) : {i: 0, v: 0};
   const pd = o.i * o.v;
   const level = Math.min(1, ((o.i * s.rl) / s.vs) ** 2);
+  // 0.5 V steps up to a whole-volt boundary just above the threshold, then 1 V steps, so 10 V and 15 V can be set exactly.
+  const fine = Math.ceil(dev.vth + 2);
 
   // Junction temperature settles towards Tamb + P·θ.
   useEffect(() => {
@@ -93,7 +95,7 @@ function SwitchLoadLab({s}: {s: Spec}): React.JSX.Element {
     if (tj > 160 && !dead) {
       setDead(true);
       setSeen((x) => ({...x, hot: true}));
-      setNote({kind: 'bad', text: <b>The device overheated and failed short-circuit: the lamp is stuck ON. Half-on (linear region) wastes a lot of power. Fit a heat sink and drive the gate fully.</b>});
+      setNote({kind: 'bad', text: <b>Overheated: the device failed short-circuit and the lamp is stuck ON. Drive the gate fully and fit a heat sink.</b>});
     } else if (tj > 100 && !seen.hot) setSeen((x) => ({...x, hot: true}));
   }, [tj]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -111,11 +113,11 @@ function SwitchLoadLab({s}: {s: Spec}): React.JSX.Element {
       setConnected(false);
       if (!pulldown && vgSet > dev.vth + 1) {
         setSeen((x) => ({...x, floating: true}));
-        setNote({kind: 'warn', text: 'Input removed, but the lamp stays ON: the gate charge has nowhere to go. A pull-down resistor fixes this.'});
+        setNote({kind: 'warn', text: 'Input removed but the lamp stays ON: the gate holds its charge. Fit a pull-down resistor.'});
       } else if (pulldown) {
         setSeen((x) => ({...x, pulldownOk: vgSet > dev.vth + 1 ? true : x.pulldownOk}));
         setNote({kind: 'info', text: 'Input removed: the pull-down discharges the gate and the device turns off.'});
-      }
+      } else setNote({kind: 'info', text: 'Gate was below the threshold: nothing changes. Raise the drive first.'});
     } else setConnected(true);
   };
   const noteIt = () => {
@@ -198,7 +200,7 @@ function SwitchLoadLab({s}: {s: Spec}): React.JSX.Element {
         </div>
         <div className={clsx(styles.controls, styles.noPrint)}>
           <div className={styles.card}>
-            <Knob label="GATE DRIVE" value={`${vgSet.toFixed(1)} V`} onDec={() => setVgSet((x) => Math.max(0, Math.round((x - (x <= dev.vth + 2 ? 0.5 : 1)) * 10) / 10))} onInc={() => setVgSet((x) => Math.min(24, Math.round((x + (x < dev.vth + 2 ? 0.5 : 1)) * 10) / 10))} />
+            <Knob label="GATE DRIVE" value={`${vgSet.toFixed(1)} V`} onDec={() => setVgSet((x) => Math.max(0, Math.round((x - (x <= fine ? 0.5 : 1)) * 10) / 10))} onInc={() => setVgSet((x) => Math.min(24, Math.round((x + (x < fine ? 0.5 : 1)) * 10) / 10))} />
             <div className={styles.seg} role="group" aria-label="Gate drive lead" style={{marginTop: '0.4rem'}}>
               <button type="button" aria-pressed={connected} onClick={disconnect}>
                 Drive {connected ? 'connected' : 'removed'}

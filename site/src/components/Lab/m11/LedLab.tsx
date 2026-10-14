@@ -40,7 +40,7 @@ interface Row {
 }
 
 /** Which measurement a probe pair is, by node. */
-const QTY: Record<string, string> = {'A|N': 'VF', 'P|X': 'VR', 'P|N': 'VS'};
+const QTY: Record<string, string> = {'A|N': 'VF', 'P|X': 'VR', 'N|P': 'VS'};
 
 export function LedTestLab(): React.JSX.Element {
   const KEY = '1.11.105';

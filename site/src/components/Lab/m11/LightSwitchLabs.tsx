@@ -185,7 +185,7 @@ function LightSwitchLab({s}: {s: Spec}): React.JSX.Element {
                 relay
               </text>
               {diode ? (
-                <path d="M300 56 H336 V114 H300 M326 96 H346 M326 78 L336 96 L346 78 Z" stroke="var(--lab-wire)" strokeWidth={1.8} fill="none" />
+                <path d="M300 56 H336 V114 H300 M326 78 H346 M326 96 L336 78 L346 96 Z" stroke="var(--lab-wire)" strokeWidth={1.8} fill="none" />
               ) : (
                 <path d="M300 56 H336 M336 114 H300" stroke="#ff8c1a" strokeWidth={1.8} strokeDasharray="3 3" />
               )}

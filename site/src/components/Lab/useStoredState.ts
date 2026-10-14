@@ -16,7 +16,7 @@ export default function useStoredState<T>(
   useEffect(() => {
     try {
       const raw = window.localStorage.getItem(key);
-      if (raw != null) setValue(JSON.parse(raw) as T);
+      setValue(raw != null ? (JSON.parse(raw) as T) : initial);
     } catch {
       // ignore
     }

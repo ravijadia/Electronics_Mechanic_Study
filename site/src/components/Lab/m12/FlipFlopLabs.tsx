@@ -44,8 +44,8 @@ export function FourBitLatchLab(): React.JSX.Element {
     setNote({kind: 'info', text: `D = ${d.map((x) => (x ? 1 : 0)).join('')}, C1C2 = ${c12 ? 1 : 0}${c34 ? 1 : 0} → Q = ${q.map((x) => (x ? 1 : 0)).join('')}`});
   };
 
-  const seenFollow = rows.some((r, i) => i < 2 || (r.c[0] && r.q[0] === r.d[0]) || (r.c[1] && r.q[2] === r.d[2]));
-  const seenHold = rows.length >= 2 && rows.some((r, i) => i > 0 && !r.c[0] && !r.c[1] && (r.q[0] === rows[i - 1].q[0] || r.q[2] === rows[i - 1].q[2]));
+  const seenFollow = rows.some((r) => (r.c[0] && (r.d[0] || r.d[1]) && r.q[0] === r.d[0] && r.q[1] === r.d[1]) || (r.c[1] && (r.d[2] || r.d[3]) && r.q[2] === r.d[2] && r.q[3] === r.d[3]));
+  const seenHold = rows.some((r) => (!r.c[0] && (r.q[0] !== r.d[0] || r.q[1] !== r.d[1])) || (!r.c[1] && (r.q[2] !== r.d[2] || r.q[3] !== r.d[3])));
 
   return (
     <PracticalSheet
@@ -65,8 +65,8 @@ export function FourBitLatchLab(): React.JSX.Element {
         {q: 'Why are the four bits split into two enable groups?', a: 'So two independent nibbles (or a byte split across two 7475s) can be latched at different times.'},
       ]}
       tasks={[
-        {label: 'Show Q following D while enabled.', done: seenFollow},
-        {label: 'Show Q holding while disabled.', done: seenHold},
+        {label: 'Show Q following D (a 1 on D) while enabled.', done: seenFollow},
+        {label: 'Show Q holding while disabled (D differs from Q).', done: seenHold},
         {label: 'Observation table: 4+ rows.', done: rows.length >= 4},
         {label: 'Print or save the record.', done: printed},
       ]}
@@ -148,8 +148,8 @@ interface RsRow {
 
 export function RsFlipFlopLab(): React.JSX.Element {
   const KEY = '1.12.121';
-  const [s, setS] = useStoredState(`lab:${KEY}:s`, false);
-  const [r, setR] = useStoredState(`lab:${KEY}:r`, false);
+  const [s, setS] = useStoredState(`lab:${KEY}:s`, true);
+  const [r, setR] = useStoredState(`lab:${KEY}:r`, true);
   const [clocked, setClocked] = useStoredState(`lab:${KEY}:clocked`, false);
   const [q, setQ] = useStoredState(`lab:${KEY}:q`, false);
   const [invalid, setInvalid] = useState(false);
@@ -157,9 +157,13 @@ export function RsFlipFlopLab(): React.JSX.Element {
   const [note, setNote] = useState<Note>(null);
   const [printed, setPrinted] = useStoredState(`lab:${KEY}:printed`, false);
 
+  // Direct mode is the bare two-NAND latch: its S-bar and R-bar inputs are active-LOW.
   useEffect(() => {
-    if (clocked) return;
-    const n = ffNext('rs', s, r, q);
+    if (clocked) {
+      setInvalid(false);
+      return;
+    }
+    const n = ffNext('rs', !s, !r, q);
     setQ(n.q);
     setInvalid(n.invalid);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -173,15 +177,17 @@ export function RsFlipFlopLab(): React.JSX.Element {
   };
 
   const noteIt = () => {
-    setRows((r2) => [...r2, {s, r, clocked, q, invalid}].slice(-10));
-    setNote({kind: 'info', text: `S${s ? 1 : 0} R${r ? 1 : 0} ${clocked ? '(clocked)' : '(direct)'} → Q = ${q ? 1 : 0}${invalid ? ' (invalid)' : ''}`});
+    setRows((r2) => [...r2, {s, r, clocked, q, invalid}].slice(-24));
+    setNote({kind: 'info', text: `${clocked ? 'S' : 'S̄'} ${s ? 1 : 0}, ${clocked ? 'R' : 'R̄'} ${r ? 1 : 0} ${clocked ? '(clocked)' : '(direct)'} → Q = ${q ? 1 : 0}${invalid ? ' (invalid)' : ''}`});
   };
 
-  const seenSet = rows.some((x) => x.s && !x.r && x.q);
-  const seenReset = rows.some((x) => !x.s && x.r && !x.q);
-  const seenHold = rows.length >= 2 && rows.some((x, i) => i > 0 && !x.s && !x.r && !x.clocked && x.q === rows[i - 1].q);
+  const eff = (x: RsRow) => (x.clocked ? {set: x.s, reset: x.r} : {set: !x.s, reset: !x.r});
+  const seenSet = rows.some((x) => !x.invalid && eff(x).set && !eff(x).reset && x.q);
+  const seenReset = rows.some((x) => !x.invalid && !eff(x).set && eff(x).reset && !x.q);
+  const seenHold = rows.some((x) => !x.clocked && x.s && x.r && x.q);
   const seenInvalid = rows.some((x) => x.invalid);
-  const seenClockHold = rows.some((x) => x.clocked && x.s && x.r === false);
+  const pending = (x: RsRow) => x.clocked && ((x.s && !x.r && !x.q) || (!x.s && x.r && x.q));
+  const seenClockHold = rows.some((x, i) => i > 0 && pending(rows[i - 1]) && x.clocked && x.s === rows[i - 1].s && x.r === rows[i - 1].r && x.q === x.s);
 
   return (
     <PracticalSheet
@@ -190,23 +196,23 @@ export function RsFlipFlopLab(): React.JSX.Element {
       aim="To build an R-S flip-flop from cross-coupled NAND gates of a 7400, operate it directly (asynchronous) and through two clock-gating NAND gates, and observe Set, Reset, Hold and the invalid S = R = 1 state."
       apparatus={['7400 (quad NAND) IC', '+5 V supply', 'S and R switches', 'Clock pulse push-button', 'Q and Q̄ LEDs']}
       procedure={[
-        'Direct mode: change S and R and watch Q change immediately.',
-        'S = R = 1: note that Q does not settle to a valid state.',
-        'Switch to clocked mode: changing S and R now does nothing until the clock button is pressed.',
-        'Press the clock button and note that Q updates to match the S, R that were set.',
+        'Direct mode (two NAND gates): S̄ and R̄ are active-LOW. S̄ = 0 sets Q, R̄ = 0 resets it, S̄ = R̄ = 1 holds it.',
+        'S̄ = R̄ = 0: note that both outputs go HIGH and Q is not a valid state.',
+        'Switch to clocked mode (two steering NAND gates added): S and R are now active-HIGH and do nothing until the clock button is pressed.',
+        'Set S, R and note Q, press the clock button, then note Q again: it updates to match S, R.',
       ]}
-      precautions={['Avoid leaving S = R = 1 for the direct (unclocked) latch.', 'In clocked mode, set S and R before pressing the clock button.']}
+      precautions={['Avoid S̄ = R̄ = 0 in direct mode and S = R = 1 in clocked mode.', 'In clocked mode, set S and R before pressing the clock button.']}
       viva={[
-        {q: 'Why is S = R = 1 invalid for an S-R latch?', a: 'Both NAND outputs are forced towards the same state, and the result is unpredictable when the inputs are released.'},
+        {q: 'Why is S̄ = R̄ = 0 invalid for a NAND S-R latch?', a: 'Both NAND outputs are forced HIGH, and the final state is unpredictable when both inputs are released together.'},
         {q: 'What does adding two clock-gating NAND gates achieve?', a: 'It lets S and R change freely, but the latch only acts on them when the clock input is active — a gated (clocked) S-R flip-flop.'},
-        {q: 'What is the hold condition?', a: 'S = R = 0 (direct) or no clock pulse (clocked): Q keeps its last value.'},
+        {q: 'What is the hold condition?', a: 'S̄ = R̄ = 1 (direct) or no clock pulse (clocked): Q keeps its last value.'},
       ]}
       tasks={[
-        {label: 'Set (S = 1, R = 0 → Q = 1).', done: seenSet},
-        {label: 'Reset (S = 0, R = 1 → Q = 0).', done: seenReset},
-        {label: 'Hold (S = R = 0, Q unchanged).', done: seenHold},
-        {label: 'Invalid state (S = R = 1).', done: seenInvalid},
-        {label: 'Clocked mode: Q only changes on a clock pulse.', done: seenClockHold},
+        {label: 'Set (direct S̄ = 0, R̄ = 1 → Q = 1).', done: seenSet},
+        {label: 'Reset (direct S̄ = 1, R̄ = 0 → Q = 0).', done: seenReset},
+        {label: 'Hold (S̄ = R̄ = 1, Q stays 1).', done: seenHold},
+        {label: 'Invalid state (both inputs active).', done: seenInvalid},
+        {label: 'Clocked: note Q with S, R set, pulse, note Q again.', done: seenClockHold},
         {label: 'Print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
@@ -215,10 +221,10 @@ export function RsFlipFlopLab(): React.JSX.Element {
           <div className={styles.kit}>
             <svg viewBox="0 0 420 220" role="img" aria-label={`S-R flip-flop from NAND gates, ${clocked ? 'clocked' : 'direct'} mode, Q ${q ? 'HIGH' : 'LOW'}`}>
               <text x={60} y={40} style={kitLabel}>
-                S
+                {clocked ? 'S' : 'S̄'}
               </text>
               <text x={60} y={180} style={kitLabel}>
-                R
+                {clocked ? 'R' : 'R̄'}
               </text>
               {clocked && (
                 <>
@@ -246,12 +252,12 @@ export function RsFlipFlopLab(): React.JSX.Element {
               <path d="M187 50 H260 V150 H200" fill="none" stroke="#9aa3a8" strokeWidth={1.5} strokeDasharray="3 3" />
               <path d="M187 170 H260 V70 H200" fill="none" stroke="#9aa3a8" strokeWidth={1.5} strokeDasharray="3 3" />
               <line x1={187} y1={50} x2={320} y2={50} stroke="#9aa3a8" strokeWidth={2} />
-              <circle cx={340} cy={50} r={9} fill={q ? '#ff5a4a' : '#4a5560'} />
+              <circle cx={340} cy={50} r={9} fill={q || invalid ? '#ff5a4a' : '#4a5560'} />
               <text x={352} y={54} style={kitLabel}>
                 Q
               </text>
               <line x1={187} y1={170} x2={320} y2={170} stroke="#9aa3a8" strokeWidth={2} />
-              <circle cx={340} cy={170} r={9} fill={!q ? '#ff5a4a' : '#4a5560'} />
+              <circle cx={340} cy={170} r={9} fill={!q || invalid ? '#ff5a4a' : '#4a5560'} />
               <text x={352} y={174} style={kitLabel}>
                 Q̄
               </text>
@@ -263,15 +269,23 @@ export function RsFlipFlopLab(): React.JSX.Element {
             </svg>
           </div>
           <div style={{display: 'grid', gap: '0.4rem', alignContent: 'start'}}>
-            <Sw label="S" on={s} onToggle={() => setS((x) => !x)} />
-            <Sw label="R" on={r} onToggle={() => setR((x) => !x)} />
-            <Sw label="Clocked mode" on={clocked} onToggle={() => setClocked((x) => !x)} />
+            <Sw label={clocked ? 'S' : 'S̄'} on={s} onToggle={() => setS((x) => !x)} />
+            <Sw label={clocked ? 'R' : 'R̄'} on={r} onToggle={() => setR((x) => !x)} />
+            <Sw
+              label="Clocked mode"
+              on={clocked}
+              onToggle={() => {
+                setClocked(!clocked);
+                setS(clocked);
+                setR(clocked);
+              }}
+            />
             {clocked && (
               <button type="button" className={clsx(styles.btn, styles.noPrint)} onClick={pulse}>
                 Clock pulse
               </button>
             )}
-            <PanelMeter label="Q" value={q ? '1' : '0'} unit="" />
+            <PanelMeter label="Q" value={invalid ? 'X' : q ? '1' : '0'} unit="" />
             <button type="button" className={clsx(styles.btn, styles.primary, styles.noPrint)} onClick={noteIt}>
               Note reading
             </button>
@@ -280,13 +294,13 @@ export function RsFlipFlopLab(): React.JSX.Element {
         <NoteBox note={note} />
       </Section>
       <Section title="Observation table">
-        {rows.length === 0 ? <Empty>No readings yet.</Empty> : <Table head={['S', 'R', 'Mode', 'Q']} rows={rows.map((x) => [x.s ? 1 : 0, x.r ? 1 : 0, x.clocked ? 'Clocked' : 'Direct', x.invalid ? 'invalid' : x.q ? 1 : 0])} />}
+        {rows.length === 0 ? <Empty>No readings yet.</Empty> : <Table head={['S / S̄', 'R / R̄', 'Mode', 'Q']} rows={rows.map((x) => [x.s ? 1 : 0, x.r ? 1 : 0, x.clocked ? 'Clocked' : 'Direct', x.invalid ? 'invalid' : x.q ? 1 : 0])} />}
       </Section>
       <Section title="Result">
         <ResetKit
           onReset={() => {
-            setS(false);
-            setR(false);
+            setS(true);
+            setR(true);
             setClocked(false);
             setQ(false);
             setRows([]);
@@ -335,12 +349,12 @@ export function FlipFlopTruthLab(): React.JSX.Element {
   const pulse = () => {
     const n = ffNext(type, a, spec.bLabel ? b : false, qNow);
     setQ((x) => ({...x, [type]: n.q}));
-    setRows((r) => [...r, {type, a, b: spec.bLabel ? b : false, qPrev: qNow, q: n.q, invalid: n.invalid}].slice(-10));
+    const bb = spec.bLabel ? b : false;
+    setRows((r) => [...r.filter((x) => !(x.type === type && x.a === a && x.b === bb && x.qPrev === qNow)), {type, a, b: bb, qPrev: qNow, q: n.q, invalid: n.invalid}]);
     setNote({kind: n.invalid ? 'warn' : 'info', text: n.invalid ? 'Invalid input combination for this flip-flop.' : `Q(t) = ${qNow ? 1 : 0} → Q(t+1) = ${n.q ? 1 : 0}`});
   };
 
   const rowsFor = rows.filter((r) => r.type === type);
-  const need = spec.bLabel ? 4 : 2;
   const seenCombos = new Set(rowsFor.map((r) => `${r.a}${r.b}`)).size;
 
   return (

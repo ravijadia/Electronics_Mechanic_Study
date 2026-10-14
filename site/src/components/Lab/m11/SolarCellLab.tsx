@@ -66,7 +66,7 @@ export function SolarCellLab(): React.JSX.Element {
   const rl = LOADS[load];
   // The ammeter is always in series: its 1 Ω burden adds to the load.
   const o = pvOperate(pv, g, isFinite(rl) ? rl + R_AMM : Infinity);
-  const vCell = isFinite(rl) ? o.i * rl : o.v;
+  const vCell = o.v;
   const vText = vfn === 'off' ? '' : Math.abs(vCell) >= (vfn === 'V2' ? 2 : 20) ? 'OL' : vCell.toFixed(vfn === 'V2' ? 3 : 2);
   const ma = o.i * 1000;
   const iText = ifn === 'off' ? '' : ma >= (ifn === 'mA20' ? 20 : 200) ? 'OL' : ma.toFixed(ifn === 'mA20' ? 2 : 1);

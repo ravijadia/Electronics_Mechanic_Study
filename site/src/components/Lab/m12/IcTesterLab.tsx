@@ -36,28 +36,32 @@ export function IcTesterLab(): React.JSX.Element {
   const t = GATE_ICS[kit.type];
   const twoIn = t.gates[0].ins.length === 2;
   const inRange = volts >= vMin && volts <= vMax;
+  const nominal = volts >= 4.75 && volts <= 5.25;
   const board = useLogicBoard({
     storeKey: KEY,
     ics: [{id: 'U1', type: kit.type, x: 190, y: 60, name: 'IC X'}],
     switches: twoIn ? [{id: 'A', x: 50, y: 100, label: 'A'}, {id: 'B', x: 50, y: 190, label: 'B'}] : [{id: 'A', x: 50, y: 140, label: 'A'}],
     leds: [{id: 'Y', x: 410, y: 140, label: 'Y'}],
+    dead: !inRange,
   });
 
   const a = board.switchVal('A');
   const b = board.switchVal('B');
-  const rawY = board.bit('LED.Y');
-  const yBit = rawY == null ? null : inRange ? rawY : false; // out-of-range supply: output stuck LOW
-  const expect = inRange ? gateTruth(t.fn, a, twoIn ? b : false) : false;
+  const yBit = board.bit('LED.Y'); // out-of-range supply: output stuck LOW
 
   const noteIt = () => {
     if (!inRange) {
       setSeenOut(true);
       return setNote({kind: 'bad', text: `Outside its rated supply the output is stuck LOW regardless of the inputs: ${volts} V is not safe to read from.`});
     }
-    setSeenIn(true);
     if (yBit == null) return setNote({kind: 'warn', text: 'Y is floating: finish wiring the switch(es) and the output.'});
+    if (!nominal) {
+      setSeenOut(true);
+      return setNote({kind: 'info', text: `At ${volts.toFixed(1)} V the IC still works: Y = ${yBit ? 1 : 0}. Take the table readings at 5 V.`});
+    }
+    setSeenIn(true);
     const row: Row = twoIn ? {a, b, y: yBit} : {a, y: yBit};
-    setRows((r) => [...r.filter((x) => !(x.a === a && x.b === b)), row]);
+    setRows((r) => [...r.filter((x) => !(x.a === a && !!x.b === (twoIn ? b : false))), row]);
     setNote({kind: 'info', text: `Noted: A${twoIn ? 'B' : ''} = ${a ? 1 : 0}${twoIn ? (b ? 1 : 0) : ''} → Y = ${yBit ? 1 : 0}.`});
   };
 
@@ -87,7 +91,7 @@ export function IcTesterLab(): React.JSX.Element {
       tasks={[
         {label: `Full truth table at 5 V (${need} rows).`, done: rowsOk},
         {label: 'Identify the gate function from the table.', done: fnOk},
-        {label: 'Try a supply value outside 4.75–5.25 V and one at 5 V.', done: seenIn && seenOut},
+        {label: 'Note a reading at 5 V and one at a supply outside 4.75–5.25 V.', done: seenIn && seenOut},
         {label: 'Identify TTL or CMOS from the supply test.', done: famOk},
         {label: 'Print or save the record.', done: printed},
       ]}
@@ -143,6 +147,7 @@ export function IcTesterLab(): React.JSX.Element {
             setSeenIn(false);
             setSeenOut(false);
             setPrinted(false);
+            board.clearWires();
             newKit();
           }}
         />

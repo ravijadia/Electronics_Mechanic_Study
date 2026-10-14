@@ -115,7 +115,7 @@ export default function FetAmpLab(): React.JSX.Element {
       apparatus={['JFET BFW10', 'VDD 15 V, RD 2.2 kΩ, RS 470 Ω, RG 1 MΩ, RL 10 kΩ, CS 100 µF', 'Test resistor 1 MΩ', 'Function generator, CRO, AC millivoltmeter / DMM']}
       procedure={[
         'DC: measure VS and VD to ground. ID = (VDD − VD) ÷ RD. VGS = −VS (the gate is at 0 V).',
-        'Apply 1 kHz, about 0.2 Vpp. Measure Vin and Vout with CS fitted, then with CS removed.',
+        'Apply 1 kHz, about 0.5 Vpp. Measure Vin and Vout with CS fitted, then with CS removed.',
         'Compare the phase on the CRO.',
         'Insert the 1 MΩ test resistor. Measure Vgen and Vin: Zin = 1 MΩ × Vin ÷ (Vgen − Vin).',
       ]}

@@ -25,7 +25,7 @@ const ITEMS: Item[] = [
   {mark: 'CD4013', type: 'D', note: 'CMOS dual D flip-flop.'},
   {mark: 'CD4027', type: 'JK', note: 'CMOS dual JK flip-flop.'},
   {mark: '74279', type: 'RS', note: 'Quad S-R latch.'},
-  {mark: '7470', type: 'JK', note: 'JK flip-flop with AND-OR-gated J and K inputs.'},
+  {mark: '7470', type: 'JK', note: 'AND-gated JK flip-flop (positive edge-triggered, with preset and clear).'},
 ];
 
 const TYPES: [string, string][] = [

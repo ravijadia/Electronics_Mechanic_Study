@@ -191,7 +191,7 @@ const MUX_ICS: IcSpec[] = [
 export function MuxLab(): React.JSX.Element {
   const KEY = '1.12.117';
   const [note, setNote] = useState<Note>(null);
-  const [rows, setRows] = useStoredState<Record<number, number>>(`lab:${KEY}:rows`, {});
+  const [rows, setRows] = useStoredState<Record<number, {d: boolean[]; y: number}>>(`lab:${KEY}:rows2`, {});
   const [printed, setPrinted] = useStoredState(`lab:${KEY}:printed`, false);
   const board = useLogicBoard({
     storeKey: KEY,
@@ -199,12 +199,12 @@ export function MuxLab(): React.JSX.Element {
     switches: [
       {id: 'S1', x: 50, y: 60, label: 'S1'},
       {id: 'S0', x: 50, y: 230, label: 'S0'},
-      {id: 'I0', x: 420, y: 400, label: 'I0'},
+      {id: 'I0', x: 420, y: 380, label: 'I0'},
       {id: 'I1', x: 420, y: 440, label: 'I1'},
-      {id: 'I2', x: 420, y: 480, label: 'I2'},
-      {id: 'I3', x: 420, y: 520, label: 'I3'},
+      {id: 'I2', x: 420, y: 500, label: 'I2'},
+      {id: 'I3', x: 420, y: 560, label: 'I3'},
     ],
-    leds: [{id: 'Y', x: 420, y: 600, label: 'Y'}],
+    leds: [{id: 'Y', x: 420, y: 640, label: 'Y'}],
     gndY: 680,
   });
 
@@ -217,11 +217,15 @@ export function MuxLab(): React.JSX.Element {
 
   const noteIt = () => {
     if (y == null) return setNote({kind: 'warn', text: 'Y floats: complete the decode → data-gate → OR-tree wiring.'});
-    setRows((r) => ({...r, [sel]: y ? 1 : 0}));
+    setRows((r) => ({...r, [sel]: {d: data, y: y ? 1 : 0}}));
     setNote(y === expect ? {kind: 'good', text: `Correct: Y follows I${sel}.`} : {kind: 'bad', text: `Y should equal I${sel} (${expect ? 1 : 0}) for this select code.`});
   };
 
-  const done = [0, 1, 2, 3].every((s) => rows[s] != null && rows[s] === (data[s] ? 1 : 0));
+  const picks = [0, 1, 2, 3].map((s) => rows[s]);
+  const tried = picks.every((r) => r != null);
+  const allRight = tried && picks.every((r, s) => r.y === (r.d[s] ? 1 : 0));
+  const mixed = tried && picks.some((r, s) => r.d[s]) && picks.some((r, s) => !r.d[s]);
+  const done = allRight && mixed;
 
   return (
     <PracticalSheet
@@ -233,7 +237,7 @@ export function MuxLab(): React.JSX.Element {
         'Decode S1, S0 into four one-hot select lines (as in the 2-to-4 decoder).',
         'AND each select line with its matching data input (select0·I0, select1·I1, select2·I2, select3·I3).',
         'OR the four results together to get Y.',
-        'Set a data pattern on I0–I3, then step S1S0 through 00, 01, 10, 11 and check Y follows the selected input.',
+        'Set a data pattern on I0–I3 with some 1s and some 0s, then step S1S0 through 00, 01, 10, 11 and check Y follows the selected input.',
       ]}
       precautions={['Match each AND gate to the correct select line and data input.', 'Do not leave any gate input unconnected.']}
       viva={[
@@ -241,8 +245,8 @@ export function MuxLab(): React.JSX.Element {
         {q: 'What does a multiplexer do?', a: 'Connects one of several input lines to a single output, chosen by the select lines.'},
       ]}
       tasks={[
-        {label: 'All four select codes tried.', done: Object.keys(rows).length >= 4},
-        {label: 'Y follows the selected data input every time.', done},
+        {label: 'All four select codes tried.', done: tried},
+        {label: 'Y follows the selected data input every time (mix of 0s and 1s).', done},
         {label: 'Print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
@@ -260,7 +264,7 @@ export function MuxLab(): React.JSX.Element {
         {Object.keys(rows).length === 0 ? (
           <Empty>No readings yet.</Empty>
         ) : (
-          <Table head={['S1', 'S0', 'I0', 'I1', 'I2', 'I3', 'Y']} rows={Object.entries(rows).map(([s, v]) => [bits4(Number(s))[0] ? 1 : 0, bits4(Number(s))[1] ? 1 : 0, ...data.map((d) => (d ? 1 : 0)), v])} />
+          <Table head={['S1', 'S0', 'I0', 'I1', 'I2', 'I3', 'Y']} rows={Object.entries(rows).map(([s, v]) => [bits4(Number(s))[0] ? 1 : 0, bits4(Number(s))[1] ? 1 : 0, ...v.d.map((d) => (d ? 1 : 0)), v.y])} />
         )}
       </Section>
       <Section title="Result">
@@ -280,7 +284,7 @@ const DEMUX_ICS: IcSpec[] = [
 export function DemuxLab(): React.JSX.Element {
   const KEY = '1.12.118';
   const [note, setNote] = useState<Note>(null);
-  const [rows, setRows] = useStoredState<Record<number, number[]>>(`lab:${KEY}:rows`, {});
+  const [rows, setRows] = useStoredState<Record<string, {sel: number; d: boolean; outs: number[]}>>(`lab:${KEY}:rows2`, {});
   const [printed, setPrinted] = useStoredState(`lab:${KEY}:printed`, false);
   const board = useLogicBoard({
     storeKey: KEY,
@@ -299,12 +303,16 @@ export function DemuxLab(): React.JSX.Element {
   const noteIt = () => {
     if (outs.some((o) => o == null)) return setNote({kind: 'warn', text: 'One or more outputs float: finish wiring all four data-gate ANDs.'});
     const seen = outs.map((o) => (o ? 1 : 0));
-    setRows((r) => ({...r, [sel]: seen}));
+    setRows((r) => ({...r, [`${sel}${d ? 1 : 0}`]: {sel, d, outs: seen}}));
     const ok = seen.every((v, i) => v === (i === sel ? (d ? 1 : 0) : 0));
     setNote(ok ? {kind: 'good', text: `Correct: Y${sel} follows D, the rest stay 0.`} : {kind: 'bad', text: `Only Y${sel} should follow D; the others should stay 0.`});
   };
 
-  const done = [0, 1, 2, 3].every((s) => rows[s] && rows[s].every((v, i) => v === (i === s ? 1 : 0)));
+  const rowOk = (x: {sel: number; d: boolean; outs: number[]}) => x.outs.every((v, i) => v === (i === x.sel && x.d ? 1 : 0));
+  const allRows = Object.values(rows);
+  const highTried = [0, 1, 2, 3].every((s) => rows[`${s}1`] != null);
+  const done = highTried && allRows.every(rowOk);
+  const lowDone = allRows.some((x) => !x.d && rowOk(x));
 
   return (
     <PracticalSheet
@@ -315,8 +323,8 @@ export function DemuxLab(): React.JSX.Element {
       procedure={[
         'Decode S1, S0 into four one-hot select lines.',
         'AND each select line with D to get Y0–Y3.',
-        'With D = 1, step S1S0 through 00, 01, 10, 11 and check only the selected Y follows D while the rest stay 0.',
-        'With D = 0, check all four outputs stay 0 regardless of the select lines.',
+        'With D = 1, step S1S0 through 00, 01, 10, 11, noting each reading, and check only the selected Y follows D while the rest stay 0.',
+        'With D = 0, note at least one reading: all four outputs must stay 0 regardless of the select lines.',
       ]}
       precautions={['Match each AND gate to the correct select line.', 'Do not leave any gate input unconnected.']}
       viva={[
@@ -324,8 +332,9 @@ export function DemuxLab(): React.JSX.Element {
         {q: 'What should the non-selected outputs read?', a: 'Logic 0, regardless of D.'},
       ]}
       tasks={[
-        {label: 'All four select codes tried with D = 1.', done: Object.keys(rows).length >= 4},
+        {label: 'All four select codes tried with D = 1.', done: highTried},
         {label: 'Only the selected output follows D each time.', done},
+        {label: 'D = 0: all four outputs stay 0.', done: lowDone && allRows.every(rowOk)},
         {label: 'Print or save the record.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
@@ -340,10 +349,10 @@ export function DemuxLab(): React.JSX.Element {
         <NoteBox note={note} />
       </Section>
       <Section title="Observation table">
-        {Object.keys(rows).length === 0 ? (
+        {allRows.length === 0 ? (
           <Empty>No readings yet.</Empty>
         ) : (
-          <Table head={['S1', 'S0', 'D', 'Y0', 'Y1', 'Y2', 'Y3']} rows={Object.entries(rows).map(([s, v]) => [bits4(Number(s))[0] ? 1 : 0, bits4(Number(s))[1] ? 1 : 0, d ? 1 : 0, ...v])} />
+          <Table head={['S1', 'S0', 'D', 'Y0', 'Y1', 'Y2', 'Y3']} rows={Object.entries(rows).sort(([x], [y]) => x.localeCompare(y)).map(([, v]) => [bits4(v.sel)[0] ? 1 : 0, bits4(v.sel)[1] ? 1 : 0, v.d ? 1 : 0, ...v.outs])} />
         )}
       </Section>
       <Section title="Result">

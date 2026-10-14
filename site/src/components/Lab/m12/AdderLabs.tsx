@@ -33,6 +33,7 @@ export function HalfAdderLab(): React.JSX.Element {
     ics: HA_ICS,
     switches: [{id: 'A', x: 50, y: 70, label: 'A'}, {id: 'B', x: 50, y: 220, label: 'B'}],
     leds: [{id: 'S', x: 420, y: 70, label: 'Sum'}, {id: 'C', x: 420, y: 220, label: 'Carry'}],
+    gndY: 340,
   });
 
   const a = board.switchVal('A');
@@ -74,7 +75,7 @@ export function HalfAdderLab(): React.JSX.Element {
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
-        <div className={styles.kit}>{board.view(480, 320)}</div>
+        <div className={styles.kit}>{board.view(480, 360)}</div>
         {board.bar}
         <div className={clsx(styles.controls, styles.noPrint)} style={{marginTop: '0.4rem'}}>
           <button type="button" className={clsx(styles.btn, styles.primary)} onClick={noteIt}>
@@ -187,7 +188,7 @@ const AS_ICS: IcSpec[] = [
   {id: 'U1', type: '7486', x: 170, y: 20},
   {id: 'U2', type: '7408', x: 170, y: 170},
   {id: 'U3', type: '7432', x: 170, y: 320},
-  {id: 'U4', type: '7486', x: 170, y: 440},
+  {id: 'U4', type: '7486', x: 170, y: 460},
 ];
 
 interface AsRow extends Row {
@@ -205,10 +206,10 @@ export function AdderSubtractorLab(): React.JSX.Element {
     switches: [
       {id: 'A', x: 50, y: 50, label: 'A'},
       {id: 'B', x: 50, y: 170, label: 'B'},
-      {id: 'M', x: 50, y: 470, label: 'M'},
+      {id: 'M', x: 50, y: 490, label: 'M'},
     ],
-    leds: [{id: 'S', x: 420, y: 50, label: 'Sum/Diff'}, {id: 'C', x: 420, y: 290, label: 'Cout/Borrow'}],
-    gndY: 600,
+    leds: [{id: 'S', x: 420, y: 50, label: 'Sum/Diff'}, {id: 'C', x: 420, y: 290, label: 'Cout'}],
+    gndY: 610,
   });
 
   const a = board.switchVal('A');
@@ -224,7 +225,11 @@ export function AdderSubtractorLab(): React.JSX.Element {
     if (sBit == null || cBit == null) return setNote({kind: 'warn', text: 'Outputs are floating: finish the wiring (remember M feeds both the B-XOR gate and Cin).'});
     setRows((r) => [...r.filter((x) => !(x.a === a && x.b === b && x.m === m)), {a, b, m, s: sBit, c: cBit}]);
     const op = m ? 'Difference' : 'Sum';
-    setNote(sBit === expS && cBit === expC ? {kind: 'good', text: `Correct ${op.toLowerCase()} and ${m ? 'borrow' : 'carry'}.`} : {kind: 'bad', text: `Expected ${op} ${expS ? 1 : 0}, ${m ? 'Borrow' : 'Cout'} ${expC ? 1 : 0}.`});
+    setNote(
+      sBit === expS && cBit === expC
+        ? {kind: 'good', text: m ? `Correct difference. Cout = ${cBit ? 1 : 0} (${cBit ? 'no borrow, A ≥ B' : 'borrow, A < B'}).` : 'Correct sum and carry.'}
+        : {kind: 'bad', text: `Expected ${op} ${expS ? 1 : 0}, Cout ${expC ? 1 : 0}.`},
+    );
   };
 
   const check = (r: AsRow) => {
@@ -244,7 +249,7 @@ export function AdderSubtractorLab(): React.JSX.Element {
         'Build a full adder for A, (B XOR M) and Cin = M, as in 1.12.113.',
         'With M = 0: B passes unchanged and Cin = 0 — the circuit adds A + B.',
         'With M = 1: B is complemented and Cin = 1, forming the 2’s complement of B — the circuit computes A − B.',
-        'Verify both the addition table (M = 0) and the subtraction table (M = 1).',
+        'Verify both the addition table (M = 0) and the subtraction table (M = 1). In subtraction, Cout = 1 means no borrow (A ≥ B); Cout = 0 means a borrow.',
       ]}
       precautions={['M must be wired to both the extra XOR gate and the full adder’s Cin.', 'Do not leave any gate input unconnected.']}
       viva={[
@@ -259,7 +264,7 @@ export function AdderSubtractorLab(): React.JSX.Element {
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
-        <div className={styles.kit}>{board.view(480, 620)}</div>
+        <div className={styles.kit}>{board.view(480, 630)}</div>
         {board.bar}
         <div className={clsx(styles.controls, styles.noPrint)} style={{marginTop: '0.4rem'}}>
           <button type="button" className={clsx(styles.btn, styles.primary)} onClick={noteIt}>
@@ -272,7 +277,7 @@ export function AdderSubtractorLab(): React.JSX.Element {
         {rows.length === 0 ? (
           <Empty>No readings yet.</Empty>
         ) : (
-          <Table head={['M', 'A', 'B', 'Sum/Diff', 'Cout/Borrow']} rows={rows.map((r) => [r.m ? 1 : 0, r.a ? 1 : 0, r.b ? 1 : 0, r.s ? 1 : 0, r.c ? 1 : 0])} />
+          <Table head={['M', 'A', 'B', 'Sum/Diff', 'Cout']} rows={rows.map((r) => [r.m ? 1 : 0, r.a ? 1 : 0, r.b ? 1 : 0, r.s ? 1 : 0, r.c ? 1 : 0])} />
         )}
       </Section>
       <Section title="Result">

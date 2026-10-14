@@ -152,6 +152,7 @@ export function useLogicBoard({
   vccY = 40,
   gndY = 260,
   locked,
+  dead,
 }: {
   storeKey: string;
   ics: IcSpec[];
@@ -160,6 +161,8 @@ export function useLogicBoard({
   vccY?: number;
   gndY?: number;
   locked?: boolean;
+  /** Supply out of range: every driven output reads LOW. */
+  dead?: boolean;
 }): LogicBoard & {view: (w: number, h: number) => React.JSX.Element} {
   const [sw, setSw] = useStoredState<Record<string, boolean>>(`lab:${storeKey}:sw`, {});
   const terminals: Terminal[] = [
@@ -173,7 +176,10 @@ export function useLogicBoard({
   const seed: Record<string, Bit> = {};
   for (const s of switches) seed[net(`SW.${s.id}`)] = sw[s.id] ?? false;
   const known = evalBoard(placed, net, seed);
-  const bit = (id: string): Bit => known[net(id)] ?? null;
+  const bit = (id: string): Bit => {
+    const v = known[net(id)] ?? null;
+    return dead && v != null ? false : v;
+  };
 
   const view = (w2: number, h2: number) => (
     <svg viewBox={`0 0 ${w2} ${h2}`} role="img" aria-label="Logic gate wiring board with switches, ICs and LEDs">

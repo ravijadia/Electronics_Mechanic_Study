@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
 import Multimeter from '../Multimeter';
@@ -86,6 +86,10 @@ export function UjtOscLab(): React.JSX.Element {
   const r = R_FIX + (POT * pot) / 100;
   const s = useMemo(() => (power ? ujtSignals(r, UC[ci], eta) : null), [power, r, ci, eta]);
   const scope = useScope('cro', {ch1: s?.ve ?? (power ? {fn: () => VV, period: null} : flat), ch2: s?.vb1 ?? flat}, {ch1: {vdiv: 2, pos: 0, coupling: 'DC', on: true}, ch2: {vdiv: 2, pos: -3, coupling: 'DC', on: true}, display: 'DUAL', tdiv: 2e-3});
+  const latched = power && !s;
+  useEffect(() => {
+    if (latched) setLatchSeen(true);
+  }, [latched, setLatchSeen]);
 
   const addRow = () => {
     if (!power) return setNote({kind: 'warn', text: 'Supply is off.'});
@@ -214,7 +218,7 @@ interface SRow {
 export function ScrUjtLab(): React.JSX.Element {
   const KEY = '1.10.98';
   const [seed, newKit] = useKitSeed(KEY);
-  const eta = useRng(seed, (rnd) => 0.58 + rnd() * 0.1);
+  const eta = useRng(seed, (rnd) => 0.6 + rnd() * 0.08);
   const [pot, setPot] = useState(30);
   const [gate, setGate] = useState(true);
   const [power, setPower] = useState(false);
@@ -244,12 +248,15 @@ export function ScrUjtLab(): React.JSX.Element {
   const vdc = stats(load).mean;
   const lampLevel = fires ? Math.min(1, (stats(load).rms / (vm / 2)) ** 2) : 0;
   const text = fn === 'off' ? '' : fn === 'dcv' ? vdc.toFixed(2) : '';
+  const dark = power && !fires;
+  useEffect(() => {
+    if (dark) setOffSeen(true);
+  }, [dark, setOffSeen]);
 
   const noteIt = () => {
     if (!power) return setNote({kind: 'warn', text: 'Supply is off.'});
     if (fn !== 'dcv') return setNote({kind: 'warn', text: 'Meter on DC V across the lamp.'});
     if (!fires) {
-      setOffSeen(true);
       return setNote({kind: 'info', text: gate ? 'Lamp off: the trigger comes too late (after 180°), so the SCR never fires.' : 'Lamp off: no gate pulse, so the SCR never turns on.'});
     }
     setRows((x) => [...x.filter((y) => y.pot !== pot), {pot, alpha: deg(alpha), vdc}].sort((a, b) => a.pot - b.pot));
@@ -257,7 +264,9 @@ export function ScrUjtLab(): React.JSX.Element {
   };
   const rowOk = (x: SRow) => {
     const a = num(x.am);
-    return a != null && Math.abs(a - x.alpha) <= 8 && near(num(x.vcalc), (vm / (2 * Math.PI)) * (1 + Math.cos((a * Math.PI) / 180)), 0.03);
+    const v = num(x.vcalc);
+    const e = (vm / (2 * Math.PI)) * (1 + Math.cos((a ?? 0) * Math.PI / 180));
+    return a != null && Math.abs(a - x.alpha) <= 8 && v != null && Math.abs(v - e) <= Math.max(0.03 * e, 0.05);
   };
 
   return (
@@ -439,7 +448,7 @@ export function DimmerLab(): React.JSX.Element {
     if (mcbTrip) setMcbTrip(false);
     if (probe === 'plain') {
       setMcbTrip(true);
-      return setNote({kind: 'bad', text: <b>Bang! The CRO probe’s ground clip was on a live point. Mains shorted through the CRO earth: the MCB tripped. Use an isolated (differential) probe.</b>});
+      return setNote({kind: 'bad', text: <b>Bang! The probe’s ground clip shorted live mains through the CRO earth: MCB tripped. Use the differential probe.</b>});
     }
     setPower(true);
     setNote(null);
@@ -454,7 +463,8 @@ export function DimmerLab(): React.JSX.Element {
   const rowOk = (x: DRow) => {
     if (x.alpha == null) return true;
     const am = num(x.am);
-    return am != null && Math.abs(am - x.alpha) <= 8 && near(num(x.vc), calc((am * Math.PI) / 180), 0.03);
+    const v = num(x.vc);
+    return am != null && Math.abs(am - x.alpha) <= 8 && v != null && Math.abs(v - calc((am * Math.PI) / 180)) <= Math.max(0.03 * calc((am * Math.PI) / 180), 1);
   };
   const lit = rows.filter((x) => x.alpha != null && x.am && x.vc && rowOk(x));
 

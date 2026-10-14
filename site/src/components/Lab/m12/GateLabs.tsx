@@ -13,6 +13,9 @@ import styles from '../styles.module.css';
 
 type Row = {a: boolean; b?: boolean; y: boolean};
 
+/** A single-input row has no `b`; treat it as b = false so repeats replace each other. */
+const sameInputs = (x: Row, a: boolean, b: boolean) => x.a === a && !!x.b === b;
+
 export function GateTruthTableLab(): React.JSX.Element {
   const KEY = '1.12.109';
   const [type, setType] = useState('7400');
@@ -38,13 +41,12 @@ export function GateTruthTableLab(): React.JSX.Element {
     if (yBit == null) return setNote({kind: 'warn', text: 'Y is floating: wire the switch(es) to an input pin, and that gate’s output to the LED.'});
     const row: Row = twoIn ? {a, b, y: yBit} : {a, y: yBit};
     setRows((r) => {
-      const list = (r[type] ?? []).filter((x) => !(x.a === a && x.b === b));
+      const list = (r[type] ?? []).filter((x) => !sameInputs(x, a, twoIn ? b : false));
       return {...r, [type]: [...list, row].sort((x, y) => (x.a === y.a ? Number(!!x.b) - Number(!!y.b) : Number(x.a) - Number(y.a)))};
     });
     setNote(yBit === expect ? {kind: 'good', text: `Y = ${yBit ? 1 : 0}, correct for ${t.fn}.`} : {kind: 'bad', text: `Y = ${yBit ? 1 : 0}, but ${t.fn} of these inputs is ${expect ? 1 : 0}. Check the wiring.`});
   };
 
-  const need = twoIn ? 4 : 2;
   const doneType = (id: string) => {
     const tt = GATE_ICS[id];
     const want = tt.gates[0].ins.length === 2 ? 4 : 2;
@@ -71,7 +73,7 @@ export function GateTruthTableLab(): React.JSX.Element {
         {q: 'Why must every gate input be connected?', a: 'A floating TTL/CMOS input can read either level and makes the output unreliable.'},
         {q: 'How many 2-input gates are in one 7400 IC?', a: 'Four.'},
       ]}
-      tasks={[...GATE_IC_IDS.map((id) => ({label: `${GATE_ICS[id].name} (${GATE_ICS[id].fn}) truth table complete.`, done: doneType(id)}))]}
+      tasks={[...GATE_IC_IDS.map((id) => ({label: `${GATE_ICS[id].name} (${GATE_ICS[id].fn}) truth table complete.`, done: doneType(id)})), {label: 'Print or save the record.', done: printed}]}
       onPrinted={(t2) => t2.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={clsx(styles.seg, styles.noPrint)} role="group" aria-label="Gate IC" style={{marginBottom: '0.6rem'}}>
@@ -126,6 +128,7 @@ export function UniversalGateLab(): React.JSX.Element {
     ics: [{id: 'U1', type: family, x: 190, y: 50}],
     switches: [{id: 'A', x: 50, y: 90, label: 'A'}, {id: 'B', x: 50, y: 230, label: 'B'}],
     leds: [{id: 'Y', x: 410, y: 160, label: 'Y'}],
+    gndY: 285,
   });
 
   const a = board.switchVal('A');
@@ -139,7 +142,7 @@ export function UniversalGateLab(): React.JSX.Element {
     if (yBit == null) return setNote({kind: 'warn', text: 'Y is floating: finish wiring your gate network to the LED.'});
     const row: Row = needTwo ? {a, b, y: yBit} : {a, y: yBit};
     setRows((r) => {
-      const list = (r[rowKey] ?? []).filter((x) => !(x.a === a && x.b === b));
+      const list = (r[rowKey] ?? []).filter((x) => !sameInputs(x, a, needTwo ? b : false));
       return {...r, [rowKey]: [...list, row]};
     });
     setNote(yBit === expect ? {kind: 'good', text: `Correct: Y = ${target} output for these inputs.`} : {kind: 'bad', text: `Y = ${yBit ? 1 : 0}, but ${target} of these inputs should be ${expect ? 1 : 0}.`});
@@ -198,7 +201,7 @@ export function UniversalGateLab(): React.JSX.Element {
             ))}
           </div>
         </div>
-        <div className={styles.kit}>{board.view(480, 300)}</div>
+        <div className={styles.kit}>{board.view(480, 310)}</div>
         {board.bar}
         <div className={clsx(styles.controls, styles.noPrint)} style={{marginTop: '0.4rem'}}>
           <button type="button" className={clsx(styles.btn, styles.primary)} onClick={noteIt}>
