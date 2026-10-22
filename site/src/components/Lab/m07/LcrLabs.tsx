@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_7_58, GU_1_7_59} from './gu';
 import useStoredState from '../useStoredState';
 import {NoteBox, ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng, type Note} from '../kit';
 import {si} from '../signals';
@@ -204,6 +205,7 @@ export function InductorLab(): React.JSX.Element {
         },
         {label: 'Enter your details and print or save the record.', done: printed},
       ]}
+      gu={GU_1_7_58}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>
@@ -376,6 +378,7 @@ export function CapacitorLab(): React.JSX.Element {
         {label: 'Mark each capacitor good or faulty.', hint: 'Far below its value, or high D, means faulty.', done: items.every((_, k) => condOk(k))},
         {label: 'Enter your details and print or save the record.', done: printed},
       ]}
+      gu={GU_1_7_59}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>

@@ -31,7 +31,7 @@ export interface PracticalGu {
   viva: VivaQuestion[];
   /**
    * Matched to `steps` by position; the `done` flags come from the English steps.
-   * Where an English label ends in a live count ("… 3/6"), `{n}` in the Gujarati label is replaced by it.
+   * Where the English label or hint ends in a live count ("… 3/6"), `{n}` in the Gujarati label or hint is replaced by it.
    */
   steps?: {label: React.ReactNode; hint?: React.ReactNode}[];
 }
@@ -152,10 +152,11 @@ export default function PracticalSheet({
   const shownSteps = steps?.map((s, k) => {
     const x = g?.steps?.[k];
     if (!x) return s;
-    // A live count such as "Correct: 3/6" ends the English label; a Gujarati label can place it with {n}.
-    const count = typeof s.label === 'string' ? s.label.match(/(\d+\/\d+)\s*$/)?.[1] : undefined;
-    const label = typeof x.label === 'string' && count ? x.label.replace('{n}', count) : x.label;
-    return {...s, label, hint: x.hint};
+    // A live count such as "Correct: 3/6" or "Readings: 4." ends the English label (or hint); Gujarati text can place it with {n}.
+    const tail = (t: React.ReactNode) => (typeof t === 'string' ? t.match(/(\d+(?:\/\d+)?)\.?\s*$/)?.[1] : undefined);
+    const count = tail(s.label) ?? tail(s.hint);
+    const fill = (t: React.ReactNode) => (typeof t === 'string' && count ? t.replace('{n}', count) : t);
+    return {...s, label: fill(x.label), hint: fill(x.hint)};
   });
   const hasSteps = !!steps && steps.length > 0;
   const currentStep = steps ? steps.findIndex((s) => !s.done) : -1;

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_7_66} from './gu';
 import Multimeter from '../Multimeter';
 import XYGraph from '../XYGraph';
 import useStoredState from '../useStoredState';
@@ -179,6 +180,7 @@ export default function ResonanceLab(): React.JSX.Element {
         {label: 'Read fr from both graphs and enter them.', hint: 'fr is at the peak of each graph. Answer in kHz.', done: frOk(ans.frs) && frOk(ans.frp)},
         {label: 'Enter your details and print or save the record.', done: printed},
       ]}
+      gu={GU_1_7_66(si(LS[choice.li], 'H'), si(CS[choice.ci], 'F'), `${R_SER} Ω`, fmtOhms(R_PAR))}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={clsx(styles.seg, styles.noPrint)} role="group" aria-label="Circuit" style={{marginBottom: '0.6rem'}}>

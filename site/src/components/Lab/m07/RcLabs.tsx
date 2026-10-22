@@ -1,6 +1,7 @@
 import React, {useEffect, useMemo, useRef, useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_7_64, GU_1_7_65} from './gu';
 import Multimeter from '../Multimeter';
 import XYGraph from '../XYGraph';
 import useStoredState from '../useStoredState';
@@ -149,6 +150,7 @@ export function RcTimeConstantLab(): React.JSX.Element {
         {label: 'Read τ from the graph and enter it.', hint: 'Time when Vc = 63.2 % of the supply.', done: graphOk},
         {label: 'Enter your details and print or save the record.', done: printed},
       ]}
+      gu={GU_1_7_64}
       onPrinted={(tt) => tt.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>
@@ -462,6 +464,7 @@ export function DifferentiatorLab(): React.JSX.Element {
         {label: 'Calculate Vout p-p and enter it.', hint: 'Vout p-p = 4 × R × C × f × Vin p-p.', done: calcOk},
         {label: 'Enter your details and print or save the record.', done: printed},
       ]}
+      gu={GU_1_7_65}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.kit} style={{marginBottom: '0.6rem'}}>

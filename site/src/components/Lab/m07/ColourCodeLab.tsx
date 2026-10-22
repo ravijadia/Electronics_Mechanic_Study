@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_7_51} from './gu';
 import Multimeter from '../Multimeter';
 import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes} from '../Probes';
@@ -148,6 +149,7 @@ export default function ColourCodeLab(): React.JSX.Element {
         {label: 'Mark each within or out of tolerance.', hint: 'Allowed range = value ± tolerance.', done: all('within')},
         {label: 'Enter your details and print or save the record.', done: printed},
       ]}
+      gu={GU_1_7_51}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_7_60} from './gu';
 import Multimeter from '../Multimeter';
 import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes} from '../Probes';
@@ -246,6 +247,7 @@ export default function ProtectionLab(): React.JSX.Element {
         },
         {label: 'Enter your details and print or save the record.', done: printed},
       ]}
+      gu={GU_1_7_60}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench: continuity test">
         <div className={styles.controls} style={{marginTop: 0}}>

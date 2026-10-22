@@ -134,3 +134,19 @@ Steps = પગલાં · Aim = હેતુ · Apparatus = સાધનો · 
 | 6 | two-way (staircase) circuit | ટુ-વે (સ્ટેરકેસ) સર્કિટ |
 | 6 | traveller wire | ટ્રાવેલર વાયર |
 | 6 | panel board / changeover | પેનલ બોર્ડ / ચેન્જઓવર |
+| 7 | active / passive component | એક્ટિવ / પેસિવ ઘટક |
+| 7 | colour band / multiplier / tolerance | કલર બેન્ડ / મલ્ટિપ્લાયર / ટોલરન્સ |
+| 7 | wire-wound / metal film / carbon film | વાયર-વાઉન્ડ / મેટલ ફિલ્મ / કાર્બન ફિલ્મ |
+| 7 | wattage / power rating | વોટેજ / પાવર રેટિંગ |
+| 7 | LCR meter / quality factor (Q) / dissipation factor (D) | LCR મીટર / ક્વોલિટી ફેક્ટર (Q) / ડિસિપેશન ફેક્ટર (D) |
+| 7 | electrolytic / tantalum / polarised | ઇલેક્ટ્રોલિટિક / ટેન્ટાલમ / પોલર |
+| 7 | Kirchhoff’s current / voltage law | કિર્ચોફનો કરંટ / વોલ્ટેજ નિયમ (KCL / KVL) |
+| 7 | junction / loop / link (breadboard) | જંક્શન / લૂપ / લિંક |
+| 7 | MCB / RCCB / PTC fuse / HRC | MCB / RCCB / PTC ફ્યુઝ / HRC |
+| 7 | trip / overload / earth leakage | ટ્રીપ / ઓવરલોડ / અર્થ લીકેજ |
+| 7 | relay: coil / armature / return spring / COM, NC, NO | રિલે: કોઇલ / આર્મેચર / રિટર્ન સ્પ્રિંગ / COM, NC, NO |
+| 7 | timer relay (on-delay / off-delay) | ટાઇમર રિલે (ઓન-ડિલે / ઓફ-ડિલે) |
+| 7 | contactor / hold-on (latching) contact / no-volt protection | કોન્ટેક્ટર / હોલ્ડ-ઓન (લેચિંગ) કોન્ટેક્ટ / નો-વોલ્ટ પ્રોટેક્શન |
+| 7 | auxiliary contact / fail-safe | ઓક્ઝિલરી કોન્ટેક્ટ / ફેઇલ-સેફ |
+| 7 | RC time constant (τ) / differentiator | RC ટાઇમ કોન્સ્ટન્ટ (τ) / ડિફરન્શિયેટર |
+| 7 | resonance / tank circuit / voltage magnification | રેઝોનન્સ / ટેન્ક સર્કિટ / વોલ્ટેજ મેગ્નિફિકેશન |

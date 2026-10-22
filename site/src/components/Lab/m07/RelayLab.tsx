@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_7_61} from './gu';
 import Multimeter from '../Multimeter';
 import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes} from '../Probes';
@@ -161,6 +162,7 @@ export default function RelayLab(): React.JSX.Element {
         {label: 'Name all nine parts.', hint: 'Use the part names in the table.', done: namesOk},
         {label: 'Enter your details and print or save the record.', done: printed},
       ]}
+      gu={GU_1_7_61}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench: pin test">
         <div className={styles.controls} style={{marginTop: 0}}>

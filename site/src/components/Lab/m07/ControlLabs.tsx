@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_7_62, GU_1_7_63} from './gu';
 import useStoredState from '../useStoredState';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, useKitSeed, useRng, type Note} from '../kit';
 import {Knob} from '../Scope';
@@ -188,6 +189,7 @@ export function TimerRelayLab(): React.JSX.Element {
         },
         {label: 'Enter your details and print or save the record.', done: printed},
       ]}
+      gu={GU_1_7_62}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.kit}>
@@ -407,6 +409,7 @@ export function ContactorLab(): React.JSX.Element {
         },
         {label: 'Enter your details and print or save the record.', done: printed},
       ]}
+      gu={GU_1_7_63}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.kit}>

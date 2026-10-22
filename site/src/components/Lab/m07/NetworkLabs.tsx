@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_7_55, GU_1_7_56, GU_1_7_57} from './gu';
 import useStoredState from '../useStoredState';
 import {Empty, ResetKit, Section, Table, Verdict, useKitSeed, useRng} from '../kit';
 import {useNetworkBench, makeValues, valueList, type NetDef, type Quantity, type Recorded} from './NetworkBench';
@@ -163,6 +164,7 @@ export function KirchhoffLab(): React.JSX.Element {
         },
         {label: 'Enter your details and print or save the record.', done: printed},
       ]}
+      gu={GU_1_7_55(valueList(nominal))}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">{bench.view}</Section>
       <Section title="Observation table">
@@ -332,6 +334,7 @@ export function SeriesParallelLab(): React.JSX.Element {
         },
         {label: 'Enter your details and print or save the record.', done: printed},
       ]}
+      gu={GU_1_7_56(valueList(sNom), valueList(pNom))}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.seg} role="group" aria-label="Board" style={{marginBottom: '0.6rem'}}>
@@ -478,6 +481,7 @@ export function NetworkLab(): React.JSX.Element {
         },
         {label: 'Enter your details and print or save the record.', done: printed},
       ]}
+      gu={GU_1_7_57(valueList(nominal))}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">{bench.view}</Section>
       <Section title="Observation table">

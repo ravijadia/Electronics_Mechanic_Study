@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_7_50, GU_1_7_52, GU_1_7_53} from './gu';
 import Multimeter from '../Multimeter';
 import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes, type Probes} from '../Probes';
@@ -125,6 +126,7 @@ export function ActiveComponentsLab(): React.JSX.Element {
         {label: 'Mark each one active or passive.', hint: 'Active parts can amplify or control current.', done: items.every((_, k) => clsOk(k))},
         {label: 'Enter your details and print or save the record.', done: printed},
       ]}
+      gu={GU_1_7_50}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Component tray">
         <PartGrid parts={items.map((c) => ({kind: c.kind, o: {mark: c.mark}}))} label="Twelve electronic components, numbered" />
@@ -251,6 +253,7 @@ export function ResistorTypesLab(): React.JSX.Element {
         {label: 'Set the condition of all 8.', hint: 'Also inspect for burns and cracks. OL on the top range means open.', done: items.every((_, k) => condOk(k))},
         {label: 'Enter your details and print or save the record.', done: printed},
       ]}
+      gu={GU_1_7_52}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>
@@ -388,6 +391,7 @@ export function PowerRatingLab(): React.JSX.Element {
         {label: 'Calculate the maximum current of each.', hint: 'I = √(P ÷ R). Enter in mA.', done: res.every((r) => r.i)},
         {label: 'Enter your details and print or save the record.', done: printed},
       ]}
+      gu={GU_1_7_53}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.kit}>
