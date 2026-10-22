@@ -1,5 +1,6 @@
 import React from 'react';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_12_119} from './gu';
 import useStoredState from '../useStoredState';
 import {ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng} from '../kit';
 import {PartGrid} from '../m07/IdentifyLabs';
@@ -73,6 +74,7 @@ export function IdentifyFlipFlopLab(): React.JSX.Element {
         {label: 'Correct every ✗ until all eight are right.', hint: 'Check the type column in the data book.', done},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_12_119}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Component tray">
         <PartGrid parts={items.map((it) => ({kind: 'dip14' as const, o: {mark: it.mark}}))} label="Eight flip-flop and latch ICs, numbered" />

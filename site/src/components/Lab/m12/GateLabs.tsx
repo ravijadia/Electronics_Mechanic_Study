@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_12_109, GU_1_12_110} from './gu';
 import {Empty, NoteBox, ResetKit, Section, Table, type Note} from '../kit';
 import useStoredState from '../useStoredState';
 import {gateTruth, GATE_ICS, GATE_IC_IDS} from './logic';
@@ -84,6 +85,7 @@ export function GateTruthTableLab(): React.JSX.Element {
         }),
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_12_109(GATE_IC_IDS.map((id) => ({name: GATE_ICS[id].name, fn: GATE_ICS[id].fn, want: GATE_ICS[id].gates[0].ins.length === 2 ? 4 : 2})))}
       onPrinted={(t2) => t2.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={clsx(styles.seg, styles.noPrint)} role="group" aria-label="Gate IC" style={{marginBottom: '0.6rem'}}>
@@ -192,6 +194,7 @@ export function UniversalGateLab(): React.JSX.Element {
         {label: 'Build XOR from NAND gates only and verify it.', hint: 'Select NAND-only, then XOR. It takes four gates.', done: doneTarget('7400', 'XOR')},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_12_110}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={clsx(styles.controls, styles.noPrint)} style={{marginTop: 0, marginBottom: '0.6rem'}}>

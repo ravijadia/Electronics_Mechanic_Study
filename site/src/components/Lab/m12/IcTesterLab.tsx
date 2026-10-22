@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_12_111} from './gu';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, useKitSeed, useRng, type Note} from '../kit';
 import {Knob} from '../Scope';
 import useStoredState from '../useStoredState';
@@ -96,6 +97,7 @@ export function IcTesterLab(): React.JSX.Element {
         {label: 'Choose TTL or CMOS in the Result table.', hint: 'TTL only works near 5 V. CMOS works from 3 to 15 V.', done: famOk},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_12_111}
       onPrinted={(t2) => t2.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.kit}>{board.view(480, 300)}</div>

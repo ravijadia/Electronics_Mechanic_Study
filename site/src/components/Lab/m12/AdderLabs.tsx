@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_12_112, GU_1_12_113, GU_1_12_114} from './gu';
 import {Empty, NoteBox, ResetKit, Section, Table, type Note} from '../kit';
 import useStoredState from '../useStoredState';
 import {useLogicBoard, type IcSpec} from './LogicBench';
@@ -74,6 +75,7 @@ export function HalfAdderLab(): React.JSX.Element {
         {label: 'Check every row matches A XOR B and A AND B.', hint: 'Wrong row? Fix the wiring and note it again.', done},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_12_112}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.kit}>{board.view(480, 360)}</div>
@@ -160,6 +162,7 @@ export function FullAdderLab(): React.JSX.Element {
         {label: 'Check all 8 rows match the full adder table.', hint: 'Wrong row? Fix the wiring and note it again.', done},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_12_113}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.kit}>{board.view(480, 500)}</div>
@@ -267,6 +270,7 @@ export function AdderSubtractorLab(): React.JSX.Element {
         {label: 'Check the subtraction rows are correct.', hint: 'Wrong row? Fix the wiring and note it again.', done: subDone},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_12_114}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.kit}>{board.view(480, 630)}</div>

@@ -192,3 +192,15 @@ Steps = પગલાં · Aim = હેતુ · Apparatus = સાધનો · 
 | 11 | maximum power point | મહત્તમ પાવર પોઇન્ટ |
 | 11 | photodiode / phototransistor / lux | ફોટોડાયોડ / ફોટોટ્રાન્ઝિસ્ટર / લક્સ |
 | 11 | sensitivity / preset | સેન્સિટિવિટી / પ્રીસેટ |
+| 12 | logic gate / truth table / logic 1, 0 | લોજિક ગેટ / ટ્રુથ ટેબલ / લોજિક 1, 0 |
+| 12 | NAND / NOR / AND / OR / XOR / NOT | NAND / NOR / AND / OR / XOR / NOT |
+| 12 | universal gate / complement | યુનિવર્સલ ગેટ / કમ્પ્લીમેન્ટ |
+| 12 | TTL / CMOS / floating input | TTL / CMOS / ફ્લોટિંગ ઇનપુટ |
+| 12 | half adder / full adder / sum / carry / borrow | હાફ એડર / ફુલ એડર / સમ (Sum) / કેરી / બોરો |
+| 12 | 2's complement / adder-subtractor | 2’s કમ્પ્લીમેન્ટ / એડર-સબટ્રેક્ટર |
+| 12 | decoder / encoder / priority encoder | ડિકોડર / એન્કોડર / પ્રાયોરિટી એન્કોડર |
+| 12 | multiplexer / demultiplexer / select line / one-hot | મલ્ટિપ્લેક્સર / ડિમલ્ટિપ્લેક્સર / સિલેક્ટ લાઇન / વન-હોટ |
+| 12 | flip-flop / latch / clock / enable | ફ્લિપ-ફ્લોપ / લેચ / ક્લોક / એનેબલ |
+| 12 | R-S / D / T / JK / master-slave | R-S / D / T / JK / માસ્ટર-સ્લેવ |
+| 12 | set / reset / hold / toggle | સેટ / રીસેટ / હોલ્ડ / ટોગલ |
+| 12 | edge-triggered / level-triggered / transparent | એજ-ટ્રિગર્ડ / લેવલ-ટ્રિગર્ડ / ટ્રાન્સપેરન્ટ |

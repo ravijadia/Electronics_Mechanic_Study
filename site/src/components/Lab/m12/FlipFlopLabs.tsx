@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_12_120, GU_1_12_121, GU_1_12_122} from './gu';
 import useStoredState from '../useStoredState';
 import {Empty, NoteBox, ResetKit, Section, Table, type Note} from '../kit';
 import {PanelMeter} from '../m08/ZenerRegLabs';
@@ -70,6 +71,7 @@ export function FourBitLatchLab(): React.JSX.Element {
         {label: `Note at least 4 rows. Rows: ${Math.min(rows.length, 4)}/4`, hint: 'Note the enable state with every reading.', done: rows.length >= 4},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_12_120}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>
@@ -215,6 +217,7 @@ export function RsFlipFlopLab(): React.JSX.Element {
         {label: 'Clocked mode: set S, R and note Q, press the clock, note Q again.', hint: 'Q changes only after the clock pulse.', done: seenClockHold},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_12_121}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>
@@ -382,6 +385,7 @@ export function FlipFlopTruthLab(): React.JSX.Element {
         {label: 'Master-slave JK: try all 4 combinations.', hint: `Select Master-Slave JK. Combinations: ${combos('msjk')}/4`, done: combos('msjk') >= 4},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_12_122}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={clsx(styles.seg, styles.noPrint)} role="group" aria-label="Flip-flop type" style={{marginBottom: '0.6rem'}}>

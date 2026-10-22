@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_12_115, GU_1_12_116, GU_1_12_117, GU_1_12_118} from './gu';
 import {Empty, NoteBox, ResetKit, Section, Table, type Note} from '../kit';
 import useStoredState from '../useStoredState';
 import {useLogicBoard, type IcSpec, type LedSpec, type SwitchSpec} from './LogicBench';
@@ -68,6 +69,7 @@ export function DecoderLab(): React.JSX.Element {
         {label: 'Check exactly one output is HIGH for every code.', hint: 'Wrong row? Fix the wiring and note it again.', done},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_12_115}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.kit}>{board.view(480, 350)}</div>
@@ -151,6 +153,7 @@ export function EncoderLab(): React.JSX.Element {
         {label: 'Check the output code is correct for every input.', hint: 'Wrong row? Fix the wiring and note it again.', done},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_12_116}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.kit}>{board.view(480, 320)}</div>
@@ -252,6 +255,7 @@ export function MuxLab(): React.JSX.Element {
         {label: 'Check Y follows the selected input every time.', hint: 'Y must match the selected input, and the data must have both 0s and 1s.', done},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_12_117}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.kit}>{board.view(480, 700)}</div>
@@ -341,6 +345,7 @@ export function DemuxLab(): React.JSX.Element {
         {label: 'Set D = 0 and note a reading: all four outputs stay 0.', hint: 'Tap D to make it 0.', done: lowDone && allRows.every(rowOk)},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_12_118}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.kit}>{board.view(480, 530)}</div>
