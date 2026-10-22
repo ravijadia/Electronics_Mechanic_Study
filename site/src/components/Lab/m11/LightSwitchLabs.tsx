@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet, {type VivaQuestion} from '../PracticalSheet';
+import {GU_LIGHTSWITCH} from './gu';
 import Multimeter from '../Multimeter';
 import XYGraph from '../XYGraph';
 import useStoredState from '../useStoredState';
@@ -129,6 +130,7 @@ function LightSwitchLab({s}: {s: Spec}): React.JSX.Element {
         {label: 'Street light: put the lamp on NC and check ON in the dark, OFF in bright light.', hint: 'Switch off to change NO/NC. Then vary the light.', done: !!seen.ncDark && !!seen.ncBright},
         {label: 'Enter your details and print or save the record.', done: printed},
       ]}
+      gu={GU_LIGHTSWITCH[s.number]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>

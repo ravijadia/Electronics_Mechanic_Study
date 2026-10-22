@@ -1,6 +1,7 @@
 import React, {useMemo, useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_10_97} from './gu';
 import Multimeter from '../Multimeter';
 import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes} from '../Probes';
@@ -135,6 +136,7 @@ export default function FetAmpLab(): React.JSX.Element {
         {label: 'Find Zin with the 1 MΩ test resistor.', hint: 'Note Vgen and Vin. Zin = 1 MΩ × Vin ÷ (Vgen − Vin).', done: ok.zin},
         {label: 'Enter your details and print or save the record.', done: printed},
       ]}
+      gu={GU_1_10_97}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>

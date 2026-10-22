@@ -177,3 +177,18 @@ Steps = પગલાં · Aim = હેતુ · Apparatus = સાધનો · 
 | 9 | Barkhausen criterion / piezo-electric | બાર્કહાઉસન કસોટી / પીઝો-ઇલેક્ટ્રિક |
 | 9 | multivibrator: astable / monostable / bistable | મલ્ટિવાઇબ્રેટર: એસ્ટેબલ / મોનોસ્ટેબલ / બાયસ્ટેબલ |
 | 9 | clipper (shunt / series / dual) / clamper | ક્લિપર (શન્ટ / સિરીઝ / ડ્યુઅલ) / ક્લેમ્પર |
+| 10 | SCR / TRIAC / DIAC / UJT / JFET / MOSFET / IGBT | SCR / TRIAC / DIAC / UJT / JFET / MOSFET / IGBT |
+| 10 | gate / drain / source (G, D, S) | ગેટ / ડ્રેઇન / સોર્સ |
+| 10 | threshold voltage / body diode / gate charge | થ્રેશોલ્ડ વોલ્ટેજ / બોડી ડાયોડ / ગેટ ચાર્જ |
+| 10 | pull-down resistor | પુલ-ડાઉન અવરોધક |
+| 10 | static-sensitive / anti-static strap | સ્ટેટિક-સેન્સિટિવ / એન્ટિ-સ્ટેટિક સ્ટ્રેપ |
+| 10 | relaxation oscillator / sawtooth / stand-off ratio (η) | રિલેક્ઝેશન ઓસિલેટર / સોટૂથ / સ્ટેન્ડ-ઓફ રેશિયો (η) |
+| 10 | firing angle (α) / phase control / natural commutation | ફાયરિંગ એંગલ (α) / ફેઝ કંટ્રોલ / નેચરલ કમ્યુટેશન |
+| 10 | lamp dimmer / isolated (differential) probe | લેમ્પ ડિમર / આઇસોલેટેડ (ડિફરન્શિયલ) પ્રોબ |
+| 10 | self bias / common-source | સેલ્ફ બાયસ / કોમન-સોર્સ |
+| 11 | LED forward voltage (VF) / forward current (IF) | LED ફોરવર્ડ વોલ્ટેજ (VF) / ફોરવર્ડ કરંટ (IF) |
+| 11 | solar (photovoltaic) cell / module | સોલાર (ફોટોવોલ્ટેઇક) સેલ / મોડ્યુલ |
+| 11 | open-circuit voltage (Voc) / short-circuit current (Isc) | ઓપન-સર્કિટ વોલ્ટેજ (Voc) / શોર્ટ-સર્કિટ કરંટ (Isc) |
+| 11 | maximum power point | મહત્તમ પાવર પોઇન્ટ |
+| 11 | photodiode / phototransistor / lux | ફોટોડાયોડ / ફોટોટ્રાન્ઝિસ્ટર / લક્સ |
+| 11 | sensitivity / preset | સેન્સિટિવિટી / પ્રીસેટ |

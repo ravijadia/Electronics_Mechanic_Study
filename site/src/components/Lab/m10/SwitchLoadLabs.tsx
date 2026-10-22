@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet, {type VivaQuestion} from '../PracticalSheet';
+import {GU_SWITCHLOAD} from './gu';
 import XYGraph from '../XYGraph';
 import useStoredState from '../useStoredState';
 import {Knob} from '../Scope';
@@ -170,6 +171,7 @@ function SwitchLoadLab({s}: {s: Spec}): React.JSX.Element {
         {label: 'Refit the pull-down and remove the drive again.', hint: 'Drive the gate above threshold first. The lamp turns off.', done: !!seen.pulldownOk},
         {label: 'Enter your details and print or save the record.', done: printed},
       ]}
+      gu={GU_SWITCHLOAD[s.number]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>

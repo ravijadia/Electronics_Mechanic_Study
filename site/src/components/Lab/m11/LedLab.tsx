@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_11_105} from './gu';
 import Multimeter from '../Multimeter';
 import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes} from '../Probes';
@@ -201,6 +202,7 @@ export function LedTestLab(): React.JSX.Element {
         {label: 'Calculate the series R for 20 mA from 12 V and enter it.', hint: 'R = (12 − VF of your red LED) ÷ 0.02.', done: rOk},
         {label: 'Enter your details and print or save the record.', done: printed},
       ]}
+      gu={GU_1_11_105}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={clsx(styles.controls, styles.noPrint)} style={{marginTop: 0, marginBottom: '0.6rem'}}>

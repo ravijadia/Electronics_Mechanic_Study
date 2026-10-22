@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_11_106} from './gu';
 import Multimeter from '../Multimeter';
 import XYGraph from '../XYGraph';
 import useStoredState from '../useStoredState';
@@ -134,6 +135,7 @@ export function SolarCellLab(): React.JSX.Element {
         {label: 'Find the maximum power and its load, and enter both.', hint: 'P = V × I. Take the largest P in your table.', done: pOk && rOk},
         {label: 'Enter your details and print or save the record.', done: printed},
       ]}
+      gu={GU_1_11_106}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>

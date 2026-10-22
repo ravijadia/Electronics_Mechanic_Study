@@ -1,6 +1,7 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_10_100, GU_1_10_98, GU_1_10_99} from './gu';
 import Multimeter from '../Multimeter';
 import useStoredState from '../useStoredState';
 import {Knob, useScope} from '../Scope';
@@ -139,6 +140,7 @@ export function UjtOscLab(): React.JSX.Element {
         {label: 'Turn the pot to 0 % and watch the UJT latch.', hint: 'R is too small: the UJT stays ON, no oscillation.', done: latchSeen},
         {label: 'Enter your details and print or save the record.', done: printed},
       ]}
+      gu={GU_1_10_100}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>
@@ -301,6 +303,7 @@ export function ScrUjtLab(): React.JSX.Element {
         {label: 'Turn the pot up until the lamp goes off.', hint: 'The trigger comes after 180°: the SCR never fires.', done: offSeen},
         {label: 'Enter your details and print or save the record.', done: printed},
       ]}
+      gu={GU_1_10_98}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>
@@ -501,6 +504,7 @@ export function DimmerLab(): React.JSX.Element {
         {label: 'Find the setting where the lamp goes off.', hint: 'Turn the pot up until the DIAC never fires. Note a reading.', done: rows.some((x) => x.alpha == null)},
         {label: 'Enter your details and print or save the record.', done: printed},
       ]}
+      gu={GU_1_10_99}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>

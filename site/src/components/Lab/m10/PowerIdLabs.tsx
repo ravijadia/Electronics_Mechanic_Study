@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_10_96, GU_1_10_101, GU_1_10_103} from './gu';
 import Multimeter from '../Multimeter';
 import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes} from '../Probes';
@@ -90,6 +91,7 @@ export function PowerDevicesLab(): React.JSX.Element {
         {label: 'Enter the current and voltage rating of each part.', hint: 'Use the first rating in the data sheet.', done: items.every((_, k) => ok(k))},
         {label: 'Enter your details and print or save the record.', done: printed},
       ]}
+      gu={GU_1_10_96}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Component tray">
         <PartGrid parts={items.map((d) => ({kind: d.kind, o: {mark: d.mark.split(' ')[0]}}))} label="Eight power electronic components" />
@@ -435,6 +437,7 @@ export function MosfetTestLab(): React.JSX.Element {
         {label: 'Choose the channel and condition of all four.', hint: 'A low D–S or G–S reading that never changes = faulty.', done: kit.every((_, k) => rowOk(k))},
         {label: 'Enter your details and print or save the record.', done: printed},
       ]}
+      gu={GU_1_10_101}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <SwBench kit={kit} b={b} withBattery={false} />
@@ -522,6 +525,7 @@ export function IgbtTestLab(): React.JSX.Element {
         {label: 'Choose the diode type and condition of all four.', done: kit.every((_, k) => rowOk(k))},
         {label: 'Enter your details and print or save the record.', done: printed},
       ]}
+      gu={GU_1_10_103}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <SwBench kit={kit} b={b} withBattery />
