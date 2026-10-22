@@ -1,6 +1,7 @@
 import React, {createContext, useContext, useRef, useState} from 'react';
 import clsx from 'clsx';
 import useStoredState from './useStoredState';
+import {SheetGuideContext} from './guide';
 import styles from './styles.module.css';
 
 export interface PracticalTask {
@@ -159,6 +160,7 @@ export default function PracticalSheet({
     return {...s, label: fill(x.label), hint: fill(x.hint)};
   });
   const hasSteps = !!steps && steps.length > 0;
+  const guide = {lang, steps: shownSteps ?? []};
   const currentStep = steps ? steps.findIndex((s) => !s.done) : -1;
   // Shared across practicals so the trainee types their details once.
   const [trainee, setTrainee] = useStoredState<Trainee>('lab:trainee', EMPTY_TRAINEE);
@@ -271,7 +273,7 @@ export default function PracticalSheet({
         </aside>
 
         <div className={styles.main}>
-          {children}
+          <SheetGuideContext.Provider value={guide}>{children}</SheetGuideContext.Provider>
 
           <div className={clsx(styles.section, styles.noPrint, isGu && styles.gu)} lang={isGu ? 'gu' : undefined}>
             <h4>{t.record}</h4>
