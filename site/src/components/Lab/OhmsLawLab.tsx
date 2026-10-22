@@ -22,6 +22,7 @@ import {
   type SlotA,
   type SlotB,
 } from './circuit';
+import {ColumnHelp, NextStep} from './guide';
 import styles from './styles.module.css';
 
 interface Reading {
@@ -749,6 +750,7 @@ export default function OhmsLawLab(): React.JSX.Element {
 
       <div className={styles.section}>
         <h4>Observation table</h4>
+        <NextStep />
         {tested.length === 0 ? (
           <div className={styles.empty}>No readings yet. Wire the bench and press “Record reading”.</div>
         ) : (
@@ -792,11 +794,20 @@ export default function OhmsLawLab(): React.JSX.Element {
                       </td>
                     </tr>
                   ))}
+                  {Array.from({length: Math.max(0, MIN_READINGS - t.rows.length)}, (_, k) => (
+                    <tr key={`ph${k}`} className={clsx(styles.phRow, styles.noPrint)} aria-hidden="true">
+                      <td>{t.rows.length + k + 1}</td>
+                      <td colSpan={5}>{k === 0 ? 'Next reading goes here' : ''}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
           ))
         )}
+        <ColumnHelp
+          heads={['Supply set (V)', 'Voltmeter, V (V)', 'Ammeter, I (mA)', 'R = V / I (Ω)']}
+        />
       </div>
 
       <div className={styles.section}>
@@ -920,6 +931,9 @@ export default function OhmsLawLab(): React.JSX.Element {
                 </tbody>
               </table>
             </div>
+            <ColumnHelp
+              heads={['Colour-code value (Ω), your reading', 'Mean V / I', 'R from graph', 'Difference from colour code']}
+            />
             {complete.length > 0 ? (
               <p>
                 <b>Conclusion: </b>

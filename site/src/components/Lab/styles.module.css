@@ -1208,3 +1208,61 @@ details.section[open] > summary {
   background: var(--lab-accent);
   color: var(--lab-accent-ink);
 }
+
+/* ---------- Observation-table guidance ---------- */
+
+.nextStep {
+  margin: 0 0 0.7rem;
+  padding: 0.55rem 0.8rem;
+  border-left: 4px solid var(--lab-accent);
+  border-radius: 6px;
+  background: var(--lab-sunken);
+  color: var(--lab-ink);
+  font-size: 0.92rem;
+}
+.nextDone {
+  border-left-color: var(--lab-good);
+}
+.nextTag {
+  font-weight: 700;
+  color: var(--lab-accent);
+}
+.nextDone,
+.nextStep .stepHint {
+  color: var(--lab-muted);
+}
+.colHelp {
+  margin: 0.4rem 0 0.8rem;
+  font-size: 0.88rem;
+}
+.colHelp summary {
+  cursor: pointer;
+  color: var(--lab-muted);
+  font-weight: 600;
+}
+.colHelp dl {
+  margin: 0.4rem 0 0;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.25rem 0.9rem;
+}
+.colHelp dt {
+  font-weight: 700;
+}
+.colHelp dd {
+  margin: 0;
+  color: var(--lab-muted);
+}
+@media (max-width: 560px) {
+  .colHelp dl {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .colHelp dd {
+    margin-bottom: 0.45rem;
+  }
+}
+.phRow td {
+  color: var(--lab-muted);
+  opacity: 0.55;
+}

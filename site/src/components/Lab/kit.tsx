@@ -2,6 +2,7 @@ import React, {useEffect, useMemo} from 'react';
 import clsx from 'clsx';
 import useStoredState from './useStoredState';
 import {mulberry32} from './circuit';
+import {ColumnHelp, NextStep} from './guide';
 import styles from './styles.module.css';
 
 export type NoteKind = 'good' | 'warn' | 'bad' | 'info';
@@ -54,6 +55,7 @@ export function Section({
   return (
     <div className={clsx(styles.section, noPrint && styles.noPrint)}>
       <h4>{title}</h4>
+      {title.startsWith('Observation') && <NextStep />}
       {children}
     </div>
   );
@@ -74,6 +76,7 @@ export function Table({
   caption?: React.ReactNode;
 }): React.JSX.Element {
   return (
+    <>
     <div className={styles.tableWrap}>
       <table className={styles.table}>
         {caption && <caption style={{textAlign: 'left', fontWeight: 700, padding: '0.2rem 0'}}>{caption}</caption>}
@@ -95,6 +98,8 @@ export function Table({
         </tbody>
       </table>
     </div>
+    <ColumnHelp heads={head} />
+    </>
   );
 }
 
