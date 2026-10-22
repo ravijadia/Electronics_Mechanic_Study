@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_5_40, GU_1_5_41, GU_1_5_42, GU_1_5_43} from './gu';
 import useStoredState from '../useStoredState';
 import {useScope} from '../Scope';
 import {fgFreq, fgVpp, useFunctionGenerator} from '../FunctionGenerator';
@@ -70,6 +71,7 @@ export function DsoControlsLab(): React.JSX.Element {
         },
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_5_40}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">{scope.view}</Section>
       <Section title="Observation table">
@@ -163,6 +165,7 @@ export function DsoMeasureLab(): React.JSX.Element {
         })),
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_5_41(signals.map((s) => s.name.toLowerCase()))}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={clsx(styles.seg, styles.noPrint)} role="group" aria-label="Signal" style={{marginBottom: '0.7rem'}}>
@@ -267,6 +270,7 @@ export function DsoPrintLab(): React.JSX.Element {
         {label: 'Read Vpp from the printout and type it.', hint: 'Vpp = divisions × volts/div shown on the printout.', done: !!vOk},
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_5_42}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>
@@ -415,6 +419,7 @@ export function Icl8038Lab(): React.JSX.Element {
         {label: 'Choose R and C to get about 1 kHz and record it.', hint: 'Use f = 0.33 ÷ (R × C) to pick the values.', done: near1k},
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_5_43}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>

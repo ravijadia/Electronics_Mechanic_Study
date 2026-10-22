@@ -104,7 +104,7 @@ Steps = પગલાં · Aim = હેતુ · Apparatus = સાધનો · 
 | goggles / gloves | ગોગલ્સ / હાથમોજાં | vent plug | વેન્ટ પ્લગ |
 | nub (raised end) | ઘૂંડી | load resistor | લોડ અવરોધક |
 
-## Module 4 additions (PENDING approval)
+## Module 4 additions (accepted)
 
 | English | Gujarati | English | Gujarati |
 |---------|----------|---------|----------|
@@ -119,3 +119,18 @@ Steps = પગલાં · Aim = હેતુ · Apparatus = સાધનો · 
 | jack / lead | જેક / લીડ | wattmeter | વોટમીટર |
 | ohmmeter | ઓહ્મમીટર | movement (meter) | મૂવમેન્ટ |
 | rectifier-type meter | રેક્ટિફાયર-પ્રકારનું મીટર | calibrated | કેલિબ્રેટેડ |
+
+## Modules 5–14 additions (PENDING approval, added module by module)
+
+| Module | English | Gujarati |
+|--------|---------|----------|
+| 5 | DSO | ડિજિટલ સ્ટોરેજ ઓસિલોસ્કોપ (DSO) |
+| 5 | printout / freeze | પ્રિન્ટઆઉટ / ફ્રીઝ |
+| 5 | duty cycle / PWM | ડ્યુટી સાયકલ / PWM |
+| 5 | pull-up resistor / open collector | પુલ-અપ અવરોધક / ઓપન કલેક્ટર |
+| 5 | timing capacitor | ટાઇમિંગ કેપેસિટર |
+| 6 | pole / throw | પોલ / થ્રો |
+| 6 | push-button (NO / NC) | પુશ-બટન (NO / NC) |
+| 6 | two-way (staircase) circuit | ટુ-વે (સ્ટેરકેસ) સર્કિટ |
+| 6 | traveller wire | ટ્રાવેલર વાયર |
+| 6 | panel board / changeover | પેનલ બોર્ડ / ચેન્જઓવર |

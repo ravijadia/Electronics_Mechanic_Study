@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_6_48, GU_1_6_49} from './gu';
 import useStoredState from '../useStoredState';
 import {ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng} from '../kit';
 import styles from '../styles.module.css';
@@ -242,6 +243,7 @@ export function SwitchesLab(): React.JSX.Element {
         },
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_6_48}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.meterGrid} style={{gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))'}}>
@@ -381,6 +383,7 @@ export function PanelBoardLab(): React.JSX.Element {
         },
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_6_49}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.meterGrid} style={{gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))'}}>
