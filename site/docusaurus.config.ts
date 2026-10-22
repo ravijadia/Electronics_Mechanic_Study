@@ -26,6 +26,8 @@ const config: Config = {
   deploymentBranch: 'gh-pages',
   trailingSlash: false,
 
+  stylesheets: ['https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&display=swap'],
+
   onBrokenLinks: 'throw',
 
   scripts: [

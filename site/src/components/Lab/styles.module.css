@@ -1167,3 +1167,44 @@ details.section[open] > summary {
   border-color: #e0a800;
   box-shadow: 0 0 12px 4px rgba(255, 211, 77, 0.6);
 }
+
+/* ---------- Gujarati instructions ---------- */
+
+.gu {
+  font-family: 'Noto Sans Gujarati', 'Nirmala UI', 'Shruti', var(--ifm-font-family-base);
+  line-height: 1.65;
+}
+.headRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.langToggle {
+  display: inline-flex;
+  border: 1px solid var(--lab-line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.langBtn {
+  border: 0;
+  background: transparent;
+  color: var(--lab-ink);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.3rem 0.8rem;
+  cursor: pointer;
+}
+.langBtn + .langBtn {
+  border-left: 1px solid var(--lab-line);
+}
+.langBtn:focus-visible {
+  outline: 2px solid var(--lab-accent);
+  outline-offset: -2px;
+}
+.langOn {
+  background: var(--lab-accent);
+  color: var(--lab-accent-ink);
+}

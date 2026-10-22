@@ -1,6 +1,7 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from './PracticalSheet';
+import {ohmsGu} from './OhmsLawLab.gu';
 import Multimeter from './Multimeter';
 import VIGraph, {LegendMarker, type GraphSeries, type Marker} from './VIGraph';
 import useStoredState from './useStoredState';
@@ -496,6 +497,8 @@ export default function OhmsLawLab(): React.JSX.Element {
   }));
 
   const partial = tested.find((t) => t.rows.length < MIN_READINGS)?.rows.length ?? 0;
+  const count1 = `${complete.length >= 1 ? MIN_READINGS : partial}/${MIN_READINGS}`;
+  const count2 = `${complete.length >= 2 ? MIN_READINGS : complete.length >= 1 ? partial : 0}/${MIN_READINGS}`;
   const steps = [
     {
       label: 'Put one DMM in Slot A and set it to DC mA.',
@@ -513,7 +516,7 @@ export default function OhmsLawLab(): React.JSX.Element {
       done: flags.wired || readings.length > 0,
     },
     {
-      label: `Raise the supply 1–2 V at a time and press Record reading. Readings: ${complete.length >= 1 ? MIN_READINGS : partial}/${MIN_READINGS}`,
+      label: `Raise the supply 1–2 V at a time and press Record reading. Readings: ${count1}`,
       hint: 'Use the lowest range that does not show OL. Keep R within its power rating.',
       done: complete.length >= 1,
     },
@@ -523,7 +526,7 @@ export default function OhmsLawLab(): React.JSX.Element {
       done: tested.length >= 2 || (complete.length >= 1 && !powerOn && !tested.some((t) => t.spec.id === rid)),
     },
     {
-      label: `Record ${MIN_READINGS} readings for the second resistor. Readings: ${complete.length >= 2 ? MIN_READINGS : complete.length >= 1 ? partial : 0}/${MIN_READINGS}`,
+      label: `Record ${MIN_READINGS} readings for the second resistor. Readings: ${count2}`,
       hint: 'Same wiring, switch ON, raise the supply in steps.',
       done: complete.length >= 2,
     },
@@ -596,6 +599,7 @@ export default function OhmsLawLab(): React.JSX.Element {
         {q: 'Name two devices that do not obey Ohm’s law.', a: 'A diode and a filament lamp. Their V–I graphs are not straight lines.'},
       ]}
       steps={steps}
+      gu={ohmsGu(count1, count2, MIN_READINGS)}
       onPrinted={(t) => {
         if (t.name.trim()) setFlags((f) => ({...f, printed: true}));
       }}>
