@@ -43,7 +43,7 @@ export default function Figure({
   bare,
   href,
   className,
-}: FigureProps): JSX.Element {
+}: FigureProps): React.JSX.Element {
   const light = useBaseUrl(src);
   const dark = useBaseUrl(darkSrc ?? src);
   const style = width

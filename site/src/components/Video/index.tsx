@@ -66,7 +66,7 @@ export default function Video({
   number,
   start,
   className,
-}: VideoProps): JSX.Element {
+}: VideoProps): React.JSX.Element {
   const src = toEmbedSrc(id, url, start);
 
   return (

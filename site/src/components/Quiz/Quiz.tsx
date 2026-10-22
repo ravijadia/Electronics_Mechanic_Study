@@ -15,7 +15,7 @@ export interface QuizProps {
   passPercent?: number;
 }
 
-export default function Quiz({title, questions, passPercent = 60}: QuizProps): JSX.Element {
+export default function Quiz({title, questions, passPercent = 60}: QuizProps): React.JSX.Element {
   const [answers, setAnswers] = useState<(number | null)[]>(
     () => questions.map(() => null),
   );
