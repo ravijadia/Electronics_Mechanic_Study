@@ -1,6 +1,7 @@
 import React, {useEffect, useMemo, useRef, useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_9_88, GU_1_9_89, GU_1_9_90, GU_1_9_91} from './gu';
 import useStoredState from '../useStoredState';
 import {Knob, useScope} from '../Scope';
 import {si, type Sig} from '../signals';
@@ -110,6 +111,7 @@ export function LcOscLab(): React.JSX.Element {
         {label: 'Hartley: set two values; note f measured and calculated.', hint: 'Switch the Oscillator to Hartley.', done: good('hartley') >= 2},
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_9_88}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>
@@ -246,6 +248,7 @@ export function PhaseShiftLab(): React.JSX.Element {
         {label: 'Set two R/C values; note f measured and calculated.', done: rows.filter(rowOk).length >= 2},
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_9_89}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>
@@ -395,6 +398,7 @@ export function CrystalLab(): React.JSX.Element {
         {label: 'Change the supply 9 V → 12 V; find the % change for crystal and LC.', done: close(ans.xs, xsTrue, 0.0002) && close(ans.lc, lcTrue, 0.02)},
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_9_90}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>
@@ -584,6 +588,7 @@ export function MultivibratorLab(): React.JSX.Element {
         {label: 'Bistable: press SET and RESET, and repeat a press.', hint: 'A repeated press changes nothing.', done: biLog.some((l) => l.startsWith('SET')) && biLog.some((l) => l.startsWith('RESET')) && biLog.some((l) => l.includes('no change'))},
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_9_91}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={clsx(styles.seg, styles.noPrint)} role="group" aria-label="Mode" style={{marginBottom: '0.5rem'}}>

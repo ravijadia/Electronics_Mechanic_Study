@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_9_81, GU_1_9_82, GU_1_9_83} from './gu';
 import Multimeter from '../Multimeter';
 import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes} from '../Probes';
@@ -89,6 +90,7 @@ export function TransistorTypesLab(): React.JSX.Element {
         {label: 'Identify all eight transistors.', hint: 'Read the mark. Use the data book extract.', done: items.every((_, k) => ok(k))},
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_9_81}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Component tray">
         <PartGrid parts={items.map((it) => ({kind: it.kind, o: {mark: it.mark}}))} label="Eight transistors" />
@@ -251,6 +253,7 @@ export function TransistorTestLab(): React.JSX.Element {
         {label: 'Give the base, type and condition of each transistor.', hint: 'Also the emitter of the good ones.', done: kit.every((_, k) => ok(k))},
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_9_82}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>
@@ -478,6 +481,7 @@ export function RelayDriverLab(): React.JSX.Element {
         {label: 'Switch off 3 times safely with the flyback diode.', hint: 'Fit the diode the right way round.', done: goodSwitches >= 3},
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_9_83}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>

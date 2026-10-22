@@ -1,6 +1,7 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet, {type VivaQuestion} from '../PracticalSheet';
+import {GU_WAVESHAPE} from './gu';
 import useStoredState from '../useStoredState';
 import {Knob, useScope} from '../Scope';
 import {fgVpp, useFunctionGenerator} from '../FunctionGenerator';
@@ -235,6 +236,7 @@ function WaveshapeLab({s}: {s: Spec}): React.JSX.Element {
         ...s.need.map((id) => ({label: `${CFGS[id].name}: read the output levels.`, hint: 'Pick the circuit, then read the CRO levels.', done: rows.some((r) => r.cfg === id && ok(r))})),
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_WAVESHAPE[s.number]?.(s.need.map((id) => CFGS[id].name))}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={clsx(styles.seg, styles.noPrint)} role="group" aria-label="Circuit" style={{marginBottom: '0.5rem'}}>

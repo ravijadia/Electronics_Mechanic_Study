@@ -1,6 +1,7 @@
 import React, {useMemo, useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_9_84, GU_1_9_85, GU_1_9_86, GU_1_9_87} from './gu';
 import Multimeter from '../Multimeter';
 import XYGraph from '../XYGraph';
 import useStoredState from '../useStoredState';
@@ -151,6 +152,7 @@ export function BiasLab(): React.JSX.Element {
         {label: 'Pick the most stable bias circuit.', hint: 'The smallest % change.', done: best === 'divider'},
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_9_84}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={clsx(styles.seg, styles.noPrint)} role="group" aria-label="Bias circuit" style={{marginBottom: '0.5rem'}}>
@@ -369,6 +371,7 @@ export function CeAmpLab(): React.JSX.Element {
         {label: 'Raise the input until the output clips, and note it.', hint: 'Watch the output on the CRO.', done: rows.some((r) => r.clipped)},
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_9_85}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>
@@ -534,6 +537,7 @@ export function EmitterFollowerLab(): React.JSX.Element {
         {label: 'Find the input impedance with the 10 kΩ method.', hint: 'Switch in the 10 kΩ series resistor.', done: zinTrue != null && near(num(ans.zin), zinTrue, 0.04) && near(zinTrue, zin, 0.1)},
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_9_86}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>
@@ -730,6 +734,7 @@ export function TwoStageLab(): React.JSX.Element {
         {label: 'Read f1 and f2 from the graph, and note the phase.', done: near(num(ans.f1), f1, 0.25) && near(num(ans.f2) != null ? num(ans.f2)! * 1000 : null, f2, 0.25) && ans.phase === '0'},
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_9_87}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>

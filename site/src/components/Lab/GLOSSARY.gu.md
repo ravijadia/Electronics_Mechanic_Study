@@ -164,3 +164,16 @@ Steps = પગલાં · Aim = હેતુ · Apparatus = સાધનો · 
 | 8 | regulator / dropout / thermal shutdown | રેગ્યુલેટર / ડ્રોપઆઉટ / થર્મલ શટડાઉન |
 | 8 | linear / switching regulator / efficiency | લિનિયર / સ્વિચિંગ રેગ્યુલેટર / કાર્યક્ષમતા |
 | 8 | heat sink / rheostat / current limiting | હીટ સિંક / રીઓસ્ટેટ / કરંટ લિમિટિંગ |
+| 9 | package / pin-out / data book | પેકેજ / પિન-આઉટ / ડેટા બુક |
+| 9 | NPN / PNP / collector / base / emitter | NPN / PNP / કલેક્ટર / બેઝ / ઇમિટર |
+| 9 | Darlington / current gain (β) | ડાર્લિંગ્ટન / કરંટ ગેઇન (β) |
+| 9 | saturation / cut-off / flyback diode | સેચ્યુરેશન / કટ-ઓફ / ફ્લાયબેક ડાયોડ |
+| 9 | bias (fixed / emitter / voltage-divider) / Q point / thermal runaway | બાયસ (ફિક્સ્ડ / ઇમિટર / વોલ્ટેજ-ડિવાઇડર) / Q પોઇન્ટ / થર્મલ રનઅવે |
+| 9 | CE amplifier / bypass capacitor / emitter follower / buffer | CE એમ્પ્લિફાયર / બાયપાસ કેપેસિટર / ઇમિટર ફોલોઅર / બફર |
+| 9 | phase inversion / clipping | ફેઝ ઇન્વર્ઝન / ક્લિપિંગ |
+| 9 | input / output impedance | ઇનપુટ / આઉટપુટ ઇમ્પિડન્સ |
+| 9 | RC-coupled / bandwidth / mid-band / dB | RC-કપલ્ડ / બેન્ડવિડ્થ / મિડ-બેન્ડ / dB |
+| 9 | oscillator: Colpitts / Hartley / RC phase-shift / crystal | ઓસિલેટર: કોલ્પિટ્સ / હાર્ટલી / RC ફેઝ-શિફ્ટ / ક્રિસ્ટલ |
+| 9 | Barkhausen criterion / piezo-electric | બાર્કહાઉસન કસોટી / પીઝો-ઇલેક્ટ્રિક |
+| 9 | multivibrator: astable / monostable / bistable | મલ્ટિવાઇબ્રેટર: એસ્ટેબલ / મોનોસ્ટેબલ / બાયસ્ટેબલ |
+| 9 | clipper (shunt / series / dual) / clamper | ક્લિપર (શન્ટ / સિરીઝ / ડ્યુઅલ) / ક્લેમ્પર |
