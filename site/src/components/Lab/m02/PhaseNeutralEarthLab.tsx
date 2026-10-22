@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_2_13} from './gu';
 import useStoredState from '../useStoredState';
 import {useMainsBench} from '../MainsBench';
 import {Empty, ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng} from '../kit';
@@ -107,6 +108,7 @@ export default function PhaseNeutralEarthLab(): React.JSX.Element {
         {label: 'Identify the phase hole and the wiring of each board.', hint: 'Use the tester and voltmeter results.', done: allRight},
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_2_13}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         {bench.view}

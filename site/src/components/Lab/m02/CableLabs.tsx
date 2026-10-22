@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_2_16, GU_1_2_19} from './gu';
 import Multimeter from '../Multimeter';
 import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes} from '../Probes';
@@ -217,6 +218,7 @@ export function CablesLab(): React.JSX.Element {
         {label: 'Find the fault in the 3-core cable.', hint: 'Use your continuity results.', done: faultAns === kit.fault},
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_2_16}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Part A: Identify the cables">
         <div className={styles.meterGrid} style={{gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))'}}>
@@ -379,6 +381,7 @@ export function CurrentCapacityLab(): React.JSX.Element {
         {label: 'Select the correct cable size for each job.', hint: 'Use the current rating table.', done: rows.every((r) => r.sizeOk)},
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_2_19}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Current-rating table">
         <Table

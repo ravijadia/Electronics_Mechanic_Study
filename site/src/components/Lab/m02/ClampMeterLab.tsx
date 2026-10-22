@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_2_27} from './gu';
 import Multimeter from '../Multimeter';
 import useStoredState from '../useStoredState';
 import {Empty, NoteBox, ResetKit, Section, Table, useKitSeed, useRng, type Note} from '../kit';
@@ -139,6 +140,7 @@ export default function ClampMeterLab(): React.JSX.Element {
         {label: 'Measure the supply voltage with the test leads.', hint: 'AC V, 600 V range.', done: rows.some((r) => r.fn === 'acv600')},
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_2_27}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>

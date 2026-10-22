@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_2_18} from './gu';
 import useStoredState from '../useStoredState';
 import {NoteBox, ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng, type Note} from '../kit';
 import styles from '../styles.module.css';
@@ -148,6 +149,7 @@ export default function WireGaugeLab(): React.JSX.Element {
         {label: 'Read the micrometer for each sample.', hint: 'Diameter = main scale + thimble reading.', done: res.every((r) => r.msr && r.td && r.dia)},
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_2_18}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <span className={styles.label} style={{marginTop: 0}}>

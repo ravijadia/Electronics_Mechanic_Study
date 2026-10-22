@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_2_14} from './gu';
 import useStoredState from '../useStoredState';
 import {GlowText, useMainsBench} from '../MainsBench';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng, type Note} from '../kit';
@@ -102,6 +103,7 @@ export default function TestLampLab(): React.JSX.Element {
         {label: 'Diagnose each board.', hint: 'Judge from the lamp glow.', done: correct.length === boards.length},
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_2_14}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Step 1: Build the test lamp" noPrint={built}>
         <div className={styles.fields} role="group" aria-label="Parts tray">

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_2_22, GU_1_2_23, GU_1_2_24, GU_1_2_25} from './gu';
 import AnalogMeter, {type DialSpec} from '../AnalogMeter';
 import useStoredState from '../useStoredState';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng, type Note} from '../kit';
@@ -122,6 +123,7 @@ export function DialSymbolsLab(): React.JSX.Element {
         {label: 'Check your answers and correct any mistakes.', hint: 'All four meters must be right.', done: allOk},
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_2_22}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Meters">
         <div className={styles.meterGrid}>
@@ -256,6 +258,7 @@ export function AnalogDemoLab(): React.JSX.Element {
         {label: 'Read the MI voltmeter on both AC and DC.', hint: 'MI works on both. Two readings.', done: has((r, s) => r.inst === 'MI' && s.ac && near(r.entered, r.shows, MI_V)) && has((r, s) => r.inst === 'MI' && !s.ac && near(r.entered, r.shows, MI_V))},
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_2_23}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>
@@ -408,6 +411,7 @@ export function MeterRangeLab(): React.JSX.Element {
         {label: 'Read the needle of each meter.', hint: 'Look straight at the needle, not from the side.', done: all('read')},
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_2_24}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Meters">
         <div className={styles.meterGrid}>
@@ -504,6 +508,7 @@ export function ZeroSettingLab(): React.JSX.Element {
         {label: 'Connect again and note the reading after adjustment.', hint: 'It should match the corrected reading.', done: !!afterOk},
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_2_25}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>

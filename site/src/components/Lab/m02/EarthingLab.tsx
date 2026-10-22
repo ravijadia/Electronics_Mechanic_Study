@@ -1,6 +1,7 @@
 import React, {useEffect, useMemo} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_2_15} from './gu';
 import useStoredState from '../useStoredState';
 import {GlowText, useMainsBench} from '../MainsBench';
 import {Empty, ResetKit, Section, Table, shuffle, useKitSeed, useRng} from '../kit';
@@ -134,6 +135,7 @@ export default function EarthingLab(): React.JSX.Element {
         {q: 'What is the maximum earth resistance usually allowed for domestic installations?', a: 'As low as possible. Use the limit given in your trade theory book (based on IS 3043), and check it with an earth tester.'},
       ]}
       steps={steps}
+      gu={GU_1_2_15}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         {bench.view}
