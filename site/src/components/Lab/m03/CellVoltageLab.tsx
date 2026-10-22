@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_3_30} from './gu';
 import Multimeter from '../Multimeter';
 import AnalogMeter, {type DialSpec} from '../AnalogMeter';
 import useStoredState from '../useStoredState';
@@ -165,6 +166,7 @@ export default function CellVoltageLab(): React.JSX.Element {
         },
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_3_30}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>

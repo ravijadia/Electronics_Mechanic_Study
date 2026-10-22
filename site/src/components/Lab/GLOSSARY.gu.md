@@ -70,7 +70,7 @@ Used for every `*.gu.ts` file so the same term is always written the same way.
 
 Steps = પગલાં · Aim = હેતુ · Apparatus = સાધનો · Procedure = પદ્ધતિ · Precautions = સાવચેતીઓ · Viva questions = મૌખિક પ્રશ્નો · Practical record = પ્રેક્ટિકલ રેકોર્ડ
 
-## Module 2 additions (PENDING approval)
+## Module 2 additions (APPROVED)
 
 | English | Gujarati | English | Gujarati |
 |---------|----------|---------|----------|
@@ -85,3 +85,21 @@ Steps = પગલાં · Aim = હેતુ · Apparatus = સાધનો · 
 | zero error | ઝીરો એરર | parallax | પેરેલેક્સ |
 | needle | કાંટો | micrometer | માઇક્રોમીટર |
 | gauge (SWG) | ગેજ (SWG) | ratchet / spindle / thimble | રેચેટ / સ્પિન્ડલ / થિમ્બલ |
+
+## Module 3 additions (PENDING approval)
+
+| English | Gujarati | English | Gujarati |
+|---------|----------|---------|----------|
+| cell / battery | સેલ / બેટરી | lead-acid battery | લેડ-એસિડ બેટરી |
+| terminal / post | ટર્મિનલ / પોસ્ટ | electrolyte | ઇલેક્ટ્રોલાઇટ |
+| specific gravity (SG) | સ્પેસિફિક ગ્રેવિટી (SG) | hydrometer | હાઇડ્રોમીટર |
+| open-circuit voltage (OCV) | ઓપન-સર્કિટ વોલ્ટેજ (OCV) | load test | લોડ ટેસ્ટ |
+| charge / discharge | ચાર્જ / ડિસ્ચાર્જ | charger | ચાર્જર |
+| cut-off voltage | કટ-ઓફ વોલ્ટેજ | deep discharge | ડીપ ડિસ્ચાર્જ |
+| sulphation | સલ્ફેશન | capacity (Ah) | ક્ષમતા (Ah) |
+| rated voltage | રેટેડ વોલ્ટેજ | backup time | બેકઅપ સમય |
+| internal resistance | આંતરિક અવરોધ | state of charge | ચાર્જની સ્થિતિ |
+| distilled water | ડિસ્ટિલ્ડ વોટર | top up | ટોપ-અપ |
+| equalising charge | ઇક્વલાઇઝિંગ ચાર્જ | petroleum jelly | પેટ્રોલિયમ જેલી |
+| goggles / gloves | ગોગલ્સ / હાથમોજાં | vent plug | વેન્ટ પ્લગ |
+| nub (raised end) | ઘૂંડી | load resistor | લોડ અવરોધક |

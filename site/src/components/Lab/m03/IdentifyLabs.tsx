@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_3_28, GU_1_3_29} from './gu';
 import Multimeter from '../Multimeter';
 import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes} from '../Probes';
@@ -187,6 +188,7 @@ export function TerminalsLab(): React.JSX.Element {
         },
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_3_28}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>
@@ -315,6 +317,7 @@ export function RatingLab(): React.JSX.Element {
         },
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_3_29}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Battery labels">
         <div className={styles.meterGrid} style={{gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))'}}>

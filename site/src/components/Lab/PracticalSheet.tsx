@@ -29,7 +29,10 @@ export interface PracticalGu {
   procedure: React.ReactNode[];
   precautions: React.ReactNode[];
   viva: VivaQuestion[];
-  /** Matched to `steps` by position; the `done` flags come from the English steps. */
+  /**
+   * Matched to `steps` by position; the `done` flags come from the English steps.
+   * Where an English label ends in a live count ("… 3/6"), `{n}` in the Gujarati label is replaced by it.
+   */
   steps?: {label: React.ReactNode; hint?: React.ReactNode}[];
 }
 
@@ -148,7 +151,11 @@ export default function PracticalSheet({
   const g = isGu ? gu : undefined;
   const shownSteps = steps?.map((s, k) => {
     const x = g?.steps?.[k];
-    return x ? {...s, label: x.label, hint: x.hint} : s;
+    if (!x) return s;
+    // A live count such as "Correct: 3/6" ends the English label; a Gujarati label can place it with {n}.
+    const count = typeof s.label === 'string' ? s.label.match(/(\d+\/\d+)\s*$/)?.[1] : undefined;
+    const label = typeof x.label === 'string' && count ? x.label.replace('{n}', count) : x.label;
+    return {...s, label, hint: x.hint};
   });
   const hasSteps = !!steps && steps.length > 0;
   const currentStep = steps ? steps.findIndex((s) => !s.done) : -1;

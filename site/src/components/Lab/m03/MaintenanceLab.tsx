@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_3_32} from './gu';
 import useStoredState from '../useStoredState';
 import {ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng} from '../kit';
 import styles from '../styles.module.css';
@@ -96,6 +97,7 @@ export default function MaintenanceLab(): React.JSX.Element {
         },
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_3_32}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Part A: Maintenance steps in order">
         <ol className={styles.orderList}>

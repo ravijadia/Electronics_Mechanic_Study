@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_3_33} from './gu';
 import useStoredState from '../useStoredState';
 import {NoteBox, ResetKit, Section, Table, Verdict, useKitSeed, useRng, type Note} from '../kit';
 import styles from '../styles.module.css';
@@ -141,6 +142,7 @@ export default function HydrometerLab(): React.JSX.Element {
         {label: 'Choose the battery’s state of charge.', hint: 'Use the corrected SG of the good cells.', done: stateAns === stateTruth},
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_3_33(REF_T)}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>
