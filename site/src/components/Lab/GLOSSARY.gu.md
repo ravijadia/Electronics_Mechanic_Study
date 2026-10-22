@@ -120,7 +120,7 @@ Steps = પગલાં · Aim = હેતુ · Apparatus = સાધનો · 
 | ohmmeter | ઓહ્મમીટર | movement (meter) | મૂવમેન્ટ |
 | rectifier-type meter | રેક્ટિફાયર-પ્રકારનું મીટર | calibrated | કેલિબ્રેટેડ |
 
-## Modules 5–14 additions (PENDING approval, added module by module)
+## Modules 5–14 additions (APPROVED)
 
 | Module | English | Gujarati |
 |--------|---------|----------|
