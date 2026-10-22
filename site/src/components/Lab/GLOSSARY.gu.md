@@ -86,7 +86,7 @@ Steps = પગલાં · Aim = હેતુ · Apparatus = સાધનો · 
 | needle | કાંટો | micrometer | માઇક્રોમીટર |
 | gauge (SWG) | ગેજ (SWG) | ratchet / spindle / thimble | રેચેટ / સ્પિન્ડલ / થિમ્બલ |
 
-## Module 3 additions (PENDING approval)
+## Module 3 additions (APPROVED)
 
 | English | Gujarati | English | Gujarati |
 |---------|----------|---------|----------|
@@ -103,3 +103,19 @@ Steps = પગલાં · Aim = હેતુ · Apparatus = સાધનો · 
 | equalising charge | ઇક્વલાઇઝિંગ ચાર્જ | petroleum jelly | પેટ્રોલિયમ જેલી |
 | goggles / gloves | ગોગલ્સ / હાથમોજાં | vent plug | વેન્ટ પ્લગ |
 | nub (raised end) | ઘૂંડી | load resistor | લોડ અવરોધક |
+
+## Module 4 additions (PENDING approval)
+
+| English | Gujarati | English | Gujarati |
+|---------|----------|---------|----------|
+| CRO / oscilloscope | CRO / ઓસિલોસ્કોપ | trace | ટ્રેસ |
+| intensity / focus | ઇન્ટેન્સિટી / ફોકસ | coupling (AC / DC / GND) | કપલિંગ (AC / DC / GND) |
+| trigger / sweep | ટ્રિગર / સ્વીપ | division (CRO screen) | ડિવિઝન |
+| time period | ટાઇમ પીરિયડ | cycle | સાઇકલ |
+| peak-to-peak | પીક-ટુ-પીક | RMS | RMS |
+| waveform | વેવફોર્મ | sine / square / triangle wave | સાઇન / સ્ક્વેર / ટ્રાયેંગલ વેવ |
+| function generator | ફંક્શન જનરેટર | amplitude | એમ્પ્લિટ્યુડ |
+| DC offset | DC ઓફસેટ | attenuator | એટેન્યુએટર |
+| jack / lead | જેક / લીડ | wattmeter | વોટમીટર |
+| ohmmeter | ઓહ્મમીટર | movement (meter) | મૂવમેન્ટ |
+| rectifier-type meter | રેક્ટિફાયર-પ્રકારનું મીટર | calibrated | કેલિબ્રેટેડ |

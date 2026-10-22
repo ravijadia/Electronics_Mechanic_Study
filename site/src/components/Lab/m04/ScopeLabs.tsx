@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_4_37, GU_1_4_38, GU_1_4_39} from './gu';
 import useStoredState from '../useStoredState';
 import {useScope} from '../Scope';
 import {fgFreq, fgVpp, useFunctionGenerator, type Wave} from '../FunctionGenerator';
@@ -78,6 +79,7 @@ export function CroControlsLab(): React.JSX.Element {
         },
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_4_37}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">{scope.view}</Section>
       <Section title="Observation table">
@@ -183,6 +185,7 @@ export function CroMeasureLab(): React.JSX.Element {
         {label: 'Switch to Square source and measure T and f.', hint: 'Adjust TIME/DIV to show 2–5 cycles.', done: !!(r.sqT && r.sqF)},
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_4_38}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={clsx(styles.row, styles.noPrint)} style={{marginBottom: '0.7rem'}}>
@@ -295,6 +298,7 @@ export function FgControlsLab(): React.JSX.Element {
         })),
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_4_39(targets.map((t) => ({text: describe(t), small: t.vpp <= 1})))}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>

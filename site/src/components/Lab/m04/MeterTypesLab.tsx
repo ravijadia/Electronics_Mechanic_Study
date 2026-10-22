@@ -1,5 +1,6 @@
 import React from 'react';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_4_36} from './gu';
 import useStoredState from '../useStoredState';
 import {ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng} from '../kit';
 import styles from '../styles.module.css';
@@ -62,6 +63,7 @@ export default function MeterTypesLab(): React.JSX.Element {
         },
         {label: 'Enter your details and print or save the record.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_4_36}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Part A: AC, DC or both?">
         <Table
