@@ -249,7 +249,7 @@ export function MuxLab(): React.JSX.Element {
       steps={[
         {label: 'Wire the multiplexer: decode S1S0, AND with I0–I3, OR to Y.', hint: 'Same decode stage as the 2-to-4 decoder.', done: y != null},
         {label: `Set a mix of 0s and 1s on I0–I3. Step S1S0 through 00–11, pressing Note reading. Codes: ${picks.filter((r) => r != null).length}/4`, hint: 'Use a data pattern with both 0s and 1s.', done: tried},
-        {label: 'Check Y follows the selected input every time.', hint: 'Wrong row? Fix the wiring and note it again.', done},
+        {label: 'Check Y follows the selected input every time.', hint: 'Y must match the selected input, and the data must have both 0s and 1s.', done},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>

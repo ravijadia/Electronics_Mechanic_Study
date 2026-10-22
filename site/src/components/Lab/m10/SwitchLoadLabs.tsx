@@ -157,6 +157,15 @@ function SwitchLoadLab({s}: {s: Spec}): React.JSX.Element {
           hint: s.dev.igbt ? 'Use the reading at 15 V.' : 'RDS(on) = VDS ÷ ID, from the reading at 10 V.',
           done: onOk,
         },
+        ...(s.dev.igbt
+          ? [
+              {
+                label: 'Hold the gate just above the threshold, with no heat sink, and watch the temperature.',
+                hint: 'About 1 V above threshold. It overheats: switch off, then Replace device.',
+                done: !!seen.hot,
+              },
+            ]
+          : []),
         {label: 'Remove the pull-down, drive the gate ON, then remove the drive.', hint: 'Switch OFF before removing the pull-down. The lamp stays ON.', done: !!seen.floating},
         {label: 'Refit the pull-down and remove the drive again.', hint: 'Drive the gate above threshold first. The lamp turns off.', done: !!seen.pulldownOk},
         {label: 'Enter your details and print or save the record.', done: printed},

@@ -92,7 +92,7 @@ export function PowerDevicesLab(): React.JSX.Element {
       ]}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Component tray">
-        <PartGrid parts={items.map((d) => ({kind: d.kind, o: {mark: d.mark}}))} label="Eight power electronic components" />
+        <PartGrid parts={items.map((d) => ({kind: d.kind, o: {mark: d.mark.split(' ')[0]}}))} label="Eight power electronic components" />
         <details style={{marginTop: '0.6rem'}}>
           <summary className={styles.muted} style={{cursor: 'pointer'}}>
             Data sheet extract
@@ -240,7 +240,12 @@ function useGateBench(kit: Sw[], key: string) {
     setCharged((c) => ({...c, [k]: false}));
     setNote({kind: 'info', text: 'Gate shorted to source/emitter: gate discharged.'});
   };
-  return {charged, log, setLog, fn, setFn, note, setNote, probes, on, d, text, unit, noteIt, battery, shortGate, meterTurnsOn, gateEvent};
+  const clearGate = () => {
+    setCharged({});
+    setFn('off');
+    setNote(null);
+  };
+  return {charged, log, setLog, fn, setFn, note, setNote, probes, on, d, text, unit, noteIt, battery, shortGate, meterTurnsOn, gateEvent, clearGate};
 }
 
 function SwBench({kit, b, withBattery}: {kit: Sw[]; b: ReturnType<typeof useGateBench>; withBattery: boolean}) {
@@ -401,7 +406,7 @@ export function MosfetTestLab(): React.JSX.Element {
         'Find G, D and S from the data sheet.',
         'Short the gate first. Diode test: red on S, black on D (N-channel) → body diode about 0.5 V. Reverse: OL.',
         'Charge the gate: red on G, black on S. Now D–S reads almost 0 in both directions (switched ON).',
-        'Short G to S (or red on S, black on G): D–S goes back to OL (OFF).',
+        'Short the gate (Short gate button). Read D–S against the body diode (red on D, black on S for N-channel): back to OL (OFF).',
         'For a P-channel device all polarities are reversed.',
         'A low reading D–S or G–S that does not change = faulty.',
       ]}
@@ -424,7 +429,7 @@ export function MosfetTestLab(): React.JSX.Element {
         },
         {
           label: 'Short the gate and note D–S switched OFF.',
-          hint: 'Press Short gate. D–S returns to OL.',
+          hint: 'Press Short gate. Read against the body diode (N-ch: red D, black S): OL.',
           done: kit.every((d, k) => d.fault !== 'good' || !!b.log[k]?.off),
         },
         {label: 'Choose the channel and condition of all four.', hint: 'A low D–S or G–S reading that never changes = faulty.', done: kit.every((_, k) => rowOk(k))},
@@ -446,6 +451,7 @@ export function MosfetTestLab(): React.JSX.Element {
         <ResetKit
           onReset={() => {
             b.setLog({});
+            b.clearGate();
             setAns({});
             setPrinted(false);
             newKit();
@@ -532,6 +538,7 @@ export function IgbtTestLab(): React.JSX.Element {
         <ResetKit
           onReset={() => {
             b.setLog({});
+            b.clearGate();
             setAns({});
             setTriedMeter(false);
             setPrinted(false);

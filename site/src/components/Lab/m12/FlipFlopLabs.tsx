@@ -40,7 +40,7 @@ export function FourBitLatchLab(): React.JSX.Element {
   }, [d[0], d[1], d[2], d[3], c12, c34]);
 
   const noteIt = () => {
-    setRows((r) => [...r, {d: [...d], c: [c12, c34] as [boolean, boolean], q: [...q]}].slice(-8));
+    setRows((r) => [...r, {d: [...d], c: [c12, c34] as [boolean, boolean], q: [...q]}].slice(-24));
     setNote({kind: 'info', text: `D = ${d.map((x) => (x ? 1 : 0)).join('')}, C1C2 = ${c12 ? 1 : 0}${c34 ? 1 : 0} → Q = ${q.map((x) => (x ? 1 : 0)).join('')}`});
   };
 
@@ -182,8 +182,8 @@ export function RsFlipFlopLab(): React.JSX.Element {
   };
 
   const eff = (x: RsRow) => (x.clocked ? {set: x.s, reset: x.r} : {set: !x.s, reset: !x.r});
-  const seenSet = rows.some((x) => !x.invalid && eff(x).set && !eff(x).reset && x.q);
-  const seenReset = rows.some((x) => !x.invalid && !eff(x).set && eff(x).reset && !x.q);
+  const seenSet = rows.some((x) => !x.clocked && !x.invalid && eff(x).set && !eff(x).reset && x.q);
+  const seenReset = rows.some((x) => !x.clocked && !x.invalid && !eff(x).set && eff(x).reset && !x.q);
   const seenHold = rows.some((x) => !x.clocked && x.s && x.r && x.q);
   const seenInvalid = rows.some((x) => x.invalid);
   const pending = (x: RsRow) => x.clocked && ((x.s && !x.r && !x.q) || (!x.s && x.r && x.q));

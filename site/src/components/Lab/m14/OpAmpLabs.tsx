@@ -225,6 +225,10 @@ export function OpAmpAmplifierLab(): React.JSX.Element {
       setNote({kind: 'warn', text: `Output stuck at ${vout < 0 ? '−' : '+'}${VSAT} V (supply limit). Lower the gain or the input and read again.`});
       return;
     }
+    if (rows[mode].some((x) => x.rin === rin && x.rf === rf && x.vin === vin && (mode !== 'sum' || (x.rin2 === rin2 && x.vin2 === vin2)))) {
+      setNote({kind: 'warn', text: 'Already noted. Change Rin, Rf or Vin and read again.'});
+      return;
+    }
     const row: AmpRow = {rin, rin2: mode === 'sum' ? rin2 : undefined, rf, vin, vin2: mode === 'sum' ? vin2 : undefined, vout: Number(vout.toFixed(2)), calc: Number(calc.toFixed(2)), scale};
     setRows((r) => ({...r, [mode]: [...r[mode], row].slice(-6)}));
     setNote({kind: 'good', text: `Noted: Vout = ${vout.toFixed(2)} V (calculated ${calc.toFixed(2)} V).`});
@@ -330,11 +334,23 @@ export function DifferentiatorIntegratorLab(): React.JSX.Element {
   const [c, setC] = useState(0.1e-6);
   const [seen, setSeen] = useStoredState<Record<string, boolean>>(`lab:${KEY}:seen`, {});
   const [printed, setPrinted] = useStoredState(`lab:${KEY}:printed`, false);
+  const [note, setNote] = useState<Note>(null);
   const fg = useFunctionGenerator({wave: 'triangle', range: 100, dial: 1, amp: 4}, true);
   const out = mode === 'diff' ? differentiatorSignal(fg.signal, r * tol.r, c * tol.c, VCC) : integratorSignal(fg.signal, r * tol.r, c * tol.c, VCC);
   const scope = useScope('dso', {ch1: fg.signal, ch2: out}, {ch2: DUAL_CH2, display: 'DUAL'});
 
-  const mark = () => setSeen((s) => ({...s, [`${mode}:${fg.state.wave}`]: true}));
+  const mark = () => {
+    if (!fg.state.on) {
+      setNote({kind: 'warn', text: 'The generator output is off. Switch it on first.'});
+      return;
+    }
+    if (!(scope.state.ch1.on && scope.state.ch2.on && scope.state.display === 'DUAL')) {
+      setNote({kind: 'warn', text: 'Switch CH1 and CH2 on and set the display to DUAL to compare input and output.'});
+      return;
+    }
+    setNote(null);
+    setSeen((s) => ({...s, [`${mode}:${fg.state.wave}`]: true}));
+  };
 
   return (
     <PracticalSheet
@@ -357,7 +373,7 @@ export function DifferentiatorIntegratorLab(): React.JSX.Element {
         {q: 'Formula for the differentiator?', a: 'Vout = −RC(dVin/dt).'},
       ]}
       steps={[
-        {label: 'Differentiator, triangular input: press Note this waveform.', hint: 'Compare CH1 (input) with CH2 (output). Expect a square wave.', done: !!seen['diff:triangle']},
+        {label: 'Differentiator, triangular input: press Note this waveform.', hint: 'Generator ON, scope in DUAL. Compare CH1 (input) with CH2 (output). Expect a square wave.', done: !!seen['diff:triangle']},
         {label: 'Differentiator, square-wave input: set the generator and note it.', hint: 'Expect sharp spikes at each edge.', done: !!seen['diff:square']},
         {label: 'Select Integrator, square-wave input: note it.', hint: 'Expect a triangular wave.', done: !!seen['int:square']},
         {label: 'Integrator, sine input: note it.', hint: 'Expect a cosine, shifted 90°.', done: !!seen['int:sine']},
@@ -399,6 +415,7 @@ export function DifferentiatorIntegratorLab(): React.JSX.Element {
             Note this waveform
           </button>
         </div>
+        <NoteBox note={note} />
       </Section>
       <Section title="Observation table">
         <Table
@@ -412,7 +429,7 @@ export function DifferentiatorIntegratorLab(): React.JSX.Element {
         />
       </Section>
       <Section title="Result">
-        <ResetKit onReset={() => (setSeen({}), setPrinted(false), newKit())} />
+        <ResetKit onReset={() => (setSeen({}), setPrinted(false), setNote(null), newKit())} />
       </Section>
     </PracticalSheet>
   );
@@ -424,7 +441,7 @@ export function DifferentiatorIntegratorLab(): React.JSX.Element {
 
 export function ZeroCrossingLab(): React.JSX.Element {
   const KEY = '1.14.130';
-  const fg = useFunctionGenerator({wave: 'sine', range: 100, dial: 1, amp: 6}, true);
+  const fg = useFunctionGenerator({wave: 'sine', range: 100, dial: 1, amp: 6, on: false}, true);
   const out = zeroCrossSignal(fg.signal, VCC);
   const scope = useScope('dso', {ch1: fg.signal, ch2: out}, {ch1: {vdiv: 2, pos: 0, coupling: 'DC', on: true}, ch2: {...DUAL_CH2, vdiv: 5}, display: 'DUAL'});
   const [checked, setChecked] = useStoredState(`lab:${KEY}:checked`, false);
@@ -465,7 +482,7 @@ export function ZeroCrossingLab(): React.JSX.Element {
         {q: 'Name one application.', a: 'Converting a sine wave to a square wave / timing reference / frequency counting.'},
       ]}
       steps={[
-        {label: 'Switch the function generator output on (sine).', hint: 'A 6 V peak sine is a good start.', done: fg.state.on},
+        {label: 'Switch the function generator output on (sine).', hint: 'The sine is set to 6 Vpp. Press the ON button.', done: fg.state.on},
         {label: 'Show CH1 and CH2 together on the scope.', hint: 'Turn both channels on and set the display to DUAL.', done: bothShown},
         {label: 'Check the output flips at every input zero crossing, then press Confirm.', hint: 'CH1 is the input sine, CH2 the square output.', done: checked},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
@@ -578,7 +595,11 @@ export function InstrumentationAmpLab(): React.JSX.Element {
       setNote({kind: 'warn', text: `Output stuck at ${vout < 0 ? '−' : '+'}${VSAT} V (supply limit). Use a larger Rgain or a smaller V1 − V2.`});
       return;
     }
-    setRows((rr) => [...rr, {v1, v2, rGain, vout: Number(vout.toFixed(3)), calc: Number(calc.toFixed(3))}].slice(-6));
+    if (rows.some((x) => x.v1 === v1 && x.v2 === v2 && x.rGain === rGain)) {
+      setNote({kind: 'warn', text: 'Already noted. Change V1, V2 − V1 or Rgain and read again.'});
+      return;
+    }
+    setRows((rr) => [...rr.filter((x) => dv !== 0 || x.v1 !== x.v2), {v1, v2, rGain, vout: Number(vout.toFixed(3)), calc: Number(calc.toFixed(3))}].slice(-6));
     if (dv === 0) {
       if (Math.abs(vout) < 0.05) setCmTested(true);
       setNote({kind: 'good', text: `Common-mode input ${v1.toFixed(1)} V on both leads: Vout = ${vout.toFixed(3)} V.`});

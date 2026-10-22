@@ -116,7 +116,7 @@ export const pinId = (ic: string, pin: number) => `${ic}.${pin}`;
  */
 export function evalBoard(ics: PlacedIc[], netOf: (id: string) => string, seed: Record<string, Bit>): Record<string, Bit> {
   const known: Record<string, Bit> = {...seed};
-  for (let pass = 0; pass < ics.length + 2; pass++) {
+  for (let pass = 0, maxPass = ics.reduce((n, ic) => n + GATE_ICS[ic.type].gates.length, 0) + 2; pass < maxPass; pass++) {
     let changed = false;
     for (const ic of ics) {
       const t = GATE_ICS[ic.type];

@@ -181,6 +181,10 @@ export function AstableLab(): React.JSX.Element {
   const duty = astableDuty(r1a, r2a);
 
   const noteIt = () => {
+    if (rows.some((x) => x.r1 === r1 && x.r2 === r2 && x.c === c)) {
+      setNote({kind: 'warn', text: 'Already noted. Change R1, R2 or C and read again.'});
+      return;
+    }
     const row = {r1, r2, c, f, fc: astableFreq(r1, r2, c), duty: duty * 100, dutyc: astableDuty(r1, r2) * 100};
     setRows((rr) => [...rr, row].slice(-6));
     setNote({kind: 'good', text: `Noted: f = ${si(f, 'Hz')}, duty = ${(duty * 100).toFixed(0)} %.`});
@@ -256,6 +260,10 @@ export function MonostableLab(): React.JSX.Element {
   const tw = monostablePulseWidth(ra, ca);
 
   const noteIt = () => {
+    if (rows.some((x) => x.r === r && x.c === c)) {
+      setNote({kind: 'warn', text: 'Already noted. Change R or C and read again.'});
+      return;
+    }
     setRows((rr) => [...rr, {r, c, tw, twc: monostablePulseWidth(r, c)}].slice(-6));
     setNote({kind: 'good', text: `Noted: pulse width = ${si(tw, 's')}.`});
   };
@@ -366,8 +374,8 @@ export function VcoLab(): React.JSX.Element {
         <div className={styles.kit}>
           <Timer555Symbol mode="astable" r1={r1} r2={r2} c={c} pin5={{kind: 'vc', v: vc}} />
         </div>
-        <ValuePicker label="R2" value={r2} options={R_VALUES} fmt={fmtOhm} onChange={(v) => newCircuit(() => setR2(v))} />
-        <ValuePicker label="C" value={c} options={C_VALUES} fmt={fmtFarad} onChange={(v) => newCircuit(() => setC(v))} />
+        <ValuePicker label="R2" value={r2} options={R_VALUES} fmt={fmtOhm} onChange={(v) => v !== r2 && newCircuit(() => setR2(v))} />
+        <ValuePicker label="C" value={c} options={C_VALUES} fmt={fmtFarad} onChange={(v) => v !== c && newCircuit(() => setC(v))} />
         <ValuePicker label="Control voltage (pin 5)" value={vc} options={VCTRL_VALUES} fmt={(v) => `${v} V`} onChange={setVc} />
         {scope.view}
         <div className={clsx(styles.controls, styles.noPrint)} style={{marginTop: '0.4rem'}}>
@@ -438,7 +446,7 @@ export function PwmLab(): React.JSX.Element {
       steps={[
         {label: 'Pick a control voltage on pin 5 and press Note reading.', hint: 'Duty = pulse width / clock period. Changing R or C starts a new table.', done: rows.length >= 1},
         {label: 'Change the control voltage and note again.', hint: 'If the output sticks HIGH, lower R or C.', done: rows.length >= 2},
-        {label: `Note a third control voltage. Readings: ${Math.min(rows.length, 3)}/3`, hint: 'For example 2 V, 6 V and 10 V.', done: rows.length >= 3},
+        {label: `Note a third control voltage. Readings: ${Math.min(rows.length, 3)}/3`, hint: 'For example 2 V, 6 V and 8 V.', done: rows.length >= 3},
         {label: 'Check duty cycle rises with the control voltage.', hint: 'Compare the first and last rows of the table.', done: rows.length >= 2 && rows[0].duty < rows[rows.length - 1].duty},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
@@ -447,8 +455,8 @@ export function PwmLab(): React.JSX.Element {
         <div className={styles.kit}>
           <Timer555Symbol mode="mono" r1={r} c={c} pin5={{kind: 'vc', v: vc}} rLabel="R" />
         </div>
-        <ValuePicker label="R" value={r} options={R_VALUES} fmt={fmtOhm} onChange={(v) => newCircuit(() => setR(v))} />
-        <ValuePicker label="C" value={c} options={C_VALUES} fmt={fmtFarad} onChange={(v) => newCircuit(() => setC(v))} />
+        <ValuePicker label="R" value={r} options={R_VALUES} fmt={fmtOhm} onChange={(v) => v !== r && newCircuit(() => setR(v))} />
+        <ValuePicker label="C" value={c} options={C_VALUES} fmt={fmtFarad} onChange={(v) => v !== c && newCircuit(() => setC(v))} />
         <ValuePicker label="Control voltage (pin 5)" value={vc} options={VCTRL_VALUES} fmt={(v) => `${v} V`} onChange={setVc} />
         {scope.view}
         <div className={clsx(styles.controls, styles.noPrint)} style={{marginTop: '0.4rem'}}>

@@ -253,7 +253,7 @@ export function ScrUjtLab(): React.JSX.Element {
   const vdc = stats(load).mean;
   const lampLevel = fires ? Math.min(1, (stats(load).rms / (vm / 2)) ** 2) : 0;
   const text = fn === 'off' ? '' : fn === 'dcv' ? vdc.toFixed(2) : '';
-  const dark = power && !fires;
+  const dark = power && gate && !fires;
   useEffect(() => {
     if (dark) setOffSeen(true);
   }, [dark, setOffSeen]);
