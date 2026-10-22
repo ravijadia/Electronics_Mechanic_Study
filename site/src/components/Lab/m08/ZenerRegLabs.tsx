@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_8_75, GU_1_8_76} from './gu';
 import XYGraph from '../XYGraph';
 import useStoredState from '../useStoredState';
 import {Knob} from '../Scope';
@@ -130,6 +131,7 @@ export function ZenerRegulatorLab(): React.JSX.Element {
         },
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_8_75}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>
@@ -339,6 +341,7 @@ export function PercentRegulationLab(): React.JSX.Element {
         },
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_8_76}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>

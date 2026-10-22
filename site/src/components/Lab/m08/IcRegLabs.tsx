@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_8_77, GU_1_8_78, GU_1_8_79, GU_1_8_80} from './gu';
 import Multimeter from '../Multimeter';
 import XYGraph from '../XYGraph';
 import useStoredState from '../useStoredState';
@@ -175,6 +176,7 @@ export function Ic7812Lab(): React.JSX.Element {
         },
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_8_77}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>
@@ -394,6 +396,7 @@ export function RegulatorIcsLab(): React.JSX.Element {
         },
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_8_78}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Component tray">
         <PartGrid parts={items.map((it) => ({kind: it.kind, o: {mark: it.mark}}))} label="Eight voltage regulator ICs" />
@@ -564,6 +567,7 @@ export function Ic723Lab(): React.JSX.Element {
         },
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_8_79}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>
@@ -763,6 +767,7 @@ export function Lm317Lab(): React.JSX.Element {
         {label: 'Include the maximum output: pot at 100 %.', hint: 'Vout is limited by R2 or by the input voltage.', done: full.some((p) => p.pos === 100)},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_8_80}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>

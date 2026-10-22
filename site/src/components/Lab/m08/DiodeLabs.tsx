@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_8_67, GU_1_8_68, GU_1_8_69, GU_1_8_74} from './gu';
 import Multimeter from '../Multimeter';
 import XYGraph from '../XYGraph';
 import useStoredState from '../useStoredState';
@@ -128,6 +129,7 @@ export function DiodeTypesLab(): React.JSX.Element {
         },
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_8_67}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Component tray">
         <PartGrid parts={items.map((it) => ({kind: it.kind, o: {mark: it.mark || undefined}}))} label="Eight diodes and diode modules, numbered" />
@@ -307,6 +309,7 @@ export function DiodeTestLab(): React.JSX.Element {
         },
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_8_68}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>
@@ -590,6 +593,7 @@ export function ForwardCharLab(): React.JSX.Element {
         },
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_8_69}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={clsx(styles.controls, styles.noPrint)} style={{marginTop: 0, marginBottom: '0.6rem'}}>
@@ -762,6 +766,7 @@ export function ZenerTestLab(): React.JSX.Element {
         },
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_8_74}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={clsx(styles.seg, styles.noPrint)} role="group" aria-label="Device under test" style={{marginBottom: '0.6rem'}}>

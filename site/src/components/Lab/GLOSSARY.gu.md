@@ -150,3 +150,17 @@ Steps = પગલાં · Aim = હેતુ · Apparatus = સાધનો · 
 | 7 | auxiliary contact / fail-safe | ઓક્ઝિલરી કોન્ટેક્ટ / ફેઇલ-સેફ |
 | 7 | RC time constant (τ) / differentiator | RC ટાઇમ કોન્સ્ટન્ટ (τ) / ડિફરન્શિયેટર |
 | 7 | resonance / tank circuit / voltage magnification | રેઝોનન્સ / ટેન્ક સર્કિટ / વોલ્ટેજ મેગ્નિફિકેશન |
+| 8 | diode module / bridge module / PIV | ડાયોડ મોડ્યુલ / બ્રિજ મોડ્યુલ / PIV |
+| 8 | Schottky / silicon / germanium | શોટ્કી / સિલિકોન / જર્મેનિયમ |
+| 8 | forward / reverse resistance | ફોરવર્ડ / રિવર્સ અવરોધ |
+| 8 | knee (cut-in) voltage | ની (knee, કટ-ઇન) વોલ્ટેજ |
+| 8 | zener breakdown / line regulation / load regulation | ઝેનર બ્રેકડાઉન / લાઇન રેગ્યુલેશન / લોડ રેગ્યુલેશન |
+| 8 | primary / secondary winding | પ્રાઇમરી / સેકન્ડરી વાઇન્ડિંગ |
+| 8 | auto-transformer / centre-tapped (CT) / ferrite core | ઓટો-ટ્રાન્સફોર્મર / સેન્ટર-ટેપ્ડ (CT) / ફેરાઇટ કોર |
+| 8 | insulation tester (megger) / SMPS | ઇન્સ્યુલેશન ટેસ્ટર (મેગર) / SMPS |
+| 8 | additive / subtractive polarity / turns ratio | એડિટિવ / સબટ્રેક્ટિવ પોલારિટી / ટર્ન્સ રેશિયો |
+| 8 | half-wave / full-wave / bridge rectifier | હાફ-વેવ / ફુલ-વેવ / બ્રિજ રેક્ટિફાયર |
+| 8 | ripple / ripple factor / filter capacitor | રિપલ / રિપલ ફેક્ટર / ફિલ્ટર કેપેસિટર |
+| 8 | regulator / dropout / thermal shutdown | રેગ્યુલેટર / ડ્રોપઆઉટ / થર્મલ શટડાઉન |
+| 8 | linear / switching regulator / efficiency | લિનિયર / સ્વિચિંગ રેગ્યુલેટર / કાર્યક્ષમતા |
+| 8 | heat sink / rheostat / current limiting | હીટ સિંક / રીઓસ્ટેટ / કરંટ લિમિટિંગ |

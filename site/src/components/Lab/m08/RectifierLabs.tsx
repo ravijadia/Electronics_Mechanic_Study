@@ -1,6 +1,7 @@
 import React, {useMemo, useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_8_72, GU_1_8_73} from './gu';
 import Multimeter from '../Multimeter';
 import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes} from '../Probes';
@@ -307,6 +308,7 @@ export function RectifierLab(): React.JSX.Element {
         ]),
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_8_72}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={clsx(styles.seg, styles.noPrint)} role="group" aria-label="Circuit" style={{marginBottom: '0.6rem'}}>
@@ -478,6 +480,7 @@ export function RippleLab(): React.JSX.Element {
         {label: 'Take rows for both half-wave and bridge.', hint: 'Switch the Rectifier button.', done: good.some((r) => r.type === 'hw') && good.some((r) => r.type === 'bridge')},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_8_73}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={clsx(styles.controls, styles.noPrint)} style={{marginTop: 0}}>

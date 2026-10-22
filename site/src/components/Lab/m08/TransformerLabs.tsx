@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_8_70, GU_1_8_71} from './gu';
 import Multimeter from '../Multimeter';
 import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes} from '../Probes';
@@ -199,6 +200,7 @@ export function TransformerTypesLab(): React.JSX.Element {
         },
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_8_70}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>
@@ -467,6 +469,7 @@ export function PolarityLab(): React.JSX.Element {
         {label: 'Enter the turns ratio Vp ÷ Vs.', hint: 'Use your Vp and Vs readings.', done: near(num(ans.ratio), ratio, 0.04)},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_8_71}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.controls} style={{marginTop: 0}}>
