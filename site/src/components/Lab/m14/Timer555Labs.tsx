@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_14_133, GU_1_14_134, GU_1_14_135, GU_1_14_136} from './gu';
 import useStoredState from '../useStoredState';
 import {Empty, NoteBox, ResetKit, Section, Table, useKitSeed, useRng, type Note} from '../kit';
 import {useScope} from '../Scope';
@@ -210,6 +211,7 @@ export function AstableLab(): React.JSX.Element {
         {label: 'Check a measured f is within 20 % of the formula.', hint: 'The table shows both. R is ±5 %, C is ±10 %.', done: rows.some((r) => near(r.f, r.fc, 0.2))},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_14_133}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.kit}>
@@ -287,6 +289,7 @@ export function MonostableLab(): React.JSX.Element {
         {label: 'Check a measured pulse width is within 20 % of 1.1RC.', hint: 'The table shows both. R is ±5 %, C is ±10 %.', done: rows.some((r2) => near(r2.tw, r2.twc, 0.2))},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_14_134}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.kit}>
@@ -369,6 +372,7 @@ export function VcoLab(): React.JSX.Element {
         {label: 'Check f falls as the control voltage rises.', hint: 'Compare the first and last rows of the table.', done: rows.length >= 2 && rows[0].f > rows[rows.length - 1].f},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_14_135}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.kit}>
@@ -450,6 +454,7 @@ export function PwmLab(): React.JSX.Element {
         {label: 'Check duty cycle rises with the control voltage.', hint: 'Compare the first and last rows of the table.', done: rows.length >= 2 && rows[0].duty < rows[rows.length - 1].duty},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_14_136(PWM_CLOCK_HZ / 1000)}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.kit}>

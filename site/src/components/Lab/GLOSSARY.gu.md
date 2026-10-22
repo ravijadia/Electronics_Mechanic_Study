@@ -204,3 +204,14 @@ Steps = પગલાં · Aim = હેતુ · Apparatus = સાધનો · 
 | 12 | R-S / D / T / JK / master-slave | R-S / D / T / JK / માસ્ટર-સ્લેવ |
 | 12 | set / reset / hold / toggle | સેટ / રીસેટ / હોલ્ડ / ટોગલ |
 | 12 | edge-triggered / level-triggered / transparent | એજ-ટ્રિગર્ડ / લેવલ-ટ્રિગર્ડ / ટ્રાન્સપેરન્ટ |
+| 14 | analog IC tester / pass / fail | એનાલોગ IC ટેસ્ટર / PASS / FAIL |
+| 14 | op-amp / open-loop / saturation (±Vsat) | ઓપ-એમ્પ / ઓપન-લૂપ / સેચ્યુરેશન (±Vsat) |
+| 14 | inverting / non-inverting / summing amplifier | ઇન્વર્ટિંગ / નોન-ઇન્વર્ટિંગ / સમિંગ એમ્પ્લિફાયર |
+| 14 | voltage follower / unity gain | વોલ્ટેજ ફોલોઅર / યુનિટી ગેઇન |
+| 14 | differentiator / integrator | ડિફરન્શિયેટર / ઇન્ટિગ્રેટર |
+| 14 | comparator / zero-crossing detector / reference (Vref) | કમ્પેરેટર / ઝીરો-ક્રોસિંગ ડિટેક્ટર / રેફરન્સ (Vref) |
+| 14 | instrumentation amplifier / common-mode / CMRR | ઇન્સ્ટ્રુમેન્ટેશન એમ્પ્લિફાયર / કોમન-મોડ / CMRR |
+| 14 | DAC: binary-weighted / R-2R ladder | DAC: બાઇનરી-વેઇટેડ / R-2R લેડર |
+| 14 | 555 timer: astable / monostable | 555 ટાઇમર: એસ્ટેબલ / મોનોસ્ટેબલ |
+| 14 | pulse width / duty cycle | પલ્સ-વિડ્થ / ડ્યુટી સાયકલ |
+| 14 | VCO (V to F converter) / PWM / control voltage | VCO (V થી F કન્વર્ટર) / PWM / કંટ્રોલ વોલ્ટેજ |

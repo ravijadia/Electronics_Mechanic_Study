@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
+import {GU_1_14_127, GU_1_14_128, GU_1_14_129, GU_1_14_130, GU_1_14_131, GU_1_14_132} from './gu';
 import Multimeter from '../Multimeter';
 import useStoredState from '../useStoredState';
 import {Empty, NoteBox, ResetKit, Section, Table, useKitSeed, useRng, type Note} from '../kit';
@@ -78,6 +79,7 @@ export function AnalogIcTesterLab(): React.JSX.Element {
         {label: `Mark each IC Good or Faulty in the table. Right: ${items.filter((_, k) => ok(k)).length}/${items.length}`, hint: 'PASS = Good, FAIL = Faulty.', done: items.every((_, k) => ok(k))},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_14_127}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={clsx(styles.seg, styles.noPrint)} role="group" aria-label="IC in socket" style={{marginBottom: '0.6rem'}}>
@@ -265,6 +267,7 @@ export function OpAmpAmplifierLab(): React.JSX.Element {
         {label: `Summing: select it and note 2 readings. Readings: ${Math.min(useful('sum').length, 2)}/2`, hint: 'Set Vin1 and Vin2. Vout = −Rf(Vin1/Rin + Vin2/Rin2).', done: done('sum')},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_14_128}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={clsx(styles.seg, styles.noPrint)} role="group" aria-label="Configuration" style={{marginBottom: '0.6rem'}}>
@@ -379,6 +382,7 @@ export function DifferentiatorIntegratorLab(): React.JSX.Element {
         {label: 'Integrator, sine input: note it.', hint: 'Expect a cosine, shifted 90°.', done: !!seen['int:sine']},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_14_129}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={clsx(styles.seg, styles.noPrint)} role="group" aria-label="Circuit" style={{marginBottom: '0.6rem'}}>
@@ -487,6 +491,7 @@ export function ZeroCrossingLab(): React.JSX.Element {
         {label: 'Check the output flips at every input zero crossing, then press Confirm.', hint: 'CH1 is the input sine, CH2 the square output.', done: checked},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_14_130}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.kit}>
@@ -632,6 +637,7 @@ export function InstrumentationAmpLab(): React.JSX.Element {
         {label: 'Set V2 − V1 to 0 (V2 = V1) and note Vout.', hint: 'Common-mode input: Vout should be close to 0 V.', done: cmTested},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_14_131}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={styles.kit}>
@@ -776,6 +782,7 @@ export function DacLab(): React.JSX.Element {
         {label: `Select R-2R ladder and note 4 codes. Codes: ${Math.min(rows.r2r.length, 4)}/4`, hint: 'Step size is Vref/16 for both DACs.', done: rows.r2r.length >= 4},
         {label: 'Enter your details and press Print / Save as PDF.', hint: 'Practical record, below the result.', done: printed},
       ]}
+      gu={GU_1_14_132}
       onPrinted={(t) => t.name.trim() && setPrinted(true)}>
       <Section title="Bench">
         <div className={clsx(styles.seg, styles.noPrint)} role="group" aria-label="DAC type" style={{marginBottom: '0.6rem'}}>
