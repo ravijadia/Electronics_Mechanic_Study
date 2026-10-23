@@ -23,11 +23,12 @@ export interface Fix {
   expected?: number | null;
 }
 
-/** A number written with up to 3 significant figures and no trailing zeros. */
+/** A number written with up to 4 significant figures (whole numbers from 1000 up) and no trailing zeros. */
 export function fmt(x: number | null | undefined): string {
   if (x == null || !Number.isFinite(x)) return '–';
   if (x === 0) return '0';
-  return String(Number(x.toPrecision(3)));
+  if (Math.abs(x) >= 1000) return String(Math.round(x));
+  return String(Number(x.toPrecision(4)));
 }
 
 const SQ2 = Math.SQRT2;
