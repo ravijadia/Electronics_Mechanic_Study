@@ -6,6 +6,7 @@ import Multimeter from '../Multimeter';
 import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes} from '../Probes';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, useKitSeed, useRng, type Note} from '../kit';
+import {L2} from '../solution';
 import styles from '../styles.module.css';
 
 const KEY = '1.4.35';
@@ -320,7 +321,20 @@ export default function MultimeterLab(): React.JSX.Element {
             head={['S. No.', 'Item', 'Function', 'Red lead jack', 'Reading', 'Check']}
             rows={rows.map((r, k) => {
               const x = items.find((i) => i.id === r.item)!;
-              return [k + 1, x.name, FN_LABEL[r.fn], r.jack === 'VmA' ? 'VΩmA' : '10A', <span className={styles.num}>{r.text}</span>, <Verdict ok={r.ok} />];
+              return [k + 1, x.name, FN_LABEL[r.fn], r.jack === 'VmA' ? 'VΩmA' : '10A', <span className={styles.num}>{r.text}</span>, <Verdict
+          ok={r.ok}
+          fix={{
+            hint: L2(
+              'Voltage and resistance: across the item, red lead in VΩmA. Current: meter in series at the gap; red lead in VΩmA (mA) or 10A (large current). No minus sign, no zero.',
+              'વોલ્ટેજ અને અવરોધ: આઇટમની આરપાર, લાલ લીડ VΩmA માં. કરંટ: ગેપમાં શ્રેણીમાં મીટર; લાલ લીડ VΩmA (mA) અથવા 10A (મોટો કરંટ) માં. માઇનસ ચિહ્ન નહીં, ઝીરો નહીં.',
+            ),
+            work: L2(
+              `${x.name}: use ${FN_LABEL[x.fn]} with the red lead in ${needJack(x.fn) === 'VmA' ? 'VΩmA' : '10A'}. You used ${FN_LABEL[r.fn]} with ${r.jack === 'VmA' ? 'VΩmA' : '10A'}${r.text.startsWith('-') ? ' and the reading has a minus sign: probes reversed' : ''}.`,
+              `${x.name}: ${FN_LABEL[x.fn]} વાપરો અને લાલ લીડ ${needJack(x.fn) === 'VmA' ? 'VΩmA' : '10A'} માં રાખો. તમે ${FN_LABEL[r.fn]} અને ${r.jack === 'VmA' ? 'VΩmA' : '10A'} વાપર્યા${r.text.startsWith('-') ? ' અને રીડિંગમાં માઇનસ ચિહ્ન છે: પ્રોબ ઊલટા' : ''}.`,
+            ),
+            answer: `${FN_LABEL[x.fn]}, ${needJack(x.fn) === 'VmA' ? 'VΩmA' : '10A'}`,
+          }}
+        />];
             })}
           />
         )}

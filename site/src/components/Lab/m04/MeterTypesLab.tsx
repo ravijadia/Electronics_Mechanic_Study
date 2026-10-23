@@ -3,6 +3,7 @@ import PracticalSheet from '../PracticalSheet';
 import {GU_1_4_36} from './gu';
 import useStoredState from '../useStoredState';
 import {ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng} from '../kit';
+import {L2} from '../solution';
 import styles from '../styles.module.css';
 
 const KEY = '1.4.36';
@@ -77,7 +78,16 @@ export default function MeterTypesLab(): React.JSX.Element {
                 </button>
               ))}
             </div>,
-            sup[i.name] ? <Verdict ok={sup[i.name] === i.supply} /> : '–',
+            sup[i.name] ? <Verdict
+                ok={sup[i.name] === i.supply}
+                fix={{
+                  hint: L2(
+                    'PMMC (moving coil) = DC only. Moving iron and dynamometer = AC and DC. Rectifier-type, induction and basic clamp meters = AC only.',
+                    'PMMC (મૂવિંગ કોઇલ) = ફક્ત DC. મૂવિંગ આયર્ન અને ડાયનેમોમીટર = AC અને DC. રેક્ટિફાયર-પ્રકાર, ઇન્ડક્શન અને સાદું ક્લેમ્પ મીટર = ફક્ત AC.',
+                  ),
+                  answer: i.supply,
+                }}
+              /> : '–',
           ])}
         />
       </Section>
@@ -92,7 +102,16 @@ export default function MeterTypesLab(): React.JSX.Element {
                 <option key={o}>{o}</option>
               ))}
             </select>,
-            pick[j.job] ? <Verdict ok={pick[j.job] === j.best} /> : '–',
+            pick[j.job] ? <Verdict
+                ok={pick[j.job] === j.best}
+                fix={{
+                  hint: L2(
+                    'Decide first: AC or DC? voltage, current, power or energy? Can the circuit be opened? Then choose the instrument built for that.',
+                    'પહેલાં નક્કી કરો: AC કે DC? વોલ્ટેજ, કરંટ, પાવર કે એનર્જી? સર્કિટ ખોલી શકાય છે? પછી તેના માટે બનેલું ઇન્સ્ટ્રુમેન્ટ પસંદ કરો.',
+                  ),
+                  answer: j.best,
+                }}
+              /> : '–',
           ])}
         />
         <ResetKit

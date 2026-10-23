@@ -6,6 +6,7 @@ import useStoredState from '../useStoredState';
 import {useScope} from '../Scope';
 import {fgFreq, fgVpp, useFunctionGenerator} from '../FunctionGenerator';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import {halfWave, pulse, si, sine, square, stats, triangle, type Sig} from '../signals';
 import styles from '../styles.module.css';
 
@@ -85,7 +86,13 @@ export function DsoControlsLab(): React.JSX.Element {
                 <option key={o}>{o}</option>
               ))}
             </select>,
-            ans[q.does] ? <Verdict ok={ans[q.does] === q.control} /> : '–',
+            ans[q.does] ? <Verdict
+              ok={ans[q.does] === q.control}
+              fix={{
+                hint: L2('Find this control on the DSO front panel above and press it to see what it does.', 'ઉપરના DSO ફ્રન્ટ પેનલ પર આ કંટ્રોલ શોધો અને દબાવીને જુઓ તે શું કરે છે.'),
+                answer: q.control,
+              }}
+            /> : '–',
           ])}
         />
         <ResetKit
@@ -185,7 +192,20 @@ export function DsoMeasureLab(): React.JSX.Element {
             inp(s.id, 'vpp', `${s.name} Vpp`),
             inp(s.id, 'f', `${s.name} frequency`),
             inp(s.id, 't', `${s.name} period`),
-            [res[k].vpp, res[k].f, res[k].t].some((x) => x == null) ? '–' : <Verdict ok={!!(res[k].vpp && res[k].f && res[k].t)} />,
+            [res[k].vpp, res[k].f, res[k].t].some((x) => x == null) ? '–' : <Verdict
+                ok={!!(res[k].vpp && res[k].f && res[k].t)}
+                fix={{
+                  hint: L2(
+                    'Vpp = vertical divisions × volts/div (or use MEASURE). Period T = horizontal divisions for one cycle × time/div. f = 1 ÷ T.',
+                    'Vpp = ઊભા ડિવિઝન × volts/div (અથવા MEASURE વાપરો). પીરિયડ T = એક સાઇકલના આડા ડિવિઝન × time/div. f = 1 ÷ T.',
+                  ),
+                  work: L2(
+                    `Vpp = ${fmt(res[k].m.pp)} V, T = ${fmt(res[k].m.period! * 1000)} ms, f = 1000 ÷ ${fmt(res[k].m.period! * 1000)} = ${fmt(res[k].m.freq)} Hz.`,
+                    `Vpp = ${fmt(res[k].m.pp)} V, T = ${fmt(res[k].m.period! * 1000)} ms, f = 1000 ÷ ${fmt(res[k].m.period! * 1000)} = ${fmt(res[k].m.freq)} Hz.`,
+                  ),
+                  answer: `${fmt(res[k].m.pp)} V, ${fmt(res[k].m.freq)} Hz, ${fmt(res[k].m.period! * 1000)} ms`,
+                }}
+              />,
           ])}
         />
         <ResetKit
@@ -308,13 +328,31 @@ export function DsoPrintLab(): React.JSX.Element {
                   'Frequency (Hz)',
                   <input className={styles.input} inputMode="decimal" aria-label="Frequency from printout" value={ans.f ?? ''} onChange={(e) => setAns((a) => ({...a, f: e.target.value}))} />,
                   fOk != null ? si(shot.fgF, 'Hz', 4) : '(hidden until you answer)',
-                  <Verdict ok={fOk} />,
+                  <Verdict
+                    ok={fOk}
+                    fix={{
+                      hint: L2('Read the time/div from the printout. T = divisions per cycle × time/div. f = 1 ÷ T.', 'પ્રિન્ટઆઉટ પરથી time/div વાંચો. T = એક સાઇકલના ડિવિઝન × time/div. f = 1 ÷ T.'),
+                      work: L2(`The generator was set to ${fmt(shot!.fgF)} Hz.`, `જનરેટર ${fmt(shot!.fgF)} Hz પર સેટ હતું.`),
+                      answer: `${fmt(shot!.fgF)} Hz`,
+                      entered: num(ans.f ?? ''),
+                      expected: shot!.fgF,
+                    }}
+                  />,
                 ],
                 [
                   'Vpp (V)',
                   <input className={styles.input} inputMode="decimal" aria-label="Vpp from printout" value={ans.vpp ?? ''} onChange={(e) => setAns((a) => ({...a, vpp: e.target.value}))} />,
                   vOk != null ? `${shot.fgVpp} V` : '(hidden until you answer)',
-                  <Verdict ok={vOk} />,
+                  <Verdict
+                    ok={vOk}
+                    fix={{
+                      hint: L2('Vpp = vertical divisions from bottom to top × volts/div shown on the printout.', 'Vpp = નીચેથી ઉપર સુધીના ઊભા ડિવિઝન × પ્રિન્ટઆઉટ પરનું volts/div.'),
+                      work: L2(`The generator was set to ${fmt(shot!.fgVpp)} V peak-to-peak.`, `જનરેટર ${fmt(shot!.fgVpp)} V પીક-ટુ-પીક પર સેટ હતું.`),
+                      answer: `${fmt(shot!.fgVpp)} V`,
+                      entered: num(ans.vpp ?? ''),
+                      expected: shot!.fgVpp,
+                    }}
+                  />,
                 ],
               ]}
             />
@@ -533,7 +571,19 @@ export function Icl8038Lab(): React.JSX.Element {
         ) : (
           <Table
             head={['R', 'C', 'Calculated f (Hz)', 'Measured f (Hz)', 'Check']}
-            rows={rows.map((x) => [si(x.r, 'Ω'), si(x.c, 'F'), <span className={styles.num}>{x.calc}</span>, <span className={styles.num}>{x.meas}</span>, <Verdict ok={rowOk(x)} />])}
+            rows={rows.map((x) => [si(x.r, 'Ω'), si(x.c, 'F'), <span className={styles.num}>{x.calc}</span>, <span className={styles.num}>{x.meas}</span>, <Verdict
+                ok={rowOk(x)}
+                fix={{
+                  hint: L2('Calculated f = 0.33 ÷ (R × C), with R in Ω and C in F. Measured f is read from the DSO.', 'ગણતરીથી f = 0.33 ÷ (R × C), R Ω માં અને C F માં. માપેલી f DSO પરથી વાંચો.'),
+                  work: L2(
+                    `f = 0.33 ÷ (${x.r} × ${x.c}) = ${fmt(0.33 / (x.r * x.c))} Hz. The DSO shows ${fmt(x.trueF)} Hz.`,
+                    `f = 0.33 ÷ (${x.r} × ${x.c}) = ${fmt(0.33 / (x.r * x.c))} Hz. DSO ${fmt(x.trueF)} Hz બતાવે છે.`,
+                  ),
+                  answer: `${fmt(0.33 / (x.r * x.c))} Hz (calc), ${fmt(x.trueF)} Hz (measured)`,
+                  entered: within(num(x.calc), 0.33 / (x.r * x.c), 0.03) ? num(x.meas) : num(x.calc),
+                  expected: within(num(x.calc), 0.33 / (x.r * x.c), 0.03) ? x.trueF : 0.33 / (x.r * x.c),
+                }}
+              />])}
           />
         )}
         <ResetKit
