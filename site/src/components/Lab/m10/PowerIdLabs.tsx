@@ -6,6 +6,7 @@ import Multimeter from '../Multimeter';
 import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes} from '../Probes';
 import {NoteBox, ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng, type Note} from '../kit';
+import {L2} from '../solution';
 import {PartGrid} from '../m07/IdentifyLabs';
 import {PartArt, type PartKind} from '../m07/art';
 import {kitLabel, near} from '../m07/parts';
@@ -117,7 +118,20 @@ export function PowerDevicesLab(): React.JSX.Element {
             sel(`Part ${k + 1} pin 1`, ans[k]?.pin1, pins, (v) => set(k, {pin1: v})),
             <input className={styles.input} style={{maxWidth: '4.5rem'}} inputMode="decimal" aria-label={`Part ${k + 1} current`} value={ans[k]?.a ?? ''} onChange={(e) => set(k, {a: e.target.value})} />,
             <input className={styles.input} style={{maxWidth: '4.5rem'}} inputMode="decimal" aria-label={`Part ${k + 1} voltage`} value={ans[k]?.v ?? ''} onChange={(e) => set(k, {v: e.target.value})} />,
-            Object.keys(ans[k] ?? {}).length === 4 ? <Verdict ok={ok(k)} /> : '–',
+            Object.keys(ans[k] ?? {}).length === 4 ? (
+              <Verdict
+                ok={ok(k)}
+                fix={{
+                  hint: L2(
+                    'Read the type number and find it in the data book: it gives the device, pin order (pin 1), maximum current and maximum voltage.',
+                    'ટાઇપ નંબર વાંચીને ડેટા બુકમાં શોધો: તેમાં ડિવાઇસ, પિન ક્રમ (પિન 1), મહત્તમ કરંટ અને મહત્તમ વોલ્ટેજ હોય છે.',
+                  ),
+                  answer: `${items[k].id}: pin 1 = ${items[k].pin1}, ${items[k].amps} A, ${items[k].volts} V`,
+                }}
+              />
+            ) : (
+              '–'
+            ),
           ])}
         />
         <p className={styles.muted}>Use the first rating given in the data sheet (e.g. DIAC: 2 A, 32 V; UJT: 0.05 A, 35 V).</p>
@@ -378,7 +392,20 @@ function TestTable({kit, b, ans, setAns, pinLabel}: {kit: Sw[]; b: ReturnType<ty
             ],
             (v) => set({cond: v}),
           ),
-          a.ch && a.cond ? <Verdict ok={ok} /> : '–',
+          a.ch && a.cond ? (
+            <Verdict
+              ok={ok}
+              fix={{
+                hint: L2(
+                  'DMM on diode test. Touch the gate to charge it (device turns ON), then touch gate to source/emitter to discharge it (turns OFF). A MOSFET shows a body diode between drain and source; some IGBTs have a co-pack diode between collector and emitter. The way that diode points tells N-channel from P-channel. A good device turns ON and OFF.',
+                  'DMM ડાયોડ ટેસ્ટ પર. ગેટને અડીને ચાર્જ કરો (ડિવાઇસ ON), પછી ગેટ અને સોર્સ/ઇમિટરને અડીને ડિસ્ચાર્જ કરો (OFF). MOSFET માં ડ્રેઇન અને સોર્સ વચ્ચે બોડી ડાયોડ દેખાય; કેટલાક IGBT માં કલેક્ટર અને ઇમિટર વચ્ચે કો-પેક ડાયોડ હોય. ડાયોડની દિશા પરથી N-ચેનલ અને P-ચેનલ ઓળખાય. સારું ડિવાઇસ ON અને OFF બંને થાય.',
+                ),
+                answer: `${d.igbt ? (d.diode ? 'With co-pack diode' : 'No diode') : d.pch ? 'P-channel' : 'N-channel'}, ${d.fault === 'good' ? 'Good' : 'Faulty'}`,
+              }}
+            />
+          ) : (
+            '–'
+          ),
         ];
       })}
     />

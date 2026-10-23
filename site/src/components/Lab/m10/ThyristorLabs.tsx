@@ -7,6 +7,7 @@ import useStoredState from '../useStoredState';
 import {Knob, useScope} from '../Scope';
 import {si, stats, type Sig} from '../signals';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import {kitLabel, near} from '../m07/parts';
 import styles from '../styles.module.css';
 
@@ -178,7 +179,23 @@ export function UjtOscLab(): React.JSX.Element {
             head={['Pot', 'R', 'C', 'T measured (ms)', 'f calculated (Hz)', 'Check']}
             rows={rows.map((x, k) => {
               const set = (p: Partial<URow>) => setRows((y) => y.map((z, j) => (j === k ? {...z, ...p} : z)));
-              return [`${x.pot} %`, si(R_FIX + (POT * x.pot) / 100, 'Ω'), si(x.c, 'F'), inp(`Row ${k + 1} period`, x.tm, (v) => set({tm: v})), inp(`Row ${k + 1} frequency`, x.fc, (v) => set({fc: v})), x.tm && x.fc ? <Verdict ok={rowOk(x)} /> : '–'];
+              return [`${x.pot} %`, si(R_FIX + (POT * x.pot) / 100, 'Ω'), si(x.c, 'F'), inp(`Row ${k + 1} period`, x.tm, (v) => set({tm: v})), inp(`Row ${k + 1} frequency`, x.fc, (v) => set({fc: v})), x.tm && x.fc ? (
+                <Verdict
+                  ok={rowOk(x)}
+                  fix={{
+                    hint: L2('T = divisions per cycle × TIME/DIV on the CRO (enter in ms). f = 1 ÷ [R × C × ln(1 ÷ (1 − η))], with R in ohms, C in farads.', 'T = CRO પર એક સાઇકલના ડિવિઝન × TIME/DIV (ms માં). f = 1 ÷ [R × C × ln(1 ÷ (1 − η))], R ઓહ્મમાં, C ફેરાડમાં.'),
+                    work: L2(
+                      `T on the CRO = ${fmt(x.T * 1000)} ms. R = ${fmt(R_FIX + (POT * x.pot) / 100)} Ω, C = ${x.c} F, η = ${fmt(num(ans.eta))} → f = ${fmt(1 / ((R_FIX + (POT * x.pot) / 100) * x.c * Math.log(1 / (1 - (num(ans.eta) ?? eta)))))} Hz.`,
+                      `CRO પર T = ${fmt(x.T * 1000)} ms. R = ${fmt(R_FIX + (POT * x.pot) / 100)} Ω, C = ${x.c} F, η = ${fmt(num(ans.eta))} → f = ${fmt(1 / ((R_FIX + (POT * x.pot) / 100) * x.c * Math.log(1 / (1 - (num(ans.eta) ?? eta)))))} Hz.`,
+                    ),
+                    answer: `T ${fmt(x.T * 1000)} ms`,
+                    entered: num(x.tm),
+                    expected: x.T * 1000,
+                  }}
+                />
+              ) : (
+                '–'
+              )];
             })}
           />
         )}
@@ -187,8 +204,36 @@ export function UjtOscLab(): React.JSX.Element {
         <Table
           head={['', 'Your value', 'Check']}
           rows={[
-            ['Peak voltage Vp (V)', inp('Peak voltage', ans.vp, (v) => setAns((a) => ({...a, vp: v}))), ans.vp ? <Verdict ok={vpOk} /> : '–'],
-            ['η = (Vp − 0.6) ÷ 12', inp('Stand-off ratio', ans.eta, (v) => setAns((a) => ({...a, eta: v}))), ans.eta ? <Verdict ok={etaOk} /> : '–'],
+            ['Peak voltage Vp (V)', inp('Peak voltage', ans.vp, (v) => setAns((a) => ({...a, vp: v}))), ans.vp ? (
+                <Verdict
+                  ok={vpOk}
+                  fix={{
+                    hint: L2('Vp is the top of the sawtooth on the capacitor, read on the CRO with DC coupling: divisions × VOLTS/DIV.', 'Vp એ કેપેસિટર પરના સોટૂથનું ટોચનું લેવલ છે, CRO પર DC કપલિંગથી: ડિવિઝન × VOLTS/DIV.'),
+                    work: L2(`Vp = η × VBB + 0.6 = ${fmt(eta)} × ${VBB} + 0.6 = ${fmt(vpTrue)} V.`, `Vp = η × VBB + 0.6 = ${fmt(eta)} × ${VBB} + 0.6 = ${fmt(vpTrue)} V.`),
+                    answer: `${fmt(vpTrue)} V`,
+                    entered: num(ans.vp),
+                    expected: vpTrue,
+                  }}
+                />
+              ) : (
+                '–'
+              ),
+            ],
+            ['η = (Vp − 0.6) ÷ 12', inp('Stand-off ratio', ans.eta, (v) => setAns((a) => ({...a, eta: v}))), ans.eta ? (
+                <Verdict
+                  ok={etaOk}
+                  fix={{
+                    hint: L2('η = (Vp − 0.6) ÷ VBB, using the Vp you read.', 'η = (Vp − 0.6) ÷ VBB, તમે વાંચેલા Vp થી.'),
+                    work: num(ans.vp) != null ? L2(`η = (${fmt(num(ans.vp))} − 0.6) ÷ ${VBB} = ${fmt((num(ans.vp)! - 0.6) / VBB)}.`, `η = (${fmt(num(ans.vp))} − 0.6) ÷ ${VBB} = ${fmt((num(ans.vp)! - 0.6) / VBB)}.`) : undefined,
+                    answer: num(ans.vp) != null ? fmt((num(ans.vp)! - 0.6) / VBB) : undefined,
+                    entered: num(ans.eta),
+                    expected: num(ans.vp) != null ? (num(ans.vp)! - 0.6) / VBB : null,
+                  }}
+                />
+              ) : (
+                '–'
+              ),
+            ],
           ]}
         />
         <ResetKit
@@ -372,7 +417,23 @@ export function ScrUjtLab(): React.JSX.Element {
             head={['Pot', 'α from CRO (°)', 'Vdc measured (V)', 'Vdc = Vm (1 + cos α) ÷ 2π', 'Check']}
             rows={rows.map((x, k) => {
               const set = (p: Partial<SRow>) => setRows((y) => y.map((z, j) => (j === k ? {...z, ...p} : z)));
-              return [`${x.pot} %`, inp(`Row ${k + 1} firing angle`, x.am, (v) => set({am: v})), x.vdc.toFixed(2), inp(`Row ${k + 1} calculated Vdc`, x.vcalc, (v) => set({vcalc: v})), x.am && x.vcalc ? <Verdict ok={rowOk(x)} /> : '–'];
+              return [`${x.pot} %`, inp(`Row ${k + 1} firing angle`, x.am, (v) => set({am: v})), x.vdc.toFixed(2), inp(`Row ${k + 1} calculated Vdc`, x.vcalc, (v) => set({vcalc: v})), x.am && x.vcalc ? (
+                <Verdict
+                  ok={rowOk(x)}
+                  fix={{
+                    hint: L2('α = (divisions to the jump ÷ divisions per cycle) × 360°. Vdc = Vm × (1 + cos α) ÷ 2π.', 'α = (જમ્પ સુધીના ડિવિઝન ÷ એક સાઇકલના ડિવિઝન) × 360°. Vdc = Vm × (1 + cos α) ÷ 2π.'),
+                    work: L2(
+                      `α = ${x.alpha}°. Vdc = ${fmt(vm)} × (1 + cos ${x.alpha}°) ÷ 2π = ${fmt((vm / (2 * Math.PI)) * (1 + Math.cos((x.alpha * Math.PI) / 180)))} V.`,
+                      `α = ${x.alpha}°. Vdc = ${fmt(vm)} × (1 + cos ${x.alpha}°) ÷ 2π = ${fmt((vm / (2 * Math.PI)) * (1 + Math.cos((x.alpha * Math.PI) / 180)))} V.`,
+                    ),
+                    answer: `α ${x.alpha}°, Vdc ${fmt((vm / (2 * Math.PI)) * (1 + Math.cos((x.alpha * Math.PI) / 180)))} V`,
+                    entered: Math.abs((num(x.am) ?? 0) - x.alpha) > 8 ? num(x.am) : num(x.vcalc),
+                    expected: Math.abs((num(x.am) ?? 0) - x.alpha) > 8 ? x.alpha : (vm / (2 * Math.PI)) * (1 + Math.cos(((num(x.am) ?? 0) * Math.PI) / 180)),
+                  }}
+                />
+              ) : (
+                '–'
+              )];
             })}
           />
         )}
@@ -582,7 +643,22 @@ export function DimmerLab(): React.JSX.Element {
             head={['Pot', 'Lamp V (measured)', 'α from CRO (°)', 'Vrms from α', 'Check']}
             rows={rows.map((x, k) => {
               const set = (p: Partial<DRow>) => setRows((y) => y.map((z, j) => (j === k ? {...z, ...p} : z)));
-              return [`${x.pot} %`, `${x.vl.toFixed(0)} V`, x.alpha == null ? 'off' : inp(`Row ${k + 1} firing angle`, x.am, (v) => set({am: v})), x.alpha == null ? '–' : inp(`Row ${k + 1} calculated V`, x.vc, (v) => set({vc: v})), x.alpha == null ? 'lamp off' : x.am && x.vc ? <Verdict ok={rowOk(x)} /> : '–'];
+              return [`${x.pot} %`, `${x.vl.toFixed(0)} V`, x.alpha == null ? 'off' : inp(`Row ${k + 1} firing angle`, x.am, (v) => set({am: v})), x.alpha == null ? '–' : inp(`Row ${k + 1} calculated V`, x.vc, (v) => set({vc: v})), x.alpha == null ? (
+                  'lamp off'
+                ) : x.am && x.vc ? (
+                  <Verdict
+                    ok={rowOk(x)}
+                    fix={{
+                      hint: L2('α from the CRO: (divisions to the point where the lamp voltage jumps ÷ divisions per half cycle) × 180°. V(rms) = Vs × √(1 − α/π + sin 2α ÷ 2π).', 'CRO પરથી α: (લેમ્પ વોલ્ટેજ જ્યાં કૂદે ત્યાં સુધીના ડિવિઝન ÷ અડધા સાઇકલના ડિવિઝન) × 180°. V(rms) = Vs × √(1 − α/π + sin 2α ÷ 2π).'),
+                      work: L2(`α = ${x.alpha}°. V(rms) = ${fmt(vs)} × √(1 − α/π + sin 2α ÷ 2π) = ${fmt(calc((x.alpha * Math.PI) / 180))} V.`, `α = ${x.alpha}°. V(rms) = ${fmt(vs)} × √(1 − α/π + sin 2α ÷ 2π) = ${fmt(calc((x.alpha * Math.PI) / 180))} V.`),
+                      answer: `α ${x.alpha}°, ${fmt(calc((x.alpha * Math.PI) / 180))} V`,
+                      entered: Math.abs((num(x.am) ?? 0) - x.alpha) > 8 ? num(x.am) : num(x.vc),
+                      expected: Math.abs((num(x.am) ?? 0) - x.alpha) > 8 ? x.alpha : calc(((num(x.am) ?? 0) * Math.PI) / 180),
+                    }}
+                  />
+                ) : (
+                  '–'
+                )];
             })}
           />
         )}

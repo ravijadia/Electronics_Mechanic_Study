@@ -6,6 +6,7 @@ import XYGraph from '../XYGraph';
 import useStoredState from '../useStoredState';
 import {Knob} from '../Scope';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import {kitLabel, near} from '../m07/parts';
 import {PanelMeter} from '../m08/ZenerRegLabs';
 import styles from '../styles.module.css';
@@ -261,11 +262,47 @@ function SwitchLoadLab({s}: {s: Spec}): React.JSX.Element {
         <Table
           head={['', 'Your value', 'Check']}
           rows={[
-            [`Threshold ${S.g}(th) (V)`, <input className={styles.input} style={{maxWidth: '5rem'}} inputMode="decimal" aria-label="Threshold voltage" value={ans.vth ?? ''} onChange={(e) => setAns((a) => ({...a, vth: e.target.value}))} />, ans.vth ? <Verdict ok={vthOk} /> : '–'],
+            [`Threshold ${S.g}(th) (V)`, <input className={styles.input} style={{maxWidth: '5rem'}} inputMode="decimal" aria-label="Threshold voltage" value={ans.vth ?? ''} onChange={(e) => setAns((a) => ({...a, vth: e.target.value}))} />, ans.vth ? (
+              <Verdict
+                ok={vthOk}
+                fix={{
+                  hint: L2(`Raise ${S.g} slowly from 0 V. The threshold is the ${S.g} at which ${S.i} just starts to flow. Look at your table near the first non-zero current.`, `${S.g} ને 0 V થી ધીમે ધીમે વધારો. જે ${S.g} પર ${S.i} વહેવા લાગે તે થ્રેશોલ્ડ. તમારા ટેબલમાં પહેલા શૂન્યેતર કરંટ પાસે જુઓ.`),
+                  answer: `${fmt(dev.vth)} V (±0.5 V)`,
+                  entered: num(ans.vth),
+                  expected: dev.vth,
+                }}
+              />
+            ) : (
+              '–'
+            ),
+          ],
             [
               s.dev.igbt ? 'VCE(sat) at VGE = 15 V (V)' : 'RDS(on) at VGS = 10 V (mΩ)',
               <input className={styles.input} style={{maxWidth: '5rem'}} inputMode="decimal" aria-label="On-state value" value={ans.on ?? ''} onChange={(e) => setAns((a) => ({...a, on: e.target.value}))} />,
-              ans.on ? onTrue == null ? `note a reading at ${s.dev.igbt ? 15 : 10} V first` : <Verdict ok={onOk} /> : '–',
+              ans.on ? (
+                onTrue == null ? (
+                  `note a reading at ${s.dev.igbt ? 15 : 10} V first`
+                ) : (
+                  <Verdict
+                    ok={onOk}
+                    fix={{
+                      hint: s.dev.igbt
+                        ? L2('VCE(sat) is the voltage across the IGBT when fully ON (VGE = 15 V). Read it from your table.', 'VCE(sat) એ IGBT પૂરેપૂરું ON (VGE = 15 V) હોય ત્યારે તેના પરનો વોલ્ટેજ. ટેબલમાંથી વાંચો.')
+                        : L2('RDS(on) = VDS ÷ ID at VGS = 10 V. Answer in mΩ (× 1000).', 'RDS(on) = VDS ÷ ID, VGS = 10 V પર. જવાબ mΩ માં (× 1000).'),
+                      work: full
+                        ? s.dev.igbt
+                          ? L2(`VCE(sat) = ${fmt(full.v)} V.`, `VCE(sat) = ${fmt(full.v)} V.`)
+                          : L2(`RDS(on) = ${fmt(full.v)} ÷ ${fmt(full.i)} × 1000 = ${fmt(onTrue)} mΩ.`, `RDS(on) = ${fmt(full.v)} ÷ ${fmt(full.i)} × 1000 = ${fmt(onTrue)} mΩ.`)
+                        : undefined,
+                      answer: s.dev.igbt ? `${fmt(onTrue)} V` : `${fmt(onTrue)} mΩ`,
+                      entered: num(ans.on),
+                      expected: onTrue,
+                    }}
+                  />
+                )
+              ) : (
+                '–'
+              ),
             ],
           ]}
         />

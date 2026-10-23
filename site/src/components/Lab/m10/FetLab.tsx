@@ -9,6 +9,7 @@ import {useScope} from '../Scope';
 import {fgFreq, useFunctionGenerator} from '../FunctionGenerator';
 import type {Sig} from '../signals';
 import {NoteBox, ResetKit, Section, Table, Verdict, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import {kitLabel, near} from '../m07/parts';
 import {Cap, DC, METER_FNS, Res, acRms, meterRead, stageSignal} from '../m09/amp';
 import {hp, par} from '../m09/bjt';
@@ -234,10 +235,65 @@ export default function FetAmpLab(): React.JSX.Element {
         <Table
           head={['', 'Your value', 'Check']}
           rows={[
-            ['ID = (15 − VD) ÷ 2.2k (mA)', inp('Drain current', ans.id, (v) => setAns((a) => ({...a, id: v}))), ans.id ? <Verdict ok={ok.id} /> : '–'],
-            ['VGS = −VS (V)', inp('VGS', ans.vgs, (v) => setAns((a) => ({...a, vgs: v}))), ans.vgs ? <Verdict ok={ok.vgs} /> : '–'],
-            ['Gain with CS', inp('Gain with CS', ans.gB, (v) => setAns((a) => ({...a, gB: v}))), ans.gB ? <Verdict ok={ok.gB} /> : '–'],
-            ['Gain without CS', inp('Gain without CS', ans.gU, (v) => setAns((a) => ({...a, gU: v}))), ans.gU ? <Verdict ok={ok.gU} /> : '–'],
+            ['ID = (15 − VD) ÷ 2.2k (mA)', inp('Drain current', ans.id, (v) => setAns((a) => ({...a, id: v}))), ans.id ? (
+                <Verdict
+                  ok={ok.id}
+                  fix={{
+                    hint: L2('ID = (VDD − VD) ÷ RD, with VD measured from drain to ground. The answer is in mA when RD is in kΩ.', 'ID = (VDD − VD) ÷ RD, VD ડ્રેઇનથી ગ્રાઉન્ડ સુધી માપેલ. RD kΩ માં હોય તો જવાબ mA માં.'),
+                    work: idTrue != null ? L2(`ID = (${VDD} − ${fmt(rec.VD)}) ÷ ${RD / 1000} kΩ = ${fmt(idTrue)} mA.`, `ID = (${VDD} − ${fmt(rec.VD)}) ÷ ${RD / 1000} kΩ = ${fmt(idTrue)} mA.`) : L2('Measure VD (drain to ground) first.', 'પહેલાં VD (ડ્રેઇનથી ગ્રાઉન્ડ) માપો.'),
+                    answer: idTrue != null ? `${fmt(idTrue)} mA` : undefined,
+                    entered: num(ans.id),
+                    expected: idTrue,
+                  }}
+                />
+              ) : (
+                '–'
+              ),
+            ],
+            ['VGS = −VS (V)', inp('VGS', ans.vgs, (v) => setAns((a) => ({...a, vgs: v}))), ans.vgs ? (
+                <Verdict
+                  ok={ok.vgs}
+                  fix={{
+                    hint: L2('With self bias the gate is at 0 V, so VGS = 0 − VS = −VS. Measure VS (source to ground) and change its sign.', 'સેલ્ફ બાયસમાં ગેટ 0 V પર હોય છે, એટલે VGS = 0 − VS = −VS. VS (સોર્સથી ગ્રાઉન્ડ) માપીને તેની નિશાની બદલો.'),
+                    answer: rec.VS != null ? `${fmt(-rec.VS)} V` : undefined,
+                    entered: num(ans.vgs),
+                    expected: rec.VS != null ? -rec.VS : null,
+                  }}
+                />
+              ) : (
+                '–'
+              ),
+            ],
+            ['Gain with CS', inp('Gain with CS', ans.gB, (v) => setAns((a) => ({...a, gB: v}))), ans.gB ? (
+                <Verdict
+                  ok={ok.gB}
+                  fix={{
+                    hint: L2('Gain = Vout ÷ Vin (rms), with the source bypass capacitor CS fitted. Keep the output unclipped.', 'ગેઇન = Vout ÷ Vin (rms), સોર્સ બાયપાસ કેપેસિટર CS લગાવીને. આઉટપુટ ક્લિપ ન થાય તેનું ધ્યાન રાખો.'),
+                    work: gB != null ? L2(`Gain = ${fmt(rec.voutB)} ÷ ${fmt(rec.vinB)} = ${fmt(gB)}.`, `ગેઇન = ${fmt(rec.voutB)} ÷ ${fmt(rec.vinB)} = ${fmt(gB)}.`) : L2('Measure Vin and Vout with CS fitted first.', 'પહેલાં CS લગાવીને Vin અને Vout માપો.'),
+                    answer: gB != null ? fmt(gB) : undefined,
+                    entered: num(ans.gB),
+                    expected: gB,
+                  }}
+                />
+              ) : (
+                '–'
+              ),
+            ],
+            ['Gain without CS', inp('Gain without CS', ans.gU, (v) => setAns((a) => ({...a, gU: v}))), ans.gU ? (
+                <Verdict
+                  ok={ok.gU}
+                  fix={{
+                    hint: L2('Remove CS and measure again. Without the bypass capacitor the gain is much lower (negative feedback from RS).', 'CS કાઢીને ફરી માપો. બાયપાસ કેપેસિટર વિના ગેઇન ઘણો ઓછો થાય છે (RS નો નેગેટિવ ફીડબેક).'),
+                    work: gU != null ? L2(`Gain = ${fmt(rec.voutU)} ÷ ${fmt(rec.vinU)} = ${fmt(gU)}.`, `ગેઇન = ${fmt(rec.voutU)} ÷ ${fmt(rec.vinU)} = ${fmt(gU)}.`) : L2('Measure Vin and Vout without CS first.', 'પહેલાં CS વગર Vin અને Vout માપો.'),
+                    answer: gU != null ? fmt(gU) : undefined,
+                    entered: num(ans.gU),
+                    expected: gU,
+                  }}
+                />
+              ) : (
+                '–'
+              ),
+            ],
             [
               'Phase',
               <select className={styles.select} aria-label="Phase" value={ans.ph ?? ''} onChange={(e) => setAns((a) => ({...a, ph: e.target.value}))}>
@@ -245,9 +301,30 @@ export default function FetAmpLab(): React.JSX.Element {
                 <option value="0">0°</option>
                 <option value="180">180°</option>
               </select>,
-              ans.ph ? <Verdict ok={ok.ph} /> : '–',
+              ans.ph ? (
+                <Verdict
+                  ok={ok.ph}
+                  fix={{ hint: L2('A common-source amplifier inverts: when the input rises the output falls (180°). Compare the two CRO traces.', 'કોમન-સોર્સ એમ્પ્લિફાયર ઊલટાવે છે: ઇનપુટ વધે ત્યારે આઉટપુટ ઘટે (180°). CRO ના બંને ટ્રેસ સરખાવો.'), answer: '180°' }}
+                />
+              ) : (
+                '–'
+              ),
             ],
-            ['Zin (kΩ)', inp('Input impedance in kilohms', ans.zin, (v) => setAns((a) => ({...a, zin: v}))), ans.zin ? <Verdict ok={ok.zin} /> : '–'],
+            ['Zin (kΩ)', inp('Input impedance in kilohms', ans.zin, (v) => setAns((a) => ({...a, zin: v}))), ans.zin ? (
+                <Verdict
+                  ok={ok.zin}
+                  fix={{
+                    hint: L2('Zin = R × Vin ÷ (Vgen − Vin), with the 1 MΩ test resistor in series: Vgen is the generator voltage, Vin the voltage at the gate. Answer in kΩ.', 'Zin = R × Vin ÷ (Vgen − Vin), 1 MΩ ટેસ્ટ રેઝિસ્ટર શ્રેણીમાં: Vgen જનરેટર વોલ્ટેજ, Vin ગેટ પરનો વોલ્ટેજ. જવાબ kΩ માં.'),
+                    work: zin != null ? L2(`Zin = ${R_TEST} × ${fmt(rec.vinT)} ÷ (${fmt(rec.vgenT)} − ${fmt(rec.vinT)}) = ${fmt(zin / 1000)} kΩ.`, `Zin = ${R_TEST} × ${fmt(rec.vinT)} ÷ (${fmt(rec.vgenT)} − ${fmt(rec.vinT)}) = ${fmt(zin / 1000)} kΩ.`) : L2('Measure Vgen and Vin with the 1 MΩ test resistor first.', 'પહેલાં 1 MΩ ટેસ્ટ રેઝિસ્ટર સાથે Vgen અને Vin માપો.'),
+                    answer: zin != null ? `${fmt(zin / 1000)} kΩ` : undefined,
+                    entered: num(ans.zin),
+                    expected: zin != null ? zin / 1000 : null,
+                  }}
+                />
+              ) : (
+                '–'
+              ),
+            ],
           ]}
         />
         <ResetKit
