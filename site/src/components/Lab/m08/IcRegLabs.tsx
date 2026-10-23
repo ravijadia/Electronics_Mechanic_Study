@@ -468,8 +468,8 @@ export function RegulatorIcsLab(): React.JSX.Element {
                 ok={ok(k)}
                 fix={{
                   hint: L2(
-                    '78 = positive, 79 = negative, 317 / 337 = adjustable. The last two digits are the voltage. Letter after 78: L = 0.1 A, M = 0.5 A, none = 1.5 A, S = 2 A. Pin 1 is IN for 78xx, GND for 79xx, ADJ for 317.',
-                    '78 = પોઝિટિવ, 79 = નેગેટિવ, 317 / 337 = એડજસ્ટેબલ. છેલ્લા બે અંક વોલ્ટેજ. 78 પછીનો અક્ષર: L = 0.1 A, M = 0.5 A, કંઈ નહીં = 1.5 A, S = 2 A. પિન 1: 78xx માં IN, 79xx માં GND, 317 માં ADJ.',
+                    '78 = positive, 79 = negative, 317 / 337 = adjustable. The last two digits are the voltage. Letter after 78: L = 0.1 A, M = 0.5 A, none = 1.5 A, S = 2 A. Pin 1 is IN for 78xx (TO-220), OUT for 78Lxx (TO-92), GND for 79xx, ADJ for 317; check the data sheet.',
+                    '78 = પોઝિટિવ, 79 = નેગેટિવ, 317 / 337 = એડજસ્ટેબલ. છેલ્લા બે અંક વોલ્ટેજ. 78 પછીનો અક્ષર: L = 0.1 A, M = 0.5 A, કંઈ નહીં = 1.5 A, S = 2 A. પિન 1: 78xx (TO-220) માં IN, 78Lxx (TO-92) માં OUT, 79xx માં GND, 317 માં ADJ; ડેટા શીટ તપાસો.',
                   ),
                   answer: `${items[k].mark}: ${items[k].vout} V, ${items[k].amps} A, pin 1 = ${items[k].pin1}`,
                 }}
