@@ -7,6 +7,7 @@ import XYGraph from '../XYGraph';
 import useStoredState from '../useStoredState';
 import {Knob} from '../Scope';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import {kitLabel, near} from '../m07/parts';
 import {PanelMeter} from '../m08/ZenerRegLabs';
 import {DROP_A, LUX_STEPS, PICK_A, pickLux, sensorDrive, type SensorSpec} from './opto';
@@ -271,11 +272,36 @@ function LightSwitchLab({s}: {s: Spec}): React.JSX.Element {
         <Table
           head={['', 'Your value', 'Check']}
           rows={[
-            ['Sensitivity = ΔI ÷ Δlux (µA/lx)', <input className={styles.input} style={{maxWidth: '5.5rem'}} inputMode="decimal" aria-label="Sensitivity" value={ans.sens ?? ''} onChange={(e) => setAns((a) => ({...a, sens: e.target.value}))} />, ans.sens ? <Verdict ok={sensOk} /> : '–'],
+            ['Sensitivity = ΔI ÷ Δlux (µA/lx)', <input className={styles.input} style={{maxWidth: '5.5rem'}} inputMode="decimal" aria-label="Sensitivity" value={ans.sens ?? ''} onChange={(e) => setAns((a) => ({...a, sens: e.target.value}))} />, ans.sens ? (
+              <Verdict
+                ok={sensOk}
+                fix={{
+                  hint: L2('Sensitivity = ΔI ÷ Δlux: pick two points on your table, divide the change in sensor current (µA) by the change in light (lx).', 'સેન્સિટિવિટી = ΔI ÷ Δlux: ટેબલમાંથી બે બિંદુ લો, સેન્સર કરંટ (µA) ના ફેરફારને પ્રકાશ (lx) ના ફેરફારથી ભાગો.'),
+                  answer: `${fmt(sen.sens * 1e6)} µA/lx (±12 %)`,
+                  entered: num(ans.sens),
+                  expected: sen.sens * 1e6,
+                }}
+              />
+            ) : (
+              '–'
+            ),
+          ],
             [
               'Switching light level (lx)',
               <input className={styles.input} style={{maxWidth: '5.5rem'}} inputMode="decimal" aria-label="Switching light level" value={ans.lux ?? ''} onChange={(e) => setAns((a) => ({...a, lux: e.target.value}))} />,
-              ans.lux ? seen.pickPos !== pos ? 'watch the relay pick up at this preset' : thr < 150 || thr > 250 ? 'set the preset for 150–250 lx' : <Verdict ok={luxOk} /> : '–',
+              ans.lux ? seen.pickPos !== pos ? 'watch the relay pick up at this preset' : thr < 150 || thr > 250 ? 'set the preset for 150–250 lx' : (
+                <Verdict
+                  ok={luxOk}
+                  fix={{
+                    hint: L2('Turn the preset slowly until the relay just picks up. The switching level is the light (lx) at that moment, between 150 and 250 lx.', 'પ્રીસેટ ધીમે ધીમે ફેરવો જ્યાં સુધી રિલે હમણાં જ પિક-અપ થાય. તે ક્ષણનો પ્રકાશ (lx) સ્વિચિંગ લેવલ છે, 150 થી 250 lx વચ્ચે.'),
+                    answer: `${fmt(thr)} lx`,
+                    entered: num(ans.lux),
+                    expected: thr,
+                  }}
+                />
+              ) : (
+                '–'
+              ),
             ],
           ]}
         />

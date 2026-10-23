@@ -7,6 +7,7 @@ import XYGraph from '../XYGraph';
 import useStoredState from '../useStoredState';
 import {Knob} from '../Scope';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import {kitLabel, near} from '../m07/parts';
 import {pvOperate, type PvSpec} from './opto';
 import styles from '../styles.module.css';
@@ -224,8 +225,41 @@ export function SolarCellLab(): React.JSX.Element {
         <Table
           head={['', 'Your value', 'Check']}
           rows={[
-            ['Maximum power (mW)', <input className={styles.input} style={{maxWidth: '5.5rem'}} inputMode="decimal" aria-label="Maximum power" value={ans.p ?? ''} onChange={(e) => setAns((a) => ({...a, p: e.target.value}))} />, ans.p ? best ? <Verdict ok={pOk} /> : 'do the load test first' : '–'],
-            ['Load at maximum power (Ω)', <input className={styles.input} style={{maxWidth: '5.5rem'}} inputMode="decimal" aria-label="Load at maximum power" value={ans.r ?? ''} onChange={(e) => setAns((a) => ({...a, r: e.target.value}))} />, ans.r ? best ? <Verdict ok={rOk} /> : '–' : '–'],
+            ['Maximum power (mW)', <input className={styles.input} style={{maxWidth: '5.5rem'}} inputMode="decimal" aria-label="Maximum power" value={ans.p ?? ''} onChange={(e) => setAns((a) => ({...a, p: e.target.value}))} />, ans.p ? (
+                best ? (
+                  <Verdict
+                    ok={pOk}
+                    fix={{
+                      hint: L2('P = V × I for each load row, then take the largest P in your table.', 'દરેક લોડ રો માટે P = V × I, પછી ટેબલનો સૌથી મોટો P લો.'),
+                      work: L2(`${fmt(best.v)} V × ${fmt(best.ima)} mA = ${fmt(best.v * best.ima)} mW.`, `${fmt(best.v)} V × ${fmt(best.ima)} mA = ${fmt(best.v * best.ima)} mW.`),
+                      answer: `${fmt(best.v * best.ima)} mW`,
+                      entered: num(ans.p),
+                      expected: best.v * best.ima,
+                    }}
+                  />
+                ) : (
+                  'do the load test first'
+                )
+              ) : (
+                '–'
+              ),
+            ],
+            ['Load at maximum power (Ω)', <input className={styles.input} style={{maxWidth: '5.5rem'}} inputMode="decimal" aria-label="Load at maximum power" value={ans.r ?? ''} onChange={(e) => setAns((a) => ({...a, r: e.target.value}))} />, ans.r ? (
+                best ? (
+                  <Verdict
+                    ok={rOk}
+                    fix={{
+                      hint: L2('The load at maximum power is the load resistance in the same row as the largest P in your table.', 'મહત્તમ પાવર પરનો લોડ એ ટેબલમાં સૌથી મોટા P વાળી રોનો લોડ અવરોધ છે.'),
+                      answer: `${best.rl} Ω`,
+                    }}
+                  />
+                ) : (
+                  '–'
+                )
+              ) : (
+                '–'
+              ),
+            ],
           ]}
         />
         <ResetKit
