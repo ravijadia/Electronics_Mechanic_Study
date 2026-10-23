@@ -6,6 +6,7 @@ import Multimeter from '../Multimeter';
 import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes} from '../Probes';
 import {NoteBox, ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import {BAND_HEX} from '../circuit';
 import {AxialResistor, E12, E24, bandsFor, fmtOhms, kitLabel, near, parseOhms} from './parts';
 import styles from '../styles.module.css';
@@ -238,7 +239,22 @@ export default function ColourCodeLab(): React.JSX.Element {
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
               </select>,
-              filled ? <Verdict ok={Object.values(rr).every(Boolean)} /> : '–',
+              filled ? <Verdict
+                  ok={Object.values(rr).every(Boolean)}
+                  fix={{
+                    hint: L2(
+                      `Wrong: ${(['val', 'tol', 'meas', 'within'] as const).filter((q) => !rr[q]).join(', ')}. Read the bands from the end nearest the edge: digits, then multiplier, then tolerance (gold ±5 %, silver ±10 %). Measure on the lowest range that does not show OL, holding only one lead.`,
+                      `ખોટું: ${(['val', 'tol', 'meas', 'within'] as const).filter((q) => !rr[q]).join(', ')}. કિનારાની નજીકના છેડેથી બેન્ડ વાંચો: અંકો, પછી મલ્ટિપ્લાયર, પછી ટોલરન્સ (ગોલ્ડ ±5 %, સિલ્વર ±10 %). OL ન આવે તેવી સૌથી નીચી રેન્જમાં માપો અને ફક્ત એક લીડ પકડો.`,
+                    ),
+                    work: L2(
+                      `${r.bands.join('-')} = ${fmtOhms(r.nominal)} ±${r.tol} %. Allowed range ${fmt(r.nominal * (1 - r.tol / 100))} – ${fmt(r.nominal * (1 + r.tol / 100))} Ω. Actual ${fmt(r.actual)} Ω → ${Math.abs(r.actual - r.nominal) <= (r.nominal * r.tol) / 100 ? 'within' : 'outside'} tolerance.`,
+                      `${r.bands.join('-')} = ${fmtOhms(r.nominal)} ±${r.tol} %. માન્ય શ્રેણી ${fmt(r.nominal * (1 - r.tol / 100))} – ${fmt(r.nominal * (1 + r.tol / 100))} Ω. વાસ્તવિક ${fmt(r.actual)} Ω → ટોલરન્સ ${Math.abs(r.actual - r.nominal) <= (r.nominal * r.tol) / 100 ? 'અંદર' : 'બહાર'}.`,
+                    ),
+                    answer: `${fmtOhms(r.nominal)} ±${r.tol} %, ${Math.abs(r.actual - r.nominal) <= (r.nominal * r.tol) / 100 ? 'Yes' : 'No'}`,
+                    entered: parseOhms(a.val ?? ''),
+                    expected: r.nominal,
+                  }}
+                /> : '–',
             ];
           })}
         />

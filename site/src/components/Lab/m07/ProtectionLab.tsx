@@ -6,6 +6,7 @@ import Multimeter from '../Multimeter';
 import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes} from '../Probes';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng, type Note} from '../kit';
+import {L2} from '../solution';
 import {kitLabel} from './parts';
 import styles from '../styles.module.css';
 
@@ -317,7 +318,16 @@ export default function ProtectionLab(): React.JSX.Element {
               <option value="good">Good</option>
               <option value="bad">Defective</option>
             </select>,
-            ans[k]?.name && ans[k]?.cond ? <Verdict ok={nameOk(k) && condOk(k)} /> : '–',
+            ans[k]?.name && ans[k]?.cond ? <Verdict
+              ok={nameOk(k) && condOk(k)}
+              fix={{
+                hint: L2(
+                  'Name: read the marking and look at the body. Condition: a good fuse or MCB shows near 0 Ω; a blown fuse reads OL (open).',
+                  'નામ: માર્કિંગ વાંચો અને બોડી જુઓ. કન્ડિશન: સારા ફ્યુઝ કે MCB માં 0 Ω ની નજીક; ઉડી ગયેલો ફ્યુઝ OL (ઓપન) બતાવે.',
+                ),
+                answer: `${d.name}, ${d.bad ? 'Defective' : 'Good'}`,
+              }}
+            /> : '–',
           ])}
         />
       </Section>

@@ -4,6 +4,7 @@ import PracticalSheet from '../PracticalSheet';
 import {GU_1_7_62, GU_1_7_63} from './gu';
 import useStoredState from '../useStoredState';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, useKitSeed, useRng, type Note} from '../kit';
+import {L2} from '../solution';
 import {Knob} from '../Scope';
 import {LOCKED_NOTE, Lamp, Mcb, across, netsOf, useWiring, type Terminal, type Wire} from './Wiring';
 import {kitLabel} from './parts';
@@ -265,7 +266,18 @@ export function TimerRelayLab(): React.JSX.Element {
         {runs.length === 0 ? (
           <Empty>No tests yet. Switch S1 on to start one.</Empty>
         ) : (
-          <Table head={['Test', 'Set time (s)', 'Measured delay (s)', 'Error (%)', 'Lamps changed over']} rows={runs.map((r, k) => [k + 1, r.set.toFixed(1), r.measured.toFixed(1), (((r.measured - r.set) / r.set) * 100).toFixed(1), <Verdict ok={r.good} yes="✓ yes" no="✗ no" />])} />
+          <Table head={['Test', 'Set time (s)', 'Measured delay (s)', 'Error (%)', 'Lamps changed over']} rows={runs.map((r, k) => [k + 1, r.set.toFixed(1), r.measured.toFixed(1), (((r.measured - r.set) / r.set) * 100).toFixed(1), <Verdict
+              ok={r.good}
+              yes="✓ yes"
+              no="✗ no"
+              fix={{
+                hint: L2(
+                  'The lamps should change over once, close to the set time. If they did not, check the timer terminals (15/16/18, A1/A2) and the wiring of the load.',
+                  'લેમ્પ સેટ સમયની નજીક એક વાર બદલાવા જોઈએ. ન બદલાય તો ટાઇમર ટર્મિનલ (15/16/18, A1/A2) અને લોડનું વાયરિંગ તપાસો.',
+                ),
+                work: L2(`Set ${r.set.toFixed(1)} s, measured ${r.measured.toFixed(1)} s.`, `સેટ ${r.set.toFixed(1)} s, માપેલ ${r.measured.toFixed(1)} s.`),
+              }}
+            />])} />
         )}
         <ResetKit
           onReset={() => {

@@ -3,6 +3,7 @@ import PracticalSheet from '../PracticalSheet';
 import {GU_1_7_55, GU_1_7_56, GU_1_7_57} from './gu';
 import useStoredState from '../useStoredState';
 import {Empty, ResetKit, Section, Table, Verdict, useKitSeed, useRng} from '../kit';
+import {L2, fmt} from '../solution';
 import {useNetworkBench, makeValues, valueList, type NetDef, type Quantity, type Recorded} from './NetworkBench';
 import {fmtOhms, near} from './parts';
 import styles from '../styles.module.css';
@@ -23,7 +24,28 @@ function Readings({quantities, records, truth}: {quantities: Quantity[]; records
           q.label,
           r && q.kind !== 'R' ? `${r.setV.toFixed(1)} V` : '–',
           r ? <span className={styles.num}>{q.kind === 'R' ? fmtOhms(r.value) : `${r.text} ${unit}`}</span> : '–',
-          r ? <Verdict ok={near(r.value, truth(q, r.setV), q.kind === 'R' ? 0.02 : 0.03)} /> : '–',
+          r ? (
+            <Verdict
+              ok={near(r.value, truth(q, r.setV), q.kind === 'R' ? 0.02 : 0.03)}
+              fix={{
+                hint:
+                  q.kind === 'V'
+                    ? L2('Voltage: DC V range, probes ACROSS the part, red on the + side. Note the reading when the supply is at your chosen setting.', 'વોલ્ટેજ: DC V રેન્જ, પ્રોબ પાર્ટની આરપાર, લાલ + બાજુ પર. સપ્લાય તમારા પસંદ કરેલા સેટિંગ પર હોય ત્યારે રીડિંગ લો.')
+                    : q.kind === 'I'
+                      ? L2('Current: supply OFF, pull out the link, DC mA range with the meter IN SERIES, red on the + side, then supply ON.', 'કરંટ: સપ્લાય OFF, લિંક કાઢો, DC mA રેન્જ અને મીટર શ્રેણીમાં, લાલ + બાજુ પર, પછી સપ્લાય ON.')
+                      : L2('Resistance: supply OFF, Ω range, probes across the part (or the whole network) with nothing else connected.', 'અવરોધ: સપ્લાય OFF, Ω રેન્જ, પ્રોબ પાર્ટ (કે આખા નેટવર્ક) પર, બીજું કંઈ જોડેલું નહીં.'),
+                work: L2(
+                  `Expected about ${q.kind === 'R' ? fmtOhms(truth(q, r.setV)) : `${fmt(truth(q, r.setV))} ${unit}`}; you noted ${q.kind === 'R' ? fmtOhms(r.value) : `${r.text} ${unit}`}.`,
+                  `અપેક્ષિત લગભગ ${q.kind === 'R' ? fmtOhms(truth(q, r.setV)) : `${fmt(truth(q, r.setV))} ${unit}`}; તમે લખ્યું ${q.kind === 'R' ? fmtOhms(r.value) : `${r.text} ${unit}`}.`,
+                ),
+                answer: q.kind === 'R' ? fmtOhms(truth(q, r.setV)) : `${fmt(truth(q, r.setV))} ${unit}`,
+                entered: r.value,
+                expected: truth(q, r.setV),
+              }}
+            />
+          ) : (
+            '–'
+          ),
         ];
       })}
     />
@@ -53,7 +75,29 @@ function LawTable({laws, records, ans, setAns}: {laws: Law[]; records: Record<st
           l.label,
           <input className={styles.input} style={{maxWidth: '6rem'}} inputMode="decimal" aria-label={`${l.label}, your sum in ${l.unit}`} value={ans[l.id] ?? ''} disabled={!have} onChange={(e) => setAns((a) => ({...a, [l.id]: e.target.value}))} />,
           have ? `${l.equals} = ${records[l.equals].text} ${l.unit}` : 'take readings first',
-          !have || entered == null ? '–' : !sumOk ? <Verdict ok={false} no="✗ add again" /> : <Verdict ok={lawOk} yes="✓ verified" no="✗ differs: check readings" />,
+          !have || entered == null ? '–' : !sumOk ? (
+            <Verdict
+              ok={false}
+              no="✗ add again"
+              fix={{
+                hint: L2('Add the readings on the left side of the law using your own table.', 'કાયદાની ડાબી બાજુના રીડિંગ તમારા ટેબલમાંથી ઉમેરો.'),
+                work: L2(`${l.sum.map((k) => fmt(records[k]?.value)).join(' + ')} = ${fmt(sum)} ${l.unit}`, `${l.sum.map((k) => fmt(records[k]?.value)).join(' + ')} = ${fmt(sum)} ${l.unit}`),
+                answer: `${fmt(sum)} ${l.unit}`,
+                entered,
+                expected: sum,
+              }}
+            />
+          ) : (
+            <Verdict
+              ok={lawOk}
+              yes="✓ verified"
+              no="✗ differs: check readings"
+              fix={{
+                hint: L2('The sum should equal the other reading within a few %. If not, one reading was taken wrongly or at a different supply setting. Retake it.', 'સરવાળો બીજા રીડિંગ જેટલો (થોડા % માં) હોવો જોઈએ. નહીં તો કોઈ રીડિંગ ખોટું અથવા અલગ સપ્લાય સેટિંગ પર લીધું છે. ફરી લો.'),
+                work: L2(`${fmt(sum)} ${l.unit} vs ${l.equals} = ${fmt(records[l.equals]?.value)} ${l.unit}.`, `${fmt(sum)} ${l.unit} વિરુદ્ધ ${l.equals} = ${fmt(records[l.equals]?.value)} ${l.unit}.`),
+              }}
+            />
+          ),
         ];
       })}
     />
@@ -275,7 +319,19 @@ export function SeriesParallelLab(): React.JSX.Element {
       label,
       <input className={styles.input} style={{maxWidth: '6rem'}} inputMode="decimal" aria-label={`${label} calculated, ohms`} value={ans[id] ?? ''} onChange={(ev) => setAns((a) => ({...a, [id]: ev.target.value}))} />,
       meas ? fmtOhms(meas) : '–',
-      e == null ? '–' : <Verdict ok={near(e, calc, 0.01)} />,
+      e == null ? (
+        '–'
+      ) : (
+        <Verdict
+          ok={near(e, calc, 0.01)}
+          fix={{
+            hint: L2('Series: Rt = R1 + R2 + R3. Parallel: 1/Rt = 1/R1 + 1/R2 + 1/R3. Use the nominal values in ohms.', 'શ્રેણી: Rt = R1 + R2 + R3. સમાંતર: 1/Rt = 1/R1 + 1/R2 + 1/R3. ઓહ્મમાં નોમિનલ કિંમતો વાપરો.'),
+            answer: fmtOhms(calc),
+            entered: e,
+            expected: calc,
+          }}
+        />
+      ),
     ];
   };
   const sameI = sr.I1 && sr.I2 && near(sr.I1.value, sr.I2.value, 0.02);
@@ -357,8 +413,18 @@ export function SeriesParallelLab(): React.JSX.Element {
       <Section title="Result">
         {(!oneSetting(sr, SQ.map((q) => q.id)) || !oneSetting(pr, PQ.map((q) => q.id))) && <p className={styles.no}>{SAME_V}</p>}
         <p>
-          Series current same at L1 and L2: {sr.I1 && sr.I2 ? <Verdict ok={!!sameI} yes="✓ yes" no="✗ no" /> : '–'} · Parallel voltage same on all resistors:{' '}
-          {['V1', 'V2', 'V3', 'Vs'].every((k) => pr[k]) ? <Verdict ok={sameV} yes="✓ yes" no="✗ no" /> : '–'}
+          Series current same at L1 and L2: {sr.I1 && sr.I2 ? <Verdict
+              ok={!!sameI}
+              yes="✓ yes"
+              no="✗ no"
+              fix={{ hint: L2('In a series circuit the same current flows through every part. If your two readings differ, retake them at the same supply setting.', 'શ્રેણી સર્કિટમાં દરેક પાર્ટમાંથી સરખો કરંટ વહે છે. બંને રીડિંગ જુદાં હોય તો એક જ સપ્લાય સેટિંગ પર ફરી લો.') }}
+            /> : '–'} · Parallel voltage same on all resistors:{' '}
+          {['V1', 'V2', 'V3', 'Vs'].every((k) => pr[k]) ? <Verdict
+              ok={sameV}
+              yes="✓ yes"
+              no="✗ no"
+              fix={{ hint: L2('In a parallel circuit every branch has the same voltage as the supply. If a reading differs, retake it at the same supply setting.', 'સમાંતર સર્કિટમાં દરેક શાખા પર સપ્લાય જેટલો જ વોલ્ટેજ હોય છે. રીડિંગ જુદું હોય તો એક જ સપ્લાય સેટિંગ પર ફરી લો.') }}
+            /> : '–'}
         </p>
         <LawTable laws={sLaws} records={sr} ans={ans} setAns={setAns} />
         <LawTable laws={pLaws} records={pr} ans={ans} setAns={setAns} />
@@ -495,7 +561,23 @@ export function NetworkLab(): React.JSX.Element {
             [
               <input className={styles.input} style={{maxWidth: '7rem'}} inputMode="decimal" aria-label="Rt calculated in ohms" value={ans.rt ?? ''} onChange={(e) => setAns((a) => ({...a, rt: e.target.value}))} />,
               rec.Rt ? fmtOhms(rec.Rt.value) : '–',
-              ans.rt ? <Verdict ok={near(num(ans.rt), rtCalc, 0.01)} /> : '–',
+              ans.rt ? (
+                <Verdict
+                  ok={near(num(ans.rt), rtCalc, 0.01)}
+                  fix={{
+                    hint: L2('R3 and R4 are in series; that pair is in parallel with R2; the result is in series with R1. Rt = R1 + R2 ∥ (R3 + R4).', 'R3 અને R4 શ્રેણીમાં; તે જોડ R2 સાથે સમાંતર; પરિણામ R1 સાથે શ્રેણીમાં. Rt = R1 + R2 ∥ (R3 + R4).'),
+                    work: L2(
+                      `R3 + R4 = ${fmtOhms(nominal.R3 + nominal.R4)}; with R2 in parallel = ${fmtOhms(1 / (1 / nominal.R2 + 1 / (nominal.R3 + nominal.R4)))}; plus R1 = ${fmtOhms(rtCalc)}.`,
+                      `R3 + R4 = ${fmtOhms(nominal.R3 + nominal.R4)}; R2 સાથે સમાંતર = ${fmtOhms(1 / (1 / nominal.R2 + 1 / (nominal.R3 + nominal.R4)))}; R1 ઉમેરતાં = ${fmtOhms(rtCalc)}.`,
+                    ),
+                    answer: fmtOhms(rtCalc),
+                    entered: num(ans.rt),
+                    expected: rtCalc,
+                  }}
+                />
+              ) : (
+                '–'
+              ),
             ],
           ]}
         />

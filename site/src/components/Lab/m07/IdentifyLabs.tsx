@@ -6,6 +6,7 @@ import Multimeter from '../Multimeter';
 import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes, type Probes} from '../Probes';
 import {NoteBox, ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import {PINS, PartArt, type PartKind, type PartOpts} from './art';
 import {AxialResistor, E12, bandsFor, fmtOhms, kitLabel, near} from './parts';
 import {OHM_FNS, ohmText} from './ColourCodeLab';
@@ -152,7 +153,16 @@ export function ActiveComponentsLab(): React.JSX.Element {
               ],
               (v) => set(k, {cls: v}),
             ),
-            ans[k]?.name && ans[k]?.cls ? <Verdict ok={nameOk(k) && clsOk(k)} /> : '–',
+            ans[k]?.name && ans[k]?.cls ? <Verdict
+                ok={nameOk(k) && clsOk(k)}
+                fix={{
+                  hint: L2(
+                    'Look at the shape, the number of leads and the printed type number. Active = can amplify or control current (transistor, SCR, IC, diode). Passive = resistor, capacitor, inductor.',
+                    'આકાર, લીડની સંખ્યા અને છાપેલો ટાઇપ નંબર જુઓ. એક્ટિવ = એમ્પ્લિફાય કે કરંટ કંટ્રોલ કરે (ટ્રાન્ઝિસ્ટર, SCR, IC, ડાયોડ). પેસિવ = રેઝિસ્ટર, કેપેસિટર, ઇન્ડક્ટર.',
+                  ),
+                  answer: `${c.name}, ${c.active ? 'Active' : 'Passive'}`,
+                }}
+              /> : '–',
           ])}
         />
         <ResetKit
@@ -290,7 +300,16 @@ export function ResistorTypesLab(): React.JSX.Element {
             ),
             <span className={styles.num}>{ans[k]?.meas ?? '–'}</span>,
             sel(`Part ${k + 1} condition`, ans[k]?.cond, Object.entries(DEFECT_NAME), (v) => set(k, {cond: v})),
-            ans[k]?.type && ans[k]?.cond ? <Verdict ok={typeOk(k) && condOk(k)} /> : '–',
+            ans[k]?.type && ans[k]?.cond ? <Verdict
+                ok={typeOk(k) && condOk(k)}
+                fix={{
+                  hint: L2(
+                    'Type: look at the body and markings. Condition: inspect for burns, cracks and broken leads; OL on the top range means open.',
+                    'ટાઇપ: બોડી અને માર્કિંગ જુઓ. કન્ડિશન: બળવું, તિરાડ, તૂટેલી લીડ તપાસો; ટોચની રેન્જમાં OL એટલે ઓપન.',
+                  ),
+                  answer: `${RTYPES.find((t) => t.id === it.id)?.name ?? it.id}, ${DEFECT_NAME[it.defect as keyof typeof DEFECT_NAME] ?? it.defect}`,
+                }}
+              /> : '–',
           ])}
         />
         <ResetKit
@@ -433,7 +452,22 @@ export function PowerRatingLab(): React.JSX.Element {
               (v) => set(k, {w: v}),
             ),
             <input className={styles.input} style={{maxWidth: '6rem'}} inputMode="decimal" aria-label={`R${k + 1} maximum current`} value={ans[k]?.i ?? ''} onChange={(e) => set(k, {i: e.target.value})} />,
-            Object.values(res[k]).some((x) => x == null) ? '–' : <Verdict ok={Object.values(res[k]).every(Boolean)} />,
+            Object.values(res[k]).some((x) => x == null) ? '–' : <Verdict
+              ok={Object.values(res[k]).every(Boolean)}
+              fix={{
+                hint: L2(
+                  `Wrong: ${(['len', 'w', 'i'] as const).filter((q) => !res[k][q]).join(', ')}. Read the body length only (not the leads), match it to the size chart, then I(max) = √(P ÷ R).`,
+                  `ખોટું: ${(['len', 'w', 'i'] as const).filter((q) => !res[k][q]).join(', ')}. ફક્ત બોડીની લંબાઈ વાંચો (લીડ નહીં), સાઇઝ ચાર્ટ સાથે મેળવો, પછી I(max) = √(P ÷ R).`,
+                ),
+                work: L2(
+                  `Length ≈ ${it.len} mm → ${it.w} W. I(max) = √(${it.w} ÷ ${it.ohms}) = ${fmt(Math.sqrt(it.w / it.ohms) * 1000)} mA.`,
+                  `લંબાઈ ≈ ${it.len} mm → ${it.w} W. I(max) = √(${it.w} ÷ ${it.ohms}) = ${fmt(Math.sqrt(it.w / it.ohms) * 1000)} mA.`,
+                ),
+                answer: `${it.len} mm, ${it.w} W, ${fmt(Math.sqrt(it.w / it.ohms) * 1000)} mA`,
+                entered: num(ans[k]?.i),
+                expected: Math.sqrt(it.w / it.ohms) * 1000,
+              }}
+            />,
           ])}
         />
         <ResetKit
