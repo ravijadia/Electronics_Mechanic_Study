@@ -8,6 +8,7 @@ import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes} from '../Probes';
 import {Knob} from '../Scope';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import {PartGrid} from '../m07/IdentifyLabs';
 import type {PartKind} from '../m07/art';
 import {kitLabel, near} from '../m07/parts';
@@ -149,7 +150,16 @@ export function DiodeTypesLab(): React.JSX.Element {
             sel(`Part ${k + 1} type`, ans[k]?.type, TYPES, (v) => set(k, {type: v})),
             inp(`Part ${k + 1} maximum current`, ans[k]?.a, (v) => set(k, {a: v})),
             inp(`Part ${k + 1} maximum voltage`, ans[k]?.v, (v) => set(k, {v: v})),
-            ans[k]?.type && ans[k]?.a && ans[k]?.v ? <Verdict ok={ok(k)} /> : '–',
+            ans[k]?.type && ans[k]?.a && ans[k]?.v ? <Verdict
+                ok={ok(k)}
+                fix={{
+                  hint: L2(
+                    'Type: shape and marking (stud, bridge, glass signal diode, zener, LED). Ratings: look up the type number in the data book and copy max current and max voltage.',
+                    'ટાઇપ: આકાર અને માર્કિંગ (સ્ટડ, બ્રિજ, ગ્લાસ સિગ્નલ ડાયોડ, ઝેનર, LED). રેટિંગ: ડેટા બુકમાં ટાઇપ નંબર શોધીને મહત્તમ કરંટ અને મહત્તમ વોલ્ટેજ લખો.',
+                  ),
+                  answer: `${TYPES.find(([v]) => v === items[k].type)?.[1] ?? items[k].type}, ${items[k].amps} A, ${items[k].volts} V`,
+                }}
+              /> : '–',
           ])}
         />
         <ResetKit
@@ -373,7 +383,16 @@ export function DiodeTestLab(): React.JSX.Element {
                 ],
                 (v) => set(k, {cond: v}),
               ),
-              a.mat && a.cond && a.ratio ? <Verdict ok={rowOk(k)} /> : '–',
+              a.mat && a.cond && a.ratio ? <Verdict
+                ok={rowOk(k)}
+                fix={{
+                  hint: L2(
+                    'Ratio = Rr ÷ Rf (write ∞ if Rr is OL). Good diode: low one way, OL the other way. Low both ways = shorted. OL both ways = open. Ge reads lower Vf (0.2–0.3 V) than Si (0.5–0.7 V).',
+                    'ગુણોત્તર = Rr ÷ Rf (Rr OL હોય તો ∞ લખો). સારો ડાયોડ: એક દિશામાં ઓછો, બીજી દિશામાં OL. બંને દિશામાં ઓછો = શોર્ટ. બંને દિશામાં OL = ઓપન. Ge નો Vf (0.2–0.3 V) Si (0.5–0.7 V) કરતાં ઓછો.',
+                  ),
+                  answer: `${kit[k].mat === 'si' ? 'Silicon' : 'Germanium'}, ${kit[k].cond === 'good' ? 'Good' : kit[k].cond === 'short' ? 'Shorted' : 'Open'}`,
+                }}
+              /> : '–',
             ];
           })}
         />
@@ -653,7 +672,22 @@ export function ForwardCharLab(): React.JSX.Element {
       <Section title="Result">
         <Table
           head={['', 'Knee voltage (V)', 'Check']}
-          rows={(['si', 'ge'] as const).map((d) => [d === 'si' ? 'Silicon' : 'Germanium', inp(`${d} knee voltage`, knee[d], (v) => setKnee((k) => ({...k, [d]: v}))), knee[d] ? <Verdict ok={kneeOk(d)} /> : '–'])}
+          rows={(['si', 'ge'] as const).map((d) => [d === 'si' ? 'Silicon' : 'Germanium', inp(`${d} knee voltage`, knee[d], (v) => setKnee((k) => ({...k, [d]: v}))), knee[d] ? (
+                <Verdict
+                  ok={kneeOk(d)}
+                  fix={{
+                    hint: L2('The knee is where the current starts to rise steeply on your V–I graph. Read the voltage there.', 'તમારા V–I ગ્રાફ પર જ્યાંથી કરંટ ઝડપથી વધવા લાગે ત્યાં ની (knee) હોય છે. ત્યાંનો વોલ્ટેજ વાંચો.'),
+                    work: L2(
+                      `Accepted range ${fmt(vForward(d === 'si' ? SI : GE, 0.5e-3) - 0.05)} – ${fmt(vForward(d === 'si' ? SI : GE, 10e-3) + 0.03)} V (typical ${d === 'si' ? '0.6 – 0.7' : '0.2 – 0.3'} V).`,
+                      `માન્ય શ્રેણી ${fmt(vForward(d === 'si' ? SI : GE, 0.5e-3) - 0.05)} – ${fmt(vForward(d === 'si' ? SI : GE, 10e-3) + 0.03)} V (સામાન્ય ${d === 'si' ? '0.6 – 0.7' : '0.2 – 0.3'} V).`,
+                    ),
+                    answer: `${fmt(vForward(d === 'si' ? SI : GE, 0.5e-3) - 0.05)} – ${fmt(vForward(d === 'si' ? SI : GE, 10e-3) + 0.03)} V`,
+                  }}
+                />
+              ) : (
+                '–'
+              ),
+            ])}
         />
         <ResetKit
           onReset={() => {
@@ -799,7 +833,22 @@ export function ZenerTestLab(): React.JSX.Element {
               (v) => setAns((a) => ({...a, [k]: {...a[k], zen: v}})),
             ),
             inp(`Z${k + 1} zener voltage`, ans[k]?.vz, (v) => setAns((a) => ({...a, [k]: {...a[k], vz: v}}))),
-            ans[k]?.zen ? <Verdict ok={vzOk(k)} /> : '–',
+            ans[k]?.zen ? (
+              <Verdict
+                ok={vzOk(k)}
+                fix={{
+                  hint: L2(
+                    'Raise the supply in reverse. A zener holds the voltage steady at Vz once it breaks down; an ordinary diode just keeps rising or burns. Note Vz at the flat part.',
+                    'રિવર્સમાં સપ્લાય વધારો. ઝેનર બ્રેકડાઉન પછી વોલ્ટેજ Vz પર સ્થિર રાખે; સામાન્ય ડાયોડ વધતો રહે કે બળી જાય. ફ્લેટ ભાગ પર Vz લખો.',
+                  ),
+                  answer: items[k].vz != null ? `Zener, Vz = ${fmt(items[k].vz)} V` : 'Not a zener',
+                  entered: num(ans[k]?.vz),
+                  expected: items[k].vz,
+                }}
+              />
+            ) : (
+              '–'
+            ),
           ])}
         />
         <p className={styles.muted}>Leave Vz empty for a device that is not a zener.</p>

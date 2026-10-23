@@ -5,6 +5,7 @@ import {GU_1_2_14} from './gu';
 import useStoredState from '../useStoredState';
 import {GlowText, useMainsBench} from '../MainsBench';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng, type Note} from '../kit';
+import {L2} from '../solution';
 import {FAULT_LABEL, PAIRS, makeBoard, type BoardFault, type Glow} from '../mains';
 import styles from '../styles.module.css';
 
@@ -155,7 +156,16 @@ export default function TestLampLab(): React.JSX.Element {
                     </option>
                   ))}
                 </select>,
-                o.answer ? <Verdict ok={o.answer === bd.fault} /> : '–',
+                o.answer ? <Verdict
+                    ok={o.answer === bd.fault}
+                    fix={{
+                      hint: L2(
+                        'Healthy: Left–Right and Right–Earth glow fully, Left–Earth is dark. Phase on the left = reversed. Nothing glows = no supply. Earth pairs dark = earth open. Dim glow = poor/loose earth or low voltage.',
+                        'સારું: Left–Right અને Right–Earth પૂરા ચમકે, Left–Earth ડાર્ક. ફેઝ ડાબે = ઊલટું. કશું ન ચમકે = નો સપ્લાય. અર્થ સાથેની જોડી ડાર્ક = અર્થ ઓપન. ઝાંખો ગ્લો = નબળો/ઢીલો અર્થ કે ઓછો વોલ્ટેજ.',
+                      ),
+                      answer: FAULT_LABEL[bd.fault],
+                    }}
+                  /> : '–',
               ])}
             />
             <p className={styles.muted}>Score: {correct.length}/{boards.length}</p>

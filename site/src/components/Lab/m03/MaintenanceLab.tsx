@@ -4,6 +4,7 @@ import PracticalSheet from '../PracticalSheet';
 import {GU_1_3_32} from './gu';
 import useStoredState from '../useStoredState';
 import {ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng} from '../kit';
+import {L2} from '../solution';
 import styles from '../styles.module.css';
 
 const KEY = '1.3.32';
@@ -119,7 +120,14 @@ export default function MaintenanceLab(): React.JSX.Element {
           <button type="button" className={clsx(styles.btn, styles.primary)} onClick={() => setChecked(true)}>
             Check order
           </button>
-          {checked && <Verdict ok={ok} no="✗ not yet. Think: safety first, then clean, then check, then top up" />}
+          {checked && <Verdict
+              ok={ok}
+              no="✗ not yet. Think: safety first, then clean, then check, then top up"
+              fix={{
+                hint: L2('Safety and cleaning come first, then check the level, top up, tighten the terminals, and measure last.', 'પહેલાં સલામતી અને સફાઈ, પછી લેવલ તપાસો, ટોપ-અપ, ટર્મિનલ ટાઇટ અને છેલ્લે માપન.'),
+                answer: STEPS.map((s, i) => `${i + 1}. ${s}`).join('  '),
+              }}
+            />}
         </div>
       </Section>
       <Section title="Part B: Problems and actions">
@@ -135,7 +143,13 @@ export default function MaintenanceLab(): React.JSX.Element {
                 </option>
               ))}
             </select>,
-            ans[k] ? <Verdict ok={ans[k] === c.fix} /> : '–',
+            ans[k] ? <Verdict
+              ok={ans[k] === c.fix}
+              fix={{
+                hint: L2('Think about the cause of the problem, then choose the action that removes that cause safely.', 'સમસ્યાનું કારણ વિચારો, પછી તે કારણ સલામત રીતે દૂર કરે તેવી ક્રિયા પસંદ કરો.'),
+                answer: FIXES[c.fix],
+              }}
+            /> : '–',
           ])}
         />
         <ResetKit

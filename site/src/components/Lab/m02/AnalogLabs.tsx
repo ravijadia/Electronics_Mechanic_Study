@@ -5,6 +5,7 @@ import {GU_1_2_22, GU_1_2_23, GU_1_2_24, GU_1_2_25} from './gu';
 import AnalogMeter, {type DialSpec} from '../AnalogMeter';
 import useStoredState from '../useStoredState';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import styles from '../styles.module.css';
 
 const lc = (s: DialSpec) => s.fsd / s.divisions;
@@ -145,7 +146,16 @@ export function DialSymbolsLab(): React.JSX.Element {
             sel(k, 'position', POSITION),
             <Input label={`Meter ${k + 1} accuracy class`} value={ans[k]?.accuracy ?? ''} onChange={(v) => set(k, {accuracy: v})} />,
             <Input label={`Meter ${k + 1} test voltage`} value={ans[k]?.kv ?? ''} onChange={(v) => set(k, {kv: v})} />,
-            Object.values(checks[k]).some((v) => v == null) ? '–' : <Verdict ok={Object.values(checks[k]).every(Boolean)} />,
+            Object.values(checks[k]).some((v) => v == null) ? '–' : <Verdict
+                ok={Object.values(checks[k]).every(Boolean)}
+                fix={{
+                  hint: L2(
+                    `Wrong: ${(['movement', 'current', 'position', 'accuracy', 'kv'] as const).filter((f) => !checks[k][f]).join(', ')}. Read the symbols at the bottom-left of the dial.`,
+                    `ખોટું: ${(['movement', 'current', 'position', 'accuracy', 'kv'] as const).filter((f) => !checks[k][f]).join(', ')}. ડાયલની નીચે-ડાબી બાજુના સિમ્બોલ વાંચો.`,
+                  ),
+                  answer: `${MOVEMENT[m.movement as 'MC']}, ${CURRENT[m.current as 'DC']}, ${POSITION[m.position as 'V']}, class ${m.accuracy}, ${m.testKV} kV`,
+                }}
+              />,
           ])}
         />
         <ResetKit
@@ -220,7 +230,7 @@ export function AnalogDemoLab(): React.JSX.Element {
     setNote(
       near(e, shows, spec)
         ? {kind: 'good', text: `Correct: ${shows} ${spec.unit}`}
-        : {kind: 'warn', text: `Check again. 1 division = ${lc(spec)} ${spec.unit}`},
+        : {kind: 'warn', text: `Check again. 1 division = ${lc(spec)} ${spec.unit}. Needle at ${fmt(shows / lc(spec))} divisions → ${fmt(shows / lc(spec))} × ${lc(spec)} = ${shows} ${spec.unit}`},
     );
   };
 
@@ -323,7 +333,22 @@ export function AnalogDemoLab(): React.JSX.Element {
                 <span className={styles.num}>
                   {r.entered} {sp.unit}
                 </span>,
-                <Verdict ok={near(r.entered, r.shows, sp)} />,
+                <Verdict
+                  ok={near(r.entered, r.shows, sp)}
+                  fix={{
+                    hint: L2(
+                      `Reading = divisions crossed by the needle × value of 1 division (1 division = ${fmt(lc(sp))} ${sp.unit}).`,
+                      `રીડિંગ = કાંટાએ પાર કરેલા ડિવિઝન × 1 ડિવિઝનની કિંમત (1 ડિવિઝન = ${fmt(lc(sp))} ${sp.unit}).`,
+                    ),
+                    work: L2(
+                      `1 division = ${sp.fsd} ÷ ${sp.divisions} = ${fmt(lc(sp))} ${sp.unit}. Needle at ${fmt(r.shows / lc(sp))} divisions → ${fmt(r.shows / lc(sp))} × ${fmt(lc(sp))} = ${fmt(r.shows)} ${sp.unit}.`,
+                      `1 ડિવિઝન = ${sp.fsd} ÷ ${sp.divisions} = ${fmt(lc(sp))} ${sp.unit}. કાંટો ${fmt(r.shows / lc(sp))} ડિવિઝન પર → ${fmt(r.shows / lc(sp))} × ${fmt(lc(sp))} = ${fmt(r.shows)} ${sp.unit}.`,
+                    ),
+                    answer: `${fmt(r.shows)} ${sp.unit}`,
+                    entered: r.entered,
+                    expected: r.shows,
+                  }}
+                />,
                 r.remark,
               ];
             })}
@@ -432,7 +457,21 @@ export function MeterRangeLab(): React.JSX.Element {
             <Input label={`Meter ${k + 1} least count`} value={ans[k]?.min ?? ''} onChange={(v) => set(k, {min: v})} suffix={d.spec.unit} />,
             <Input label={`Meter ${k + 1} reading`} value={ans[k]?.read ?? ''} onChange={(v) => set(k, {read: v})} suffix={d.spec.unit} />,
             Object.values(res[k]).some((v) => v == null) ? '–' : (
-              <Verdict ok={Object.values(res[k]).every(Boolean)} no={`✗ ${['max', 'min', 'read'].filter((f) => !res[k][f as 'max']).join(', ')}`} />
+              <Verdict
+                ok={Object.values(res[k]).every(Boolean)}
+                no={`✗ ${['max', 'min', 'read'].filter((f) => !res[k][f as 'max']).join(', ')}`}
+                fix={{
+                  hint: L2(
+                    'Max = last number on the scale. Least count = full scale ÷ number of divisions. Reading = divisions × least count.',
+                    'મહત્તમ = સ્કેલ પરનો છેલ્લો આંકડો. લીસ્ટ કાઉન્ટ = ફુલ સ્કેલ ÷ ડિવિઝનની સંખ્યા. રીડિંગ = ડિવિઝન × લીસ્ટ કાઉન્ટ.',
+                  ),
+                  work: L2(
+                    `Max = ${d.spec.fsd} ${d.spec.unit}. Least count = ${d.spec.fsd} ÷ ${d.spec.divisions} = ${fmt(lc(d.spec))} ${d.spec.unit}. Needle at ${fmt(d.value / lc(d.spec))} divisions → ${fmt(d.value / lc(d.spec))} × ${fmt(lc(d.spec))} = ${fmt(d.value)} ${d.spec.unit}.`,
+                    `મહત્તમ = ${d.spec.fsd} ${d.spec.unit}. લીસ્ટ કાઉન્ટ = ${d.spec.fsd} ÷ ${d.spec.divisions} = ${fmt(lc(d.spec))} ${d.spec.unit}. કાંટો ${fmt(d.value / lc(d.spec))} ડિવિઝન પર → ${fmt(d.value / lc(d.spec))} × ${fmt(lc(d.spec))} = ${fmt(d.value)} ${d.spec.unit}.`,
+                  ),
+                  answer: `${d.spec.fsd} / ${fmt(lc(d.spec))} / ${fmt(d.value)} ${d.spec.unit}`,
+                }}
+              />
             ),
           ])}
         />
@@ -547,14 +586,41 @@ export function ZeroSettingLab(): React.JSX.Element {
           rows={[
             [
               <>
-                <Input label="Zero error" value={vals.zero ?? ''} onChange={(v) => setVals((x) => ({...x, zero: v}))} /> <Verdict ok={zeroOk} />
+                <Input label="Zero error" value={vals.zero ?? ''} onChange={(v) => setVals((x) => ({...x, zero: v}))} /> <Verdict
+                  ok={zeroOk}
+                  fix={{
+                    hint: L2('Zero error = where the needle rests with the meter disconnected: + if right of zero, − if left.', 'ઝીરો એરર = મીટર ડિસ્કનેક્ટ હોય ત્યારે કાંટો જ્યાં ઊભો રહે તે: ઝીરોની જમણે + , ડાબે −.'),
+                    work: L2(`Needle rests at ${fmt(kit.offset)} divisions × ${fmt(lc(spec))} V = ${fmt(initialZero)} V.`, `કાંટો ${fmt(kit.offset)} ડિવિઝન પર × ${fmt(lc(spec))} V = ${fmt(initialZero)} V.`),
+                    answer: `${fmt(initialZero)} V`,
+                    entered: num(vals.zero ?? ''),
+                    expected: initialZero,
+                  }}
+                />
               </>,
               <>
-                <Input label="Reading before adjustment" value={vals.before ?? ''} onChange={(v) => setVals((x) => ({...x, before: v}))} /> <Verdict ok={beforeOk} />
+                <Input label="Reading before adjustment" value={vals.before ?? ''} onChange={(v) => setVals((x) => ({...x, before: v}))} /> <Verdict
+                  ok={beforeOk}
+                  fix={{
+                    hint: L2('Observed reading = true value + zero error. Read the needle with the supply connected.', 'અવલોકન કરેલું રીડિંગ = સાચી કિંમત + ઝીરો એરર. સપ્લાય જોડીને કાંટો વાંચો.'),
+                    work: L2(`${fmt(kit.v)} + (${fmt(initialZero)}) = ${fmt(beforeTruth)} V.`, `${fmt(kit.v)} + (${fmt(initialZero)}) = ${fmt(beforeTruth)} V.`),
+                    answer: `${fmt(beforeTruth)} V`,
+                    entered: num(vals.before ?? ''),
+                    expected: beforeTruth,
+                  }}
+                />
               </>,
               corrected != null ? <span className={styles.num}>{corrected.toFixed(1)}</span> : '–',
               <>
-                <Input label="Reading after adjustment" value={vals.after ?? ''} onChange={(v) => setVals((x) => ({...x, after: v}))} /> <Verdict ok={afterOk} />
+                <Input label="Reading after adjustment" value={vals.after ?? ''} onChange={(v) => setVals((x) => ({...x, after: v}))} /> <Verdict
+                  ok={afterOk}
+                  fix={{
+                    hint: L2('Set the needle exactly on zero first (meter disconnected). Then connect and read.', 'પહેલાં કાંટો બરાબર ઝીરો પર લાવો (મીટર ડિસ્કનેક્ટ). પછી જોડીને વાંચો.'),
+                    work: L2(`After zeroing, the reading is the true value: ${fmt(kit.v)} V. Corrected reading = observed − zero error.`, `ઝીરો કર્યા પછી રીડિંગ સાચી કિંમત હોય છે: ${fmt(kit.v)} V. સુધારેલું રીડિંગ = અવલોકન − ઝીરો એરર.`),
+                    answer: `${fmt(kit.v)} V`,
+                    entered: num(vals.after ?? ''),
+                    expected: kit.v,
+                  }}
+                />
               </>,
             ],
           ]}

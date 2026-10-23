@@ -6,6 +6,7 @@ import Multimeter from '../Multimeter';
 import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes} from '../Probes';
 import {NoteBox, ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng, type Note} from '../kit';
+import {L2} from '../solution';
 import {kitLabel} from './parts';
 import styles from '../styles.module.css';
 
@@ -245,7 +246,16 @@ export default function RelayLab(): React.JSX.Element {
                 </option>
               ))}
             </select>,
-            pinAns[i] ? <Verdict ok={pinAns[i] === roleKey(role(i))} /> : '–',
+            pinAns[i] ? <Verdict
+              ok={pinAns[i] === roleKey(role(i))}
+              fix={{
+                hint: L2(
+                  'Coil pins read a few hundred Ω between them. Relaxed: COM–NC beeps, COM–NO does not. Energised: COM–NO beeps, COM–NC does not.',
+                  'કોઇલ પિન વચ્ચે થોડાક સો Ω આવે. રિલેક્ષ: COM–NC બીપ, COM–NO નહીં. એનર્જાઇઝ: COM–NO બીપ, COM–NC નહીં.',
+                ),
+                answer: ROLE_OPTS.find(([v]) => v === roleKey(role(i)))?.[1],
+              }}
+            /> : '–',
           ])}
         />
         <p className={styles.muted}>Coil resistance: {Object.values(pinAns).filter((x) => x === 'coil').length === 2 && pinsOk ? `${kit.coilR} Ω` : 'measure it'}.</p>
@@ -334,7 +344,13 @@ export default function RelayLab(): React.JSX.Element {
                   </option>
                 ))}
               </select>,
-              names[p.id] ? <Verdict ok={names[p.id] === p.id} /> : '–',
+              names[p.id] ? <Verdict
+                ok={names[p.id] === p.id}
+                fix={{
+                  hint: L2('Match the part to the picture and its job: coil makes the magnet, armature moves, spring returns it, contacts switch the load.', 'ભાગને ચિત્ર અને તેના કામ સાથે મેળવો: કોઇલ ચુંબક બનાવે, આર્મેચર હલે, સ્પ્રિંગ પાછું લાવે, કોન્ટેક્ટ લોડ સ્વિચ કરે.'),
+                  answer: p.name,
+                }}
+              /> : '–',
             ])}
           />
         )}

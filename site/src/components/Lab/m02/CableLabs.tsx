@@ -6,6 +6,7 @@ import Multimeter from '../Multimeter';
 import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes} from '../Probes';
 import {NoteBox, ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import styles from '../styles.module.css';
 
 // ---------------------------------------------------------------------------
@@ -182,7 +183,15 @@ export function CablesLab(): React.JSX.Element {
           <option key={o}>{o}</option>
         ))}
       </select>{' '}
-      {colours[k] && <Verdict ok={colours[k] === COLOUR_TRUTH[k]} yes="✓" no="✗" />}
+      {colours[k] && <Verdict
+          ok={colours[k] === COLOUR_TRUTH[k]}
+          yes="✓"
+          no="✗"
+          fix={{
+            hint: L2('Compare the new IEC colours (brown, blue, green/yellow) with the old ones (red, black, green).', 'નવા IEC કલર (બ્રાઉન, બ્લુ, ગ્રીન/યલો) અને જૂના કલર (લાલ, કાળો, લીલો) સરખાવો.'),
+            answer: COLOUR_TRUTH[k],
+          }}
+        />}
     </>
   );
 
@@ -234,7 +243,13 @@ export function CablesLab(): React.JSX.Element {
                   </option>
                 ))}
               </select>
-              <div style={{minHeight: '1.5em'}}>{names[k] && <Verdict ok={names[k] === id} />}</div>
+              <div style={{minHeight: '1.5em'}}>{names[k] && <Verdict
+                  ok={names[k] === id}
+                  fix={{
+                    hint: L2('Count the cores, look at the insulation and the sheath (round or flat, armour wires).', 'કોર ગણો, ઇન્સ્યુલેશન અને શીથ (ગોળ કે ચપટી, આર્મર વાયર) જુઓ.'),
+                    answer: CABLE_NAME[id],
+                  }}
+                />}</div>
             </div>
           ))}
         </div>
@@ -292,7 +307,17 @@ export function CablesLab(): React.JSX.Element {
                 ))}
               </select>
             </label>
-            {faultAns && <Verdict ok={faultAns === kit.fault} no="✗ check your tests again" />}
+            {faultAns && <Verdict
+                ok={faultAns === kit.fault}
+                no="✗ check your tests again"
+                fix={{
+                  hint: L2(
+                    'Test each core end to end (it should beep), then test between cores (should not beep). No beep end to end = open. Beep between cores = short.',
+                    'દરેક કોરને એક છેડેથી બીજા છેડા સુધી ટેસ્ટ કરો (બીપ આવવો જોઈએ), પછી કોર વચ્ચે ટેસ્ટ કરો (બીપ ન આવવો જોઈએ). છેડેથી છેડે બીપ નહીં = ઓપન. કોર વચ્ચે બીપ = શોર્ટ.',
+                  ),
+                  answer: FAULTS.find((x) => x.id === kit.fault)?.label,
+                }}
+              />}
           </div>
         </div>
         <NoteBox note={note} />
@@ -411,7 +436,23 @@ export function CurrentCapacityLab(): React.JSX.Element {
             r.iOk == null || r.sizeOk == null ? (
               '–'
             ) : (
-              <Verdict ok={!!(r.iOk && r.sizeOk)} no={`✗ ${!r.iOk ? 'current' : ''}${!r.iOk && !r.sizeOk ? ' and ' : ''}${!r.sizeOk ? 'size' : ''}`} />
+              <Verdict
+                ok={!!(r.iOk && r.sizeOk)}
+                no={`✗ ${!r.iOk ? 'current' : ''}${!r.iOk && !r.sizeOk ? ' and ' : ''}${!r.sizeOk ? 'size' : ''}`}
+                fix={{
+                  hint: L2(
+                    'I = P ÷ (V × power factor), V = 230 V. Then take the smallest cable whose rating is equal to or more than I.',
+                    'I = P ÷ (V × પાવર ફેક્ટર), V = 230 V. પછી જેનું રેટિંગ I જેટલું કે વધારે હોય તે સૌથી નાનો કેબલ પસંદ કરો.',
+                  ),
+                  work: L2(
+                    `I = ${r.j.p} ÷ (230 × ${r.j.pf}) = ${fmt(r.I)} A. The smallest rating ≥ ${fmt(r.I)} A is ${r.need.amps} A → ${r.need.size} mm².`,
+                    `I = ${r.j.p} ÷ (230 × ${r.j.pf}) = ${fmt(r.I)} A. ${fmt(r.I)} A થી વધારે સૌથી નાનું રેટિંગ ${r.need.amps} A છે → ${r.need.size} mm².`,
+                  ),
+                  answer: `${fmt(r.I)} A, ${r.need.size} mm²`,
+                  entered: ans[k]?.i ? Number(ans[k]?.i) : null,
+                  expected: r.I,
+                }}
+              />
             ),
           ])}
         />

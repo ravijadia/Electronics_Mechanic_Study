@@ -9,6 +9,7 @@ import {ProbeBar, ProbePoint, useProbes} from '../Probes';
 import {fgFreq, fgVpp, useFunctionGenerator} from '../FunctionGenerator';
 import {si} from '../signals';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import {fmtOhms, kitLabel, near} from './parts';
 import styles from '../styles.module.css';
 
@@ -295,7 +296,22 @@ export default function ResonanceLab(): React.JSX.Element {
           ).map(([id, label, ok]) => [
             label,
             <input className={styles.input} style={{maxWidth: '6rem'}} inputMode="decimal" aria-label={`${label}, kilohertz`} value={ans[id] ?? ''} onChange={(e) => setAns((a) => ({...a, [id]: e.target.value}))} />,
-            ans[id] ? <Verdict ok={ok} /> : '–',
+            ans[id] ? <Verdict
+              ok={ok}
+              fix={{
+                hint:
+                  id === 'calc'
+                    ? L2('fr = 1 ÷ (2π√(L × C)), with L in H and C in F. Answer in kHz.', 'fr = 1 ÷ (2π√(L × C)), L H માં અને C F માં. જવાબ kHz માં.')
+                    : L2('Series: fr is where the current is maximum. Parallel: fr is where the tank voltage is maximum. Read the peak on your graph.', 'શ્રેણી: જ્યાં કરંટ મહત્તમ ત્યાં fr. સમાંતર: જ્યાં ટેન્ક વોલ્ટેજ મહત્તમ ત્યાં fr. ગ્રાફનું પીક વાંચો.'),
+                work:
+                  id === 'calc'
+                    ? L2(`fr = 1 ÷ (2π√(${si(LS[choice.li], 'H')} × ${si(CS[choice.ci], 'F')})) = ${fmt(frNom / 1000)} kHz.`, `fr = 1 ÷ (2π√(${si(LS[choice.li], 'H')} × ${si(CS[choice.ci], 'F')})) = ${fmt(frNom / 1000)} kHz.`)
+                    : L2(`The real resonant frequency of your kit is ${fmt(frTrue / 1000)} kHz (±5 % is accepted).`, `તમારી કિટની વાસ્તવિક રેઝોનન્ટ ફ્રીક્વન્સી ${fmt(frTrue / 1000)} kHz છે (±5 % ચાલે).`),
+                answer: `${fmt((id === 'calc' ? frNom : frTrue) / 1000)} kHz`,
+                entered: num(ans[id]),
+                expected: (id === 'calc' ? frNom : frTrue) / 1000,
+              }}
+            /> : '–',
           ])}
         />
         <ResetKit

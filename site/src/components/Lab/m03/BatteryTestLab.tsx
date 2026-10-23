@@ -5,6 +5,7 @@ import {GU_1_3_34} from './gu';
 import AnalogMeter, {type DialSpec} from '../AnalogMeter';
 import useStoredState from '../useStoredState';
 import {NoteBox, ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng, type Note} from '../kit';
+import {L2} from '../solution';
 import styles from '../styles.module.css';
 
 const KEY = '1.3.34';
@@ -180,7 +181,20 @@ export default function BatteryTestLab(): React.JSX.Element {
                   </option>
                 ))}
               </select>,
-              o.verdict ? <Verdict ok={o.verdict === TRUTH[x.state]} /> : '–',
+              o.verdict ? <Verdict
+                  ok={o.verdict === TRUTH[x.state]}
+                  fix={{
+                    hint: L2(
+                      `Ready: OCV about 12.6 V or more, all cells SG about 1.26, load test stays above ${LOAD_LIMIT} V. Needs recharging: low OCV and low SG in all cells equally. Faulty: one cell SG far lower than the rest, or good OCV that collapses under load.`,
+                      `તૈયાર: OCV લગભગ 12.6 V કે વધુ, બધા સેલનો SG લગભગ 1.26, લોડ ટેસ્ટમાં ${LOAD_LIMIT} V થી ઉપર. રિચાર્જ જરૂરી: બધા સેલમાં OCV અને SG સરખા ઓછા. ખરાબ: એક સેલનો SG બીજા કરતાં ઘણો ઓછો, અથવા સારો OCV પણ લોડમાં તૂટી પડે.`,
+                    ),
+                    work: L2(
+                      `This battery: OCV ${x.ocv} V, SG ${Math.min(...x.sg).toFixed(3)} – ${Math.max(...x.sg).toFixed(3)}, load test ${x.load} V.`,
+                      `આ બેટરી: OCV ${x.ocv} V, SG ${Math.min(...x.sg).toFixed(3)} – ${Math.max(...x.sg).toFixed(3)}, લોડ ટેસ્ટ ${x.load} V.`,
+                    ),
+                    answer: VERDICT[TRUTH[x.state]],
+                  }}
+                /> : '–',
             ];
           })}
         />

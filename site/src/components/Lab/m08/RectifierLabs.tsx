@@ -8,6 +8,7 @@ import {ProbeBar, ProbePoint, useProbes} from '../Probes';
 import {useScope} from '../Scope';
 import {si, type Sig} from '../signals';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import {fmtOhms, kitLabel, near} from '../m07/parts';
 import {VD, dcAc, rectify, type RectType} from './rectifier';
 import styles from '../styles.module.css';
@@ -357,7 +358,25 @@ export function RectifierLab(): React.JSX.Element {
               field(t, 'f', `${TYPE_NAME[t]} output frequency`),
               <span className={styles.num}>{r.vdc ?? '–'}</span>,
               field(t, 'theory', `${TYPE_NAME[t]} theoretical Vdc`),
-              filled ? <Verdict ok={allOk(t)} no={r.built ? '✗ check again' : '✗ not built correctly yet'} /> : '–',
+              filled ? (
+                <Verdict
+                  ok={allOk(t)}
+                  no={r.built ? '✗ check again' : '✗ not built correctly yet'}
+                  fix={{
+                    hint: L2(
+                      `${r.built ? '' : 'Build the circuit correctly first (diode bands/cathodes the right way). '}Wrong: ${(['vac', 'vdc', 'vm', 'f', 'theory'] as const).filter((q) => ok[q] !== true).join(', ')}. Output frequency: 50 Hz half-wave, 100 Hz full-wave/bridge. Vdc theory: 0.318 × Vm (half-wave), 0.636 × Vm (full-wave/bridge).`,
+                      `${r.built ? '' : 'પહેલાં સર્કિટ બરાબર બનાવો (ડાયોડના બેન્ડ/કેથોડ સાચી દિશામાં). '}ખોટું: ${(['vac', 'vdc', 'vm', 'f', 'theory'] as const).filter((q) => ok[q] !== true).join(', ')}. આઉટપુટ ફ્રીક્વન્સી: હાફ-વેવ 50 Hz, ફુલ-વેવ/બ્રિજ 100 Hz. Vdc થિયરી: 0.318 × Vm (હાફ-વેવ), 0.636 × Vm (ફુલ-વેવ/બ્રિજ).`,
+                    ),
+                    work: L2(
+                      `Vac = ${fmt(truth(t).vac)} V, Vm = ${fmt(truth(t).vm)} V, f = ${truth(t).f} Hz, Vdc = ${fmt(truth(t).dc)} V; theory = ${truth(t).k} × ${fmt(truth(t).vm)} = ${fmt(truth(t).k * truth(t).vm)} V.`,
+                      `Vac = ${fmt(truth(t).vac)} V, Vm = ${fmt(truth(t).vm)} V, f = ${truth(t).f} Hz, Vdc = ${fmt(truth(t).dc)} V; થિયરી = ${truth(t).k} × ${fmt(truth(t).vm)} = ${fmt(truth(t).k * truth(t).vm)} V.`,
+                    ),
+                    answer: `Vm ${fmt(truth(t).vm)} V, f ${truth(t).f} Hz, Vdc theory ${fmt(truth(t).k * truth(t).vm)} V`,
+                  }}
+                />
+              ) : (
+                '–'
+              ),
             ];
           })}
         />
@@ -551,7 +570,22 @@ export function RippleLab(): React.JSX.Element {
         ) : (
           <Table
             head={['Rectifier', 'C', 'RL', 'Vdc (V)', 'Vac (V)', 'Ripple p-p (V)', 'f (Hz)', 'γ', 'Check']}
-            rows={rows.map((r) => [TYPE_NAME[r.type], r.c ? si(r.c, 'F') : 'None', fmtOhms(r.rl), r.vdc, r.vac, r.vpp, r.f, r.rf, <Verdict ok={okRow(r)} />])}
+            rows={rows.map((r) => [TYPE_NAME[r.type], r.c ? si(r.c, 'F') : 'None', fmtOhms(r.rl), r.vdc, r.vac, r.vpp, r.f, r.rf, <Verdict
+                ok={okRow(r)}
+                fix={{
+                  hint: L2(
+                    'Vdc with a DC V range, Vac with an AC V range across the output, ripple p-p and f from the CRO. γ = Vac ÷ Vdc. Ripple f = 50 Hz (half-wave) or 100 Hz (bridge).',
+                    'Vdc DC V રેન્જથી, Vac આઉટપુટ પર AC V રેન્જથી, ripple p-p અને f CRO પરથી. γ = Vac ÷ Vdc. રિપલ f = 50 Hz (હાફ-વેવ) અથવા 100 Hz (બ્રિજ).',
+                  ),
+                  work: L2(
+                    `Vdc ≈ ${fmt(truthOf(r).dc)} V, Vac ≈ ${fmt(truthOf(r).ac)} V, ripple ≈ ${fmt(truthOf(r).pp)} V p-p, f = ${truthOf(r).f} Hz, γ = ${fmt(truthOf(r).ac)} ÷ ${fmt(truthOf(r).dc)} = ${fmt(truthOf(r).ac / truthOf(r).dc)}.`,
+                    `Vdc ≈ ${fmt(truthOf(r).dc)} V, Vac ≈ ${fmt(truthOf(r).ac)} V, રિપલ ≈ ${fmt(truthOf(r).pp)} V p-p, f = ${truthOf(r).f} Hz, γ = ${fmt(truthOf(r).ac)} ÷ ${fmt(truthOf(r).dc)} = ${fmt(truthOf(r).ac / truthOf(r).dc)}.`,
+                  ),
+                  answer: `γ = ${fmt(truthOf(r).ac / truthOf(r).dc)}`,
+                  entered: num(r.rf),
+                  expected: truthOf(r).ac / truthOf(r).dc,
+                }}
+              />])}
           />
         )}
         <ResetKit

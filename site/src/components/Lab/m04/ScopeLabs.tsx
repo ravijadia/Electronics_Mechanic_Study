@@ -6,6 +6,7 @@ import useStoredState from '../useStoredState';
 import {useScope} from '../Scope';
 import {fgFreq, fgVpp, useFunctionGenerator, type Wave} from '../FunctionGenerator';
 import {NoteBox, ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import {dc, si, sine, square, type Sig} from '../signals';
 import styles from '../styles.module.css';
 
@@ -93,7 +94,13 @@ export function CroControlsLab(): React.JSX.Element {
                 <option key={o}>{o}</option>
               ))}
             </select>,
-            ans[q.does] ? <Verdict ok={ans[q.does] === q.control} /> : '–',
+            ans[q.does] ? <Verdict
+              ok={ans[q.does] === q.control}
+              fix={{
+                hint: L2('Find the control on the CRO front panel above and see what it changes when you turn it.', 'ઉપરના CRO ફ્રન્ટ પેનલ પર કંટ્રોલ શોધો અને તેને ફેરવતાં શું બદલાય છે તે જુઓ.'),
+                answer: q.control,
+              }}
+            /> : '–',
           ])}
         />
         <ResetKit
@@ -150,6 +157,18 @@ export function CroMeasureLab(): React.JSX.Element {
     sqT: ans.sqT ? within(num(ans.sqT), 1000 / kit.sqF, 0.06) : null,
     sqF: ans.sqF ? within(num(ans.sqF), kit.sqF, 0.07) : null,
   };
+  const vf = (k: keyof MeasAns, expected: number, unit: string, hintEn: string, hintGu: string, work?: string) => (
+    <Verdict
+      ok={r[k]}
+      fix={{
+        hint: L2(hintEn, hintGu),
+        work,
+        answer: `${fmt(expected)} ${unit}`,
+        entered: num(ans[k] ?? ''),
+        expected,
+      }}
+    />
+  );
   const inp = (k: keyof MeasAns, label: string) => (
     <input className={styles.input} inputMode="decimal" aria-label={label} value={ans[k] ?? ''} onChange={(e) => setAns((a) => ({...a, [k]: e.target.value}))} />
   );
@@ -210,13 +229,25 @@ export function CroMeasureLab(): React.JSX.Element {
         <Table
           head={['Quantity', 'Your value', 'Check']}
           rows={[
-            ['DC voltage (V)', inp('vdc', 'DC voltage'), <Verdict ok={r.vdc} />],
-            ['Sine Vpp (V)', inp('vpp', 'Sine Vpp'), <Verdict ok={r.vpp} />],
-            ['Sine Vrms (V)', inp('vrms', 'Sine Vrms'), <Verdict ok={r.vrms} />],
-            ['Sine period T (ms)', inp('t', 'Sine period'), <Verdict ok={r.t} />],
-            ['Sine frequency f (Hz)', inp('f', 'Sine frequency'), <Verdict ok={r.f} />],
-            ['Square period T (ms)', inp('sqT', 'Square period'), <Verdict ok={r.sqT} />],
-            ['Square frequency f (Hz)', inp('sqF', 'Square frequency'), <Verdict ok={r.sqF} />],
+            ['DC voltage (V)', inp('vdc', 'DC voltage'), vf('vdc', kit.vdc, 'V', 'V = divisions from the zero line × VOLTS/DIV.', 'V = ઝીરો લાઇનથી ડિવિઝન × VOLTS/DIV.')],
+            ['Sine Vpp (V)', inp('vpp', 'Sine Vpp'), vf('vpp', kit.sineVpp, 'V', 'Vpp = divisions from the bottom to the top of the wave × VOLTS/DIV.', 'Vpp = તરંગના નીચેથી ઉપર સુધીના ડિવિઝન × VOLTS/DIV.')],
+            [
+              'Sine Vrms (V)',
+              inp('vrms', 'Sine Vrms'),
+              vf('vrms', kit.sineVpp / (2 * Math.SQRT2), 'V', 'Vrms = Vpp ÷ 2√2 = Vpp ÷ 2.83.', 'Vrms = Vpp ÷ 2√2 = Vpp ÷ 2.83.', `${fmt(kit.sineVpp)} ÷ 2.83 = ${fmt(kit.sineVpp / (2 * Math.SQRT2))} V`),
+            ],
+            ['Sine period T (ms)', inp('t', 'Sine period'), vf('t', 1000 / kit.sineF, 'ms', 'T = horizontal divisions for one cycle × TIME/DIV.', 'T = એક સાઇકલના આડા ડિવિઝન × TIME/DIV.')],
+            [
+              'Sine frequency f (Hz)',
+              inp('f', 'Sine frequency'),
+              vf('f', kit.sineF, 'Hz', 'f = 1 ÷ T. With T in ms, f = 1000 ÷ T.', 'f = 1 ÷ T. T ms માં હોય તો f = 1000 ÷ T.', `1000 ÷ ${fmt(1000 / kit.sineF)} = ${fmt(kit.sineF)} Hz`),
+            ],
+            ['Square period T (ms)', inp('sqT', 'Square period'), vf('sqT', 1000 / kit.sqF, 'ms', 'T = horizontal divisions for one cycle × TIME/DIV.', 'T = એક સાઇકલના આડા ડિવિઝન × TIME/DIV.')],
+            [
+              'Square frequency f (Hz)',
+              inp('sqF', 'Square frequency'),
+              vf('sqF', kit.sqF, 'Hz', 'f = 1 ÷ T. With T in ms, f = 1000 ÷ T.', 'f = 1 ÷ T. T ms માં હોય તો f = 1000 ÷ T.', `1000 ÷ ${fmt(1000 / kit.sqF)} = ${fmt(kit.sqF)} Hz`),
+            ],
           ]}
         />
         <ResetKit

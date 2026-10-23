@@ -4,6 +4,7 @@ import PracticalSheet from '../PracticalSheet';
 import {GU_1_6_48, GU_1_6_49} from './gu';
 import useStoredState from '../useStoredState';
 import {ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng} from '../kit';
+import {L2} from '../solution';
 import styles from '../styles.module.css';
 
 const INK = '#d9dee2';
@@ -270,7 +271,16 @@ export function SwitchesLab(): React.JSX.Element {
               </select>,
               <input className={styles.input} style={{maxWidth: '4rem'}} inputMode="numeric" aria-label={`Switch ${k + 1} poles`} value={a.p ?? ''} onChange={(e) => set({p: e.target.value})} />,
               <input className={styles.input} style={{maxWidth: '4rem'}} inputMode="numeric" aria-label={`Switch ${k + 1} throws`} value={a.t ?? ''} onChange={(e) => set({t: e.target.value})} />,
-              a.name && a.p && a.t ? <Verdict ok={ok(d)} /> : '–',
+              a.name && a.p && a.t ? <Verdict
+                  ok={ok(d)}
+                  fix={{
+                    hint: L2(
+                      'Poles = number of separate circuits switched together. Throws = number of positions (outputs) for each pole. Count the contacts and the moving blades.',
+                      'પોલ = એકસાથે સ્વિચ થતી અલગ સર્કિટની સંખ્યા. થ્રો = દરેક પોલ માટે પોઝિશન (આઉટપુટ) ની સંખ્યા. કોન્ટેક્ટ અને ફરતા બ્લેડ ગણો.',
+                    ),
+                    answer: `${d.name}: ${d.poles} pole, ${d.throws} throw`,
+                  }}
+                /> : '–',
             ];
           })}
         />
@@ -401,7 +411,15 @@ export function PanelBoardLab(): React.JSX.Element {
               </label>
               {pick[app.id] && (
                 <div style={{margin: '0.4rem 0'}}>
-                  <Verdict ok={chosen(app.id)} yes={`✓ ${app.why}`} no={`✗ ${app.why}`} />
+                  <Verdict
+                    ok={chosen(app.id)}
+                    yes={`✓ ${app.why}`}
+                    no={`✗ ${app.why}`}
+                    fix={{
+                      hint: L2('Ask: how many places control it, and does it need to reverse or only switch on and off?', 'પૂછો: કેટલી જગ્યાએથી કંટ્રોલ કરવું છે, અને ઊલટાવવું છે કે ફક્ત ચાલુ-બંધ?'),
+                      answer: app.right,
+                    }}
+                  />
                 </div>
               )}
               {chosen(app.id) && app.id === 'room' && (
@@ -464,7 +482,18 @@ export function PanelBoardLab(): React.JSX.Element {
                     </button>
                     <span className={clsx(styles.lampDot, lit && styles.lampOn)} aria-label={lit ? 'Lamp on' : 'Lamp off'} />
                   </div>
-                  {Object.keys(wires).length === WIRES.length && <Verdict ok={wiringOk} yes="✓ Staircase wiring works" no="✗ Lamp does not follow both switches: check the wiring" />}
+                  {Object.keys(wires).length === WIRES.length && <Verdict
+                      ok={wiringOk}
+                      yes="✓ Staircase wiring works"
+                      no="✗ Lamp does not follow both switches: check the wiring"
+                      fix={{
+                        hint: L2(
+                          'The two switches are joined by two traveller wires (L1 to L1, L2 to L2). Phase enters at one common, the lamp is fed from the other common.',
+                          'બંને સ્વિચ બે ટ્રાવેલર વાયરથી જોડાય છે (L1 થી L1, L2 થી L2). ફેઝ એક કોમનમાં આવે, લેમ્પ બીજા કોમનમાંથી મળે.',
+                        ),
+                        answer: 'Phase → Switch A common · A L1 → B L1 · A L2 → B L2 · Switch B common → Lamp',
+                      }}
+                    />}
                 </div>
               )}
             </div>

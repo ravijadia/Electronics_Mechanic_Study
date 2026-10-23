@@ -3,6 +3,7 @@ import PracticalSheet from '../PracticalSheet';
 import {GU_1_12_119} from './gu';
 import useStoredState from '../useStoredState';
 import {ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng} from '../kit';
+import {L2} from '../solution';
 import {PartGrid} from '../m07/IdentifyLabs';
 import styles from '../styles.module.css';
 
@@ -82,7 +83,18 @@ export function IdentifyFlipFlopLab(): React.JSX.Element {
       <Section title="Observation table">
         <Table
           head={['No.', 'Marking', 'Type', 'Check']}
-          rows={items.map((it, k) => [k + 1, <span className={styles.num}>{it.mark}</span>, sel(`Part ${k + 1} type`, ans[k], (v) => setAns((x) => ({...x, [k]: v}))), ans[k] ? <Verdict ok={ans[k] === it.type} /> : '–'])}
+          rows={items.map((it, k) => [k + 1, <span className={styles.num}>{it.mark}</span>, sel(`Part ${k + 1} type`, ans[k], (v) => setAns((x) => ({...x, [k]: v}))), ans[k] ? (
+              <Verdict
+                ok={ans[k] === it.type}
+                fix={{
+                  hint: L2('Look the type number up in the data book. Pins J and K = JK; a single D input = D; S and R inputs only = R-S; four D inputs sharing an enable = latch.', 'ડેટા બુકમાં ટાઇપ નંબર શોધો. J અને K પિન = JK; એક D ઇનપુટ = D; ફક્ત S અને R ઇનપુટ = R-S; એક એનેબલવાળા ચાર D ઇનપુટ = લેચ.'),
+                  answer: TYPES.find(([v]) => v === it.type)?.[1],
+                }}
+              />
+            ) : (
+              '–'
+            ),
+          ])}
         />
         <details style={{marginTop: '0.6rem'}}>
           <summary className={styles.muted} style={{cursor: 'pointer'}}>

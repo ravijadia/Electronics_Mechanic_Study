@@ -6,6 +6,7 @@ import XYGraph from '../XYGraph';
 import useStoredState from '../useStoredState';
 import {Knob} from '../Scope';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import {fmtOhms, kitLabel, near} from '../m07/parts';
 import styles from '../styles.module.css';
 
@@ -225,7 +226,22 @@ export function ZenerRegulatorLab(): React.JSX.Element {
       <Section title="Result">
         <Table
           head={['Rs = (15 − 9.1) ÷ (20 mA + 5 mA)', 'Your value (Ω)', 'Check']}
-          rows={[['Series resistor', <input className={styles.input} style={{maxWidth: '6rem'}} inputMode="decimal" aria-label="Calculated Rs in ohms" value={rsCalc} onChange={(e) => setRsCalc(e.target.value)} />, rsCalc ? <Verdict ok={near(num(rsCalc), rsTrue, 0.02)} /> : '–']]}
+          rows={[['Series resistor', <input className={styles.input} style={{maxWidth: '6rem'}} inputMode="decimal" aria-label="Calculated Rs in ohms" value={rsCalc} onChange={(e) => setRsCalc(e.target.value)} />, rsCalc ? (
+                <Verdict
+                  ok={near(num(rsCalc), rsTrue, 0.02)}
+                  fix={{
+                    hint: L2('Rs = (Vin − Vz) ÷ (IZ + IL). The resistor carries the zener current plus the load current.', 'Rs = (Vin − Vz) ÷ (IZ + IL). રેઝિસ્ટરમાંથી ઝેનર કરંટ અને લોડ કરંટ બંને વહે છે.'),
+                    work: L2(`Rs = (15 − 9.1) ÷ (20 mA + 5 mA) = 5.9 ÷ 0.025 = ${fmt(rsTrue)} Ω.`, `Rs = (15 − 9.1) ÷ (20 mA + 5 mA) = 5.9 ÷ 0.025 = ${fmt(rsTrue)} Ω.`),
+                    answer: `${fmt(rsTrue)} Ω`,
+                    entered: num(rsCalc),
+                    expected: rsTrue,
+                  }}
+                />
+              ) : (
+                '–'
+              ),
+            ],
+          ]}
         />
         <ResetKit
           onReset={() => {
@@ -406,7 +422,20 @@ export function PercentRegulationLab(): React.JSX.Element {
             of(p).find((r) => r.iset === 0)?.v.toFixed(2) ?? '–',
             of(p).find((r) => r.iset === 1)?.v.toFixed(2) ?? '–',
             <input className={styles.input} style={{maxWidth: '5rem'}} inputMode="decimal" aria-label={`${p} percentage regulation`} value={ans[p] ?? ''} onChange={(e) => setAns((a) => ({...a, [p]: e.target.value}))} />,
-            ans[p] ? <Verdict ok={ok(p)} /> : '–',
+            ans[p] ? (
+              <Verdict
+                ok={ok(p)}
+                fix={{
+                  hint: L2('% regulation = (V no load − V full load) ÷ V full load × 100.', '% રેગ્યુલેશન = (V નો-લોડ − V ફુલ-લોડ) ÷ V ફુલ-લોડ × 100.'),
+                  work: L2(`(${of(p).find((r) => r.iset === 0)?.v.toFixed(2)} − ${of(p).find((r) => r.iset === 1)?.v.toFixed(2)}) ÷ ${of(p).find((r) => r.iset === 1)?.v.toFixed(2)} × 100 = ${fmt(pct(p))} %.`, `(${of(p).find((r) => r.iset === 0)?.v.toFixed(2)} − ${of(p).find((r) => r.iset === 1)?.v.toFixed(2)}) ÷ ${of(p).find((r) => r.iset === 1)?.v.toFixed(2)} × 100 = ${fmt(pct(p))} %.`),
+                  answer: `${fmt(pct(p))} %`,
+                  entered: num(ans[p]),
+                  expected: pct(p),
+                }}
+              />
+            ) : (
+              '–'
+            ),
           ])}
         />
         <ResetKit

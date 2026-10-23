@@ -4,6 +4,7 @@ import PracticalSheet from '../PracticalSheet';
 import {GU_1_7_58, GU_1_7_59} from './gu';
 import useStoredState from '../useStoredState';
 import {NoteBox, ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import {si} from '../signals';
 import {PartArt, type PartKind, type PartOpts} from './art';
 import {bandsFor, near} from './parts';
@@ -232,7 +233,16 @@ export function InductorLab(): React.JSX.Element {
             ),
             <input className={styles.input} style={{maxWidth: '7rem'}} aria-label={`Inductor ${k + 1} marked value`} placeholder="e.g. 47uH, –" value={ans[k]?.marked ?? ''} onChange={(e) => set(k, {marked: e.target.value})} />,
             <span className={styles.num}>{ans[k]?.meas ?? '–'}</span>,
-            ans[k]?.type && ans[k]?.marked ? <Verdict ok={typeOk(k) && !!markOk(k)} /> : '–',
+            ans[k]?.type && ans[k]?.marked ? <Verdict
+                ok={typeOk(k) && !!markOk(k)}
+                fix={{
+                  hint: L2(
+                    'Name the inductor from its construction (air-core, ferrite, iron-core, SMD). Colour or SMD code is read in µH: 101 = 10 × 10¹ = 100 µH. Write “–” if unmarked.',
+                    'ઇન્ડક્ટરનું નામ તેની બનાવટ પરથી (એર-કોર, ફેરાઇટ, આયર્ન-કોર, SMD). કલર કે SMD કોડ µH માં વંચાય: 101 = 10 × 10¹ = 100 µH. માર્કિંગ ન હોય તો “–” લખો.',
+                  ),
+                  answer: `${it.name}, ${it.marked == null ? '–' : si(it.marked, 'H')}`,
+                }}
+              /> : '–',
           ])}
         />
         <p className={styles.muted}>Marked value: 47uH, 0.1mH, 1H, or “–” if unmarked.</p>
@@ -433,7 +443,17 @@ export function CapacitorLab(): React.JSX.Element {
               ],
               (v) => set(k, {cond: v}),
             ),
-            ans[k]?.type && ans[k]?.marked && ans[k]?.cond ? <Verdict ok={typeOk(k) && markOk(k) && condOk(k)} /> : '–',
+            ans[k]?.type && ans[k]?.marked && ans[k]?.cond ? <Verdict
+                ok={typeOk(k) && markOk(k) && condOk(k)}
+                fix={{
+                  hint: L2(
+                    '3-digit code is in pF: first two digits × 10^third. 104 = 10 × 10⁴ pF = 100 nF. Faulty = far below the marked value, or high D.',
+                    '3 અંકનો કોડ pF માં: પહેલા બે અંક × 10^ત્રીજો. 104 = 10 × 10⁴ pF = 100 nF. ખરાબ = માર્ક કરેલી કિંમત કરતાં ઘણું ઓછું, અથવા વધુ D.',
+                  ),
+                  work: L2(`${it.mark} → ${si(it.marked, 'F')}.`, `${it.mark} → ${si(it.marked, 'F')}.`),
+                  answer: `${it.name}, ${si(it.marked, 'F')}, ${it.faulty ? 'Faulty' : 'Good'}`,
+                }}
+              /> : '–',
           ])}
         />
         <p className={styles.muted}>Value: 470p, 100n, 0.1u, 470u.</p>

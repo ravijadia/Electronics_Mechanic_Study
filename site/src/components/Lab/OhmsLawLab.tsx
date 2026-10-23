@@ -23,6 +23,8 @@ import {
   type SlotB,
 } from './circuit';
 import {ColumnHelp, NextStep} from './guide';
+import {Verdict} from './kit';
+import {L2, fmt} from './solution';
 import styles from './styles.module.css';
 
 interface Reading {
@@ -47,6 +49,7 @@ const SERIES_COLOR = ['var(--s1)', 'var(--s2)', 'var(--s3)', 'var(--s4)'];
 const SERIES_MARKER: Marker[] = ['circle', 'square', 'triangle', 'diamond'];
 const METER_NAME: Record<MeterKey, string> = {m1: 'DMM 1', m2: 'DMM 2'};
 const MIN_READINGS = 5;
+const BAND_DIGIT: Record<string, number> = {black: 0, brown: 1, red: 2, orange: 3, yellow: 4, green: 5, blue: 6, violet: 7, grey: 8, white: 9};
 
 const NEW_METER: MeterState = {fn: 'off', reversed: false, fuseBlown: false};
 
@@ -901,12 +904,25 @@ export default function OhmsLawLab(): React.JSX.Element {
                             value={codes[t.spec.id] ?? ''}
                             onChange={(e) => setCodes((c) => ({...c, [t.spec.id]: e.target.value}))}
                           />{' '}
-                          {t.typedOhms != null &&
-                            (t.codeOK ? (
-                              <span className={styles.ok}>✓ correct</span>
-                            ) : (
-                              <span className={styles.no}>✗ check the bands</span>
-                            ))}
+                          {t.typedOhms != null && (
+                            <Verdict
+                              ok={t.codeOK}
+                              no="✗ check the bands"
+                              fix={{
+                                hint: L2(
+                                  'Bands 1 and 2 are digits, band 3 is the multiplier (number of zeros), band 4 is the tolerance (gold ±5 %). Black 0, brown 1, red 2, orange 3, yellow 4, green 5, blue 6, violet 7, grey 8, white 9.',
+                                  'બેન્ડ 1 અને 2 અંકો, બેન્ડ 3 મલ્ટિપ્લાયર (કેટલા ઝીરો), બેન્ડ 4 ટોલરન્સ (ગોલ્ડ ±5 %). કાળો 0, બ્રાઉન 1, લાલ 2, નારંગી 3, પીળો 4, લીલો 5, વાદળી 6, જાંબલી 7, ગ્રે 8, સફેદ 9.',
+                                ),
+                                work: L2(
+                                  `${t.spec.bands.join(', ')}: digits ${t.spec.bands.slice(0, 2).map((b) => BAND_DIGIT[b] ?? '?').join('')}, multiplier ${t.spec.bands[2]} = ×${10 ** (BAND_DIGIT[t.spec.bands[2]] ?? 0)} → ${fmt(t.spec.nominal)} Ω.`,
+                                  `${t.spec.bands.join(', ')}: અંકો ${t.spec.bands.slice(0, 2).map((b) => BAND_DIGIT[b] ?? '?').join('')}, મલ્ટિપ્લાયર ${t.spec.bands[2]} = ×${10 ** (BAND_DIGIT[t.spec.bands[2]] ?? 0)} → ${fmt(t.spec.nominal)} Ω.`,
+                                ),
+                                answer: `${fmt(t.spec.nominal)} Ω`,
+                                entered: t.typedOhms,
+                                expected: t.spec.nominal,
+                              }}
+                            />
+                          )}
                         </td>
                         <td className={styles.num}>{t.mean ? formatOhms(t.mean) : '–'}</td>
                         <td className={styles.num}>{t.fitR ? formatOhms(t.fitR) : '–'}</td>

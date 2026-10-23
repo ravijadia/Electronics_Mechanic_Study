@@ -9,6 +9,7 @@ import {useScope} from '../Scope';
 import {fgFreq, useFunctionGenerator} from '../FunctionGenerator';
 import {si, stats, type Sig} from '../signals';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import {fmtOhms, kitLabel, near} from './parts';
 import styles from '../styles.module.css';
 
@@ -305,12 +306,39 @@ export function RcTimeConstantLab(): React.JSX.Element {
             [
               `τ = R × C = ${fmtOhms(RS[ri])} × ${fmtF(CS[ci])}`,
               <input className={styles.input} style={{maxWidth: '6rem'}} inputMode="decimal" aria-label="Calculated time constant in seconds" value={ans.calc ?? ''} onChange={(e) => setAns((a) => ({...a, calc: e.target.value}))} />,
-              ans.calc ? <Verdict ok={calcOk} /> : '–',
+              ans.calc ? (
+                <Verdict
+                  ok={calcOk}
+                  fix={{
+                    hint: L2('τ = R × C, with R in ohms and C in farads. The answer is in seconds.', 'τ = R × C, R ઓહ્મમાં અને C ફેરાડમાં. જવાબ સેકન્ડમાં.'),
+                    work: L2(`τ = ${RS[ri]} × ${CS[ci]} = ${fmt(nominalTau)} s.`, `τ = ${RS[ri]} × ${CS[ci]} = ${fmt(nominalTau)} s.`),
+                    answer: `${fmt(nominalTau)} s`,
+                    entered: num(ans.calc),
+                    expected: nominalTau,
+                  }}
+                />
+              ) : (
+                '–'
+              ),
             ],
             [
               'τ from graph (Vc = 6.32 V)',
               <input className={styles.input} style={{maxWidth: '6rem'}} inputMode="decimal" aria-label="Time constant from graph in seconds" value={ans.graph ?? ''} onChange={(e) => setAns((a) => ({...a, graph: e.target.value}))} />,
-              ans.graph ? <Verdict ok={graphOk} no="✗ read the graph again" /> : '–',
+              ans.graph ? (
+                <Verdict
+                  ok={graphOk}
+                  no="✗ read the graph again"
+                  fix={{
+                    hint: L2('τ is the time at which Vc reaches 63.2 % of the supply (6.32 V for 10 V) on the charging curve.', 'ચાર્જિંગ વક્ર પર Vc સપ્લાયના 63.2 % (10 V માટે 6.32 V) સુધી પહોંચે તે સમય એટલે τ.'),
+                    work: L2(`With the meter loading the capacitor, τ seen = ${fmt(tauSeen)} s (±10 % accepted).`, `મીટર કેપેસિટર પર લોડ કરતું હોવાથી દેખાતું τ = ${fmt(tauSeen)} s (±10 % ચાલે).`),
+                    answer: `${fmt(tauSeen)} s`,
+                    entered: num(ans.graph),
+                    expected: tauSeen,
+                  }}
+                />
+              ) : (
+                '–'
+              ),
             ],
           ]}
         />
@@ -550,7 +578,14 @@ export function DifferentiatorLab(): React.JSX.Element {
         ) : (
           <Table
             head={['R', 'C', 'f', 'Input', 'Vin p-p', 'Vout p-p', 'Output shape', 'Check']}
-            rows={rows.map((r) => [fmtOhms(r.r), fmtF(r.c), si(r.f, 'Hz'), r.wave, `${r.vin} V`, `${r.vout} V`, r.shape, <Verdict ok={readOk(r)} />])}
+            rows={rows.map((r) => [fmtOhms(r.r), fmtF(r.c), si(r.f, 'Hz'), r.wave, `${r.vin} V`, `${r.vout} V`, r.shape, <Verdict
+                ok={readOk(r)}
+                fix={{
+                  hint: L2('Vpp = vertical divisions from the bottom to the top of the trace × VOLTS/DIV. Count again for Vin and Vout.', 'Vpp = ટ્રેસના નીચેથી ઉપર સુધીના ઊભા ડિવિઝન × VOLTS/DIV. Vin અને Vout માટે ફરી ગણો.'),
+                  work: L2(`Vin p-p = ${fmt(r.vinTrue)} V, Vout p-p = ${fmt(r.voutTrue)} V (±10 % accepted).`, `Vin p-p = ${fmt(r.vinTrue)} V, Vout p-p = ${fmt(r.voutTrue)} V (±10 % ચાલે).`),
+                  answer: `${fmt(r.vinTrue)} V / ${fmt(r.voutTrue)} V`,
+                }}
+              />])}
           />
         )}
       </Section>
@@ -563,7 +598,20 @@ export function DifferentiatorLab(): React.JSX.Element {
                 `4 × ${fmtOhms(last.r)} × ${fmtF(last.c)} × ${si(last.f, 'Hz')} × ${last.vin} V`,
                 <input className={styles.input} style={{maxWidth: '6rem'}} inputMode="decimal" aria-label="Calculated output peak to peak in volts" value={ans.calc ?? ''} onChange={(e) => setAns((a) => ({...a, calc: e.target.value}))} />,
                 `${last.vout} V`,
-                ans.calc ? <Verdict ok={calcOk} /> : '–',
+                ans.calc ? (
+                  <Verdict
+                    ok={calcOk}
+                    fix={{
+                      hint: L2('Vout p-p = 4 × R × C × f × Vin p-p. Use ohms, farads, hertz and volts.', 'Vout p-p = 4 × R × C × f × Vin p-p. ઓહ્મ, ફેરાડ, હર્ટ્ઝ અને વોલ્ટ વાપરો.'),
+                      work: L2(`4 × ${last.r} × ${last.c} × ${last.f} × ${last.vin} = ${fmt(4 * last.r * last.c * last.f * Number(last.vin))} V.`, `4 × ${last.r} × ${last.c} × ${last.f} × ${last.vin} = ${fmt(4 * last.r * last.c * last.f * Number(last.vin))} V.`),
+                      answer: `${fmt(4 * last.r * last.c * last.f * Number(last.vin))} V`,
+                      entered: num(ans.calc),
+                      expected: 4 * last.r * last.c * last.f * Number(last.vin),
+                    }}
+                  />
+                ) : (
+                  '–'
+                ),
               ],
             ]}
           />

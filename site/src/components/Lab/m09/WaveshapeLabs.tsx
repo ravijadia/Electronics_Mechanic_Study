@@ -7,6 +7,7 @@ import {Knob, useScope} from '../Scope';
 import {fgVpp, useFunctionGenerator} from '../FunctionGenerator';
 import {stats, type Sig} from '../signals';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import {kitLabel} from '../m07/parts';
 import styles from '../styles.module.css';
 
@@ -289,7 +290,23 @@ function WaveshapeLab({s}: {s: Spec}): React.JSX.Element {
             rows={rows.map((r, k) => {
               const set = (p: Partial<Row>) => setRows((x) => x.map((y, j) => (j === k ? {...y, ...p} : y)));
               const field = (f: 'emax' | 'emin', label: string) => <input className={styles.input} style={{maxWidth: '5rem'}} inputMode="decimal" aria-label={label} value={r[f] ?? ''} onChange={(e) => set({[f]: e.target.value})} />;
-              return [CFGS[r.cfg].name, ...(usesVb ? [CFGS[r.cfg].biased ? r.vb.toFixed(1) : '–'] : []), r.vpp.toFixed(1), field('emax', `Row ${k + 1} output top`), field('emin', `Row ${k + 1} output bottom`), r.emax && r.emin ? <Verdict ok={ok(r)} /> : '–'];
+              return [CFGS[r.cfg].name, ...(usesVb ? [CFGS[r.cfg].biased ? r.vb.toFixed(1) : '–'] : []), r.vpp.toFixed(1), field('emax', `Row ${k + 1} output top`), field('emin', `Row ${k + 1} output bottom`), r.emax && r.emin ? (
+                <Verdict
+                  ok={ok(r)}
+                  fix={{
+                    hint: L2(
+                      'Read the top and bottom levels of the output on CH2 (volts/div × divisions from the 0 V line). A clipper cuts the wave at a level; a clamper shifts the whole wave up or down by the capacitor charge.',
+                      'CH2 પર આઉટપુટના ઉપર અને નીચેના લેવલ વાંચો (volts/div × 0 V લાઇનથી ડિવિઝન). ક્લિપર તરંગને એક લેવલે કાપે; ક્લેમ્પર કેપેસિટરના ચાર્જ જેટલો આખો તરંગ ઉપર-નીચે ખસેડે.',
+                    ),
+                    work: L2(`Output top = ${fmt(r.max)} V, bottom = ${fmt(r.min)} V (±5 % or 0.3 V accepted).`, `આઉટપુટ ટોચ = ${fmt(r.max)} V, તળિયું = ${fmt(r.min)} V (±5 % કે 0.3 V ચાલે).`),
+                    answer: `${fmt(r.max)} V / ${fmt(r.min)} V`,
+                    entered: close(r.emax, r.max) ? num(r.emin) : num(r.emax),
+                    expected: close(r.emax, r.max) ? r.min : r.max,
+                  }}
+                />
+              ) : (
+                '–'
+              )];
             })}
           />
         )}

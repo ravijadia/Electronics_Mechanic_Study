@@ -8,6 +8,7 @@ import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes} from '../Probes';
 import {Knob} from '../Scope';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import {PartGrid} from '../m07/IdentifyLabs';
 import type {PartKind} from '../m07/art';
 import {kitLabel, near} from '../m07/parts';
@@ -310,7 +311,20 @@ export function Ic7812Lab(): React.JSX.Element {
             [
               nl && fl ? `(${nl.vout} − ${fl.vout}) ÷ ${fl.vout} × 100` : 'Note Vout at no load and 1 A first',
               <input className={styles.input} style={{maxWidth: '5rem'}} inputMode="decimal" aria-label="Percentage load regulation" value={pct} onChange={(e) => setPct(e.target.value)} />,
-              pct && pctTrue != null ? <Verdict ok={Math.abs((num(pct) ?? 99) - pctTrue) < 0.02} /> : '–',
+              pct && pctTrue != null ? (
+                <Verdict
+                  ok={Math.abs((num(pct) ?? 99) - pctTrue) < 0.02}
+                  fix={{
+                    hint: L2('% regulation = (Vno-load − Vfull-load) ÷ Vfull-load × 100. Use the Vout you noted at no load and at 1 A.', '% રેગ્યુલેશન = (Vનો-લોડ − Vફુલ-લોડ) ÷ Vફુલ-લોડ × 100. નો લોડ અને 1 A પર નોંધેલા Vout વાપરો.'),
+                    work: L2(`(${nl!.vout} − ${fl!.vout}) ÷ ${fl!.vout} × 100 = ${fmt(pctTrue)} %.`, `(${nl!.vout} − ${fl!.vout}) ÷ ${fl!.vout} × 100 = ${fmt(pctTrue)} %.`),
+                    answer: `${fmt(pctTrue)} %`,
+                    entered: num(pct),
+                    expected: pctTrue,
+                  }}
+                />
+              ) : (
+                '–'
+              ),
             ],
           ]}
         />
@@ -449,7 +463,20 @@ export function RegulatorIcsLab(): React.JSX.Element {
               ],
               (v) => set(k, {pin1: v}),
             ),
-            ans[k]?.type && ans[k]?.vout && ans[k]?.amps && ans[k]?.pin1 ? <Verdict ok={ok(k)} /> : '–',
+            ans[k]?.type && ans[k]?.vout && ans[k]?.amps && ans[k]?.pin1 ? (
+              <Verdict
+                ok={ok(k)}
+                fix={{
+                  hint: L2(
+                    '78 = positive, 79 = negative, 317 / 337 = adjustable. The last two digits are the voltage. Letter after 78: L = 0.1 A, M = 0.5 A, none = 1.5 A, S = 2 A. Pin 1 is IN for 78xx (TO-220), OUT for 78Lxx (TO-92), GND for 79xx, ADJ for 317; check the data sheet.',
+                    '78 = પોઝિટિવ, 79 = નેગેટિવ, 317 / 337 = એડજસ્ટેબલ. છેલ્લા બે અંક વોલ્ટેજ. 78 પછીનો અક્ષર: L = 0.1 A, M = 0.5 A, કંઈ નહીં = 1.5 A, S = 2 A. પિન 1: 78xx (TO-220) માં IN, 78Lxx (TO-92) માં OUT, 79xx માં GND, 317 માં ADJ; ડેટા શીટ તપાસો.',
+                  ),
+                  answer: `${items[k].mark}: ${items[k].vout} V, ${items[k].amps} A, pin 1 = ${items[k].pin1}`,
+                }}
+              />
+            ) : (
+              '–'
+            ),
           ])}
         />
         <ResetKit
@@ -625,19 +652,55 @@ export function Ic723Lab(): React.JSX.Element {
             [
               'Minimum Vin for regulation (V)',
               <span>
-                <input className={styles.input} style={{maxWidth: '4.5rem'}} inputMode="decimal" aria-label="IC 723 minimum input" value={ans.min723 ?? ''} onChange={(e) => setAns((a) => ({...a, min723: e.target.value}))} /> {ans.min723 ? <Verdict ok={minOk('723', ans.min723)} /> : null}
+                <input className={styles.input} style={{maxWidth: '4.5rem'}} inputMode="decimal" aria-label="IC 723 minimum input" value={ans.min723 ?? ''} onChange={(e) => setAns((a) => ({...a, min723: e.target.value}))} /> {ans.min723 ? (
+                  <Verdict
+                    ok={minOk('723', ans.min723)}
+                    fix={{
+                      hint: L2('Lower Vin step by step. The minimum is where Vout just starts to fall below the set value.', 'Vin ધીમે ધીમે ઘટાડો. Vout સેટ કિંમતથી નીચે ઉતરવા લાગે ત્યાં લઘુત્તમ છે.'),
+                      answer: '9.5 V (±1 V)',
+                      entered: num(ans.min723),
+                      expected: 9.5,
+                    }}
+                  />
+                ) : null}
               </span>,
               <span>
-                <input className={styles.input} style={{maxWidth: '4.5rem'}} inputMode="decimal" aria-label="IC 78S40 minimum input" value={ans.min78 ?? ''} onChange={(e) => setAns((a) => ({...a, min78: e.target.value}))} /> {ans.min78 ? <Verdict ok={minOk('78S40', ans.min78)} /> : null}
+                <input className={styles.input} style={{maxWidth: '4.5rem'}} inputMode="decimal" aria-label="IC 78S40 minimum input" value={ans.min78 ?? ''} onChange={(e) => setAns((a) => ({...a, min78: e.target.value}))} /> {ans.min78 ? (
+                  <Verdict
+                    ok={minOk('78S40', ans.min78)}
+                    fix={{
+                      hint: L2('Lower Vin step by step. The minimum is about 2 V above the set output voltage.', 'Vin ધીમે ધીમે ઘટાડો. લઘુત્તમ Vin સેટ આઉટપુટ વોલ્ટેજ કરતાં લગભગ 2 V વધારે હોય છે.'),
+                      answer: `${fmt(set + 2)} V (±1 V)`,
+                      entered: num(ans.min78),
+                      expected: set + 2,
+                    }}
+                  />
+                ) : null}
               </span>,
             ],
             [
               'Efficiency at Vin = 20 V (%)',
               <span>
-                <input className={styles.input} style={{maxWidth: '4.5rem'}} inputMode="decimal" aria-label="IC 723 efficiency" value={ans.eff723 ?? ''} onChange={(e) => setAns((a) => ({...a, eff723: e.target.value}))} /> {ans.eff723 ? effAt20('723') == null ? 'note 20 V first' : <Verdict ok={effOk('723', ans.eff723)} /> : null}
+                <input className={styles.input} style={{maxWidth: '4.5rem'}} inputMode="decimal" aria-label="IC 723 efficiency" value={ans.eff723 ?? ''} onChange={(e) => setAns((a) => ({...a, eff723: e.target.value}))} /> {ans.eff723 ? effAt20('723') == null ? 'note 20 V first' : <Verdict
+                    ok={effOk('723', ans.eff723)}
+                    fix={{
+                      hint: L2('Efficiency = (Vout × Iout) ÷ (Vin × Iin) × 100 at Vin = 20 V.', 'કાર્યક્ષમતા = (Vout × Iout) ÷ (Vin × Iin) × 100, Vin = 20 V પર.'),
+                      answer: `${fmt(effAt20('723'))} %`,
+                      entered: num(ans.eff723),
+                      expected: effAt20('723'),
+                    }}
+                  /> : null}
               </span>,
               <span>
-                <input className={styles.input} style={{maxWidth: '4.5rem'}} inputMode="decimal" aria-label="IC 78S40 efficiency" value={ans.eff78 ?? ''} onChange={(e) => setAns((a) => ({...a, eff78: e.target.value}))} /> {ans.eff78 ? effAt20('78S40') == null ? 'note 20 V first' : <Verdict ok={effOk('78S40', ans.eff78)} /> : null}
+                <input className={styles.input} style={{maxWidth: '4.5rem'}} inputMode="decimal" aria-label="IC 78S40 efficiency" value={ans.eff78 ?? ''} onChange={(e) => setAns((a) => ({...a, eff78: e.target.value}))} /> {ans.eff78 ? effAt20('78S40') == null ? 'note 20 V first' : <Verdict
+                    ok={effOk('78S40', ans.eff78)}
+                    fix={{
+                      hint: L2('Efficiency = (Vout × Iout) ÷ (Vin × Iin) × 100 at Vin = 20 V.', 'કાર્યક્ષમતા = (Vout × Iout) ÷ (Vin × Iin) × 100, Vin = 20 V પર.'),
+                      answer: `${fmt(effAt20('78S40'))} %`,
+                      entered: num(ans.eff78),
+                      expected: effAt20('78S40'),
+                    }}
+                  /> : null}
               </span>,
             ],
           ]}
@@ -852,7 +915,20 @@ export function Lm317Lab(): React.JSX.Element {
               p.r2 ?? '–',
               p.vout ?? '–',
               <input className={styles.input} style={{maxWidth: '5rem'}} inputMode="decimal" aria-label={`Calculated Vout at ${p.pos} percent`} value={p.calc ?? ''} disabled={!p.r2} onChange={(e) => setRows((r) => r.map((x) => (x.pos === p.pos ? {...x, calc: e.target.value} : x)))} />,
-              p.calc && p.vout ? <Verdict ok={measOk(p) && calcOk(p)} /> : '–',
+              p.calc && p.vout ? (
+                <Verdict
+                  ok={measOk(p) && calcOk(p)}
+                  fix={{
+                    hint: L2('Vout = 1.25 × (1 + R2 ÷ R1), with R1 = 220 Ω and R2 in ohms (the kΩ value × 1000). Measure R2 with the supply off.', 'Vout = 1.25 × (1 + R2 ÷ R1), R1 = 220 Ω અને R2 ઓહ્મમાં (kΩ કિંમત × 1000). R2 સપ્લાય બંધ રાખીને માપો.'),
+                    work: p.r2 != null ? L2(`1.25 × (1 + ${fmt(Number(p.r2) * 1000)} ÷ ${R1}) = ${fmt(1.25 * (1 + (Number(p.r2) * 1000) / R1))} V.`, `1.25 × (1 + ${fmt(Number(p.r2) * 1000)} ÷ ${R1}) = ${fmt(1.25 * (1 + (Number(p.r2) * 1000) / R1))} V.`) : undefined,
+                    answer: p.r2 != null ? `${fmt(1.25 * (1 + (Number(p.r2) * 1000) / R1))} V` : undefined,
+                    entered: num(p.calc),
+                    expected: p.r2 != null ? 1.25 * (1 + (Number(p.r2) * 1000) / R1) : null,
+                  }}
+                />
+              ) : (
+                '–'
+              ),
             ])}
           />
         )}

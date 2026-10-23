@@ -4,6 +4,7 @@ import PracticalSheet from '../PracticalSheet';
 import {GU_1_3_33} from './gu';
 import useStoredState from '../useStoredState';
 import {NoteBox, ResetKit, Section, Table, Verdict, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import styles from '../styles.module.css';
 
 const KEY = '1.3.33';
@@ -195,7 +196,21 @@ export default function HydrometerLab(): React.JSX.Element {
             k + 1,
             <input className={styles.input} inputMode="decimal" aria-label={`Cell ${k + 1} observed SG`} value={ans[k]?.obs ?? ''} onChange={(e) => setAns((a) => ({...a, [k]: {...a[k], obs: e.target.value}}))} />,
             <input className={styles.input} inputMode="decimal" aria-label={`Cell ${k + 1} corrected SG`} value={ans[k]?.cor ?? ''} onChange={(e) => setAns((a) => ({...a, [k]: {...a[k], cor: e.target.value}}))} />,
-            res[k].obs == null || res[k].cor == null ? '–' : <Verdict ok={!!(res[k].obs && res[k].cor)} no={`✗ ${!res[k].obs ? 'observed' : 'corrected'}`} />,
+            res[k].obs == null || res[k].cor == null ? '–' : <Verdict
+              ok={!!(res[k].obs && res[k].cor)}
+              no={`✗ ${!res[k].obs ? 'observed' : 'corrected'}`}
+              fix={{
+                hint: L2(
+                  `Observed SG = reading at the liquid level on the float. Corrected SG = observed + (temperature − ${REF_T}) × 0.0007.`,
+                  `અવલોકિત SG = ફ્લોટ પર પ્રવાહીના સ્તરે દેખાતું રીડિંગ. સુધારેલો SG = અવલોકિત + (તાપમાન − ${REF_T}) × 0.0007.`,
+                ),
+                work: L2(
+                  `Observed ${kit.cells[k].toFixed(3)}. Correction = (${kit.temp} − ${REF_T}) × 0.0007 = ${fmt((kit.temp - REF_T) * CORR)}. Corrected = ${kit.cells[k].toFixed(3)} + ${fmt((kit.temp - REF_T) * CORR)} = ${corrOf(kit.cells[k]).toFixed(3)}.`,
+                  `અવલોકિત ${kit.cells[k].toFixed(3)}. સુધારો = (${kit.temp} − ${REF_T}) × 0.0007 = ${fmt((kit.temp - REF_T) * CORR)}. સુધારેલો = ${kit.cells[k].toFixed(3)} + ${fmt((kit.temp - REF_T) * CORR)} = ${corrOf(kit.cells[k]).toFixed(3)}.`,
+                ),
+                answer: `${kit.cells[k].toFixed(3)} → ${corrOf(kit.cells[k]).toFixed(3)}`,
+              }}
+            />,
           ])}
         />
       </Section>
@@ -224,8 +239,25 @@ export default function HydrometerLab(): React.JSX.Element {
           </label>
         </div>
         <div className={styles.row}>
-          {weakAns && <Verdict ok={Number(weakAns) === kit.weak + 1} yes="✓ weak cell" no="✗ weak cell" />}
-          {stateAns && <Verdict ok={stateAns === stateTruth} yes="✓ state of charge" no="✗ state of charge" />}
+          {weakAns && <Verdict
+              ok={Number(weakAns) === kit.weak + 1}
+              yes="✓ weak cell"
+              no="✗ weak cell"
+              fix={{
+                hint: L2('The weak cell has an SG far lower than the other five.', 'નબળા સેલનો SG બાકીના પાંચ કરતાં ઘણો ઓછો હોય છે.'),
+                answer: `Cell ${kit.weak + 1}`,
+              }}
+            />}
+          {stateAns && <Verdict
+              ok={stateAns === stateTruth}
+              yes="✓ state of charge"
+              no="✗ state of charge"
+              fix={{
+                hint: L2('Ignore the weak cell. Average the corrected SG of the five good cells and find it in the table.', 'નબળા સેલને ગણશો નહીં. પાંચ સારા સેલના સુધારેલા SG ની સરેરાશ કાઢીને ટેબલમાં શોધો.'),
+                work: L2(`Average corrected SG of the good cells = ${avgGood.toFixed(3)} → ${stateTruth}.`, `સારા સેલના સુધારેલા SG ની સરેરાશ = ${avgGood.toFixed(3)} → ${stateTruth}.`),
+                answer: stateTruth,
+              }}
+            />}
         </div>
         <ResetKit
           onReset={() => {

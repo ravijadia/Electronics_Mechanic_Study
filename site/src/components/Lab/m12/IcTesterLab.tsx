@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import PracticalSheet from '../PracticalSheet';
 import {GU_1_12_111} from './gu';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, useKitSeed, useRng, type Note} from '../kit';
+import {L2} from '../solution';
 import {Knob} from '../Scope';
 import useStoredState from '../useStoredState';
 import {gateTruth, GATE_ICS, GATE_IC_IDS} from './logic';
@@ -129,7 +130,24 @@ export function IcTesterLab(): React.JSX.Element {
                   </option>
                 ))}
               </select>,
-              fnGuess ? (rowsOk ? <Verdict ok={fnOk} /> : 'complete the truth table first') : '–',
+              fnGuess ? (
+                rowsOk ? (
+                  <Verdict
+                    ok={fnOk}
+                    fix={{
+                      hint: L2(
+                        'Compare Y in your table: AND = 1 only when both inputs are 1; OR = 0 only when both are 0; NAND and NOR are the opposites of those; XOR = 1 when the inputs differ; NOT inverts one input.',
+                        'તમારા ટેબલમાં Y સરખાવો: AND = બંને ઇનપુટ 1 હોય ત્યારે જ 1; OR = બંને 0 હોય ત્યારે જ 0; NAND અને NOR તેના ઊલટા; XOR = ઇનપુટ જુદા હોય ત્યારે 1; NOT એક ઇનપુટને ઊલટાવે.',
+                      ),
+                      answer: t.fn,
+                    }}
+                  />
+                ) : (
+                  'complete the truth table first'
+                )
+              ) : (
+                '–'
+              ),
             ],
             [
               'IC family',
@@ -138,7 +156,21 @@ export function IcTesterLab(): React.JSX.Element {
                 <option value="TTL">TTL</option>
                 <option value="CMOS">CMOS</option>
               </select>,
-              famGuess ? (seenIn && seenOut ? <Verdict ok={famOk} /> : 'try both an in-range and an out-of-range supply first') : '–',
+              famGuess ? (
+                seenIn && seenOut ? (
+                  <Verdict
+                    ok={famOk}
+                    fix={{
+                      hint: L2('TTL works only close to 5 V (4.75–5.25 V). CMOS keeps working from 3 V to 15 V. Change the supply and watch whether the output still follows.', 'TTL ફક્ત 5 V ની નજીક (4.75–5.25 V) ચાલે. CMOS 3 V થી 15 V સુધી ચાલે. સપ્લાય બદલો અને આઉટપુટ હજી ફોલો કરે છે કે નહીં તે જુઓ.'),
+                      answer: kit.family,
+                    }}
+                  />
+                ) : (
+                  'try both an in-range and an out-of-range supply first'
+                )
+              ) : (
+                '–'
+              ),
             ],
           ]}
         />

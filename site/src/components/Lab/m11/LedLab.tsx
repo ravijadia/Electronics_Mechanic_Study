@@ -7,6 +7,7 @@ import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes} from '../Probes';
 import {Knob} from '../Scope';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import {solveNodes, resistanceBetween, type Branch, type CurrentSource} from '../m07/network';
 import {AxialResistor, bandsFor, kitLabel, near} from '../m07/parts';
 import {solveSeries} from '../m08/diode';
@@ -356,7 +357,24 @@ export function LedTestLab(): React.JSX.Element {
             [
               'R = (12 − VF red) ÷ 20 mA (Ω)',
               <input className={styles.input} style={{maxWidth: '5.5rem'}} inputMode="decimal" aria-label="Series resistor" value={ans.r ?? ''} onChange={(e) => setAns({r: e.target.value})} />,
-              ans.r ? rTrue == null ? 'measure the red LED VF first' : <Verdict ok={rOk} /> : '–',
+              ans.r ? (
+                rTrue == null ? (
+                  'measure the red LED VF first'
+                ) : (
+                  <Verdict
+                    ok={rOk}
+                    fix={{
+                      hint: L2('R = (Vsupply − VF) ÷ IF, with Vsupply = 12 V and IF = 20 mA. Use the VF you measured for the red LED.', 'R = (Vસપ્લાય − VF) ÷ IF, Vસપ્લાય = 12 V અને IF = 20 mA. લાલ LED માટે તમે માપેલો VF વાપરો.'),
+                      work: L2(`R = (12 − ${fmt(redVf)}) ÷ 0.02 = ${fmt(rTrue)} Ω.`, `R = (12 − ${fmt(redVf)}) ÷ 0.02 = ${fmt(rTrue)} Ω.`),
+                      answer: `${fmt(rTrue)} Ω`,
+                      entered: num(ans.r),
+                      expected: rTrue,
+                    }}
+                  />
+                )
+              ) : (
+                '–'
+              ),
             ],
           ]}
         />
