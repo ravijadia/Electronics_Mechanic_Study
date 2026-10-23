@@ -1,7 +1,8 @@
-import React, {createContext, useContext, useRef, useState} from 'react';
+import React, {createContext, useContext, useEffect, useRef, useState} from 'react';
 import clsx from 'clsx';
 import useStoredState from './useStoredState';
 import {SheetGuideContext} from './guide';
+import {markPractical} from '../../progress/store';
 import styles from './styles.module.css';
 
 export interface PracticalTask {
@@ -168,6 +169,18 @@ export default function PracticalSheet({
   const doneCount = items.filter((x) => x.done).length;
   const pct = items.length ? Math.round((doneCount / items.length) * 100) : 0;
   const Title = standalone ? 'h1' : 'h3';
+
+  // Done = every step except the final "enter your details and print" step is green.
+  // Counted only when it turns green during this visit, so a practical that is
+  // already green before the trainee has done anything is never counted.
+  const isRecordStep = (s: PracticalTask) => typeof s.label === 'string' && s.label.startsWith('Enter your details');
+  const core = items.filter((s) => !isRecordStep(s));
+  const allDone = core.length > 0 && core.every((s) => s.done);
+  const sawUndone = useRef(false);
+  useEffect(() => {
+    if (!allDone) sawUndone.current = true;
+    else if (sawUndone.current) markPractical(number);
+  }, [allDone, number]);
 
   const print = () => {
     const html = document.documentElement;

@@ -1,0 +1,287 @@
+{
+  "modules": [
+    {
+      "module": 2,
+      "title": "AC and Electrical Cables, Single Range Meters",
+      "lessons": [
+        {
+          "title": "Electrical Terms",
+          "doc": "/docs/module-02-ac-electrical-cables-meters/electrical-terms",
+          "quiz": "/tests/module-02-ac-electrical-cables-meters/electrical-terms"
+        },
+        {
+          "title": "Measuring Instrument Meter",
+          "doc": "/docs/module-02-ac-electrical-cables-meters/measuring-instrument-meter",
+          "quiz": "/tests/module-02-ac-electrical-cables-meters/measuring-instrument-meter"
+        }
+      ]
+    },
+    {
+      "module": 3,
+      "title": "Cells and Batteries",
+      "lessons": [
+        {
+          "title": "Cells and Batteries",
+          "doc": "/docs/module-03-cells-and-batteries/cells-and-batteries",
+          "quiz": "/tests/module-03-cells-and-batteries/cells-and-batteries"
+        },
+        {
+          "title": "Secondary Battery – Charge, Discharge and Maintenance",
+          "doc": "/docs/module-03-cells-and-batteries/secondary-battery-maintenance",
+          "quiz": "/tests/module-03-cells-and-batteries/secondary-battery-maintenance"
+        }
+      ]
+    },
+    {
+      "module": 4,
+      "title": "AC/DC Measuring Instruments, Basic Workshop Practice",
+      "lessons": [
+        {
+          "title": "Types of Measuring Instruments",
+          "doc": "/docs/module-04-ac-dc-measuring-instruments/measuring-instruments-types",
+          "quiz": "/tests/module-04-ac-dc-measuring-instruments/measuring-instruments-types"
+        },
+        {
+          "title": "Oscilloscope Controls",
+          "doc": "/docs/module-04-ac-dc-measuring-instruments/oscilloscope-controls",
+          "quiz": "/tests/module-04-ac-dc-measuring-instruments/oscilloscope-controls"
+        }
+      ]
+    },
+    {
+      "module": 5,
+      "title": "Digital Storage Oscilloscope",
+      "lessons": [
+        {
+          "title": "DSO Front Panel Controls & Single Shot Capture",
+          "doc": "/docs/module-05-digital-storage-oscilloscope/dso-controls-single-shot",
+          "quiz": "/tests/module-05-digital-storage-oscilloscope/dso-controls-single-shot"
+        },
+        {
+          "title": "Function Generator Using IC 8038",
+          "doc": "/docs/module-05-digital-storage-oscilloscope/function-generator-ic8038",
+          "quiz": "/tests/module-05-digital-storage-oscilloscope/function-generator-ic8038"
+        }
+      ]
+    },
+    {
+      "module": 6,
+      "title": "Soldering/Desoldering and Various Switches",
+      "lessons": [
+        {
+          "title": "Soldering and Desoldering of Wires",
+          "doc": "/docs/module-06-soldering-switches/soldering-desoldering-wires",
+          "quiz": "/tests/module-06-soldering-switches/soldering-desoldering-wires"
+        },
+        {
+          "title": "Types of Switches",
+          "doc": "/docs/module-06-soldering-switches/types-of-switches",
+          "quiz": "/tests/module-06-soldering-switches/types-of-switches"
+        }
+      ]
+    },
+    {
+      "module": 7,
+      "title": "Active and Passive Components",
+      "lessons": [
+        {
+          "title": "Active/Passive Components & Resistors",
+          "doc": "/docs/module-07-active-passive-components/active-passive-resistors",
+          "quiz": "/tests/module-07-active-passive-components/active-passive-resistors"
+        },
+        {
+          "title": "Inductors & Capacitors",
+          "doc": "/docs/module-07-active-passive-components/inductors-capacitors",
+          "quiz": "/tests/module-07-active-passive-components/inductors-capacitors"
+        },
+        {
+          "title": "Magnetism & Relay",
+          "doc": "/docs/module-07-active-passive-components/magnetism-relay",
+          "quiz": "/tests/module-07-active-passive-components/magnetism-relay"
+        },
+        {
+          "title": "Ohm's Law, Kirchhoff's Laws & DC Series Circuits",
+          "doc": "/docs/module-07-active-passive-components/ohms-kirchhoffs-dc-series",
+          "quiz": "/tests/module-07-active-passive-components/ohms-kirchhoffs-dc-series"
+        },
+        {
+          "title": "RC Time Constant & RLC Circuits",
+          "doc": "/docs/module-07-active-passive-components/rc-time-constant-rlc",
+          "quiz": "/tests/module-07-active-passive-components/rc-time-constant-rlc"
+        }
+      ]
+    },
+    {
+      "module": 8,
+      "title": "Power Supply Circuits",
+      "lessons": [
+        {
+          "title": "Rectifiers",
+          "doc": "/docs/module-08-power-supply-circuits/rectifiers",
+          "quiz": "/tests/module-08-power-supply-circuits/rectifiers"
+        },
+        {
+          "title": "Regulated Power Supply & IC Regulators",
+          "doc": "/docs/module-08-power-supply-circuits/regulated-power-supply-ic-regulators",
+          "quiz": "/tests/module-08-power-supply-circuits/regulated-power-supply-ic-regulators"
+        },
+        {
+          "title": "Semiconductor & Diode",
+          "doc": "/docs/module-08-power-supply-circuits/semiconductors-and-diodes",
+          "quiz": "/tests/module-08-power-supply-circuits/semiconductors-and-diodes"
+        },
+        {
+          "title": "Transformer",
+          "doc": "/docs/module-08-power-supply-circuits/transformer",
+          "quiz": "/tests/module-08-power-supply-circuits/transformer"
+        },
+        {
+          "title": "Zener Diode",
+          "doc": "/docs/module-08-power-supply-circuits/zener-diodes",
+          "quiz": "/tests/module-08-power-supply-circuits/zener-diodes"
+        }
+      ]
+    },
+    {
+      "module": 9,
+      "title": "Transistor",
+      "lessons": [
+        {
+          "title": "Clamper Circuits",
+          "doc": "/docs/module-09-transistor/clamper-circuits",
+          "quiz": "/tests/module-09-transistor/clamper-circuits"
+        },
+        {
+          "title": "Clipper Circuit",
+          "doc": "/docs/module-09-transistor/clipper-circuit",
+          "quiz": "/tests/module-09-transistor/clipper-circuit"
+        },
+        {
+          "title": "Multivibrators",
+          "doc": "/docs/module-09-transistor/multivibrators",
+          "quiz": "/tests/module-09-transistor/multivibrators"
+        },
+        {
+          "title": "Oscillators",
+          "doc": "/docs/module-09-transistor/oscillators",
+          "quiz": "/tests/module-09-transistor/oscillators"
+        },
+        {
+          "title": "RC Phase Shift Oscillator",
+          "doc": "/docs/module-09-transistor/rc-phase-shift-oscillator",
+          "quiz": "/tests/module-09-transistor/rc-phase-shift-oscillator"
+        },
+        {
+          "title": "Biasing of Transistors",
+          "doc": "/docs/module-09-transistor/transistor-biasing",
+          "quiz": "/tests/module-09-transistor/transistor-biasing"
+        },
+        {
+          "title": "Transistors and Classification",
+          "doc": "/docs/module-09-transistor/transistors-classification",
+          "quiz": "/tests/module-09-transistor/transistors-classification"
+        }
+      ]
+    },
+    {
+      "module": 10,
+      "title": "Power Electronic Components",
+      "lessons": [
+        {
+          "title": "Field Effect Transistor",
+          "doc": "/docs/module-10-power-electronic-components/field-effect-transistor",
+          "quiz": "/tests/module-10-power-electronic-components/field-effect-transistor"
+        },
+        {
+          "title": "MOSFET",
+          "doc": "/docs/module-10-power-electronic-components/mosfet",
+          "quiz": "/tests/module-10-power-electronic-components/mosfet"
+        },
+        {
+          "title": "TRIAC & DIAC Dimmer/Regulator",
+          "doc": "/docs/module-10-power-electronic-components/triac-diac-dimmer",
+          "quiz": "/tests/module-10-power-electronic-components/triac-diac-dimmer"
+        }
+      ]
+    },
+    {
+      "module": 11,
+      "title": "Opto Electronics",
+      "lessons": [
+        {
+          "title": "Light Emitting Diodes (LEDs)",
+          "doc": "/docs/module-11-opto-electronics/light-emitting-diodes",
+          "quiz": "/tests/module-11-opto-electronics/light-emitting-diodes"
+        }
+      ]
+    },
+    {
+      "module": 12,
+      "title": "Basic Gates, Combinational Circuits, Flip-Flops",
+      "lessons": [
+        {
+          "title": "Binary Arithmetic",
+          "doc": "/docs/module-12-digital-logic/binary-arithmetic",
+          "quiz": "/tests/module-12-digital-logic/binary-arithmetic"
+        },
+        {
+          "title": "Digital IC Families",
+          "doc": "/docs/module-12-digital-logic/digital-ic-families",
+          "quiz": "/tests/module-12-digital-logic/digital-ic-families"
+        },
+        {
+          "title": "Encoder & Decoder",
+          "doc": "/docs/module-12-digital-logic/encoder-decoder",
+          "quiz": "/tests/module-12-digital-logic/encoder-decoder"
+        },
+        {
+          "title": "Latch Circuits",
+          "doc": "/docs/module-12-digital-logic/latch-circuits",
+          "quiz": "/tests/module-12-digital-logic/latch-circuits"
+        },
+        {
+          "title": "Multiplexers & Demultiplexers",
+          "doc": "/docs/module-12-digital-logic/multiplexers-demultiplexers",
+          "quiz": "/tests/module-12-digital-logic/multiplexers-demultiplexers"
+        }
+      ]
+    },
+    {
+      "module": 13,
+      "title": "Electronic Circuit Simulator",
+      "lessons": [
+        {
+          "title": "Electronic Simulation Software",
+          "doc": "/docs/module-13-circuit-simulator/electronic-simulation-software",
+          "quiz": "/tests/module-13-circuit-simulator/electronic-simulation-software"
+        }
+      ]
+    },
+    {
+      "module": 14,
+      "title": "Op Amp and Timer Applications",
+      "lessons": [
+        {
+          "title": "Op-Amp Comparators & Differentiator",
+          "doc": "/docs/module-14-op-amp-timer/op-amp-comparators-differentiator",
+          "quiz": "/tests/module-14-op-amp-timer/op-amp-comparators-differentiator"
+        },
+        {
+          "title": "Differential & Instrumentation Amplifiers",
+          "doc": "/docs/module-14-op-amp-timer/op-amp-differential-instrumentation",
+          "quiz": "/tests/module-14-op-amp-timer/op-amp-differential-instrumentation"
+        },
+        {
+          "title": "Operational Amplifiers",
+          "doc": "/docs/module-14-op-amp-timer/operational-amplifiers",
+          "quiz": "/tests/module-14-op-amp-timer/operational-amplifiers"
+        },
+        {
+          "title": "Timer IC Applications",
+          "doc": "/docs/module-14-op-amp-timer/timer-ic-applications",
+          "quiz": "/tests/module-14-op-amp-timer/timer-ic-applications"
+        }
+      ]
+    }
+  ]
+}

@@ -4,6 +4,8 @@ import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import Heading from '@theme/Heading';
 import {PRACTICAL_MODULES, type PracticalKind} from '@site/src/data/practicals';
+import {ProgressSummary} from '@site/src/components/Progress';
+import useProgress from '@site/src/progress/useProgress';
 import styles from './practicals.module.css';
 
 const KIND: Record<PracticalKind, {label: string; short: string; icon: string; blurb: string}> = {
@@ -41,6 +43,7 @@ const ready = all.filter((x) => x.path).length;
 
 export default function Practicals(): React.JSX.Element {
   const [filter, setFilter] = useState<Filter>('all');
+  const done = useProgress().practicals;
   const show = (kind: PracticalKind, built: boolean) =>
     filter === 'all' || (filter === 'ready' ? built : filter === kind);
 
@@ -62,6 +65,8 @@ export default function Practicals(): React.JSX.Element {
         <p className={styles.lead}>
           1st-year practicals on a virtual trainer kit: wire it, measure, record, print your record.
         </p>
+
+        <ProgressSummary />
 
         <div className={styles.stats}>
           {(['sim', 'interactive', 'handson', 'software'] as PracticalKind[]).map((k) => (
@@ -108,7 +113,10 @@ export default function Practicals(): React.JSX.Element {
               <ul className={styles.list}>
                 {items.map((x) => (
                   <li key={x.no} className={clsx(styles.item, x.path && styles.itemReady)}>
-                    <span className={styles.no}>{x.no}</span>
+                    <span className={styles.no}>
+                      {done[x.no] ? <span aria-label="done" title="Done" style={{color: 'var(--ifm-color-success-dark)', fontWeight: 700}}>✓ </span> : null}
+                      {x.no}
+                    </span>
                     <span className={styles.title}>
                       {x.path ? <Link to={x.path}>{x.title}</Link> : x.title}
                     </span>

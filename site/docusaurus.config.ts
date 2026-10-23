@@ -56,6 +56,8 @@ const config: Config = {
     },
   },
 
+  clientModules: [require.resolve('./src/clientModules/progressTracker.ts')],
+
   plugins: [
     [
       require.resolve('@easyops-cn/docusaurus-search-local'),
@@ -121,6 +123,7 @@ const config: Config = {
         },
         {to: '/tests', label: 'Tests', position: 'left'},
         {to: '/practicals', label: 'Virtual Lab', position: 'left'},
+        {to: '/progress', label: 'My Progress', position: 'left'},
         {to: '/blog', label: 'Announcements', position: 'left'},
         {
           type: 'localeDropdown',
@@ -146,6 +149,10 @@ const config: Config = {
             {
               label: 'Tests',
               to: '/tests',
+            },
+            {
+              label: 'My Progress',
+              to: '/progress',
             },
             {
               label: 'Announcements',
