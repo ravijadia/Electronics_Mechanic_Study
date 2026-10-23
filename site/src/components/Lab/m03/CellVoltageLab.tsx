@@ -7,6 +7,7 @@ import AnalogMeter, {type DialSpec} from '../AnalogMeter';
 import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes} from '../Probes';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import styles from '../styles.module.css';
 
 const KEY = '1.3.30';
@@ -102,7 +103,7 @@ export default function CellVoltageLab(): React.JSX.Element {
     if (entry.trim() === '' || Number.isNaN(e)) return setNote({kind: 'warn', text: 'Type your analog reading.'});
     patch(src.id, {ana: e, anaRange, anaTruth: anaShows});
     setEntry('');
-    setNote(Math.abs(e - anaShows) <= lc / 2 + 1e-9 ? {kind: 'good', text: 'Analog reading noted ✓'} : {kind: 'warn', text: `Noted. Check again: 1 division = ${lc} V`});
+    setNote(Math.abs(e - anaShows) <= lc / 2 + 1e-9 ? {kind: 'good', text: 'Analog reading noted ✓'} : {kind: 'warn', text: `Noted. Check again: 1 division = ${lc} V. Needle at ${fmt(anaShows / lc)} divisions → ${fmt(anaShows / lc)} × ${lc} = ${fmt(anaShows)} V`});
   };
 
   const anaOk = (o?: Obs) => o?.ana != null && o.anaTruth != null && o.anaRange != null && Math.abs(o.ana - o.anaTruth) <= ANA[o.anaRange].fsd / ANA[o.anaRange].divisions / 2 + 1e-9;
@@ -251,7 +252,22 @@ export default function CellVoltageLab(): React.JSX.Element {
                 <span className={styles.num}>{o?.dmm ?? '–'}</span>,
                 <span className={styles.num}>{o?.ana ?? '–'}</span>,
                 o?.anaRange ? ANA_LABEL[o.anaRange] : '–',
-                o?.ana != null ? <Verdict ok={anaOk(o)} /> : '–',
+                o?.ana != null ? <Verdict
+                    ok={anaOk(o)}
+                    fix={{
+                      hint: L2(
+                        `Reading = divisions crossed by the needle × value of 1 division (1 division = ${fmt(ANA[o.anaRange!].fsd / ANA[o.anaRange!].divisions)} V on this range).`,
+                        `રીડિંગ = કાંટાએ પાર કરેલા ડિવિઝન × 1 ડિવિઝનની કિંમત (આ રેન્જમાં 1 ડિવિઝન = ${fmt(ANA[o.anaRange!].fsd / ANA[o.anaRange!].divisions)} V).`,
+                      ),
+                      work: L2(
+                        `Needle at ${fmt(o.anaTruth! / (ANA[o.anaRange!].fsd / ANA[o.anaRange!].divisions))} divisions × ${fmt(ANA[o.anaRange!].fsd / ANA[o.anaRange!].divisions)} V = ${fmt(o.anaTruth)} V.`,
+                        `કાંટો ${fmt(o.anaTruth! / (ANA[o.anaRange!].fsd / ANA[o.anaRange!].divisions))} ડિવિઝન પર × ${fmt(ANA[o.anaRange!].fsd / ANA[o.anaRange!].divisions)} V = ${fmt(o.anaTruth)} V.`,
+                      ),
+                      answer: `${fmt(o.anaTruth)} V`,
+                      entered: o.ana,
+                      expected: o.anaTruth,
+                    }}
+                  /> : '–',
               ];
             })}
           />

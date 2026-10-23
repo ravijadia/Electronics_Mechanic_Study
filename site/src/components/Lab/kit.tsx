@@ -1,8 +1,9 @@
-import React, {useEffect, useMemo} from 'react';
+import React, {useContext, useEffect, useMemo, useState} from 'react';
 import clsx from 'clsx';
 import useStoredState from './useStoredState';
 import {mulberry32} from './circuit';
-import {ColumnHelp, NextStep} from './guide';
+import {ColumnHelp, NextStep, SheetGuideContext} from './guide';
+import {diagnose, pick, type Fix} from './solution';
 import styles from './styles.module.css';
 
 export type NoteKind = 'good' | 'warn' | 'bad' | 'info';
@@ -103,9 +104,72 @@ export function Table({
   );
 }
 
-export function Verdict({ok, yes = '✓ correct', no = '✗ check again'}: {ok: boolean | null; yes?: string; no?: string}): React.JSX.Element | null {
+const VERDICT_TEXT = {
+  en: {hint: 'Hint', solution: 'Show solution', working: 'Working', answer: 'Correct answer', yours: 'Your answer'},
+  gu: {hint: 'સંકેત', solution: 'ઉકેલ બતાવો', working: 'ગણતરી', answer: 'સાચો જવાબ', yours: 'તમારો જવાબ'},
+};
+
+/**
+ * ✓ / ✗ beside a typed entry. With `fix`, a wrong entry offers a Hint (formula, no numbers)
+ * and then the full solution worked with this trainee's own readings.
+ */
+export function Verdict({
+  ok,
+  yes = '✓ correct',
+  no = '✗ check again',
+  fix,
+}: {
+  ok: boolean | null;
+  yes?: string;
+  no?: string;
+  fix?: Fix;
+}): React.JSX.Element | null {
+  const guide = useContext(SheetGuideContext);
+  const [level, setLevel] = useState(0);
   if (ok == null) return null;
-  return ok ? <span className={styles.ok}>{yes}</span> : <span className={styles.no}>{no}</span>;
+  if (ok) return <span className={styles.ok}>{yes}</span>;
+  const lang = guide?.lang ?? 'en';
+  const t = VERDICT_TEXT[lang];
+  const gu = lang === 'gu';
+  const hint = pick(fix?.hint, lang);
+  const work = pick(fix?.work, lang);
+  const slip = fix ? pick(diagnose(fix.entered, fix.expected) ?? undefined, lang) : undefined;
+  const hasAnswer = fix != null && (fix.answer != null || work != null);
+  return (
+    <span className={clsx(styles.verdictBox, gu && styles.gu)} lang={gu ? 'gu' : undefined}>
+      <span className={styles.no}>{no}</span>
+      {fix && (
+        <span className={clsx(styles.fixBtns, styles.noPrint)}>
+          {hint && level < 1 && (
+            <button type="button" className={styles.fixBtn} onClick={() => setLevel(1)}>
+              {t.hint}
+            </button>
+          )}
+          {hasAnswer && level < 2 && (
+            <button type="button" className={styles.fixBtn} onClick={() => setLevel(2)}>
+              {t.solution}
+            </button>
+          )}
+        </span>
+      )}
+      {fix && level >= 1 && hint && <span className={clsx(styles.fixPanel, styles.noPrint)}>💡 {hint}</span>}
+      {fix && level >= 2 && (
+        <span className={clsx(styles.fixPanel, styles.fixSolution, styles.noPrint)}>
+          {slip && <span className={styles.fixSlip}>⚠ {slip}</span>}
+          {work && (
+            <span className={styles.fixLine}>
+              <b>{t.working}:</b> {work}
+            </span>
+          )}
+          {fix.answer != null && (
+            <span className={styles.fixLine}>
+              <b>{t.answer}:</b> {fix.answer}
+            </span>
+          )}
+        </span>
+      )}
+    </span>
+  );
 }
 
 /** Reset button shared by every practical. */

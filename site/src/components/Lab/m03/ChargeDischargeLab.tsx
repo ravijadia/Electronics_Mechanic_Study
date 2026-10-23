@@ -6,6 +6,7 @@ import Multimeter from '../Multimeter';
 import XYGraph from '../XYGraph';
 import useStoredState from '../useStoredState';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import {CAPACITY_AH, CUTOFF_V, advance, charge, discharge, ocv} from '../battery';
 import styles from '../styles.module.css';
 
@@ -316,7 +317,16 @@ export default function ChargeDischargeLab(): React.JSX.Element {
             Ah delivered to cut-off (I × t)
             <input className={styles.input} inputMode="decimal" value={ahAns} onChange={(e) => setAhAns(e.target.value)} />
           </label>
-          <Verdict ok={ahOk} />
+          <Verdict
+            ok={ahOk}
+            fix={{
+              hint: L2('Ah = discharge current (A) × time (h) until cut-off. Use the ammeter value and the time shown in the table.', 'Ah = ડિસ્ચાર્જ કરંટ (A) × કટ-ઓફ સુધીનો સમય (h). એમીટરની કિંમત અને ટેબલનો સમય વાપરો.'),
+              work: L2(`Ah delivered = ${fmt(sim.ahOut)} Ah (current × time, added up over the discharge). Allowed ±12 %.`, `મળેલા Ah = ${fmt(sim.ahOut)} Ah (ડિસ્ચાર્જ દરમિયાન કરંટ × સમયનો સરવાળો). ±12 % ચાલે.`),
+              answer: `${fmt(sim.ahOut)} Ah`,
+              entered: ahN,
+              expected: sim.ahOut,
+            }}
+          />
           {ahOk && <span className={styles.muted}>Rated {CAPACITY_AH} Ah</span>}
         </div>
         <ResetKit

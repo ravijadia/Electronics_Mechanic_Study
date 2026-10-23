@@ -4,6 +4,7 @@ import PracticalSheet from '../PracticalSheet';
 import {GU_1_2_18} from './gu';
 import useStoredState from '../useStoredState';
 import {NoteBox, ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import styles from '../styles.module.css';
 
 const KEY = '1.2.18';
@@ -231,7 +232,21 @@ export default function WireGaugeLab(): React.JSX.Element {
               inp('msr', 'main scale reading'),
               inp('td', 'thimble division'),
               inp('dia', 'diameter'),
-              all.some((x) => x == null) ? '–' : <Verdict ok={all.every(Boolean)} no={`✗ ${(['SWG', 'MSR', 'TD', 'diameter'] as const).filter((_, j) => !all[j]).join(', ')}`} />,
+              all.some((x) => x == null) ? '–' : <Verdict
+                  ok={all.every(Boolean)}
+                  no={`✗ ${(['SWG', 'MSR', 'TD', 'diameter'] as const).filter((_, j) => !all[j]).join(', ')}`}
+                  fix={{
+                    hint: L2(
+                      'SWG = the snug slot. Diameter = MSR + TD × 0.01 mm. MSR is the last visible sleeve mark (add 0.5 mm if the half-mm mark is visible).',
+                      'SWG = બરાબર બેસતો સ્લોટ. ડાયામીટર = MSR + TD × 0.01 mm. MSR એટલે સ્લીવ પરનો છેલ્લો દેખાતો માર્ક (અડધા mm નો માર્ક દેખાય તો 0.5 mm ઉમેરો).',
+                    ),
+                    work: L2(
+                      `${s.g} SWG (${s.d} mm). MSR = ${fmt(Math.floor(r.d / 0.5 + 1e-9) * 0.5)} mm, TD = ${Math.round((r.d - Math.floor(r.d / 0.5 + 1e-9) * 0.5) * 100)}. Diameter = ${fmt(Math.floor(r.d / 0.5 + 1e-9) * 0.5)} + ${Math.round((r.d - Math.floor(r.d / 0.5 + 1e-9) * 0.5) * 100)} × 0.01 = ${fmt(r.d)} mm.`,
+                      `${s.g} SWG (${s.d} mm). MSR = ${fmt(Math.floor(r.d / 0.5 + 1e-9) * 0.5)} mm, TD = ${Math.round((r.d - Math.floor(r.d / 0.5 + 1e-9) * 0.5) * 100)}. ડાયામીટર = ${fmt(Math.floor(r.d / 0.5 + 1e-9) * 0.5)} + ${Math.round((r.d - Math.floor(r.d / 0.5 + 1e-9) * 0.5) * 100)} × 0.01 = ${fmt(r.d)} mm.`,
+                    ),
+                    answer: `${s.g} SWG, ${fmt(r.d)} mm`,
+                  }}
+                />,
             ];
           })}
         />

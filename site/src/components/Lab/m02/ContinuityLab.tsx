@@ -6,6 +6,7 @@ import Multimeter from '../Multimeter';
 import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes} from '../Probes';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng, type Note} from '../kit';
+import {L2} from '../solution';
 import styles from '../styles.module.css';
 
 const KEY = '1.2.26';
@@ -253,7 +254,16 @@ export default function ContinuityLab(): React.JSX.Element {
                   <option value="good">Good</option>
                   <option value="faulty">Faulty (open)</option>
                 </select>,
-                verdicts[it.id] ? <Verdict ok={verdicts[it.id] === (it.good ? 'good' : 'faulty')} /> : '–',
+                verdicts[it.id] ? <Verdict
+                    ok={verdicts[it.id] === (it.good ? 'good' : 'faulty')}
+                    fix={{
+                      hint: L2(
+                        'Good = beep and a reading near 0 Ω. Faulty (open) = OL and no beep. A switch should beep when ON and read OL when OFF.',
+                        'સારું = બીપ અને 0 Ω ની નજીક રીડિંગ. ખરાબ (ઓપન) = OL અને બીપ નહીં. સ્વિચ ON હોય ત્યારે બીપ અને OFF હોય ત્યારે OL બતાવવું જોઈએ.',
+                      ),
+                      answer: it.good ? 'Good' : 'Faulty (open)',
+                    }}
+                  /> : '–',
               ];
             })}
           />

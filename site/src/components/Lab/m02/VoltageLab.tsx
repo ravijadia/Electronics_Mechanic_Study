@@ -6,6 +6,7 @@ import Multimeter from '../Multimeter';
 import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes} from '../Probes';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, useKitSeed, useRng, type Note} from '../kit';
+import {L2} from '../solution';
 import styles from '../styles.module.css';
 
 const KEY = '1.2.21';
@@ -237,7 +238,21 @@ export default function VoltageLab(): React.JSX.Element {
                 <span className={styles.num}>
                   {r.text} {unit}
                 </span>,
-                <Verdict ok={good(r)} yes={r.fn === s.best ? '✓ best range' : '✓'} no="✗ wrong function / polarity" />,
+                <Verdict
+                  ok={good(r)}
+                  yes={r.fn === s.best ? '✓ best range' : '✓'}
+                  no="✗ wrong function / polarity"
+                  fix={{
+                    hint: L2(
+                      'Match the meter to the source: AC source → AC V, DC source → DC V. A minus sign means the probes are reversed (red to +).',
+                      'મીટરને સોર્સ સાથે મેળવો: AC સોર્સ → AC V, DC સોર્સ → DC V. માઇનસ ચિહ્ન એટલે પ્રોબ ઊલટા (લાલ + પર).',
+                    ),
+                    work: RANGE[r.fn].ac !== s.ac
+                      ? L2(`${s.name} is ${s.ac ? 'AC' : 'DC'}, but you used ${RANGE[r.fn].ac ? 'AC' : 'DC'} V.`, `${s.name} ${s.ac ? 'AC' : 'DC'} છે, પણ તમે ${RANGE[r.fn].ac ? 'AC' : 'DC'} V વાપર્યું.`)
+                      : L2('The reading has a minus sign: red probe on the negative terminal. Swap the probes.', 'રીડિંગમાં માઇનસ ચિહ્ન છે: લાલ પ્રોબ નેગેટિવ પર છે. પ્રોબ બદલો.'),
+                    answer: `${s.ac ? 'AC' : 'DC'} V, ${FN_LABEL[s.best]}`,
+                  }}
+                />,
                 <button type="button" className={clsx(styles.iconBtn, styles.noPrint)} aria-label={`Delete reading ${k + 1}`} onClick={() => setRows((x) => x.filter((_, j) => j !== k))}>
                   ✕
                 </button>,

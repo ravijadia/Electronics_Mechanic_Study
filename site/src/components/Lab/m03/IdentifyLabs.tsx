@@ -6,6 +6,7 @@ import Multimeter from '../Multimeter';
 import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes} from '../Probes';
 import {NoteBox, ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import styles from '../styles.module.css';
 
 // ---------------------------------------------------------------------------
@@ -235,7 +236,16 @@ export function TerminalsLab(): React.JSX.Element {
               <option value="B">B</option>
             </select>,
             verified.includes(k) ? 'Yes' : '–',
-            ans[k] ? <Verdict ok={ans[k] === c.plus} /> : '–',
+            ans[k] ? <Verdict
+              ok={ans[k] === c.plus}
+              fix={{
+                hint: L2(
+                  'Put the red probe on A and the black on B. A plain number means A is positive; a minus sign means A is negative (so B is positive).',
+                  'લાલ પ્રોબ A પર અને કાળો B પર મૂકો. સાદો આંકડો આવે તો A પોઝિટિવ; માઇનસ ચિહ્ન આવે તો A નેગેટિવ (એટલે B પોઝિટિવ).',
+                ),
+                answer: `Terminal ${c.plus}`,
+              }}
+            /> : '–',
           ])}
         />
         <ResetKit
@@ -340,7 +350,22 @@ export function RatingLab(): React.JSX.Element {
             inp(k, 'ah', `Battery ${k + 1} capacity`),
             <span className={styles.num}>{it.loadA < 0.1 ? `${it.loadA * 1000} mA` : `${it.loadA} A`}</span>,
             inp(k, 'h', `Battery ${k + 1} backup time`),
-            Object.values(res[k]).some((x) => x == null) ? '–' : <Verdict ok={Object.values(res[k]).every(Boolean)} />,
+            Object.values(res[k]).some((x) => x == null) ? '–' : <Verdict
+                ok={Object.values(res[k]).every(Boolean)}
+                fix={{
+                  hint: L2(
+                    `Wrong: ${(['v', 'ah', 'h'] as const).filter((q) => !res[k][q]).join(', ')}. Read the label. mAh ÷ 1000 = Ah. Backup time (h) = Ah ÷ load current (A).`,
+                    `ખોટું: ${(['v', 'ah', 'h'] as const).filter((q) => !res[k][q]).join(', ')}. લેબલ વાંચો. mAh ÷ 1000 = Ah. બેકઅપ સમય (h) = Ah ÷ લોડ કરંટ (A).`,
+                  ),
+                  work: L2(
+                    `${it.v} V, ${it.ah} Ah. Backup = ${it.ah} ÷ ${it.loadA} = ${fmt(it.ah / it.loadA)} h.`,
+                    `${it.v} V, ${it.ah} Ah. બેકઅપ = ${it.ah} ÷ ${it.loadA} = ${fmt(it.ah / it.loadA)} h.`,
+                  ),
+                  answer: `${it.v} V, ${it.ah} Ah, ${fmt(it.ah / it.loadA)} h`,
+                  entered: n(ans[k]?.h),
+                  expected: it.ah / it.loadA,
+                }}
+              />,
           ])}
         />
         <ResetKit

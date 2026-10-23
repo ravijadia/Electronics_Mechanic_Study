@@ -5,6 +5,7 @@ import {GU_1_2_13} from './gu';
 import useStoredState from '../useStoredState';
 import {useMainsBench} from '../MainsBench';
 import {Empty, ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng} from '../kit';
+import {L2} from '../solution';
 import {PAIRS, makeBoard, type BoardFault, type Hole} from '../mains';
 import styles from '../styles.module.css';
 
@@ -160,7 +161,16 @@ export default function PhaseNeutralEarthLab(): React.JSX.Element {
                   <option value="correct">Correct</option>
                   <option value="reversed">Phase–neutral reversed</option>
                 </select>,
-                a.phase == null || a.wiring == null ? '–' : <Verdict ok={!!(a.phase && a.wiring)} />,
+                a.phase == null || a.wiring == null ? '–' : <Verdict
+                    ok={!!(a.phase && a.wiring)}
+                    fix={{
+                      hint: L2(
+                        'The neon tester glows on the phase hole only. Phase on the right = correct wiring. Phase on the left = phase and neutral reversed.',
+                        'નિયોન ટેસ્ટર ફક્ત ફેઝ હોલ પર ચમકે છે. ફેઝ જમણી બાજુ = સાચું વાયરિંગ. ફેઝ ડાબી બાજુ = ફેઝ અને ન્યુટ્રલ ઊલટા.',
+                      ),
+                      answer: `${r.bd.fault === 'reversed' ? 'Left hole' : 'Right hole'}, ${r.bd.fault === 'reversed' ? 'Phase–neutral reversed' : 'Correct'}`,
+                    }}
+                  />,
               ];
             })}
           />
