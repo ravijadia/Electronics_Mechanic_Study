@@ -3,6 +3,8 @@ import clsx from 'clsx';
 import useStoredState from './useStoredState';
 import {SheetGuideContext} from './guide';
 import {markPractical} from '../../progress/store';
+import {sendPractical, submitEnabled} from '../../submit/client';
+import {buildSnapshot} from '../../submit/snapshot';
 import styles from './styles.module.css';
 
 export interface PracticalTask {
@@ -57,6 +59,13 @@ const UI = {
     batch: 'Batch / Unit',
     date: 'Date',
     print: 'Print / Save as PDF',
+    send: 'Send to trainer',
+    sending: 'Sending…',
+    sent: 'Sent to trainer ✓',
+    sentAgain: 'Send again',
+    batchCode: 'Batch code (from your trainer)',
+    needFields: 'Fill in your name, roll no., batch, date and batch code first.',
+    lastSent: 'Last sent: ',
     aimHead: 'Aim, apparatus and procedure',
     aim: 'Aim:',
     apparatus: 'Apparatus',
@@ -80,6 +89,13 @@ const UI = {
     batch: 'બેચ / યુનિટ',
     date: 'તારીખ',
     print: 'પ્રિન્ટ / PDF સેવ કરો',
+    send: 'ટ્રેનરને મોકલો',
+    sending: 'મોકલી રહ્યા છીએ…',
+    sent: 'ટ્રેનરને મોકલ્યું ✓',
+    sentAgain: 'ફરી મોકલો',
+    batchCode: 'બેચ કોડ (ટ્રેનર પાસેથી)',
+    needFields: 'પહેલાં નામ, રોલ નં., બેચ, તારીખ અને બેચ કોડ ભરો.',
+    lastSent: 'છેલ્લે મોકલ્યું: ',
     aimHead: 'હેતુ, સાધનો અને પદ્ધતિ',
     aim: 'હેતુ:',
     apparatus: 'સાધનો',
@@ -200,6 +216,33 @@ export default function PracticalSheet({
     onPrinted?.(trainee);
   };
 
+  // Sending the record to the trainer's Google Sheet / Drive (only when trainer-setup is done).
+  const [batchCode, setBatchCode] = useStoredState<string>('lab:batchCode', '');
+  const [lastSent, setLastSent] = useStoredState<number>(`lab:sent:${number}`, 0);
+  const [sendState, setSendState] = useState<{busy: boolean; error?: string}>({busy: false});
+  const send = async () => {
+    const need = ![trainee.name, trainee.roll, trainee.batch, trainee.date, batchCode].every((x) => x.trim());
+    if (need) return setSendState({busy: false, error: t.needFields});
+    if (!rootRef.current) return;
+    setSendState({busy: true});
+    const snap = buildSnapshot(rootRef.current);
+    const res = await sendPractical({
+      batchCode: batchCode.trim(),
+      trainee: {name: trainee.name.trim(), roll: trainee.roll.trim(), batch: trainee.batch.trim(), date: trainee.date},
+      practical: {no: number, title},
+      stepsDone: doneCount,
+      stepsTotal: items.length,
+      correct: snap.correct,
+      wrong: snap.wrong,
+      tables: snap.tables,
+      html: snap.html,
+    });
+    if (res.ok) {
+      setLastSent(res.submitted);
+      setSendState({busy: false});
+    } else setSendState({busy: false, error: res.error});
+  };
+
   const field = (key: keyof Trainee, label: string, type = 'text') => (
     <label className={styles.field}>
       {label}
@@ -295,10 +338,32 @@ export default function PracticalSheet({
               {field('roll', t.roll)}
               {field('batch', t.batch)}
               {field('date', t.date, 'date')}
+              {submitEnabled && (
+                <label className={styles.field}>
+                  {t.batchCode}
+                  <input className={styles.input} type="text" autoComplete="off" value={batchCode} onChange={(e) => setBatchCode(e.target.value)} />
+                </label>
+              )}
             </div>
             <button type="button" className={clsx(styles.btn, styles.primary)} onClick={print}>
               {t.print}
             </button>
+            {submitEnabled && (
+              <>
+                {' '}
+                <button type="button" className={styles.btn} disabled={sendState.busy} onClick={send}>
+                  {sendState.busy ? t.sending : lastSent ? t.sentAgain : t.send}
+                </button>
+                <div aria-live="polite">
+                  {sendState.error && <p className={styles.no}>{sendState.error}</p>}
+                  {!sendState.error && lastSent > 0 && !sendState.busy && (
+                    <p className={styles.ok}>
+                      {t.sent} <small>{t.lastSent}{new Date(lastSent).toLocaleString()}</small>
+                    </p>
+                  )}
+                </div>
+              </>
+            )}
           </div>
 
           <details className={clsx(styles.section, isGu && styles.gu)} lang={isGu ? 'gu' : undefined}>

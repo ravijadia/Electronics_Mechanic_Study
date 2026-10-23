@@ -1,0 +1,174 @@
+.page {
+  padding: 1.5rem 0 3rem;
+  max-width: 1360px;
+}
+
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  margin: 0.75rem 0;
+}
+
+.input {
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--ifm-color-emphasis-400);
+  border-radius: 6px;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  font: inherit;
+}
+
+.note {
+  color: var(--ifm-color-emphasis-700);
+  margin: 0.5rem 0;
+}
+
+.err {
+  color: var(--ifm-color-danger);
+  font-weight: 600;
+}
+
+.scroll {
+  overflow-x: auto;
+  margin: 0.5rem 0 1rem;
+  max-height: 75vh;
+}
+
+.grid {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: auto;
+  display: table;
+  font-size: 0.85rem;
+}
+
+.grid th,
+.grid td {
+  border: 0;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  background: var(--ifm-background-color);
+  padding: 0.2rem 0.3rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.grid thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  vertical-align: bottom;
+  background: var(--ifm-background-surface-color);
+}
+
+.grid thead th small {
+  display: block;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.who {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  text-align: left !important;
+  min-width: 11rem;
+  background: var(--ifm-background-surface-color) !important;
+}
+
+.grid thead .who {
+  z-index: 3;
+}
+
+.roll {
+  color: var(--ifm-color-emphasis-600);
+  margin-right: 0.3rem;
+}
+
+.vert {
+  display: block;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  margin: 0 auto;
+}
+
+.count {
+  font-weight: 700;
+}
+
+.cell {
+  width: 1.9rem;
+}
+
+.tick {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  line-height: 1.5rem;
+  border: 0;
+  border-radius: 50%;
+  background: var(--ifm-color-success-contrast-background);
+  color: var(--ifm-color-success-darkest);
+  font-weight: 700;
+  padding: 0;
+}
+
+button.tick {
+  cursor: pointer;
+}
+
+button.tick:hover,
+button.tick:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+}
+
+.partial {
+  background: var(--ifm-color-warning-contrast-background);
+  color: var(--ifm-color-warning-darkest);
+}
+
+.legend {
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.85rem;
+}
+
+.detail {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+}
+
+.detailHead {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.detail h2 {
+  font-size: 1.15rem;
+  margin: 0 0 0.25rem;
+}
+
+.detail p {
+  margin: 0.15rem 0;
+}
+
+.readings {
+  width: auto;
+  display: table;
+  margin-top: 0.75rem;
+}
+
+.readings caption {
+  text-align: left;
+  font-weight: 700;
+  padding: 0.2rem 0;
+}
+
+@media (max-width: 600px) {
+  .page {
+    padding: 1rem 0 2rem;
+  }
+}
