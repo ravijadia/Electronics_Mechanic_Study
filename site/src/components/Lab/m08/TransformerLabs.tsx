@@ -6,6 +6,7 @@ import Multimeter from '../Multimeter';
 import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes} from '../Probes';
 import {NoteBox, ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import {kitLabel, near} from '../m07/parts';
 import styles from '../styles.module.css';
 
@@ -261,7 +262,16 @@ export function TransformerTypesLab(): React.JSX.Element {
             <span className={styles.num}>{ans[k]?.cp ?? '–'}</span>,
             <span className={styles.num}>{ans[k]?.cs ?? '–'}</span>,
             sel(`T${k + 1} condition`, ans[k]?.cond, Object.entries(FAULT_NAME), (v) => set(k, {cond: v})),
-            ans[k]?.type && ans[k]?.cond ? <Verdict ok={typeOk(k) && condOk(k)} /> : '–',
+            ans[k]?.type && ans[k]?.cond ? <Verdict
+                ok={typeOk(k) && condOk(k)}
+                fix={{
+                  hint: L2(
+                    'Type: look at the core and windings. Condition: Rp and Rs should read a few Ω to a few hundred Ω. OL = that winding is open. A reading between a winding and the core (or the other winding) = leakage.',
+                    'ટાઇપ: કોર અને વાઇન્ડિંગ જુઓ. કન્ડિશન: Rp અને Rs થોડા Ω થી થોડા સો Ω આવવા જોઈએ. OL = તે વાઇન્ડિંગ ઓપન. વાઇન્ડિંગ અને કોર (કે બીજા વાઇન્ડિંગ) વચ્ચે રીડિંગ = લીકેજ.',
+                  ),
+                  answer: `${TNAME[x.type]}, ${FAULT_NAME[x.fault]}`,
+                }}
+              /> : '–',
           ])}
         />
         <ResetKit
@@ -582,7 +592,13 @@ export function PolarityLab(): React.JSX.Element {
                 ],
                 (x) => setAns((s) => ({...s, prim: x})),
               ),
-              ans.prim ? <Verdict ok={ans.prim === priPair} /> : '–',
+              ans.prim ? <Verdict
+                ok={ans.prim === priPair}
+                fix={{
+                  hint: L2('Measure R between every pair of terminals with the Ω meter. The primary (mains) winding has the higher resistance.', 'Ω મીટરથી દરેક ટર્મિનલની જોડી વચ્ચે R માપો. પ્રાઇમરી (મેઇન્સ) વાઇન્ડિંગનો અવરોધ વધારે હોય છે.'),
+                  answer: priPair.replace('+', ' and '),
+                }}
+              /> : '–',
             ],
             [
               'Polarity test result',
@@ -595,7 +611,13 @@ export function PolarityLab(): React.JSX.Element {
                 ],
                 (x) => setAns((s) => ({...s, mode: x})),
               ),
-              ans.mode ? linkedPolarity ? <Verdict ok={ans.mode === linkedPolarity} /> : 'fit the link' : '–',
+              ans.mode ? linkedPolarity ? <Verdict
+                ok={ans.mode === linkedPolarity}
+                fix={{
+                  hint: L2('Link one primary and one secondary terminal and apply AC to the primary. Vx (across the free ends) = Vp + Vs means additive; Vp − Vs means subtractive.', 'એક પ્રાઇમરી અને એક સેકન્ડરી ટર્મિનલ જોડો અને પ્રાઇમરીમાં AC આપો. ખુલ્લા છેડા વચ્ચે Vx = Vp + Vs હોય તો એડિટિવ; Vp − Vs હોય તો સબટ્રેક્ટિવ.'),
+                  answer: linkedPolarity === 'add' ? 'Additive (Vx = Vp + Vs)' : 'Subtractive (Vx = Vp − Vs)',
+                }}
+              /> : 'fit the link' : '–',
             ],
             [
               `Secondary terminal in phase with T${lowestPri + 1}`,
@@ -605,12 +627,27 @@ export function PolarityLab(): React.JSX.Element {
                 [0, 1, 2, 3].filter((t) => winding(t) === 'S').map((t) => [`T${t + 1}`, `T${t + 1}`]),
                 (x) => setAns((s) => ({...s, dot: x})),
               ),
-              ans.dot ? <Verdict ok={ans.dot === `T${inPhaseWithLowest + 1}`} /> : '–',
+              ans.dot ? <Verdict
+                ok={ans.dot === `T${inPhaseWithLowest + 1}`}
+                fix={{
+                  hint: L2('Use the additive/subtractive test: the secondary terminal that gives a subtractive result when linked to the lowest-numbered primary terminal is in phase with it.', 'એડિટિવ/સબટ્રેક્ટિવ ટેસ્ટ વાપરો: સૌથી નીચા નંબરના પ્રાઇમરી ટર્મિનલ સાથે જોડતાં સબટ્રેક્ટિવ આવે તે સેકન્ડરી ટર્મિનલ તેની સાથે ઇન-ફેઝ છે.'),
+                  answer: `T${inPhaseWithLowest + 1}`,
+                }}
+              /> : '–',
             ],
             [
               'Turns ratio Vp ÷ Vs',
               <input className={styles.input} style={{maxWidth: '5rem'}} inputMode="decimal" aria-label="Turns ratio" value={ans.ratio ?? ''} onChange={(e) => setAns((s) => ({...s, ratio: e.target.value}))} />,
-              ans.ratio ? <Verdict ok={near(num(ans.ratio), ratio, 0.04)} /> : '–',
+              ans.ratio ? <Verdict
+                ok={near(num(ans.ratio), ratio, 0.04)}
+                fix={{
+                  hint: L2('Turns ratio = Vp ÷ Vs, using the primary voltage and the secondary voltage you measured.', 'ટર્ન્સ રેશિયો = Vp ÷ Vs, તમે માપેલા પ્રાઇમરી અને સેકન્ડરી વોલ્ટેજથી.'),
+                  work: L2(`Vp ÷ Vs = ${kit.mains} ÷ ${fmt(kit.vs * (kit.mains / 230))} = ${fmt(ratio)}.`, `Vp ÷ Vs = ${kit.mains} ÷ ${fmt(kit.vs * (kit.mains / 230))} = ${fmt(ratio)}.`),
+                  answer: fmt(ratio),
+                  entered: num(ans.ratio),
+                  expected: ratio,
+                }}
+              /> : '–',
             ],
           ]}
         />
