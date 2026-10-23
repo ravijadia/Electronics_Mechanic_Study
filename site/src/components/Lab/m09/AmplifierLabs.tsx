@@ -10,6 +10,7 @@ import {useScope} from '../Scope';
 import {fgFreq, useFunctionGenerator} from '../FunctionGenerator';
 import {si, type Sig} from '../signals';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import {kitLabel, near} from '../m07/parts';
 import {VT, biasOf, ceSwing, hp, lp, par, type BiasKind, type BiasValues, type Q} from './bjt';
 import {DC, METER_FNS, Res, Stage, acRms, meterRead, stageSignal} from './amp';
@@ -208,7 +209,26 @@ export function BiasLab(): React.JSX.Element {
                 r.vc ?? '–',
                 inp(`${BIAS[k].name} ${t} collector current`, r.ic, (v) => set({ic: v})),
                 inp(`${BIAS[k].name} ${t} Vce`, r.vce, (v) => set({vce: v})),
-                r.ic && r.vce ? <Verdict ok={rowOk(k, t)} /> : '–',
+                r.ic && r.vce ? (
+                  <Verdict
+                    ok={rowOk(k, t)}
+                    fix={{
+                      hint: L2(
+                        'Ic = (Vcc − Vc) ÷ Rc. Vce = Vc − Ve. Measure VB, VE, VC to ground with DC V 20 and the supply ON.',
+                        'Ic = (Vcc − Vc) ÷ Rc. Vce = Vc − Ve. સપ્લાય ON રાખી DC V 20 થી VB, VE, VC ગ્રાઉન્ડની સાપેક્ષ માપો.',
+                      ),
+                      work: L2(
+                        `Ic = (${VCC} − ${fmt(qOf(k, t).vc)}) ÷ ${BIAS[k].v.rc} = ${fmt(((VCC - qOf(k, t).vc) / BIAS[k].v.rc) * 1000)} mA. Vce = ${fmt(qOf(k, t).vc)} − ${fmt(qOf(k, t).ve)} = ${fmt(qOf(k, t).vc - qOf(k, t).ve)} V.`,
+                        `Ic = (${VCC} − ${fmt(qOf(k, t).vc)}) ÷ ${BIAS[k].v.rc} = ${fmt(((VCC - qOf(k, t).vc) / BIAS[k].v.rc) * 1000)} mA. Vce = ${fmt(qOf(k, t).vc)} − ${fmt(qOf(k, t).ve)} = ${fmt(qOf(k, t).vc - qOf(k, t).ve)} V.`,
+                      ),
+                      answer: `Ic ${fmt(((VCC - qOf(k, t).vc) / BIAS[k].v.rc) * 1000)} mA, Vce ${fmt(qOf(k, t).vc - qOf(k, t).ve)} V`,
+                      entered: num(r.ic),
+                      expected: ((VCC - qOf(k, t).vc) / BIAS[k].v.rc) * 1000,
+                    }}
+                  />
+                ) : (
+                  '–'
+                ),
               ];
             }),
           )}
@@ -217,7 +237,24 @@ export function BiasLab(): React.JSX.Element {
       <Section title="Result">
         <Table
           head={['Circuit', '% change in Ic (A → B)', 'Check']}
-          rows={KINDS.map((k) => [BIAS[k].name, inp(`${BIAS[k].name} percent change`, pct[k], (v) => setPct((p) => ({...p, [k]: v}))), pct[k] ? pctTrue(k) == null ? 'fill Ic first' : <Verdict ok={pctOk(k)} /> : '–'])}
+          rows={KINDS.map((k) => [BIAS[k].name, inp(`${BIAS[k].name} percent change`, pct[k], (v) => setPct((p) => ({...p, [k]: v}))), pct[k] ? pctTrue(k) == null ? 'fill Ic first' : (
+                <Verdict
+                  ok={pctOk(k)}
+                  fix={{
+                    hint: L2('% change = (Ic(B) − Ic(A)) ÷ Ic(A) × 100, using the Ic values in your table.', '% ફેરફાર = (Ic(B) − Ic(A)) ÷ Ic(A) × 100, તમારા ટેબલના Ic વાપરો.'),
+                    work: L2(
+                      `(${rows[`${k}-B`]?.ic} − ${rows[`${k}-A`]?.ic}) ÷ ${rows[`${k}-A`]?.ic} × 100 = ${fmt(pctTrue(k))} %.`,
+                      `(${rows[`${k}-B`]?.ic} − ${rows[`${k}-A`]?.ic}) ÷ ${rows[`${k}-A`]?.ic} × 100 = ${fmt(pctTrue(k))} %.`,
+                    ),
+                    answer: `${fmt(pctTrue(k))} %`,
+                    entered: num(pct[k]),
+                    expected: pctTrue(k),
+                  }}
+                />
+              ) : (
+                '–'
+              ),
+          ])}
         />
         <p>
           Most stable:{' '}
@@ -229,7 +266,15 @@ export function BiasLab(): React.JSX.Element {
               </option>
             ))}
           </select>{' '}
-          {best ? <Verdict ok={best === 'divider'} /> : null}
+          {best ? (
+            <Verdict
+              ok={best === 'divider'}
+              fix={{
+                hint: L2('The most stable circuit is the one whose Ic changes least when the transistor is swapped (smallest % change).', 'સૌથી સ્થિર સર્કિટ એ છે જેનો Ic ટ્રાન્ઝિસ્ટર બદલતાં સૌથી ઓછો બદલાય (સૌથી ઓછો % ફેરફાર).'),
+                answer: BIAS.divider.name,
+              }}
+            />
+          ) : null}
         </p>
         <ResetKit
           onReset={() => {
@@ -431,7 +476,22 @@ export function CeAmpLab(): React.JSX.Element {
               si(Number(r.vout), 'V'),
               r.clipped ? 'clipped' : 'clean',
               inp(`Row ${k + 1} gain`, r.gain, (v) => setRows((x) => x.map((y, j) => (j === k ? {...y, gain: v} : y)))),
-              r.clipped ? '–' : r.gain ? <Verdict ok={rowGainOk(r)} /> : '–',
+              r.clipped ? (
+                '–'
+              ) : r.gain ? (
+                <Verdict
+                  ok={rowGainOk(r)}
+                  fix={{
+                    hint: L2('Av = Vout ÷ Vin. Read both rms values on the AC millivoltmeter, with the output clean (not clipped).', 'Av = Vout ÷ Vin. AC મિલિવોલ્ટમીટર પર બંને rms કિંમતો વાંચો, આઉટપુટ ક્લીન (ક્લિપ થયેલું નહીં) હોવું જોઈએ.'),
+                    work: L2(`Vin = ${fmt(r.vinTrue)} V, Vout = ${fmt(r.voutTrue)} V → Av = ${fmt(r.voutTrue)} ÷ ${fmt(r.vinTrue)} = ${fmt(r.voutTrue / r.vinTrue)}.`, `Vin = ${fmt(r.vinTrue)} V, Vout = ${fmt(r.voutTrue)} V → Av = ${fmt(r.voutTrue)} ÷ ${fmt(r.vinTrue)} = ${fmt(r.voutTrue / r.vinTrue)}.`),
+                    answer: fmt(r.voutTrue / r.vinTrue),
+                    entered: num(r.gain),
+                    expected: r.voutTrue / r.vinTrue,
+                  }}
+                />
+              ) : (
+                '–'
+              ),
             ])}
           />
         )}
@@ -445,7 +505,12 @@ export function CeAmpLab(): React.JSX.Element {
             <option value="90">90°</option>
             <option value="180">180° (inverted)</option>
           </select>{' '}
-          {phase ? <Verdict ok={phase === '180'} /> : null}
+          {phase ? (
+            <Verdict
+              ok={phase === '180'}
+              fix={{ hint: L2('A common-emitter stage inverts the signal: when the input rises the output falls. Compare the two traces on the CRO.', 'કોમન-ઇમિટર સ્ટેજ સિગ્નલને ઊલટાવે છે: ઇનપુટ વધે ત્યારે આઉટપુટ ઘટે. CRO પર બંને ટ્રેસ સરખાવો.'), answer: '180°' }}
+            />
+          ) : null}
         </p>
         <ResetKit
           onReset={() => {
@@ -593,7 +658,25 @@ export function EmitterFollowerLab(): React.JSX.Element {
         <Table
           head={['', 'Your value', 'Check']}
           rows={[
-            ['Av = Vout ÷ Vin', inp('Voltage gain', ans.gain, (v) => setAns((x) => ({...x, gain: v}))), ans.gain ? gTrue == null ? 'measure first' : <Verdict ok={near(num(ans.gain), gTrue, 0.02)} /> : '–'],
+            ['Av = Vout ÷ Vin', inp('Voltage gain', ans.gain, (v) => setAns((x) => ({...x, gain: v}))), ans.gain ? (
+                gTrue == null ? (
+                  'measure first'
+                ) : (
+                  <Verdict
+                    ok={near(num(ans.gain), gTrue, 0.02)}
+                    fix={{
+                      hint: L2('Av = Vout ÷ Vin, both measured in rms with the AC millivoltmeter. An emitter follower has a gain just below 1.', 'Av = Vout ÷ Vin, બંને AC મિલિવોલ્ટમીટરથી rms માં. ઇમિટર ફોલોઅરનો ગેઇન 1 ની થોડો નીચે હોય છે.'),
+                      work: L2(`Av = ${fmt(voutAc)} ÷ ${fmt(vinD)} = ${fmt(gTrue)}.`, `Av = ${fmt(voutAc)} ÷ ${fmt(vinD)} = ${fmt(gTrue)}.`),
+                      answer: fmt(gTrue),
+                      entered: num(ans.gain),
+                      expected: gTrue,
+                    }}
+                  />
+                )
+              ) : (
+                '–'
+              ),
+            ],
             [
               'Phase',
               <select className={styles.select} aria-label="Phase" value={ans.phase ?? ''} onChange={(e) => setAns((x) => ({...x, phase: e.target.value}))}>
@@ -601,9 +684,34 @@ export function EmitterFollowerLab(): React.JSX.Element {
                 <option value="0">0° (in phase)</option>
                 <option value="180">180° (inverted)</option>
               </select>,
-              ans.phase ? <Verdict ok={ans.phase === '0'} /> : '–',
+              ans.phase ? (
+                <Verdict
+                  ok={ans.phase === '0'}
+                  fix={{ hint: L2('An emitter follower does not invert: the output follows the input. Compare the two traces.', 'ઇમિટર ફોલોઅર સિગ્નલ ઊલટાવતું નથી: આઉટપુટ ઇનપુટને અનુસરે છે. બંને ટ્રેસ સરખાવો.'), answer: '0°' }}
+                />
+              ) : (
+                '–'
+              ),
             ],
-            ['Zin = 10k × Vb ÷ (Vg − Vb) (Ω)', inp('Input impedance', ans.zin, (v) => setAns((x) => ({...x, zin: v})), '6rem'), ans.zin ? zinTrue == null ? 'measure Vg and Vb with 10k first' : <Verdict ok={near(num(ans.zin), zinTrue, 0.04) && near(zinTrue, zin, 0.1)} /> : '–'],
+            ['Zin = 10k × Vb ÷ (Vg − Vb) (Ω)', inp('Input impedance', ans.zin, (v) => setAns((x) => ({...x, zin: v})), '6rem'), ans.zin ? (
+                zinTrue == null ? (
+                  'measure Vg and Vb with 10k first'
+                ) : (
+                  <Verdict
+                    ok={near(num(ans.zin), zinTrue, 0.04) && near(zinTrue, zin, 0.1)}
+                    fix={{
+                      hint: L2('Zin = 10k × Vb ÷ (Vg − Vb): Vg is the generator voltage, Vb the voltage at the base after the 10 kΩ series resistor.', 'Zin = 10k × Vb ÷ (Vg − Vb): Vg જનરેટર વોલ્ટેજ, Vb 10 kΩ શ્રેણી રેઝિસ્ટર પછી બેઝ પરનો વોલ્ટેજ.'),
+                      work: L2(`Zin = 10 000 × ${fmt(vbr)} ÷ (${fmt(vg)} − ${fmt(vbr)}) = ${fmt(zinTrue)} Ω.`, `Zin = 10 000 × ${fmt(vbr)} ÷ (${fmt(vg)} − ${fmt(vbr)}) = ${fmt(zinTrue)} Ω.`),
+                      answer: `${fmt(zinTrue)} Ω`,
+                      entered: num(ans.zin),
+                      expected: zinTrue,
+                    }}
+                  />
+                )
+              ) : (
+                '–'
+              ),
+            ],
           ]}
         />
         <ResetKit
@@ -794,12 +902,98 @@ export function TwoStageLab(): React.JSX.Element {
         <Table
           head={['', 'Your value', 'Check']}
           rows={[
-            ['A1 = Vo1 ÷ Vin (1 kHz)', inp('A1', ans.a1, (v) => setAns((x) => ({...x, a1: v}))), ans.a1 && mid ? <Verdict ok={okMid(ans.a1, mid.vo1 / mid.vin)} /> : '–'],
-            ['A2 = Vout ÷ Vo1', inp('A2', ans.a2, (v) => setAns((x) => ({...x, a2: v}))), ans.a2 && mid ? <Verdict ok={okMid(ans.a2, mid.vo2 / mid.vo1)} /> : '–'],
-            ['A = A1 × A2', inp('Overall gain', ans.a, (v) => setAns((x) => ({...x, a: v}))), ans.a && aTot ? <Verdict ok={okMid(ans.a, aTot)} /> : '–'],
-            ['Gain (dB) = 20 log A', inp('Gain in dB', ans.db, (v) => setAns((x) => ({...x, db: v}))), ans.db && aTot ? <Verdict ok={Math.abs((num(ans.db) ?? 0) - 20 * Math.log10(aTot)) < 0.3} /> : '–'],
-            ['Lower cut-off f1 (Hz)', inp('f1', ans.f1, (v) => setAns((x) => ({...x, f1: v}))), ans.f1 ? <Verdict ok={near(num(ans.f1), f1, 0.25)} no="✗ read the graph again" /> : '–'],
-            ['Upper cut-off f2 (kHz)', inp('f2', ans.f2, (v) => setAns((x) => ({...x, f2: v}))), ans.f2 ? <Verdict ok={near(num(ans.f2) != null ? num(ans.f2)! * 1000 : null, f2, 0.25)} no="✗ read the graph again" /> : '–'],
+            ['A1 = Vo1 ÷ Vin (1 kHz)', inp('A1', ans.a1, (v) => setAns((x) => ({...x, a1: v}))), ans.a1 && mid ? (
+                <Verdict
+                  ok={okMid(ans.a1, mid.vo1 / mid.vin)}
+                  fix={{
+                    hint: L2('A1 = output of stage 1 ÷ input, at 1 kHz (mid-band).', 'A1 = સ્ટેજ 1 નું આઉટપુટ ÷ ઇનપુટ, 1 kHz (મિડ-બેન્ડ) પર.'),
+                    work: L2(`A1 = ${fmt(mid.vo1)} ÷ ${fmt(mid.vin)} = ${fmt(mid.vo1 / mid.vin)}.`, `A1 = ${fmt(mid.vo1)} ÷ ${fmt(mid.vin)} = ${fmt(mid.vo1 / mid.vin)}.`),
+                    answer: fmt(mid.vo1 / mid.vin),
+                    entered: num(ans.a1),
+                    expected: mid.vo1 / mid.vin,
+                  }}
+                />
+              ) : (
+                '–'
+              ),
+            ],
+            ['A2 = Vout ÷ Vo1', inp('A2', ans.a2, (v) => setAns((x) => ({...x, a2: v}))), ans.a2 && mid ? (
+                <Verdict
+                  ok={okMid(ans.a2, mid.vo2 / mid.vo1)}
+                  fix={{
+                    hint: L2('A2 = final output ÷ the output of stage 1, at 1 kHz.', 'A2 = અંતિમ આઉટપુટ ÷ સ્ટેજ 1 નું આઉટપુટ, 1 kHz પર.'),
+                    work: L2(`A2 = ${fmt(mid.vo2)} ÷ ${fmt(mid.vo1)} = ${fmt(mid.vo2 / mid.vo1)}.`, `A2 = ${fmt(mid.vo2)} ÷ ${fmt(mid.vo1)} = ${fmt(mid.vo2 / mid.vo1)}.`),
+                    answer: fmt(mid.vo2 / mid.vo1),
+                    entered: num(ans.a2),
+                    expected: mid.vo2 / mid.vo1,
+                  }}
+                />
+              ) : (
+                '–'
+              ),
+            ],
+            ['A = A1 × A2', inp('Overall gain', ans.a, (v) => setAns((x) => ({...x, a: v}))), ans.a && aTot ? (
+                <Verdict
+                  ok={okMid(ans.a, aTot)}
+                  fix={{
+                    hint: L2('Overall gain A = A1 × A2 (also = final output ÷ input).', 'કુલ ગેઇન A = A1 × A2 (એટલે અંતિમ આઉટપુટ ÷ ઇનપુટ).'),
+                    work: L2(`A = ${fmt(mid!.vo2)} ÷ ${fmt(mid!.vin)} = ${fmt(aTot)}.`, `A = ${fmt(mid!.vo2)} ÷ ${fmt(mid!.vin)} = ${fmt(aTot)}.`),
+                    answer: fmt(aTot),
+                    entered: num(ans.a),
+                    expected: aTot,
+                  }}
+                />
+              ) : (
+                '–'
+              ),
+            ],
+            ['Gain (dB) = 20 log A', inp('Gain in dB', ans.db, (v) => setAns((x) => ({...x, db: v}))), ans.db && aTot ? (
+                <Verdict
+                  ok={Math.abs((num(ans.db) ?? 0) - 20 * Math.log10(aTot)) < 0.3}
+                  fix={{
+                    hint: L2('Gain in dB = 20 × log10(A) for a voltage gain A.', 'dB માં ગેઇન = 20 × log10(A), વોલ્ટેજ ગેઇન A માટે.'),
+                    work: L2(`20 × log10(${fmt(aTot)}) = ${fmt(20 * Math.log10(aTot))} dB.`, `20 × log10(${fmt(aTot)}) = ${fmt(20 * Math.log10(aTot))} dB.`),
+                    answer: `${fmt(20 * Math.log10(aTot))} dB`,
+                    entered: num(ans.db),
+                    expected: 20 * Math.log10(aTot),
+                  }}
+                />
+              ) : (
+                '–'
+              ),
+            ],
+            ['Lower cut-off f1 (Hz)', inp('f1', ans.f1, (v) => setAns((x) => ({...x, f1: v}))), ans.f1 ? (
+                <Verdict
+                  ok={near(num(ans.f1), f1, 0.25)}
+                  no="✗ read the graph again"
+                  fix={{
+                    hint: L2('Cut-off frequencies are where the gain falls to 0.707 (−3 dB) of the mid-band gain. f1 is on the low-frequency side.', 'કટ-ઓફ ફ્રીક્વન્સી ત્યાં હોય જ્યાં ગેઇન મિડ-બેન્ડ ગેઇનના 0.707 (−3 dB) સુધી ઘટે. f1 ઓછી ફ્રીક્વન્સી બાજુ પર છે.'),
+                    work: L2(`Mid-band gain ${fmt(peakG)} → cut-off at ${fmt(peakG / Math.SQRT2)}. f1 ≈ ${fmt(f1)} Hz.`, `મિડ-બેન્ડ ગેઇન ${fmt(peakG)} → કટ-ઓફ ${fmt(peakG / Math.SQRT2)} પર. f1 ≈ ${fmt(f1)} Hz.`),
+                    answer: `${fmt(f1)} Hz (±25 %)`,
+                    entered: num(ans.f1),
+                    expected: f1,
+                  }}
+                />
+              ) : (
+                '–'
+              ),
+            ],
+            ['Upper cut-off f2 (kHz)', inp('f2', ans.f2, (v) => setAns((x) => ({...x, f2: v}))), ans.f2 ? (
+                <Verdict
+                  ok={near(num(ans.f2) != null ? num(ans.f2)! * 1000 : null, f2, 0.25)}
+                  no="✗ read the graph again"
+                  fix={{
+                    hint: L2('f2 is where the gain falls to 0.707 of the mid-band gain on the high-frequency side. Enter it in kHz.', 'f2 ઊંચી ફ્રીક્વન્સી બાજુ પર ગેઇન મિડ-બેન્ડ ગેઇનના 0.707 સુધી ઘટે ત્યાં છે. kHz માં લખો.'),
+                    work: L2(`f2 ≈ ${fmt(f2 / 1000)} kHz.`, `f2 ≈ ${fmt(f2 / 1000)} kHz.`),
+                    answer: `${fmt(f2 / 1000)} kHz (±25 %)`,
+                    entered: num(ans.f2),
+                    expected: f2 / 1000,
+                  }}
+                />
+              ) : (
+                '–'
+              ),
+            ],
             [
               'Output phase vs input',
               <select className={styles.select} aria-label="Phase" value={ans.phase ?? ''} onChange={(e) => setAns((x) => ({...x, phase: e.target.value}))}>
@@ -807,7 +1001,14 @@ export function TwoStageLab(): React.JSX.Element {
                 <option value="0">In phase (0° / 360°)</option>
                 <option value="180">Inverted (180°)</option>
               </select>,
-              ans.phase ? <Verdict ok={ans.phase === '0'} /> : '–',
+              ans.phase ? (
+                <Verdict
+                  ok={ans.phase === '0'}
+                  fix={{ hint: L2('Two inverting stages invert twice: the output is back in phase with the input (360° = 0°).', 'બે ઇન્વર્ટિંગ સ્ટેજ બે વાર ઊલટાવે છે: આઉટપુટ ફરી ઇનપુટ સાથે ઇન-ફેઝ (360° = 0°).'), answer: '0° / 360°' }}
+                />
+              ) : (
+                '–'
+              ),
             ],
           ]}
         />

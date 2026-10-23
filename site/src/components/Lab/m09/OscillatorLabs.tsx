@@ -6,6 +6,7 @@ import useStoredState from '../useStoredState';
 import {Knob, useScope} from '../Scope';
 import {si, type Sig} from '../signals';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import {near} from '../m07/parts';
 import {PanelMeter} from '../m08/ZenerRegLabs';
 import styles from '../styles.module.css';
@@ -149,7 +150,23 @@ export function LcOscLab(): React.JSX.Element {
             head={['Oscillator', 'Tank', 'f measured (kHz)', 'f calculated (kHz)', 'Check']}
             rows={rows.map((r, k) => {
               const set = (p: Partial<LcRow>) => setRows((x) => x.map((y, j) => (j === k ? {...y, ...p} : y)));
-              return [r.osc === 'colpitts' ? 'Colpitts' : 'Hartley', r.desc, inp(`Row ${k + 1} measured`, r.meas, (v) => set({meas: v})), inp(`Row ${k + 1} calculated`, r.calc, (v) => set({calc: v})), r.meas && r.calc ? <Verdict ok={rowOk(r)} /> : '–'];
+              return [r.osc === 'colpitts' ? 'Colpitts' : 'Hartley', r.desc, inp(`Row ${k + 1} measured`, r.meas, (v) => set({meas: v})), inp(`Row ${k + 1} calculated`, r.calc, (v) => set({calc: v})), r.meas && r.calc ? (
+                  <Verdict
+                    ok={rowOk(r)}
+                    fix={{
+                      hint: L2(
+                        'Colpitts: f = 1 ÷ (2π√(L × Ceq)) with Ceq = C1 × C2 ÷ (C1 + C2). Hartley: f = 1 ÷ (2π√(Ltotal × C)). Measure f on the CRO and enter both in kHz.',
+                        'કોલ્પિટ્સ: f = 1 ÷ (2π√(L × Ceq)), Ceq = C1 × C2 ÷ (C1 + C2). હાર્ટલી: f = 1 ÷ (2π√(Lકુલ × C)). f CRO પર માપો અને બંને kHz માં લખો.',
+                      ),
+                      work: L2(`Calculated f = ${fmt(r.fNom / 1000)} kHz. The CRO shows ${fmt(r.fTrue / 1000)} kHz.`, `ગણતરીથી f = ${fmt(r.fNom / 1000)} kHz. CRO ${fmt(r.fTrue / 1000)} kHz બતાવે છે.`),
+                      answer: `${fmt(r.fNom / 1000)} kHz (calc), ${fmt(r.fTrue / 1000)} kHz (measured)`,
+                      entered: near(num(r.calc) != null ? num(r.calc)! * 1000 : null, r.fNom, 0.02) ? (num(r.meas) ?? 0) * 1000 : (num(r.calc) ?? 0) * 1000,
+                      expected: near(num(r.calc) != null ? num(r.calc)! * 1000 : null, r.fNom, 0.02) ? r.fTrue : r.fNom,
+                    }}
+                  />
+                ) : (
+                  '–'
+                )];
             })}
           />
         )}
@@ -278,7 +295,20 @@ export function PhaseShiftLab(): React.JSX.Element {
             head={['R, C', 'f measured (Hz)', 'f calculated (Hz)', 'Check']}
             rows={rows.map((r, k) => {
               const set = (p: Partial<PsRow>) => setRows((x) => x.map((y, j) => (j === k ? {...y, ...p} : y)));
-              return [r.desc, inp(`Row ${k + 1} measured`, r.meas, (v) => set({meas: v})), inp(`Row ${k + 1} calculated`, r.calc, (v) => set({calc: v})), r.meas && r.calc ? <Verdict ok={rowOk(r)} /> : '–'];
+              return [r.desc, inp(`Row ${k + 1} measured`, r.meas, (v) => set({meas: v})), inp(`Row ${k + 1} calculated`, r.calc, (v) => set({calc: v})), r.meas && r.calc ? (
+                <Verdict
+                  ok={rowOk(r)}
+                  fix={{
+                    hint: L2('f = 1 ÷ (2π√6 × R × C) = 0.065 ÷ (R × C), with R in ohms and C in farads. Measure f on the CRO.', 'f = 1 ÷ (2π√6 × R × C) = 0.065 ÷ (R × C), R ઓહ્મમાં અને C ફેરાડમાં. f CRO પર માપો.'),
+                    work: L2(`Calculated f = ${fmt(r.fNom)} Hz. The CRO shows ${fmt(r.fTrue)} Hz.`, `ગણતરીથી f = ${fmt(r.fNom)} Hz. CRO ${fmt(r.fTrue)} Hz બતાવે છે.`),
+                    answer: `${fmt(r.fNom)} Hz (calc), ${fmt(r.fTrue)} Hz (measured)`,
+                    entered: near(num(r.calc), r.fNom, 0.02) ? num(r.meas) : num(r.calc),
+                    expected: near(num(r.calc), r.fNom, 0.02) ? r.fTrue : r.fNom,
+                  }}
+                />
+              ) : (
+                '–'
+              )];
             })}
           />
         )}
@@ -287,7 +317,22 @@ export function PhaseShiftLab(): React.JSX.Element {
         <Table
           head={['', 'Your answer', 'Check']}
           rows={[
-            ['Gain at which oscillation starts', inp('Onset gain', ans.onset, (v) => setAns((a) => ({...a, onset: v}))), ans.onset ? <Verdict ok={onsetSeen && near(num(ans.onset), kit.thr, 0.06)} no={onsetSeen ? '✗ check again' : '✗ find the onset on the bench'} /> : '–'],
+            ['Gain at which oscillation starts', inp('Onset gain', ans.onset, (v) => setAns((a) => ({...a, onset: v}))), ans.onset ? (
+                <Verdict
+                  ok={onsetSeen && near(num(ans.onset), kit.thr, 0.06)}
+                  no={onsetSeen ? '✗ check again' : '✗ find the onset on the bench'}
+                  fix={{
+                    hint: L2('Raise the gain slowly from zero. The onset gain is the lowest setting at which the output just starts to oscillate (Barkhausen: loop gain = 1).', 'ગેઇન શૂન્યથી ધીમે ધીમે વધારો. જે સૌથી ઓછા સેટિંગ પર આઉટપુટ ઓસિલેટ થવા લાગે તે ઓનસેટ ગેઇન (બાર્કહાઉસન: લૂપ ગેઇન = 1).'),
+                    answer: onsetSeen ? fmt(kit.thr) : undefined,
+                    work: onsetSeen ? undefined : L2('Move the gain control on the bench until the oscillation just starts, then enter that gain.', 'બેન્ચ પર ગેઇન કંટ્રોલ ફેરવીને ઓસિલેશન શરૂ થાય ત્યાં સુધી લાવો, પછી તે ગેઇન લખો.'),
+                    entered: num(ans.onset),
+                    expected: kit.thr,
+                  }}
+                />
+              ) : (
+                '–'
+              ),
+            ],
             [
               'Phase shift after section 3',
               <select className={styles.select} aria-label="Phase shift after three sections" value={ans.phase ?? ''} onChange={(e) => setAns((a) => ({...a, phase: e.target.value}))}>
@@ -297,7 +342,14 @@ export function PhaseShiftLab(): React.JSX.Element {
                 <option value="180">180°</option>
                 <option value="360">360°</option>
               </select>,
-              ans.phase ? <Verdict ok={ans.phase === '180'} /> : '–',
+              ans.phase ? (
+                <Verdict
+                  ok={ans.phase === '180'}
+                  fix={{ hint: L2('The RC network shifts the phase by 180° and the amplifier inverts by 180°: total 360°, so the feedback is positive. The shift of the RC network at f is 180°.', 'RC નેટવર્ક 180° ફેઝ શિફ્ટ કરે છે અને એમ્પ્લિફાયર 180° ઊલટાવે છે: કુલ 360°, એટલે પોઝિટિવ ફીડબેક. f પર RC નેટવર્કનો શિફ્ટ 180° છે.'), answer: '180°' }}
+                />
+              ) : (
+                '–'
+              ),
             ],
           ]}
         />
@@ -432,9 +484,45 @@ export function CrystalLab(): React.JSX.Element {
         <Table
           head={['', 'Your value', 'Check']}
           rows={[
-            ['Error of 3.579545 MHz crystal (ppm)', inp('Crystal error in ppm', ans.ppm, (v) => setAns((a) => ({...a, ppm: v}))), ans.ppm ? ppmTrue == null ? 'measure first' : <Verdict ok={close(ans.ppm, ppmTrue, 0.5)} /> : '–'],
-            ['% change 9 → 12 V, crystal', inp('Crystal percent change', ans.xs, (v) => setAns((a) => ({...a, xs: v}))), ans.xs ? xsTrue == null ? 'measure at 9 V and 12 V' : <Verdict ok={close(ans.xs, xsTrue, 0.0002)} /> : '–'],
-            ['% change 9 → 12 V, LC', inp('LC percent change', ans.lc, (v) => setAns((a) => ({...a, lc: v}))), ans.lc ? lcTrue == null ? 'measure at 9 V and 12 V' : <Verdict ok={close(ans.lc, lcTrue, 0.02)} /> : '–'],
+            ['Error of 3.579545 MHz crystal (ppm)', inp('Crystal error in ppm', ans.ppm, (v) => setAns((a) => ({...a, ppm: v}))), ans.ppm ? ppmTrue == null ? (
+                  'measure first'
+                ) : (
+                  <Verdict
+                    ok={close(ans.ppm, ppmTrue, 0.5)}
+                    fix={{
+                      hint: L2('Error (ppm) = (f measured − 3 579 545) ÷ 3 579 545 × 10⁶.', 'ભૂલ (ppm) = (માપેલી f − 3 579 545) ÷ 3 579 545 × 10⁶.'),
+                      answer: `${fmt(ppmTrue)} ppm`,
+                      entered: num(ans.ppm),
+                      expected: ppmTrue,
+                    }}
+                  />
+                ) : '–'],
+            ['% change 9 → 12 V, crystal', inp('Crystal percent change', ans.xs, (v) => setAns((a) => ({...a, xs: v}))), ans.xs ? xsTrue == null ? (
+                  'measure at 9 V and 12 V'
+                ) : (
+                  <Verdict
+                    ok={close(ans.xs, xsTrue, 0.0002)}
+                    fix={{
+                      hint: L2('% change = (f at 12 V − f at 9 V) ÷ f at 9 V × 100. A crystal changes by a tiny fraction of a percent.', '% ફેરફાર = (12 V પર f − 9 V પર f) ÷ 9 V પર f × 100. ક્રિસ્ટલ ટકાના ખૂબ નાના અંશમાં બદલાય છે.'),
+                      answer: `${fmt(xsTrue)} %`,
+                      entered: num(ans.xs),
+                      expected: xsTrue,
+                    }}
+                  />
+                ) : '–'],
+            ['% change 9 → 12 V, LC', inp('LC percent change', ans.lc, (v) => setAns((a) => ({...a, lc: v}))), ans.lc ? lcTrue == null ? (
+                  'measure at 9 V and 12 V'
+                ) : (
+                  <Verdict
+                    ok={close(ans.lc, lcTrue, 0.02)}
+                    fix={{
+                      hint: L2('% change = (f at 12 V − f at 9 V) ÷ f at 9 V × 100, for the LC oscillator.', '% ફેરફાર = (12 V પર f − 9 V પર f) ÷ 9 V પર f × 100, LC ઓસિલેટર માટે.'),
+                      answer: `${fmt(lcTrue)} %`,
+                      entered: num(ans.lc),
+                      expected: lcTrue,
+                    }}
+                  />
+                ) : '–'],
           ]}
         />
         <ResetKit
@@ -652,13 +740,40 @@ export function MultivibratorLab(): React.JSX.Element {
           head={['R1', 'R2', 'C', 'T measured (ms)', 'T = 0.69 (R1 + R2) C (ms)', 'Check']}
           rows={astRows.map((x, k) => {
             const set = (p: Partial<AsRow>) => setAstRows((r) => r.map((y, j) => (j === k ? {...y, ...p} : y)));
-            return [`${x.r1 / 1000}k`, `${x.r2 / 1000}k`, si(x.c, 'F'), inp(`Astable row ${k + 1} measured`, x.t, (v) => set({t: v})), inp(`Astable row ${k + 1} calculated`, x.calc, (v) => set({calc: v})), x.t && x.calc ? <Verdict ok={astOk(x)} /> : '–'];
+            return [`${x.r1 / 1000}k`, `${x.r2 / 1000}k`, si(x.c, 'F'), inp(`Astable row ${k + 1} measured`, x.t, (v) => set({t: v})), inp(`Astable row ${k + 1} calculated`, x.calc, (v) => set({calc: v})), x.t && x.calc ? (
+                <Verdict
+                  ok={astOk(x)}
+                  fix={{
+                    hint: L2('T = 0.69 × (R1 + R2) × C, with R in ohms and C in farads. Measure T on the scope and enter both in ms.', 'T = 0.69 × (R1 + R2) × C, R ઓહ્મમાં અને C ફેરાડમાં. T સ્કોપ પર માપો અને બંને ms માં લખો.'),
+                    work: L2(`T = 0.69 × (${x.r1} + ${x.r2}) × ${x.c} = ${fmt(0.69 * (x.r1 + x.r2) * x.c * 1000)} ms. The scope shows ${fmt(astTrue(x) * 1000)} ms.`, `T = 0.69 × (${x.r1} + ${x.r2}) × ${x.c} = ${fmt(0.69 * (x.r1 + x.r2) * x.c * 1000)} ms. સ્કોપ ${fmt(astTrue(x) * 1000)} ms બતાવે છે.`),
+                    answer: `${fmt(0.69 * (x.r1 + x.r2) * x.c * 1000)} ms (calc), ${fmt(astTrue(x) * 1000)} ms (measured)`,
+                    entered: near(num(x.calc) != null ? num(x.calc)! / 1000 : null, 0.69 * (x.r1 + x.r2) * x.c, 0.02) ? num(x.t) : num(x.calc),
+                    expected: near(num(x.calc) != null ? num(x.calc)! / 1000 : null, 0.69 * (x.r1 + x.r2) * x.c, 0.02) ? astTrue(x) * 1000 : 0.69 * (x.r1 + x.r2) * x.c * 1000,
+                  }}
+                />
+              ) : (
+                '–'
+              )];
           })}
         />
         <Table
           caption="Monostable (R = 47 kΩ)"
           head={['C', 'Pulse measured (s)', 'Pulse = 0.69 R C (s)', 'Check']}
-          rows={monoRows.map((x, k) => [si(x.c, 'F'), x.meas.toFixed(2), inp(`Monostable row ${k + 1} calculated`, x.calc, (v) => setMonoRows((r) => r.map((y, j) => (j === k ? {...y, calc: v} : y)))), x.calc ? <Verdict ok={monoOk(x)} /> : '–'])}
+          rows={monoRows.map((x, k) => [si(x.c, 'F'), x.meas.toFixed(2), inp(`Monostable row ${k + 1} calculated`, x.calc, (v) => setMonoRows((r) => r.map((y, j) => (j === k ? {...y, calc: v} : y)))), x.calc ? (
+              <Verdict
+                ok={monoOk(x)}
+                fix={{
+                  hint: L2('Pulse width = 0.69 × R × C, with R in ohms and C in farads. The answer is in seconds.', 'પલ્સ-વિડ્થ = 0.69 × R × C, R ઓહ્મમાં અને C ફેરાડમાં. જવાબ સેકન્ડમાં.'),
+                  work: L2(`0.69 × ${MR[1]} × ${x.c} = ${fmt(0.69 * MR[1] * x.c)} s.`, `0.69 × ${MR[1]} × ${x.c} = ${fmt(0.69 * MR[1] * x.c)} s.`),
+                  answer: `${fmt(0.69 * MR[1] * x.c)} s`,
+                  entered: num(x.calc),
+                  expected: 0.69 * MR[1] * x.c,
+                }}
+              />
+            ) : (
+              '–'
+            ),
+          ])}
         />
         <Table caption="Bistable" head={['Event']} rows={biLog.map((l) => [l])} />
         <ResetKit

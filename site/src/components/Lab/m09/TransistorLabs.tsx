@@ -6,6 +6,7 @@ import Multimeter from '../Multimeter';
 import useStoredState from '../useStoredState';
 import {ProbeBar, ProbePoint, useProbes} from '../Probes';
 import {Empty, NoteBox, ResetKit, Section, Table, Verdict, shuffle, useKitSeed, useRng, type Note} from '../kit';
+import {L2, fmt} from '../solution';
 import {PartGrid} from '../m07/IdentifyLabs';
 import type {PartKind} from '../m07/art';
 import {kitLabel, near} from '../m07/parts';
@@ -137,7 +138,20 @@ export function TransistorTypesLab(): React.JSX.Element {
               ],
               (v) => set(k, {hs: v}),
             ),
-            Object.keys(ans[k] ?? {}).length === 4 ? <Verdict ok={ok(k)} /> : '–',
+            Object.keys(ans[k] ?? {}).length === 4 ? (
+              <Verdict
+                ok={ok(k)}
+                fix={{
+                  hint: L2(
+                    'Look the type number up in the data book: it gives NPN/PNP, use, the pin order (pins 1-2-3) and the package. Power packages (TO-220, TO-3) usually need a heat sink; the metal tab or case is the collector.',
+                    'ડેટા બુકમાં ટાઇપ નંબર શોધો: તેમાં NPN/PNP, ઉપયોગ, પિન ક્રમ (પિન 1-2-3) અને પેકેજ હોય છે. પાવર પેકેજ (TO-220, TO-3) ને સામાન્ય રીતે હીટ સિંક જોઈએ; મેટલ ટેબ કે કેસ કલેક્ટર હોય છે.',
+                  ),
+                  answer: `${items[k].pol.toUpperCase()}, ${USE.find(([v]) => v === items[k].use)?.[1] ?? items[k].use}, collector ${items[k].coll === 'case' ? 'case' : `pin ${items[k].coll}`}, heat sink ${items[k].hs}`,
+                }}
+              />
+            ) : (
+              '–'
+            ),
           ])}
         />
         <ResetKit
@@ -347,7 +361,20 @@ export function TransistorTestLab(): React.JSX.Element {
                 ],
                 (v) => set(k, {cond: v}),
               ),
-              ans[k]?.cond ? <Verdict ok={ok(k)} /> : '–',
+              ans[k]?.cond ? (
+                <Verdict
+                  ok={ok(k)}
+                  fix={{
+                    hint: L2(
+                      'A good NPN: red on base, black on collector or emitter reads about 0.6 V; the reverse reads OL; C–E reads OL both ways. The base is the pin that conducts to both others with the same probe colour. Red on the base = NPN, black on the base = PNP.',
+                      'સારો NPN: લાલ બેઝ પર, કાળો કલેક્ટર કે ઇમિટર પર લગભગ 0.6 V; ઊલટું OL; C–E બંને દિશામાં OL. બંને પિન સાથે એક જ પ્રોબ કલરથી કન્ડક્શન કરતી પિન બેઝ છે. લાલ બેઝ પર = NPN, કાળો બેઝ પર = PNP.',
+                    ),
+                    answer: `${kit[k].cond === 'good' ? 'Good' : kit[k].cond === 'beOpen' ? 'B–E open' : 'C–E shorted'}, ${kit[k].pol.toUpperCase()}, base pin ${pinOf(kit[k], 'B')}, emitter pin ${pinOf(kit[k], 'E')}`,
+                  }}
+                />
+              ) : (
+                '–'
+              ),
             ];
           })}
         />
@@ -601,7 +628,25 @@ export function RelayDriverLab(): React.JSX.Element {
       <Section title="Result">
         <Table
           head={['Rb (max) = (5 − 0.7) ÷ (Ic ÷ 100), Ic = 11.8 V ÷ 400 Ω', 'Your value (Ω)', 'Check']}
-          rows={[['Base resistor', <input className={styles.input} style={{maxWidth: '6rem'}} inputMode="decimal" aria-label="Maximum base resistor in ohms" value={rbCalc} onChange={(e) => setRbCalc(e.target.value)} />, rbCalc ? <Verdict ok={near(num(rbCalc), rbMax, 0.03)} /> : '–']]}
+          rows={[['Base resistor', <input className={styles.input} style={{maxWidth: '6rem'}} inputMode="decimal" aria-label="Maximum base resistor in ohms" value={rbCalc} onChange={(e) => setRbCalc(e.target.value)} />, rbCalc ? (
+                <Verdict
+                  ok={near(num(rbCalc), rbMax, 0.03)}
+                  fix={{
+                    hint: L2('For saturation Ib must be at least Ic ÷ β. Ic(sat) = (Vcc − Vce(sat)) ÷ R(coil). Rb(max) = (Vin − Vbe) ÷ Ib.', 'સેચ્યુરેશન માટે Ib ઓછામાં ઓછો Ic ÷ β હોવો જોઈએ. Ic(sat) = (Vcc − Vce(sat)) ÷ R(કોઇલ). Rb(max) = (Vin − Vbe) ÷ Ib.'),
+                    work: L2(
+                      `Ic = (${VCC} − ${VCE_SAT}) ÷ ${R_COIL} = ${fmt(((VCC - VCE_SAT) / R_COIL) * 1000)} mA; Ib = Ic ÷ 100 = ${fmt(((VCC - VCE_SAT) / R_COIL / 100) * 1000)} mA; Rb = (5 − ${VBE}) ÷ Ib = ${fmt(rbMax)} Ω.`,
+                      `Ic = (${VCC} − ${VCE_SAT}) ÷ ${R_COIL} = ${fmt(((VCC - VCE_SAT) / R_COIL) * 1000)} mA; Ib = Ic ÷ 100 = ${fmt(((VCC - VCE_SAT) / R_COIL / 100) * 1000)} mA; Rb = (5 − ${VBE}) ÷ Ib = ${fmt(rbMax)} Ω.`,
+                    ),
+                    answer: `${fmt(rbMax)} Ω`,
+                    entered: num(rbCalc),
+                    expected: rbMax,
+                  }}
+                />
+              ) : (
+                '–'
+              ),
+            ],
+          ]}
         />
         <ResetKit
           onReset={() => {
