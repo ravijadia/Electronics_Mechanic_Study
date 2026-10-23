@@ -411,5 +411,113 @@
   "theme.tags.tagsPageTitle": {
     "message": "ટેગ",
     "description": "The title of the tag list page"
+  },
+  "progress.title": {
+    "message": "મારી પ્રગતિ"
+  },
+  "progress.viewAll": {
+    "message": "સંપૂર્ણ પ્રગતિ જુઓ →"
+  },
+  "progress.practicals": {
+    "message": "પૂર્ણ કરેલા પ્રેક્ટિકલ"
+  },
+  "progress.lessons": {
+    "message": "વાંચેલા પાઠ"
+  },
+  "progress.quizzes": {
+    "message": "આપેલા ટેસ્ટ"
+  },
+  "progress.continue": {
+    "message": "જ્યાંથી છોડ્યું હતું ત્યાંથી આગળ વધો:"
+  },
+  "progress.empty": {
+    "message": "તમે પાઠ વાંચશો, પ્રેક્ટિકલ કરશો અને ટેસ્ટ આપશો તેમ તમારી પ્રગતિ અહીં દેખાશે. તે આ ફોન કે કોમ્પ્યુટરના આ બ્રાઉઝરમાં સેવ થાય છે."
+  },
+  "progress.quizBest": {
+    "message": "શ્રેષ્ઠ સ્કોર: {best} / {total} · પ્રયાસો: {attempts}"
+  },
+  "progress.lessonRead": {
+    "message": "તમે આ પાઠ વાંચી લીધો છે"
+  },
+  "progress.markUnread": {
+    "message": "વાંચ્યો નથી તરીકે નિશાન કરો"
+  },
+  "progress.lessonNotRead": {
+    "message": "હજી વાંચ્યો તરીકે નિશાન નથી. પાનાના અંત સુધી પહોંચશો ત્યારે થઈ જશે."
+  },
+  "progress.markRead": {
+    "message": "વાંચ્યો તરીકે નિશાન કરો"
+  },
+  "progress.quizNone": {
+    "message": "આ પાઠનો ટેસ્ટ: હજી આપ્યો નથી."
+  },
+  "progress.quizAgain": {
+    "message": "ટેસ્ટ ફરી આપો →"
+  },
+  "progress.quizTake": {
+    "message": "ટેસ્ટ આપો →"
+  },
+  "progress.saved": {
+    "message": "ફાઇલ સેવ થઈ. તેને સાચવી રાખો અને કોઈપણ ફોનમાં લોડ કરીને તમારી પ્રગતિ પાછી મેળવો."
+  },
+  "progress.loaded": {
+    "message": "પ્રગતિ લોડ થઈ અને આ ફોન પરની પ્રગતિ સાથે ઉમેરાઈ."
+  },
+  "progress.loadFailed": {
+    "message": "આ ફાઇલ આ વેબસાઇટ પરથી સેવ કરેલી પ્રગતિ ફાઇલ નથી."
+  },
+  "progress.confirmClear": {
+    "message": "આ ફોન પરની તમારી બધી પ્રગતિ ભૂંસી નાખવી? આ પાછું લાવી શકાશે નહીં."
+  },
+  "progress.save": {
+    "message": "મારી પ્રગતિની ફાઇલ સેવ કરો"
+  },
+  "progress.load": {
+    "message": "પ્રગતિની ફાઇલ લોડ કરો"
+  },
+  "progress.print": {
+    "message": "પ્રિન્ટ"
+  },
+  "progress.clear": {
+    "message": "પ્રગતિ ભૂંસી નાખો"
+  },
+  "progress.note": {
+    "message": "તમારી પ્રગતિ આ ફોન કે કોમ્પ્યુટરના આ બ્રાઉઝરમાં જ સેવ થાય છે. બીજા ફોનમાં રાખવા માટે અહીં સેવ દબાવો, પછી બીજા ફોનમાં લોડ કરો. પ્રેક્ટિકલના રીડિંગ જે ડિવાઇસ પર લીધા હોય ત્યાં જ રહે છે."
+  },
+  "progress.module": {
+    "message": "મોડ્યુલ"
+  },
+  "progress.counts": {
+    "message": "પ્રેક્ટિકલ {p}/{pt} · પાઠ {l}/{lt} · ટેસ્ટ {q}/{qt}"
+  },
+  "progress.lessonsAndTests": {
+    "message": "પાઠ અને ટેસ્ટ"
+  },
+  "progress.colLesson": {
+    "message": "પાઠ"
+  },
+  "progress.colRead": {
+    "message": "વાંચ્યો"
+  },
+  "progress.colTest": {
+    "message": "ટેસ્ટ"
+  },
+  "progress.undo": {
+    "message": "પાછું"
+  },
+  "progress.tickIt": {
+    "message": "ટિક કરો"
+  },
+  "progress.attempts": {
+    "message": "{n} પ્રયાસ"
+  },
+  "progress.quizTakeShort": {
+    "message": "ટેસ્ટ આપો"
+  },
+  "progress.practicalsHead": {
+    "message": "વર્ચ્યુઅલ લેબ પ્રેક્ટિકલ"
+  },
+  "progress.noPracticals": {
+    "message": "આ મોડ્યુલમાં કોઈ વર્ચ્યુઅલ પ્રેક્ટિકલ નથી."
   }
 }

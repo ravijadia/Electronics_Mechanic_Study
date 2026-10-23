@@ -5,6 +5,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import Translate, {translate} from '@docusaurus/Translate';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
+import {ProgressSummary} from '@site/src/components/Progress';
 import Heading from '@theme/Heading';
 
 import styles from './index.module.css';
@@ -48,6 +49,9 @@ export default function Home(): ReactNode {
       })}>
       <HomepageHeader />
       <main>
+        <div className="container">
+          <ProgressSummary />
+        </div>
         <HomepageFeatures />
       </main>
     </Layout>

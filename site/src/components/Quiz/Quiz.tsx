@@ -1,5 +1,8 @@
 import React, {useRef, useState} from 'react';
 import Translate from '@docusaurus/Translate';
+import {useLocation} from '@docusaurus/router';
+import {pageKey, recordQuiz} from '@site/src/progress/store';
+import {QuizBest} from '@site/src/components/Progress';
 import styles from './styles.module.css';
 
 export interface QuizQuestion {
@@ -21,6 +24,7 @@ export default function Quiz({title, questions, passPercent = 60}: QuizProps): R
   );
   const [submitted, setSubmitted] = useState(false);
   const quizRef = useRef<HTMLDivElement>(null);
+  const {pathname} = useLocation();
 
   const allAnswered = answers.every((a) => a !== null);
 
@@ -43,6 +47,11 @@ export default function Quiz({title, questions, passPercent = 60}: QuizProps): R
   }
 
   function handleSubmit() {
+    const key = pageKey(pathname);
+    if (key) {
+      const right = answers.reduce<number>((sum, a, i) => sum + (a === questions[i].correctIndex ? 1 : 0), 0);
+      recordQuiz(key, right, questions.length);
+    }
     setSubmitted(true);
     quizRef.current?.scrollIntoView({behavior: 'smooth', block: 'start'});
   }
@@ -55,6 +64,7 @@ export default function Quiz({title, questions, passPercent = 60}: QuizProps): R
   return (
     <div className={styles.quiz} ref={quizRef}>
       {title && <h2>{title}</h2>}
+      <QuizBest />
 
       {submitted && (
         <div className={`${styles.resultBanner} ${passed ? styles.pass : styles.fail}`}>
