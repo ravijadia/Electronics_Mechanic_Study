@@ -60,7 +60,7 @@ export default function ChargeDischargeLab(): React.JSX.Element {
     }
     if (mode === sim.mode) return;
     // A new discharge/charge run starts its own clock.
-    setSim((s) => ({...s, mode, t: mode === 'idle' ? s.t : 0, ...(mode === 'discharge' ? {ahOut: 0, cutoffSeen: false} : {}), ...(mode === 'charge' ? {ahIn: 0} : {})}));
+    setSim((s) => ({...s, mode, t: mode === 'idle' ? s.t : 0, ...(mode === 'discharge' ? {ahOut: 0, cutoffSeen: false, deep: false} : {}), ...(mode === 'charge' ? {ahIn: 0} : {})}));
     if (mode !== 'idle') setRows((r) => r.filter((x) => x.mode !== mode));
   };
 
@@ -142,7 +142,7 @@ export default function ChargeDischargeLab(): React.JSX.Element {
         {
           label: 'Disconnect the load at the cut-off.',
           hint: 'Going lower is deep discharge and damages the battery.',
-          done: reachedCutoff && !sim.deep && sim.mode !== 'discharge',
+          done: reachedCutoff && !sim.deep && sim.mode === 'idle',
         },
         {
           label: 'Calculate the Ah delivered and enter it.',
