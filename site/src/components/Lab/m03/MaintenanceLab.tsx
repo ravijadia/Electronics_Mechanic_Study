@@ -35,7 +35,7 @@ type Fix = keyof typeof FIXES;
 const CASES: {text: string; fix: Fix}[] = [
   {text: 'White-green powder on the terminals', fix: 'clean'},
   {text: 'Electrolyte level below the top of the plates', fix: 'topup'},
-  {text: 'One cell’s specific gravity is much lower than the others', fix: 'equalise'},
+  {text: 'Specific gravity is slightly low and uneven between the cells', fix: 'equalise'},
   {text: 'Battery case is bulging and cracked', fix: 'replace'},
   {text: 'Vent plugs are blocked with dirt', fix: 'vents'},
   {text: 'Battery will not be used for two months', fix: 'store'},

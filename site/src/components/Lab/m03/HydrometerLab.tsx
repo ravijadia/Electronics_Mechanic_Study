@@ -75,7 +75,8 @@ export default function HydrometerLab(): React.JSX.Element {
   const [seed, newKit] = useKitSeed(KEY);
   const kit = useRng(seed, (rnd) => {
     const temp = 30 + Math.floor(rnd() * 11); // 30–40 °C
-    const base = 1.2 + rnd() * 0.06; // corrected SG of good cells
+    // Corrected SG of the good cells: near one of the table rows, so every state can come up and the answer is clear-cut.
+    const base = SOC_TABLE[Math.floor(rnd() * SOC_TABLE.length)].sg + (rnd() - 0.5) * 0.01;
     const weak = Math.floor(rnd() * 6);
     const cells = Array.from({length: 6}, (_, k) => {
       const corrected = base + (rnd() - 0.5) * 0.008 - (k === weak ? 0.06 + rnd() * 0.02 : 0);
